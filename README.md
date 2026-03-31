@@ -4,45 +4,37 @@ Repositório de experimentos, testes e prototipagem rápida com foco em IA, auto
 
 ---
 
-## 📁 Estrutura de Arquivos
+## 🤖 Higilabor Growth OS — Sistema de Agentes
 
-### 🤖 Sistema de Agentes de IA — Higilabor Growth OS
+Sistema de 13 agentes de IA para executar as melhorias prioriárias da análise competitiva da Higilabor.
 
-| Agente | Arquivo | Função |
-|--------|---------|--------|
-| Agente 1 | `agente-1-depoimentos.md` | Coleta e publicação de depoimentos |
-| Agente 2 | `agente-2-cases.md` | Cases de transformação e resultados |
-| Agente 3 | `agente-3-autoridade.md` | Educação técnica e autoridade de marca |
-| Agente 4 | `agente-4-oferta.md` | Conversão imediata e ofertas |
-| Agente 5 | `agente-5-nutricao.md` | Nutrição relacional de leads |
-| Agente 6 | `agente-6-trafego.md` | Gestão de tráfego e aquisição |
-| Agente 7 | `agente-7-parcerias.md` | Estratégia de parcerias e distribuição |
-| Agente 8 | `agente-8-ux.md` | Otimização de UX/UI |
-| Agente 9 | `agente-9-cs.md` | Customer Success e retenção |
-| Agente 10 | `agente-10-inovacao.md` | Inovação e desenvolvimento de produtos |
-| Agente 11 | `agente-11-juridico-sla.md` | Monitor jurídico e gestor de SLA/KPI |
+**Lógica:** 1 agente-orquestrador comanda + 12 agentes especialistas executam cada melhoria.
 
-### 📊 Análises e Estratégia
+| Agente | Arquivo | Nome | Melhoria-alvo |
+|--------|---------|------|---------------|
+| 0 | `agente-0-orquestrador.md` | Diretor de Growth | Orquestração geral do sistema |
+| 1 | `agente-1-depoimentos.md` | Gestor de Prova Social | Depoimentos no site com resultado mensurável |
+| 2 | `agente-2-cases.md` | Arquiteto de Cases | 5 cases de sucesso formatados |
+| 3 | `agente-3-seo.md` | Especialista em SEO Local | Páginas SEO por serviço e região |
+| 4 | `agente-4-linkedin.md` | Editor-Chefe de Autoridade LinkedIn | Ativar LinkedIn com conteúdo de autoridade |
+| 5 | `agente-5-blog.md` | Redator de Blog Evergreen | Blog consistente com 1 artigo/semana |
+| 6 | `agente-6-youtube.md` | Produtor Audiovisual Técnico | Canal YouTube com explicações técnicas |
+| 7 | `agente-7-lead-magnet.md` | Designer de Lead Magnets | Checklist gratuito de SST |
+| 8 | `agente-8-parcerias.md` | Estratégista de Parcerias Jurídicas | Parceria com escritórios trabalhistas |
+| 9 | `agente-9-portal.md` | Product Manager de Experiência | Portal do cliente com laudos e status |
+| 10 | `agente-10-newsletter.md` | Gestor de Relacionamento | Newsletter mensal de SST |
+| 11 | `agente-11-eventos.md` | Estratégista de Eventos | Workshop regional de SST em Uberlandia |
+| 12 | `agente-12-setorial.md` | Consultor de Verticalização | Páginas e ofertas por setor |
+
+---
+
+## 📊 Análises e Estratégia
 
 | Arquivo | Conteúdo |
 |---------|----------|
 | `higilabor-competitive-analysis.md` | Análise competitiva da Higilabor (Março 2026) |
-| `higilabor-growth-os-agents.md` | Documentação do sistema multi-agente Growth OS |
+| `higilabor-growth-os-agents.md` | Documentação completa do sistema Growth OS |
 | `marketing-competitive-analysis.md` | Framework de análise competitiva de marketing |
-
----
-
-## 📂 Estrutura de Pastas Planejada
-
-```
-/agentes         → Documentação dos 11 agentes de IA
-/analises        → Análises competitivas e estratégicas
-/automations     → Scripts de automação jurídica e de negócios
-/ai-prompts      → Prompts e testes com IA (OpenAI, Perplexity, etc.)
-/templates       → Modelos de documentos e contratos
-/integrations    → Testes de APIs e integrações externas
-/scripts         → Utilitários e ferramentas diversas
-```
 
 ---
 
@@ -50,11 +42,11 @@ Repositório de experimentos, testes e prototipagem rápida com foco em IA, auto
 
 Este repositório serve como área livre para:
 
-- ✅ Testar novas ideias antes de aplicar em produção
+- ✅ Prototipar o sistema multi-agente da Higilabor
+- ✅ Testar prompts e fluxos de execução
+- ✅ Documentar estratégias e melhorias prioriárias
 - ✅ Experimentar integrações com ferramentas de IA
-- ✅ Prototipar automações jurídicas e empresariais
-- ✅ Desenvolver o sistema multi-agente da Higilabor
-- ✅ Monitorar SLAs, KPIs e obrigações contratuais
+- ✅ Desenvolver automações jurídicas e empresariais
 
 ---
 
@@ -65,20 +57,8 @@ Este repositório serve como área livre para:
 | IA & Automação | OpenAI API, Perplexity AI, n8n |
 | Frontend | HTML, Tailwind CSS, JavaScript |
 | Backend | Python, Node.js |
-| Jurídico | Geração de contratos, análise de documentos, SLA |
+| Jurídico & SST | Geração de contratos, laudos, SLA |
 | Deploy | GitHub Actions, GitHub Pages |
-| Assinatura Digital | DocuSign, Clicksign |
-
----
-
-## 📌 Projetos Ativos
-
-- [ ] Sistema Growth OS — 11 agentes de IA em operação
-- [ ] Analisador de contratos com IA
-- [ ] Monitor de SLAs e prazos jurídicos (Agente 11)
-- [ ] Dashboard de KPIs para escritório e Higilabor
-- [ ] Automação de petições jurídicas
-- [ ] Integração com assinatura digital
 
 ---
 
