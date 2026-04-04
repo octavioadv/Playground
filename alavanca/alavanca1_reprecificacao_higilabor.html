@@ -1,0 +1,338 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.w{padding:1rem 0;font-family:var(--font-sans)}
+.sec{margin-bottom:2rem}
+.sec-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.row label{font-size:13px;color:var(--color-text-secondary);width:220px;flex-shrink:0;line-height:1.4}
+.row input[type=range]{flex:1}
+.row .val{font-size:13px;font-weight:500;color:var(--color-text-primary);min-width:64px;text-align:right}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.metric .mlabel{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.metric .mval{font-size:22px;font-weight:500}
+.mval.danger{color:#A32D2D}
+.mval.warn{color:#854F0B}
+.mval.ok{color:#3B6D11}
+.mval.info{color:#185FA5}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1.5rem 0}
+.breakdown{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.brow{display:flex;align-items:center;padding:9px 14px;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.brow:last-child{border-bottom:none}
+.brow.total{background:var(--color-background-secondary);font-weight:500}
+.brow .blab{flex:1;color:var(--color-text-secondary)}
+.brow.total .blab{color:var(--color-text-primary)}
+.brow .bval{color:var(--color-text-primary);min-width:80px;text-align:right}
+.brow .bpct{font-size:12px;color:var(--color-text-secondary);min-width:48px;text-align:right;margin-left:8px}
+.bar-track{height:4px;background:var(--color-background-secondary);border-radius:2px;margin:1rem 0 0.5rem;overflow:hidden;display:flex;gap:2px}
+.bar-seg{height:100%;border-radius:2px;transition:width 0.3s}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:1.5rem}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-secondary)}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.alert-box{padding:10px 14px;border-radius:var(--border-radius-md);font-size:13px;line-height:1.5;margin-bottom:1rem;border-left:2px solid}
+.alert-box.red{background:#FCEBEB;color:#791F1F;border-color:#E24B4A}
+.alert-box.green{background:#EAF3DE;color:#27500A;border-color:#639922}
+.alert-box.amber{background:#FAEEDA;color:#633806;border-color:#EF9F27}
+.switch-row{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+.pill{padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
+.pill.active{background:#E24B4A;color:#fff;border-color:#E24B4A}
+.tabs{display:flex;gap:0;margin-bottom:1.5rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden}
+.tab{flex:1;padding:8px 12px;font-size:13px;text-align:center;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);border-right:0.5px solid var(--color-border-tertiary);transition:all 0.15s}
+.tab:last-child{border-right:none}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
+.panel{display:none}.panel.active{display:block}
+@media (prefers-color-scheme:dark){
+  .alert-box.red{background:#501313;color:#F7C1C1}
+  .alert-box.green{background:#173404;color:#C0DD97}
+  .alert-box.amber{background:#412402;color:#FAC775}
+  .pill.active{background:#A32D2D;border-color:#A32D2D}
+}
+</style>
+
+<div class="w">
+
+<div class="tabs">
+  <div class="tab active" onclick="setTab(0)">Calculadora de preço piso</div>
+  <div class="tab" onclick="setTab(1)">Vetores de precificação</div>
+  <div class="tab" onclick="setTab(2)">Diagnóstico de contrato</div>
+</div>
+
+<div class="panel active" id="panel0">
+
+  <div class="switch-row">
+    <span style="font-size:12px;color:var(--color-text-secondary);align-self:center;">Serviço:</span>
+    <div class="pill active" onclick="setServico(this,'pcmso')">PCMSO</div>
+    <div class="pill" onclick="setServico(this,'pgr')">PGR</div>
+    <div class="pill" onclick="setServico(this,'ltcat')">LTCAT</div>
+    <div class="pill" onclick="setServico(this,'trein')">Treinamento NR</div>
+    <div class="pill" onclick="setServico(this,'laudo')">Laudo insalub.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">Custo direto de entrega</div>
+    <div class="row"><label>Horas técnicas necessárias</label><input type="range" id="horas" min="2" max="40" step="1" value="8" oninput="calc()"><span class="val" id="horas-v">8 h</span></div>
+    <div class="row"><label>Custo/hora do técnico (pró-labore real + encargos)</label><input type="range" id="custo_hora" min="50" max="300" step="10" value="120" oninput="calc()"><span class="val" id="custo_hora-v">R$ 120</span></div>
+    <div class="row"><label>Deslocamento — km ida e volta</label><input type="range" id="km" min="0" max="400" step="10" value="60" oninput="calc()"><span class="val" id="km-v">60 km</span></div>
+    <div class="row"><label>Visitas previstas no contrato</label><input type="range" id="visitas" min="1" max="12" step="1" value="2" oninput="calc()"><span class="val" id="visitas-v">2</span></div>
+    <div class="row"><label>Retrabalho esperado (% sobre horas)</label><input type="range" id="retrabalho" min="0" max="30" step="1" value="10" oninput="calc()"><span class="val" id="retrabalho-v">10%</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">Custo indireto e tributário</div>
+    <div class="row"><label>Rateio de overhead (admin + estrutura)</label><input type="range" id="overhead" min="5" max="40" step="1" value="18" oninput="calc()"><span class="val" id="overhead-v">18%</span></div>
+    <div class="row"><label>Tributos Simples Nacional sobre faturamento</label><input type="range" id="tributos" min="4" max="19" step="0.5" value="9" oninput="calc()"><span class="val" id="tributos-v">9%</span></div>
+    <div class="row"><label>Custo comercial (tempo de venda e proposta)</label><input type="range" id="comercial" min="3" max="20" step="1" value="7" oninput="calc()"><span class="val" id="comercial-v">7%</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">Margem e sobretaxas</div>
+    <div class="row"><label>Margem mínima aceitável (meta EBITDA)</label><input type="range" id="margem" min="5" max="30" step="1" value="20" oninput="calc()"><span class="val" id="margem-v">20%</span></div>
+    <div class="row"><label>Urgência (prazo &lt; 7 dias)?</label><input type="range" id="urgencia" min="0" max="30" step="5" value="0" oninput="calc()"><span class="val" id="urgencia-v">0%</span></div>
+    <div class="row"><label>Múltiplas unidades / complexidade extra</label><input type="range" id="complexidade" min="0" max="40" step="5" value="0" oninput="calc()"><span class="val" id="complexidade-v">0%</span></div>
+  </div>
+
+  <div class="metrics" id="metrics-box">
+    <div class="metric"><div class="mlabel">Custo total de entrega</div><div class="mval info" id="m-custo">R$ 0</div></div>
+    <div class="metric"><div class="mlabel">Preço piso (sem margem)</div><div class="mval warn" id="m-piso">R$ 0</div></div>
+    <div class="metric"><div class="mlabel">Preço mínimo com margem alvo</div><div class="mval ok" id="m-preco">R$ 0</div></div>
+    <div class="metric"><div class="mlabel">Margem na proposta atual</div><div class="mval" id="m-margem-atual">—</div></div>
+  </div>
+
+  <div class="row" style="margin-bottom:1rem">
+    <label style="font-size:13px;color:var(--color-text-secondary);width:220px;flex-shrink:0">Preço que você está cobrando hoje</label>
+    <input type="range" id="preco_atual" min="200" max="8000" step="100" value="1200" oninput="calc()">
+    <span class="val" id="preco_atual-v">R$ 1.200</span>
+  </div>
+
+  <div id="alert-diagnostico"></div>
+
+  <div class="sec-title" style="margin-bottom:8px">Composição do preço mínimo</div>
+  <div class="bar-track" id="bar-track"></div>
+  <div class="legend" id="bar-legend"></div>
+  <div class="breakdown" id="breakdown"></div>
+
+</div>
+
+<div class="panel" id="panel1">
+  <div class="sec">
+    <div class="sec-title">Os 7 vetores que a Higilabor precisa cobrar com critério</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">1. Porte da empresa contratante</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">MEI e microempresa com 3 funcionários não podem pagar o mesmo preço que uma indústria com 200. O PCMSO de 200 funcionários exige mais laudos, mais exames periódicos, mais ASO, mais complexidade regulatória.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">Até 10 func.: preço base</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FAEEDA;color:#633806">11–50: +40%</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FCEBEB;color:#791F1F">51–200: +90%</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EEEDFE;color:#3C3489">200+: orçamento</span>
+        </div>
+      </div>
+
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">2. Grau de risco da atividade</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">Empresa de risco grau III ou IV (indústria, construção, mineração) exige laudos mais complexos, GRO mais detalhado, mais agentes reconhecidos. Risco grau I (comércio leve) é relativamente simples. Precificar igual é subsidiar o risco do cliente.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">Grau I: base</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FAEEDA;color:#633806">Grau II: +20%</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FCEBEB;color:#791F1F">Grau III/IV: +45%</span>
+        </div>
+      </div>
+
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">3. Deslocamento e raio de atendimento</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">Cada quilômetro fora do raio padrão (sugestão: 30 km de Uberlândia) tem custo real — combustível, tempo improdutivo do técnico, desgaste de veículo. Absorver isso "na amizade" corrói diretamente o EBITDA.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">0–30 km: incluso</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FAEEDA;color:#633806">31–100 km: R$ 1,20/km extra</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FCEBEB;color:#791F1F">100+ km: diária técnica</span>
+        </div>
+      </div>
+
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">4. Urgência e prazo comprimido</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">Quando o cliente chega com fiscalização na porta pedindo laudo em 48h, ele está comprando prioridade na fila, disponibilidade imediata do técnico e risco de qualidade. Isso tem preço. Toda urgência sem sobretaxa é desconto disfarçado.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">Prazo normal: base</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FAEEDA;color:#633806">7–14 dias: +15%</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FCEBEB;color:#791F1F">Menos de 7 dias: +30%</span>
+        </div>
+      </div>
+
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">5. Múltiplas unidades operacionais</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">Cliente com 3 filiais em cidades diferentes não é um contrato — é três contratos com desconto de pacote. Cada unidade tem seu CNPJ, seu PPRA/PGR específico, seus riscos próprios. Tratar como um único serviço é trabalhar de graça nas outras duas.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">1 unidade: base</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FAEEDA;color:#633806">2–3 unidades: base × n × 0,85</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#E6F1FB;color:#0C447C">4+: negociação por escopo</span>
+        </div>
+      </div>
+
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">6. Revisão extraordinária e retrabalho do cliente</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">Quando o laudo foi entregue correto e o cliente pede revisão por mudança interna da empresa (novo processo, novo funcionário, nova atividade), isso é um novo serviço. Está incluído no preço? Se não estiver explícito no contrato, você entregará de graça por pressão.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">1 revisão: inclusa</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FCEBEB;color:#791F1F">2ª revisão em diante: avulso</span>
+        </div>
+      </div>
+
+      <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+        <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">7. Customização e escopo fora do padrão</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:8px">Treinamento no formato padrão da Higilabor tem um custo. Treinamento com material personalizado, apresentação da empresa do cliente, horário fora do comercial, local diferente e conteúdo adaptado é consultoria — não treinamento. A diferença de preço precisa estar no contrato.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#EAF3DE;color:#27500A">Padrão: base</span>
+          <span style="font-size:12px;padding:3px 10px;border-radius:12px;background:#FAEEDA;color:#633806">Personalizado: +25 a +50%</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel2">
+  <div class="sec-title">Teste rápido: seu contrato está destruindo margem?</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem" id="quiz">
+    <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+      <div style="font-size:13px;color:var(--color-text-primary);margin-bottom:10px;font-weight:500">O preço foi definido olhando o concorrente ou o "mercado"?</div>
+      <div style="display:flex;gap:8px"><div class="pill" onclick="resp(this,0,'sim')">Sim</div><div class="pill" onclick="resp(this,0,'nao')">Não — calculo meu custo real</div></div>
+    </div>
+    <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+      <div style="font-size:13px;color:var(--color-text-primary);margin-bottom:10px;font-weight:500">O deslocamento está embutido "no preço" sem cobrança separada?</div>
+      <div style="display:flex;gap:8px"><div class="pill" onclick="resp(this,1,'sim')">Sim, absorvo no preço</div><div class="pill" onclick="resp(this,1,'nao')">Não — cobro por km ou faixa</div></div>
+    </div>
+    <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+      <div style="font-size:13px;color:var(--color-text-primary);margin-bottom:10px;font-weight:500">Urgência e prazo curto têm sobretaxa formal no contrato?</div>
+      <div style="display:flex;gap:8px"><div class="pill" onclick="resp(this,2,'nao')">Não, cobro igual</div><div class="pill" onclick="resp(this,2,'sim')">Sim, tenho tabela de urgência</div></div>
+    </div>
+    <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+      <div style="font-size:13px;color:var(--color-text-primary);margin-bottom:10px;font-weight:500">Você sabe qual é a sua margem real por tipo de serviço?</div>
+      <div style="display:flex;gap:8px"><div class="pill" onclick="resp(this,3,'nao')">Não — sei o faturamento total</div><div class="pill" onclick="resp(this,3,'sim')">Sim — meço por serviço</div></div>
+    </div>
+    <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px">
+      <div style="font-size:13px;color:var(--color-text-primary);margin-bottom:10px;font-weight:500">Revisões e retrabalho do cliente estão limitados no contrato?</div>
+      <div style="display:flex;gap:8px"><div class="pill" onclick="resp(this,4,'nao')">Não — faço até ficar certo</div><div class="pill" onclick="resp(this,4,'sim')">Sim — contrato define escopo</div></div>
+    </div>
+  </div>
+  <div id="quiz-resultado" style="display:none"></div>
+</div>
+
+</div>
+
+<script>
+var respostas = {};
+var servicoBase = {pcmso:{horas:10,km:40,visitas:2,retrabalho:12,overhead:18,tributos:9,comercial:7,custo_hora:130},pgr:{horas:12,km:60,visitas:3,retrabalho:15,overhead:18,tributos:9,comercial:7,custo_hora:140},ltcat:{horas:16,km:80,visitas:4,retrabalho:18,overhead:18,tributos:9,comercial:8,custo_hora:150},trein:{horas:8,km:50,visitas:1,retrabalho:5,overhead:15,tributos:9,comercial:6,custo_hora:120},laudo:{horas:14,km:70,visitas:3,retrabalho:20,overhead:18,tributos:9,comercial:7,custo_hora:140}};
+
+function fmtR(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
+function fmtP(v){return Math.round(v)+'%'}
+
+function setServico(el,s){
+  document.querySelectorAll('.switch-row .pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  var d=servicoBase[s];
+  ['horas','km','visitas','retrabalho','overhead','tributos','comercial','custo_hora'].forEach(function(k){
+    if(d[k]!==undefined){document.getElementById(k).value=d[k];}
+  });
+  calc();
+}
+
+function g(id){return parseFloat(document.getElementById(id).value)}
+
+function calc(){
+  var horas=g('horas'),ch=g('custo_hora'),km=g('km'),vis=g('visitas'),ret=g('retrabalho'),oh=g('overhead'),trib=g('tributos'),com=g('comercial'),margem=g('margem'),urg=g('urgencia'),comp=g('complexidade'),atual=g('preco_atual');
+  
+  document.getElementById('horas-v').textContent=horas+' h';
+  document.getElementById('custo_hora-v').textContent='R$ '+ch;
+  document.getElementById('km-v').textContent=km+' km';
+  document.getElementById('visitas-v').textContent=vis;
+  document.getElementById('retrabalho-v').textContent=ret+'%';
+  document.getElementById('overhead-v').textContent=oh+'%';
+  document.getElementById('tributos-v').textContent=trib+'%';
+  document.getElementById('comercial-v').textContent=com+'%';
+  document.getElementById('margem-v').textContent=margem+'%';
+  document.getElementById('urgencia-v').textContent=urg+'%';
+  document.getElementById('complexidade-v').textContent=comp+'%';
+  document.getElementById('preco_atual-v').textContent=fmtR(atual);
+
+  var custoHoraTotal=horas*ch*(1+(ret/100));
+  var custokm=km*vis*1.1;
+  var custoBase=custoHoraTotal+custokm;
+  var overheadVal=custoBase*(oh/100);
+  var comVal=custoBase*(com/100);
+  var custoTotal=custoBase+overheadVal+comVal;
+
+  var denominador=1-(trib/100)-(margem/100);
+  if(denominador<=0)denominador=0.01;
+  var precoMinimo=custoTotal/denominador;
+  var precoComSobretaxa=precoMinimo*(1+(urg/100))*(1+(comp/100));
+  var pisosemMargem=custoTotal/(1-(trib/100));
+
+  document.getElementById('m-custo').textContent=fmtR(custoTotal);
+  document.getElementById('m-piso').textContent=fmtR(pisosemMargem);
+  document.getElementById('m-preco').textContent=fmtR(precoComSobretaxa);
+
+  var margemAtual=((atual-custoTotal)/atual)*100-(trib);
+  var mAtualEl=document.getElementById('m-margem-atual');
+  mAtualEl.textContent=fmtP(margemAtual);
+  mAtualEl.className='mval '+(margemAtual>=18?'ok':margemAtual>=8?'warn':'danger');
+
+  var alertEl=document.getElementById('alert-diagnostico');
+  if(atual<pisosemMargem){
+    alertEl.innerHTML='<div class="alert-box red">Atenção: o preço cobrado hoje ('+fmtR(atual)+') está abaixo do preço piso ('+fmtR(pisosemMargem)+'). Você está entregando este serviço no prejuízo antes mesmo de calcular a margem.</div>';
+  } else if(margemAtual<10){
+    alertEl.innerHTML='<div class="alert-box amber">Margem crítica: com '+fmtP(margemAtual)+' de EBITDA neste serviço, você está longe da meta de 20%. O preço mínimo para atingir a meta é '+fmtR(precoComSobretaxa)+'.</div>';
+  } else if(margemAtual>=18){
+    alertEl.innerHTML='<div class="alert-box green">Boa margem neste serviço: '+fmtP(margemAtual)+'%. Mantenha o padrão de precificação e monitore o custo de entrega.</div>';
+  } else {
+    alertEl.innerHTML='<div class="alert-box amber">Margem de '+fmtP(margemAtual)+'% — abaixo da meta de 20%. Ajuste o preço para '+fmtR(precoComSobretaxa)+' para atingir a meta com as sobretaxas aplicadas.</div>';
+  }
+
+  var segs=[
+    {label:'Hora técnica',val:Math.round(custoHoraTotal),color:'#E24B4A'},
+    {label:'Deslocamento',val:Math.round(custokm),color:'#EF9F27'},
+    {label:'Overhead',val:Math.round(overheadVal),color:'#378ADD'},
+    {label:'Comercial',val:Math.round(comVal),color:'#7F77DD'},
+    {label:'Tributos',val:Math.round(precoComSobretaxa*(trib/100)),color:'#888780'},
+    {label:'Margem alvo',val:Math.round(precoComSobretaxa*(margem/100)),color:'#1D9E75'},
+  ];
+  var total=segs.reduce(function(a,s){return a+s.val},0);
+  var track=document.getElementById('bar-track');
+  track.innerHTML=segs.map(function(s){return '<div class="bar-seg" style="width:'+Math.round(s.val/total*100)+'%;background:'+s.color+'"></div>'}).join('');
+  document.getElementById('bar-legend').innerHTML=segs.map(function(s){return '<div class="leg-item"><div class="leg-dot" style="background:'+s.color+'"></div>'+s.label+' '+fmtR(s.val)+'</div>'}).join('');
+  document.getElementById('breakdown').innerHTML=segs.map(function(s){
+    return '<div class="brow"><span class="blab">'+s.label+'</span><span class="bval">'+fmtR(s.val)+'</span><span class="bpct">'+Math.round(s.val/total*100)+'%</span></div>'
+  }).join('')+'<div class="brow total"><span class="blab">Preço mínimo total</span><span class="bval">'+fmtR(precoComSobretaxa)+'</span><span class="bpct">100%</span></div>';
+}
+
+function setTab(i){
+  document.querySelectorAll('.tab').forEach(function(t,j){t.classList.toggle('active',i===j)});
+  document.querySelectorAll('.panel').forEach(function(p,j){p.classList.toggle('active',i===j)});
+}
+
+function resp(el,idx,val){
+  var parent=el.parentElement;
+  parent.querySelectorAll('.pill').forEach(function(p){p.classList.remove('active')});
+  el.classList.add('active');
+  respostas[idx]=val;
+  if(Object.keys(respostas).length===5){mostrarResultado();}
+}
+
+function mostrarResultado(){
+  var pontos=0;
+  if(respostas[0]==='nao')pontos++;
+  if(respostas[1]==='nao')pontos++;
+  if(respostas[2]==='sim')pontos++;
+  if(respostas[3]==='sim')pontos++;
+  if(respostas[4]==='sim')pontos++;
+  var r=document.getElementById('quiz-resultado');
+  r.style.display='block';
+  var cor,texto,cls;
+  if(pontos<=1){cls='red';texto='Diagnóstico crítico ('+pontos+'/5): sua precificação está destruindo margem. Você provavelmente está trabalhando muito para sobrar pouco — e às vezes no prejuízo. A reprecificação é urgente.'}
+  else if(pontos<=3){cls='amber';texto='Diagnóstico intermediário ('+pontos+'/5): há brechas sérias de margem no modelo atual. Com 2 a 3 ajustes estruturais na precificação, você pode ganhar 4 a 6 p.p. de EBITDA sem vender mais.'}
+  else{cls='green';texto='Diagnóstico razoável ('+pontos+'/5): você já tem algumas práticas corretas. O ganho agora está em consistência, tabela formal e aplicação sem exceções — especialmente nos contratos antigos.'}
+  r.innerHTML='<div class="alert-box '+cls+'" style="font-size:14px">'+texto+'</div><button onclick="sendPrompt(\'Monte uma tabela de preço piso para PCMSO, PGR, LTCAT e treinamentos NR com os critérios que discutimos\')" style="margin-top:12px;width:100%">Montar tabela de preço piso para a Higilabor ↗</button>';
+}
+
+calc();
+</script>
