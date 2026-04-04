@@ -1,12 +1,53 @@
 
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Alavanca - Reprecificacao Higilabor</title>
 <style>
+:root{
+  --font-sans:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+  --color-text-primary:#1d2b36;
+  --color-text-secondary:#5b6874;
+  --color-background-primary:#fffdf8;
+  --color-background-secondary:#f4efe6;
+  --color-border-secondary:#d8cec0;
+  --color-border-tertiary:#e4dbcf;
+  --border-radius-md:14px;
+  --border-radius-lg:22px;
+}
 *{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{
+  margin:0;
+  padding:24px;
+  font-family:var(--font-sans);
+  color:var(--color-text-primary);
+  background:
+    radial-gradient(circle at top left,#fff7ea 0,transparent 32%),
+    linear-gradient(180deg,#f5efe5 0%,#ece3d6 100%);
+}
+main{
+  width:min(1180px,100%);
+  margin:0 auto;
+  padding:24px;
+  border:1px solid var(--color-border-tertiary);
+  border-radius:28px;
+  background:rgba(255,253,248,0.94);
+  box-shadow:0 24px 60px rgba(91,70,33,0.12);
+  backdrop-filter:blur(8px);
+}
 .w{padding:1rem 0;font-family:var(--font-sans)}
 .sec{margin-bottom:2rem}
 .sec-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px}
 .row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .row label{font-size:13px;color:var(--color-text-secondary);width:220px;flex-shrink:0;line-height:1.4}
 .row input[type=range]{flex:1}
+.row input[type=range],
+input[type=range]{accent-color:#E24B4A}
 .row .val{font-size:13px;font-weight:500;color:var(--color-text-primary);min-width:64px;text-align:right}
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
 .metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
@@ -42,13 +83,41 @@
 .tab:last-child{border-right:none}
 .tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
 .panel{display:none}.panel.active{display:block}
+@media (max-width:720px){
+  body{padding:12px}
+  main{padding:16px;border-radius:22px}
+  .tabs{flex-wrap:wrap}
+  .tab{min-width:50%;border-bottom:0.5px solid var(--color-border-tertiary)}
+  .tab:nth-child(2){border-right:none}
+  .row{flex-wrap:wrap;align-items:flex-start}
+  .row label{width:100%}
+  .row .val{width:100%;min-width:0;text-align:left}
+  .metrics{grid-template-columns:1fr}
+}
 @media (prefers-color-scheme:dark){
+  :root{
+    --color-text-primary:#f2eee6;
+    --color-text-secondary:#c8c0b4;
+    --color-background-primary:#241f18;
+    --color-background-secondary:#302921;
+    --color-border-secondary:#4b433a;
+    --color-border-tertiary:#3f382f;
+  }
+  body{
+    background:
+      radial-gradient(circle at top left,#48341b 0,transparent 30%),
+      linear-gradient(180deg,#17130f 0%,#221c16 100%);
+  }
+  main{background:rgba(29,24,19,0.94);box-shadow:0 24px 60px rgba(0,0,0,0.35)}
   .alert-box.red{background:#501313;color:#F7C1C1}
   .alert-box.green{background:#173404;color:#C0DD97}
   .alert-box.amber{background:#412402;color:#FAC775}
   .pill.active{background:#A32D2D;border-color:#A32D2D}
 }
 </style>
+ </head>
+<body>
+<main>
 
 <div class="w">
 
@@ -288,6 +357,8 @@ function calc(){
     alertEl.innerHTML='<div class="alert-box amber">Margem de '+fmtP(margemAtual)+'% — abaixo da meta de 20%. Ajuste o preço para '+fmtR(precoComSobretaxa)+' para atingir a meta com as sobretaxas aplicadas.</div>';
   }
 
+  alertEl.innerHTML=alertEl.innerHTML.replace('%%','%');
+
   var segs=[
     {label:'Hora técnica',val:Math.round(custoHoraTotal),color:'#E24B4A'},
     {label:'Deslocamento',val:Math.round(custokm),color:'#EF9F27'},
@@ -334,5 +405,24 @@ function mostrarResultado(){
   r.innerHTML='<div class="alert-box '+cls+'" style="font-size:14px">'+texto+'</div><button onclick="sendPrompt(\'Monte uma tabela de preço piso para PCMSO, PGR, LTCAT e treinamentos NR com os critérios que discutimos\')" style="margin-top:12px;width:100%">Montar tabela de preço piso para a Higilabor ↗</button>';
 }
 
+function sendPrompt(prompt){
+  if(window.parent && window.parent!==window && typeof window.parent.sendPrompt==='function'){
+    window.parent.sendPrompt(prompt);
+    return;
+  }
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(prompt).then(function(){
+      alert('Prompt copied. Paste it into your AI chat.');
+    }).catch(function(){
+      window.prompt('Copy the prompt below:',prompt);
+    });
+    return;
+  }
+  window.prompt('Copy the prompt below:',prompt);
+}
+
 calc();
 </script>
+ </main>
+</body>
+</html>
