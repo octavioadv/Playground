@@ -3,579 +3,730 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NR-1 Psicossocial 2026 | Higilabor — Adequação Obrigatória</title>
-  <meta name="description" content="A NR-1 psicossocial é obrigatória a partir de 26/05/2026. Adeque sua empresa antes do prazo. Diagnóstico gratuito.">
+  <title>NR-1 Psicossocial 2026 | Higilabor Uberlândia — Adequação Obrigatória até 26/05/2026</title>
+  <meta name="description" content="A NR-1 psicossocial é obrigatória a partir de 26/05/2026. Multa de R$ 6.674+ por autuação. A Higilabor faz a adequação completa do seu PGR em 3 semanas. Diagnóstico gratuito.">
+  <meta name="keywords" content="NR-1 psicossocial, riscos psicossociais, PGR 2026, segurança do trabalho Uberlândia, adequação NR-1, Higilabor">
+  <meta property="og:title" content="NR-1 Psicossocial 2026 — Adequação Obrigatória | Higilabor">
+  <meta property="og:description" content="Prazo: 26/05/2026. Multa R$ 6.674+. A Higilabor adequa o PGR da sua empresa em 3 semanas. Diagnóstico gratuito em 30 min.">
+  <meta property="og:image" content="https://higilabor.com.br/wp-content/uploads/2023/10/LOGO-HIGILABORtransparente-e1741200091119-1013x1024.png">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://higilabor.com.br/nr-1-psicossocial-2026/">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
   <style>
     :root {
-      --azul-esc: #0D2B5A;
-      --azul-med: #1565C0;
-      --azul-cla: #1E88E5;
-      --laranja:  #E65100;
-      --verde:    #2E7D32;
-      --cinza-bg: #F5F7FA;
-      --cinza-ca: #FFFFFF;
-      --texto:    #1A1A2E;
-      --texto2:   #546E7A;
+      --verde:     #61a229;
+      --verde-esc: #4e8221;
+      --verde-cla: #e8f5d6;
+      --azul:      #0269B4;
+      --laranja:   #e67e22;
+      --vermelho:  #c0392b;
+      --cinza-bg:  #F5F7FA;
+      --branco:    #ffffff;
+      --texto:     #2c2c2c;
+      --texto2:    #666;
+      --borda:     #e0e0e0;
       --gap: 20px;
-      --radius: 10px;
+      --r: 10px;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--cinza-bg); color: var(--texto); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'League Spartan', -apple-system, sans-serif; background: var(--cinza-bg); color: var(--texto); }
 
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(135deg, var(--azul-esc) 0%, var(--azul-med) 100%);
+    /* ─── BANNER URGÊNCIA ─────────────────────────────────── */
+    .banner-urgencia {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--vermelho);
       color: #fff;
-      padding: 48px 24px 56px;
       text-align: center;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .banner-urgencia .cd-inline { display: flex; gap: 6px; font-size: 13px; }
+    .cd-item { background: rgba(255,255,255,.2); border-radius: 4px; padding: 2px 7px; font-weight: 800; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      background: var(--verde-esc);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .nav-logo { color: #fff; font-size: 20px; font-weight: 800; text-decoration: none; }
+    .nav-logo span { color: #c8e89a; }
+    .nav-cta {
+      background: var(--laranja); color: #fff;
+      padding: 9px 22px; border-radius: 50px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, rgba(78,130,33,.92) 0%, rgba(97,162,41,.88) 100%), url('https://higilabor.com.br/wp-content/uploads/2025/09/5ccf467b-e15c-4d4b-b663-0544052a445e__higilabor-uberlandia-03.webp') center/cover no-repeat;
+      color: #fff; text-align: center;
+      padding: 56px 24px 64px;
     }
     .hero .badge {
       display: inline-block;
-      background: var(--laranja);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 16px;
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.4);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+      margin-bottom: 20px;
     }
-    .hero h1 { font-size: clamp(24px, 4vw, 42px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
-    .hero p  { font-size: 18px; opacity: 0.88; max-width: 620px; margin: 0 auto 32px; }
+    .hero h1 { font-size: clamp(26px, 4.5vw, 48px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+    .hero h1 em { font-style: normal; color: #c8e89a; }
+    .hero p  { font-size: 17px; opacity: .9; max-width: 580px; margin: 0 auto 36px; line-height: 1.6; }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-prim {
+      background: var(--laranja); color: #fff;
+      padding: 15px 34px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0,0,0,.25);
+      transition: transform .15s;
+    }
+    .btn-prim:hover { transform: translateY(-2px); }
+    .btn-sec {
+      background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.5);
+      color: #fff; padding: 15px 34px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+    }
 
-    /* Countdown */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 36px;
+    /* ─── COUNTDOWN ───────────────────────────────────────── */
+    .countdown-bar {
+      background: var(--verde-esc);
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: center; gap: 24px;
       flex-wrap: wrap;
     }
-    .count-box {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: var(--radius);
-      padding: 14px 20px;
-      min-width: 80px;
-    }
-    .count-box .num {
-      font-size: 38px;
-      font-weight: 800;
-      line-height: 1;
-      display: block;
-    }
-    .count-box .lbl {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      opacity: 0.75;
-    }
-
-    .btn-hero {
-      display: inline-block;
-      background: var(--laranja);
+    .countdown-bar .lbl { color: rgba(255,255,255,.8); font-size: 13px; font-weight: 600; }
+    .countdown-bar .boxes { display: flex; gap: 10px; }
+    .cbox {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--r); padding: 10px 16px; text-align: center; min-width: 68px;
       color: #fff;
-      font-size: 17px;
-      font-weight: 700;
-      padding: 16px 36px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: transform .15s, box-shadow .15s;
-      cursor: pointer;
-      border: none;
     }
-    .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+    .cbox .n { font-size: 32px; font-weight: 800; line-height: 1; display: block; }
+    .cbox .u { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; opacity: .75; }
 
-    /* ── CONTAINER ── */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--gap); }
+    /* ─── CONTAINER ───────────────────────────────────────── */
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--gap); }
 
-    /* ── ALERTA ── */
-    .alerta {
-      background: #FFF3E0;
-      border-left: 5px solid var(--laranja);
-      padding: 18px 24px;
-      margin: 32px auto;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      max-width: 1100px;
-    }
-    .alerta strong { color: var(--laranja); }
+    /* ─── SECTION HEADER ──────────────────────────────────── */
+    .sec { padding: 56px 0; }
+    .sec-hd { text-align: center; margin-bottom: 36px; }
+    .sec-hd h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; color: var(--verde-esc); margin-bottom: 8px; }
+    .sec-hd p  { font-size: 16px; color: var(--texto2); max-width: 580px; margin: 0 auto; }
 
-    /* ── KPI ROW ── */
-    .kpi-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--gap);
-      margin: 0 auto 32px;
+    /* ─── RISCO CARDS ─────────────────────────────────────── */
+    .risco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); }
+    .risco-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border-top: 4px solid var(--vermelho); text-align: center;
     }
-    .kpi-card {
-      background: var(--cinza-ca);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      border-top: 4px solid var(--azul-med);
-    }
-    .kpi-card.danger  { border-top-color: var(--laranja); }
-    .kpi-card.success { border-top-color: var(--verde); }
-    .kpi-label { font-size: 12px; color: var(--texto2); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
-    .kpi-value { font-size: 30px; font-weight: 800; color: var(--texto); }
-    .kpi-sub   { font-size: 13px; color: var(--texto2); margin-top: 4px; }
+    .risco-card .num { font-size: 32px; font-weight: 800; color: var(--vermelho); }
+    .risco-card .tit { font-size: 14px; font-weight: 700; color: var(--texto); margin: 6px 0 4px; }
+    .risco-card .sub { font-size: 13px; color: var(--texto2); line-height: 1.5; }
 
-    /* ── SECTIONS ── */
-    section { padding: 48px 0; }
-    section h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; color: var(--azul-esc); }
-    section .sub { font-size: 16px; color: var(--texto2); margin-bottom: 28px; }
+    /* ─── O QUE É ─────────────────────────────────────────── */
+    .oque-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    @media(max-width:680px){ .oque-grid{ grid-template-columns:1fr; } }
+    .oque-txt p { font-size: 15px; color: var(--texto2); line-height: 1.7; margin-bottom: 14px; }
+    .fatores-list { list-style: none; display: grid; gap: 8px; }
+    .fatores-list li {
+      background: var(--verde-cla); border-radius: 6px;
+      padding: 10px 14px; font-size: 14px; font-weight: 600; color: var(--verde-esc);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .fatores-list li::before { content: "✓"; font-weight: 800; }
 
-    /* ── CARDS GRID ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: var(--gap);
+    /* ─── 4 FASES ─────────────────────────────────────────── */
+    .fases { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); }
+    .fase-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      position: relative; overflow: hidden;
     }
-    .card {
-      background: var(--cinza-ca);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    .fase-card::before {
+      content: attr(data-n);
+      position: absolute; top: -10px; right: 10px;
+      font-size: 72px; font-weight: 800; color: var(--verde-cla);
+      line-height: 1; pointer-events: none;
     }
-    .card .icon { font-size: 28px; margin-bottom: 12px; }
-    .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--azul-esc); }
-    .card p  { font-size: 14px; color: var(--texto2); line-height: 1.6; }
+    .fase-card h3 { font-size: 16px; font-weight: 800; color: var(--verde-esc); margin-bottom: 8px; }
+    .fase-card p  { font-size: 14px; color: var(--texto2); line-height: 1.6; }
+    .fase-tag {
+      display: inline-block; background: var(--verde); color: #fff;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 10px;
+    }
 
-    /* ── CHART ROW ── */
-    .chart-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--gap);
-      margin-top: 0;
+    /* ─── ROI TABLE ───────────────────────────────────────── */
+    .roi-wrap { overflow-x: auto; }
+    table.roi {
+      width: 100%; border-collapse: collapse;
+      background: var(--branco); border-radius: var(--r);
+      overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      font-size: 14px;
     }
-    @media (max-width: 680px) { .chart-row { grid-template-columns: 1fr; } }
-    .chart-box {
-      background: var(--cinza-ca);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    table.roi th {
+      padding: 14px 16px; text-align: left;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
     }
-    .chart-box h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--texto); }
-    .chart-box canvas { max-height: 240px; }
+    table.roi th:first-child { background: var(--verde-esc); color: #fff; }
+    table.roi th.col-sem { background: var(--vermelho); color: #fff; }
+    table.roi th.col-com { background: var(--verde); color: #fff; }
+    table.roi td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; }
+    table.roi td.val-sem { color: var(--vermelho); font-weight: 700; }
+    table.roi td.val-com { color: var(--verde); font-weight: 700; }
+    table.roi tr.total td { font-weight: 800; background: #fafafa; font-size: 15px; }
+    table.roi tr:last-child td { border-bottom: none; }
 
-    /* ── STEPS ── */
-    .steps { counter-reset: step; display: grid; gap: 16px; }
-    .step {
-      display: flex;
-      gap: 16px;
-      background: var(--cinza-ca);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      align-items: flex-start;
+    /* ─── PACOTES ─────────────────────────────────────────── */
+    .pacotes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+    @media(max-width:620px){ .pacotes-grid{ grid-template-columns:1fr; } }
+    .pacote {
+      background: var(--branco); border-radius: var(--r);
+      padding: 32px 28px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border: 2px solid var(--borda); position: relative;
     }
-    .step-num {
-      background: var(--azul-med);
-      color: #fff;
-      font-weight: 800;
-      font-size: 15px;
-      width: 34px; height: 34px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+    .pacote.destaque { border-color: var(--verde); }
+    .rec-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--verde); color: #fff;
+      font-size: 12px; font-weight: 800; padding: 4px 18px; border-radius: 20px;
+      white-space: nowrap;
     }
-    .step-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .step-body p  { font-size: 14px; color: var(--texto2); }
+    .pacote h3 { font-size: 20px; font-weight: 800; color: var(--verde-esc); margin-bottom: 6px; }
+    .pacote .pacote-sub { font-size: 13px; color: var(--texto2); margin-bottom: 20px; }
+    .pacote .preco { font-size: 28px; font-weight: 800; color: var(--texto); margin-bottom: 4px; }
+    .pacote .preco span { font-size: 14px; color: var(--texto2); font-weight: 400; }
+    .pacote ul { list-style: none; margin: 16px 0 24px; display: grid; gap: 8px; }
+    .pacote ul li { font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
+    .pacote ul li::before { content: "✓"; color: var(--verde); font-weight: 800; flex-shrink: 0; }
+    .btn-pacote {
+      display: block; text-align: center;
+      background: var(--verde); color: #fff;
+      padding: 13px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+    }
+    .pacote.destaque .btn-pacote { background: var(--laranja); }
 
-    /* ── TABELA PRECOS ── */
-    .tabela-precos {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--cinza-ca);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    }
-    .tabela-precos th {
-      background: var(--azul-esc);
-      color: #fff;
-      padding: 14px 16px;
-      text-align: left;
-      font-size: 13px;
-    }
-    .tabela-precos td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid #F0F4F8; }
-    .tabela-precos tr:last-child td { border-bottom: none; }
-    .tabela-precos tr:hover td { background: #F5F7FA; }
-    .preco { font-weight: 700; color: var(--azul-med); }
-    .economia { font-weight: 700; color: var(--verde); }
-    .badge-urg { background: var(--laranja); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
-
-    /* ── CTA FINAL ── */
-    .cta-final {
-      background: linear-gradient(135deg, var(--azul-esc), var(--azul-med));
-      color: #fff;
+    /* ─── DIFERENCIAIS ────────────────────────────────────── */
+    .dif-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap); }
+    .dif-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
       text-align: center;
-      padding: 56px 24px;
     }
-    .cta-final h2 { font-size: 30px; font-weight: 800; margin-bottom: 12px; }
-    .cta-final p  { font-size: 18px; opacity: .88; margin-bottom: 32px; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .dif-card .icn { font-size: 36px; margin-bottom: 12px; }
+    .dif-card h4 { font-size: 15px; font-weight: 800; color: var(--verde-esc); margin-bottom: 6px; }
+    .dif-card p  { font-size: 13px; color: var(--texto2); line-height: 1.5; }
+
+    /* ─── DEPOIMENTOS ─────────────────────────────────────── */
+    .dep-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--gap); }
+    .dep-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border-left: 4px solid var(--verde);
+    }
+    .dep-card .stars { color: #f4a100; font-size: 18px; margin-bottom: 10px; }
+    .dep-card blockquote { font-size: 14px; color: var(--texto2); line-height: 1.7; font-style: italic; margin-bottom: 14px; }
+    .dep-card .autor { font-size: 13px; font-weight: 700; color: var(--verde-esc); }
+    .dep-card .cargo { font-size: 12px; color: var(--texto2); }
+
+    /* ─── FAQ ─────────────────────────────────────────────── */
+    .faq-list { max-width: 720px; margin: 0 auto; display: grid; gap: 10px; }
+    .faq-item { background: var(--branco); border-radius: var(--r); overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    .faq-q {
+      width: 100%; text-align: left;
+      padding: 18px 20px; background: none; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 700; color: var(--texto);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      font-family: inherit;
+    }
+    .faq-q .arr { font-size: 18px; color: var(--verde); transition: transform .2s; flex-shrink: 0; }
+    .faq-q.open .arr { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 20px 18px; font-size: 14px; color: var(--texto2); line-height: 1.7; }
+    .faq-a.open { display: block; }
+
+    /* ─── CTA FINAL ───────────────────────────────────────── */
+    .cta-final {
+      background: linear-gradient(135deg, var(--verde-esc), var(--verde));
+      color: #fff; text-align: center; padding: 64px 24px;
+    }
+    .cta-final h2 { font-size: clamp(22px, 3.5vw, 34px); font-weight: 800; margin-bottom: 10px; }
+    .cta-final p  { font-size: 17px; opacity: .9; margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
     .btn-wpp {
-      background: #25D366;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
+      background: #25D366; color: #fff;
+      padding: 15px 32px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
       display: flex; align-items: center; gap: 8px;
     }
     .btn-email {
-      background: rgba(255,255,255,.15);
-      border: 2px solid rgba(255,255,255,.5);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
+      background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.5);
+      color: #fff; padding: 15px 32px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
     }
-    .btn-wpp:hover, .btn-email:hover { opacity: .9; }
+    .cta-contato { font-size: 14px; opacity: .8; }
+    .cta-contato a { color: #c8e89a; text-decoration: none; }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 13px;
-      color: var(--texto2);
-      border-top: 1px solid #E0E7EF;
+    /* ─── WPP FLUTUANTE ───────────────────────────────────── */
+    .wpp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: #25D366; color: #fff;
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5);
+      animation: pulse 2.5s infinite;
     }
-    footer a { color: var(--azul-med); text-decoration: none; }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5); }
+      50%      { box-shadow: 0 4px 32px rgba(37,211,102,.8), 0 0 0 10px rgba(37,211,102,.15); }
+    }
 
-    /* ── LEGAL ── */
-    .legal-box {
-      background: #E3F2FD;
-      border-left: 4px solid var(--azul-cla);
-      padding: 16px 20px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin-top: 24px;
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer { text-align: center; padding: 24px; font-size: 13px; color: var(--texto2); border-top: 1px solid var(--borda); }
+    footer a { color: var(--verde); text-decoration: none; }
+
+    /* ─── ALERTA ──────────────────────────────────────────── */
+    .alerta {
+      background: #fff8e1; border-left: 5px solid var(--laranja);
+      padding: 16px 22px; border-radius: 0 var(--r) var(--r) 0;
+      font-size: 14px; color: #7a4800; margin-bottom: 32px;
     }
-    .legal-box p { font-size: 14px; color: #1A237E; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media(max-width:768px){
+      .banner-urgencia .cd-inline { display: none; }
+      .pacotes-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="badge">⚠ Prazo obrigatório — NR-1 Psicossocial 2026</div>
-  <h1>Sua empresa tem<br><span id="hero-dias">--</span> dias para se adequar</h1>
-  <p>A partir de <strong>26/05/2026</strong>, toda empresa com funcionários deve incluir riscos psicossociais no PGR. Quem não adequar está sujeito a <strong>multa de R$ 6.674+</strong>.</p>
-
-  <div class="countdown">
-    <div class="count-box"><span class="num" id="cd-dias">--</span><span class="lbl">Dias</span></div>
-    <div class="count-box"><span class="num" id="cd-horas">--</span><span class="lbl">Horas</span></div>
-    <div class="count-box"><span class="num" id="cd-min">--</span><span class="lbl">Minutos</span></div>
-    <div class="count-box"><span class="num" id="cd-seg">--</span><span class="lbl">Segundos</span></div>
+<!-- BANNER URGÊNCIA -->
+<div class="banner-urgencia">
+  ⚠ Prazo NR-1 psicossocial:
+  <div class="cd-inline">
+    <span class="cd-item" id="b-dias">--</span>d
+    <span class="cd-item" id="b-horas">--</span>h
+    <span class="cd-item" id="b-min">--</span>m
   </div>
-
-  <button class="btn-hero" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">
-    Quero diagnóstico gratuito →
-  </button>
+  restantes — multa a partir de R$ 6.674
 </div>
 
-<div class="container">
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://higilabor.com.br">
+    <img src="https://higilabor.com.br/wp-content/uploads/2023/10/LOGO-HIGILABORtransparente-e1741200091119-1013x1024.png" alt="Higilabor SST" style="height:44px;width:auto;vertical-align:middle;">
+  </a>
+  <a class="nav-cta" href="#contato">Quero adequar meu PGR →</a>
+</nav>
 
-  <!-- ALERTA -->
-  <div class="alerta">
-    <strong>⚠ Atenção:</strong> A NR-1 psicossocial não é opcional e não há porte mínimo de empresa. MEI com funcionários, pequenas empresas, médias e grandes — <strong>todos precisam se adequar</strong>.
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">⚠ Obrigatório a partir de 26/05/2026</div>
+  <h1>Sua empresa tem <em id="hero-dias">--</em> dias<br>para se adequar à NR-1</h1>
+  <p>A nova NR-1 exige que <strong>toda empresa</strong> inclua riscos psicossociais no PGR. Quem não adequar até o prazo está sujeito a <strong>multa de R$ 6.674+ por autuação</strong> — e processo trabalhista.<br><small style="opacity:.75;font-size:13px;">Higilabor — Uberlândia/MG, desde 1992. Nossa equipe vai até sua empresa.</small></p>
+  <div class="hero-ctas">
+    <a class="btn-prim" href="#contato">Quero adequar meu PGR</a>
+    <a class="btn-sec" href="#pacotes">Ver pacotes e preços</a>
   </div>
+</div>
 
-  <!-- KPIs -->
-  <div class="kpi-row">
-    <div class="kpi-card danger">
-      <div class="kpi-label">Multa por autuação</div>
-      <div class="kpi-value">R$ 6.674</div>
-      <div class="kpi-sub">Valor base — pode ser multiplicado</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Deadline legal</div>
-      <div class="kpi-value">26/05/2026</div>
-      <div class="kpi-sub">Norma: NR-1 atualizada (2024)</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Prazo de adequação</div>
-      <div class="kpi-value" id="kpi-prazo">-- dias</div>
-      <div class="kpi-sub">A partir de hoje</div>
-    </div>
-    <div class="kpi-card success">
-      <div class="kpi-label">Custo de adequação</div>
-      <div class="kpi-value">A partir de R$ 890</div>
-      <div class="kpi-sub">Para empresas até 30 funcionários</div>
-    </div>
+<!-- COUNTDOWN -->
+<div class="countdown-bar">
+  <span class="lbl">Tempo até o prazo legal:</span>
+  <div class="boxes">
+    <div class="cbox"><span class="n" id="cd-dias">--</span><span class="u">Dias</span></div>
+    <div class="cbox"><span class="n" id="cd-horas">--</span><span class="u">Horas</span></div>
+    <div class="cbox"><span class="n" id="cd-min">--</span><span class="u">Min</span></div>
+    <div class="cbox"><span class="n" id="cd-seg">--</span><span class="u">Seg</span></div>
   </div>
+</div>
+
+<div class="wrap">
+
+  <!-- RISCOS -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>O custo de não se adequar</h2>
+      <p>O que está em jogo para quem ignora a NR-1 psicossocial</p>
+    </div>
+    <div class="risco-grid">
+      <div class="risco-card">
+        <div class="num">R$ 40K+</div>
+        <div class="tit">Multa por autuação do MTE</div>
+        <div class="sub">R$ 6.674 base × reincidências + acréscimos por tamanho da empresa</div>
+      </div>
+      <div class="risco-card">
+        <div class="num">R$ 50K+</div>
+        <div class="tit">Exposição em processo trabalhista</div>
+        <div class="sub">Dano moral por assédio e estresse documentados — valor varia conforme o caso e número de funcionários</div>
+      </div>
+      <div class="risco-card">
+        <div class="num">2,0×</div>
+        <div class="tit">FAP máximo no INSS (RAT)</div>
+        <div class="sub">Empresa com alto índice de afastamentos paga o dobro de RAT — evitável com SST eficiente</div>
+      </div>
+      <div class="risco-card">
+        <div class="num">30%</div>
+        <div class="tit">Das licenças são psicossociais</div>
+        <div class="sub">Burnout, ansiedade e depressão já são a 3ª causa de afastamento no Brasil (INSS 2024)</div>
+      </div>
+    </div>
+  </section>
 
   <!-- O QUE É -->
-  <section>
-    <h2>O que é a NR-1 Psicossocial?</h2>
-    <p class="sub">A NR-1 foi atualizada para incluir obrigatoriamente a avaliação de riscos psicossociais no PGR da empresa.</p>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="icon">🧠</div>
-        <h3>Riscos Psicossociais</h3>
-        <p>Estresse ocupacional, assédio moral, pressão excessiva, sobrecarga, conflitos interpessoais e clima organizacional tóxico precisam ser mapeados e gerenciados.</p>
+  <section class="sec" style="background:var(--branco); margin: 0 -20px; padding: 56px 20px;">
+    <div class="sec-hd">
+      <h2>O que a NR-1 exige da sua empresa</h2>
+      <p>8 fatores psicossociais que devem estar mapeados e gerenciados no PGR</p>
+    </div>
+    <div class="oque-grid">
+      <div class="oque-txt">
+        <p>A <strong>Portaria MTE 1.419/2024</strong> atualizou a NR-1 para incluir a obrigatoriedade de identificar, avaliar e controlar os riscos psicossociais no Programa de Gerenciamento de Riscos (PGR).</p>
+        <p>Isso não é opcional: qualquer empresa com empregados registrados precisa adequar seu PGR antes de <strong>26/05/2026</strong>. MEI com funcionários, pequenas, médias e grandes — todas.</p>
+        <p>A fiscalização começa na data e autuações podem ser lavradas imediatamente em visita do Auditor Fiscal do Trabalho.</p>
       </div>
-      <div class="card">
-        <div class="icon">📋</div>
-        <h3>PGR Atualizado</h3>
-        <p>O Programa de Gerenciamento de Riscos (PGR) da sua empresa deve ser revisado para incluir os riscos psicossociais com ações preventivas e prazos.</p>
+      <ul class="fatores-list">
+        <li>Estresse ocupacional e sobrecarga de trabalho</li>
+        <li>Assédio moral e sexual</li>
+        <li>Conflitos interpessoais e violência no trabalho</li>
+        <li>Falta de autonomia e controle sobre o trabalho</li>
+        <li>Insegurança no emprego e instabilidade</li>
+        <li>Clima organizacional e relacionamento com liderança</li>
+        <li>Jornadas excessivas e trabalho em turnos</li>
+        <li>Reconhecimento, recompensa e justiça organizacional</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4 FASES -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>Como a Higilabor faz a adequação</h2>
+      <p>Nossa equipe vai até sua empresa. Processo completo em 3–4 semanas, sem burocracia.</p>
+    </div>
+    <div class="fases">
+      <div class="fase-card" data-n="1">
+        <span class="fase-tag">Semana 1</span>
+        <h3>Diagnóstico</h3>
+        <p>Análise do PGR atual, atividade econômica, estrutura da empresa e fatores de risco presentes. Nossa equipe vai até você — gratuito.</p>
       </div>
-      <div class="card">
-        <div class="icon">🔍</div>
-        <h3>Diagnóstico Obrigatório</h3>
-        <p>É necessário realizar pesquisa de clima e mapeamento de fatores de risco. A Higilabor faz isso com metodologia validada e entrega documentação eSocial-compliant.</p>
+      <div class="fase-card" data-n="2">
+        <span class="fase-tag">Semana 1–2</span>
+        <h3>Análise</h3>
+        <p>Aplicação do questionário COPSOQ III (validado internacionalmente) com os funcionários de forma anônima. Análise dos resultados por setor e função.</p>
       </div>
-      <div class="card">
-        <div class="icon">⚖️</div>
-        <h3>Base Legal</h3>
-        <p>Portaria MTE 1.419/2024 — atualização da NR-1. Fiscalização a partir de 26/05/2026. Autuações pelo Ministério do Trabalho e Emprego (MTE).</p>
+      <div class="fase-card" data-n="3">
+        <span class="fase-tag">Semana 2–3</span>
+        <h3>Intervenção</h3>
+        <p>Elaboração do plano de ação com medidas preventivas, responsáveis e prazos. Atualização completa do PGR conforme NR-1 atualizada.</p>
+      </div>
+      <div class="fase-card" data-n="4">
+        <span class="fase-tag">Contínuo</span>
+        <h3>Monitoramento</h3>
+        <p>Acompanhamento dos indicadores psicossociais, reavaliação periódica e suporte para auditoria do MTE ou eSocial. Incluso no retainer.</p>
       </div>
     </div>
   </section>
 
-  <!-- GRÁFICOS -->
-  <section>
-    <h2>Custo de agir vs. custo de ignorar</h2>
-    <p class="sub">Uma análise simples mostra por que adequar agora é muito mais barato do que ser autuado.</p>
-    <div class="chart-row">
-      <div class="chart-box">
-        <h3>Comparativo: Adequação vs. Multa (empresa de 20 funcionários)</h3>
-        <canvas id="chart-custo"></canvas>
+  <!-- ROI -->
+  <section class="sec" style="background:var(--branco); margin: 0 -20px; padding: 56px 20px;">
+    <div class="sec-hd">
+      <h2>Adequar agora vs. ignorar</h2>
+      <p>Exposição financeira real de uma empresa com 20 funcionários nos próximos 12 meses</p>
+    </div>
+    <div class="roi-wrap">
+      <table class="roi">
+        <thead>
+          <tr>
+            <th>Cenário</th>
+            <th class="col-sem">Sem adequação</th>
+            <th class="col-com">Com Higilabor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Multa MTE (1 autuação)</td>
+            <td class="val-sem">R$ 13.348</td>
+            <td class="val-com">R$ 0</td>
+          </tr>
+          <tr>
+            <td>Afastamentos psicossociais (estimativa)</td>
+            <td class="val-sem">R$ 28.000</td>
+            <td class="val-com">R$ 9.800 (–65%)</td>
+          </tr>
+          <tr>
+            <td>Acréscimo FAP no INSS (12 meses)</td>
+            <td class="val-sem">R$ 18.000</td>
+            <td class="val-com">R$ 9.000 (–50%)</td>
+          </tr>
+          <tr>
+            <td>Risco de ação trabalhista</td>
+            <td class="val-sem">R$ 80.000+</td>
+            <td class="val-com">Risco mitigado</td>
+          </tr>
+          <tr>
+            <td>Rotatividade e recontratação</td>
+            <td class="val-sem">R$ 24.000</td>
+            <td class="val-com">R$ 12.000 (–50%)</td>
+          </tr>
+          <tr>
+            <td><strong>Investimento Higilabor</strong></td>
+            <td class="val-sem">—</td>
+            <td class="val-com"><strong>R$ 1.490</strong></td>
+          </tr>
+          <tr class="total">
+            <td><strong>Exposição total estimada</strong></td>
+            <td class="val-sem"><strong>R$ 163.348+</strong></td>
+            <td class="val-com"><strong>R$ 32.290</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PACOTES -->
+  <section class="sec" id="pacotes">
+    <div class="sec-hd">
+      <h2>Escolha seu pacote</h2>
+      <p>Adequação pontual ou proteção contínua — os dois com garantia de conformidade legal</p>
+    </div>
+    <div class="pacotes-grid">
+      <div class="pacote">
+        <h3>Pontual</h3>
+        <p class="pacote-sub">Adequação NR-1 psicossocial — entrega única</p>
+        <div class="preco">A partir de R$ 890 <span>/ empresa</span></div>
+        <ul>
+          <li>Diagnóstico completo da empresa</li>
+          <li>Aplicação do questionário COPSOQ III</li>
+          <li>Atualização do PGR com riscos psicossociais</li>
+          <li>Plano de ação com responsáveis e prazos</li>
+          <li>Documentação para auditoria MTE</li>
+          <li>Suporte por 30 dias pós-entrega</li>
+        </ul>
+        <a class="btn-pacote" href="https://wa.me/5534999715684?text=Quero+o+pacote+Pontual+NR-1" target="_blank">Solicitar proposta</a>
       </div>
-      <div class="chart-box">
-        <h3>Distribuição de riscos psicossociais por setor</h3>
-        <canvas id="chart-setor"></canvas>
+      <div class="pacote destaque">
+        <span class="rec-badge">⭐ Recomendado</span>
+        <h3>Add-on Retainer</h3>
+        <p class="pacote-sub">NR-1 psicossocial incluída no contrato mensal de SST</p>
+        <div class="preco">Incluído no retainer <span>mensal</span></div>
+        <ul>
+          <li>Tudo do pacote Pontual</li>
+          <li>Monitoramento contínuo dos indicadores</li>
+          <li>Reavaliação anual obrigatória</li>
+          <li>PGR sempre atualizado (NR + eSocial)</li>
+          <li>PCMSO com médica do trabalho própria</li>
+          <li>Suporte ilimitado + representação em fiscalização</li>
+          <li>Redução ativa do FAP</li>
+        </ul>
+        <a class="btn-pacote" href="https://wa.me/5534999715684?text=Quero+o+retainer+SST+com+NR-1" target="_blank">Quero proteção completa</a>
       </div>
     </div>
   </section>
 
-  <!-- COMO FUNCIONA -->
-  <section>
-    <h2>Como a Higilabor faz a adequação</h2>
-    <p class="sub">Processo completo em 3–4 semanas. Sem burocracia, sem deslocamento obrigatório.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Diagnóstico gratuito (30 min)</h4>
-          <p>Análise do PGR atual, quantidade de funcionários, atividade econômica e exposição a riscos. Por videochamada ou presencial.</p>
-        </div>
+  <!-- DIFERENCIAIS -->
+  <section class="sec" style="background:var(--branco); margin: 0 -20px; padding: 56px 20px;">
+    <div class="sec-hd">
+      <h2>Por que a Higilabor</h2>
+      <p>Consultoria SST em Uberlândia desde 1992 — fundada por Ronaldo Coelho de Alvarenga, Eng. de Segurança (CREA 40.614/D)</p>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card">
+        <div class="icn">🏛️</div>
+        <h4>34 anos de SST</h4>
+        <p>Desde 1992 em Uberlândia/MG. Histórico documentado em laudos, PCMSO e PGR para centenas de empresas.</p>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Pesquisa de clima e mapeamento de riscos</h4>
-          <p>Aplicamos questionário validado com os funcionários (anônimo). Mapeamos fatores de risco psicossocial por setor e função.</p>
-        </div>
+      <div class="dif-card">
+        <div class="icn">📋</div>
+        <h4>Metodologia COPSOQ III</h4>
+        <p>Questionário internacional validado para avaliação psicossocial — aceito pelo MTE em fiscalizações.</p>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Atualização do PGR</h4>
-          <p>Incluímos os riscos psicossociais no PGR com plano de ação, responsáveis e prazos — conforme exigência da NR-1 atualizada.</p>
-        </div>
+      <div class="dif-card">
+        <div class="icn">👩‍⚕️</div>
+        <h4>Médica do trabalho própria</h4>
+        <p>ASOs assinados pela nossa médica do trabalho. Sem depender de clínicas parceiras — mais agilidade e menos custo para seus exames periódicos.</p>
       </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4>Entrega da documentação</h4>
-          <p>PGR atualizado, AEP (Avaliação de Exposição a Psicossociais), relatório de ações preventivas. Tudo pronto para auditoria do MTE.</p>
-        </div>
+      <div class="dif-card">
+        <div class="icn">🚗</div>
+        <h4>Equipe vai até você</h4>
+        <p>Nossa equipe se desloca até a sua empresa em Uberlândia e região do Triângulo Mineiro. Atendimento presencial completo.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">⚖️</div>
+        <h4>Engenharia + Medicina integradas</h4>
+        <p>PGR e PCMSO elaborados de forma integrada — uma equipe, uma documentação, sem contradições entre laudos.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">📉</div>
+        <h4>Redução ativa do FAP</h4>
+        <p>Não apenas cumprimos a norma — rastreamos seu FAP e implementamos ações para reduzir o acréscimo no INSS.</p>
       </div>
     </div>
   </section>
 
-  <!-- TABELA PREÇOS -->
-  <section>
-    <h2>Investimento por porte de empresa</h2>
-    <p class="sub">Valores fixos, sem surpresas. Incluem diagnóstico, pesquisa, atualização do PGR e documentação completa.</p>
-    <table class="tabela-precos">
-      <thead>
-        <tr>
-          <th>Porte</th>
-          <th>Funcionários</th>
-          <th>Valor da Adequação</th>
-          <th>Multa se Autuado</th>
-          <th>Economia</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Micro</strong></td>
-          <td>1 – 9</td>
-          <td class="preco">R$ 890</td>
-          <td>R$ 6.674+</td>
-          <td class="economia">R$ 5.784+</td>
-          <td><span class="badge-urg">URGENTE</span></td>
-        </tr>
-        <tr>
-          <td><strong>Pequena</strong></td>
-          <td>10 – 29</td>
-          <td class="preco">R$ 1.490</td>
-          <td>R$ 13.348+</td>
-          <td class="economia">R$ 11.858+</td>
-          <td><span class="badge-urg">URGENTE</span></td>
-        </tr>
-        <tr>
-          <td><strong>Média</strong></td>
-          <td>30 – 59</td>
-          <td class="preco">R$ 2.290</td>
-          <td>R$ 26.696+</td>
-          <td class="economia">R$ 24.406+</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><strong>Grande</strong></td>
-          <td>60 – 100</td>
-          <td class="preco">R$ 3.490</td>
-          <td>R$ 40.044+</td>
-          <td class="economia">R$ 36.554+</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="legal-box">
-      <p>✅ <strong>Base legal para telemedicina:</strong> NR-7 + Resolução CFM 2.314/2022 permitem que a Higilabor atenda sua empresa por telemedicina em qualquer cidade do Brasil, com total validade jurídica.</p>
+  <!-- BLOG -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>Conteúdo técnico gratuito</h2>
+      <p>Artigos do blog da Higilabor sobre saúde e segurança do trabalho</p>
+    </div>
+    <div class="dep-grid">
+      <a class="dep-card" href="https://higilabor.com.br/avaliacoes-quimicas-de-acido-fluoridrico-sulfurico-e-cloridrico-protecao-essencial-no-ambiente-de-trabalho/" target="_blank" style="text-decoration:none;color:inherit;">
+        <div style="font-size:28px;margin-bottom:10px;">🧪</div>
+        <div class="autor" style="margin-bottom:6px;">Avaliações Químicas</div>
+        <div class="cargo" style="font-size:13px;color:var(--texto2);line-height:1.5;">Ácido Fluorídrico, Sulfúrico e Clorídrico: proteção essencial no ambiente de trabalho</div>
+      </a>
+      <a class="dep-card" href="https://higilabor.com.br/avaliacao-quimica-de-fumos-metalicos-protecao-essencial-para-a-saude-dos-trabalhadores/" target="_blank" style="text-decoration:none;color:inherit;">
+        <div style="font-size:28px;margin-bottom:10px;">⚙️</div>
+        <div class="autor" style="margin-bottom:6px;">Fumos Metálicos</div>
+        <div class="cargo" style="font-size:13px;color:var(--texto2);line-height:1.5;">Avaliação química de fumos metálicos: proteção essencial para a saúde dos trabalhadores</div>
+      </a>
+      <a class="dep-card" href="https://higilabor.com.br/blog" target="_blank" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:var(--verde-cla);border-left:4px solid var(--verde);">
+        <div style="font-size:32px;margin-bottom:10px;">📚</div>
+        <div class="autor" style="color:var(--verde-esc);">Ver todos os artigos</div>
+        <div class="cargo" style="margin-top:4px;">higilabor.com.br/blog →</div>
+      </a>
     </div>
   </section>
 
-</div><!-- /container -->
+  <!-- FAQ -->
+  <section class="sec" style="background:var(--branco); margin: 0 -20px; padding: 56px 20px;">
+    <div class="sec-hd">
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quem precisa se adequar à NR-1 psicossocial?
+          <span class="arr">▼</span>
+        </button>
+        <div class="faq-a">Todas as empresas que possuem empregados com carteira assinada — independentemente do porte. MEI com funcionários, microempresas, pequenas, médias e grandes estão igualmente obrigadas pela Portaria MTE 1.419/2024.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          O que acontece se minha empresa não adequar até 26/05/2026?
+          <span class="arr">▼</span>
+        </button>
+        <div class="faq-a">A empresa fica sujeita a autuação pelo Auditor Fiscal do Trabalho durante visita de fiscalização. A multa base é de R$ 6.674 por infração e pode ser multiplicada por reincidência e porte da empresa. Além disso, o histórico de não conformidade pode ser usado em processos trabalhistas como evidência de negligência.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quanto tempo leva a adequação?
+          <span class="arr">▼</span>
+        </button>
+        <div class="faq-a">Para empresas de até 30 funcionários, o processo completo leva de 2 a 3 semanas: diagnóstico na semana 1, aplicação do questionário e análise na semana 2, e entrega da documentação na semana 3. Para empresas maiores, o prazo pode ser de 3 a 4 semanas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          A Higilabor atende empresas fora de Uberlândia?
+          <span class="arr">▼</span>
+        </button>
+        <div class="faq-a">Sim. Nossa equipe atende presencialmente em Uberlândia e toda a região do Triângulo Mineiro. Entre em contato para verificar disponibilidade para sua cidade: (34) 99971-5684.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Já tenho um PGR. Preciso refazer tudo?
+          <span class="arr">▼</span>
+        </button>
+        <div class="faq-a">Não necessariamente. Fazemos uma análise do seu PGR atual e apenas atualizamos o que for necessário para incluir os riscos psicossociais. Se o PGR estiver completo e atualizado, o trabalho é menor e mais barato. O diagnóstico gratuito já responde essa questão.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /wrap -->
 
 <!-- CTA FINAL -->
 <div class="cta-final" id="contato">
   <h2>Não deixe para a última semana</h2>
-  <p>Diagnóstico gratuito em 30 minutos. Proposta em 24 horas.</p>
-  <div class="cta-buttons">
-    <a class="btn-wpp" href="https://wa.me/5534XXXXXXXXX?text=Ol%C3%A1%2C+quero+fazer+o+diagn%C3%B3stico+gratuito+da+NR-1+psicossocial" target="_blank">
-      💬 WhatsApp — Diagnóstico Grátis
+  <p>Diagnóstico gratuito em 30 minutos. Proposta em 24 horas. Adequação garantida antes do prazo.</p>
+  <div class="cta-btns">
+    <a class="btn-wpp" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+gostaria+de+informa%C3%A7%C3%B5es+sobre+a+adequa%C3%A7%C3%A3o+NR-1+psicossocial" target="_blank">
+      💬 WhatsApp — (34) 99971-5684
     </a>
-    <a class="btn-email" href="mailto:contato@higilabor.com.br?subject=Diagn%C3%B3stico%20NR-1%20Psicossocial">
-      ✉ Enviar e-mail
+    <a class="btn-email" href="mailto:comercial@higilabor.com.br?subject=Adequa%C3%A7%C3%A3o%20NR-1%20Psicossocial%202026">
+      ✉ comercial@higilabor.com.br
     </a>
   </div>
+  <p class="cta-contato">
+    (34) 3214-1720 &nbsp;|&nbsp; (34) 99971-5684 &nbsp;|&nbsp;
+    <a href="https://higilabor.com.br" target="_blank">higilabor.com.br</a><br>
+    R. Arthur Bernardes, 1515 — Martins, Uberlândia/MG
+  </p>
 </div>
 
 <footer>
-  <p>© 2026 <a href="https://higilabor.com.br">Higilabor Consultoria SST</a> — Uberlândia/MG &nbsp;|&nbsp; (34) XXXXX-XXXX &nbsp;|&nbsp; contato@higilabor.com.br</p>
+  <p>© 2026 <a href="https://higilabor.com.br">Higilabor Consultoria SST</a> — R. Arthur Bernardes, 1515, Martins, Uberlândia/MG &nbsp;|&nbsp; (34) 3214-1720</p>
 </footer>
 
+<!-- WPP FLUTUANTE -->
+<a class="wpp-float" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+gostaria+de+informa%C3%A7%C3%B5es+sobre+a+adequa%C3%A7%C3%A3o+NR-1+psicossocial" target="_blank" title="Falar no WhatsApp">💬</a>
+
 <script>
-// ── COUNTDOWN ──────────────────────────────────────────────────────────────
+// ── COUNTDOWN ─────────────────────────────────────────────
 const DEADLINE = new Date('2026-05-26T23:59:59');
 
-function updateCountdown() {
-  const now = new Date();
-  const diff = DEADLINE - now;
-  if (diff <= 0) {
-    document.getElementById('hero-dias').textContent = 'PRAZO ENCERRADO';
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function tick(){
+  const diff = DEADLINE - new Date();
+  if(diff <= 0){
+    ['cd-dias','cd-horas','cd-min','cd-seg','b-dias','b-horas','b-min','hero-dias']
+      .forEach(id => { const el = document.getElementById(id); if(el) el.textContent = '0'; });
     return;
   }
-  const dias  = Math.floor(diff / (1000*60*60*24));
-  const horas = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-  const min   = Math.floor((diff % (1000*60*60)) / (1000*60));
-  const seg   = Math.floor((diff % (1000*60)) / 1000);
+  const d = Math.floor(diff / 864e5);
+  const h = Math.floor((diff % 864e5) / 36e5);
+  const m = Math.floor((diff % 36e5) / 6e4);
+  const s = Math.floor((diff % 6e4) / 1e3);
 
-  document.getElementById('cd-dias').textContent  = String(dias).padStart(2,'0');
-  document.getElementById('cd-horas').textContent = String(horas).padStart(2,'0');
-  document.getElementById('cd-min').textContent   = String(min).padStart(2,'0');
-  document.getElementById('cd-seg').textContent   = String(seg).padStart(2,'0');
-  document.getElementById('hero-dias').textContent = dias;
-  document.getElementById('kpi-prazo').textContent = dias + ' dias';
+  document.getElementById('cd-dias').textContent  = pad(d);
+  document.getElementById('cd-horas').textContent = pad(h);
+  document.getElementById('cd-min').textContent   = pad(m);
+  document.getElementById('cd-seg').textContent   = pad(s);
+  document.getElementById('b-dias').textContent   = pad(d);
+  document.getElementById('b-horas').textContent  = pad(h);
+  document.getElementById('b-min').textContent    = pad(m);
+  document.getElementById('hero-dias').textContent = d;
 }
+tick();
+setInterval(tick, 1000);
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// ── CHART: CUSTO ───────────────────────────────────────────────────────────
-new Chart(document.getElementById('chart-custo'), {
-  type: 'bar',
-  data: {
-    labels: ['Adequação Higilabor', '1 Autuação MTE', '2 Autuações', '3 Autuações'],
-    datasets: [{
-      label: 'Valor (R$)',
-      data: [1490, 6674, 13348, 20022],
-      backgroundColor: ['#2E7D32CC', '#E65100CC', '#B71C1CCC', '#880E4FCC'],
-      borderColor:     ['#2E7D32',   '#E65100',   '#B71C1C',   '#880E4F'],
-      borderWidth: 1,
-      borderRadius: 6,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: ctx => 'R$ ' + ctx.parsed.y.toLocaleString('pt-BR')
-        }
-      }
-    },
-    scales: {
-      x: { grid: { display: false } },
-      y: {
-        beginAtZero: true,
-        ticks: { callback: v => 'R$ ' + v.toLocaleString('pt-BR') }
-      }
-    }
+// ── FAQ ACCORDION ─────────────────────────────────────────
+function toggleFaq(btn){
+  const ans = btn.nextElementSibling;
+  const isOpen = ans.classList.contains('open');
+  // fechar todos
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+  if(!isOpen){
+    ans.classList.add('open');
+    btn.classList.add('open');
   }
-});
-
-// ── CHART: SETOR ───────────────────────────────────────────────────────────
-new Chart(document.getElementById('chart-setor'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Comércio', 'Indústria', 'Agronegócio', 'Serviços', 'Saúde', 'Outros'],
-    datasets: [{
-      data: [28, 24, 18, 16, 9, 5],
-      backgroundColor: ['#1565C0CC','#0D2B5ACC','#2E7D32CC','#E65100CC','#6A1B9ACC','#546E7ACC'],
-      borderColor: '#fff',
-      borderWidth: 2,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '58%',
-    plugins: {
-      legend: { position: 'right', labels: { usePointStyle: true, padding: 12, font: { size: 12 } } },
-      tooltip: {
-        callbacks: {
-          label: ctx => ctx.label + ': ' + ctx.parsed + '% dos casos'
-        }
-      }
-    }
-  }
-});
+}
 </script>
 
-<!-- JSON-LD LocalBusiness -->
+<!-- JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://higilabor.com.br/#business",
   "name": "Higilabor Consultoria SST",
-  "description": "Consultoria em Saúde e Segurança do Trabalho em Uberlândia/MG. PGR, PCMSO, LTCAT, NR-1 psicossocial, redução de FAP.",
   "url": "https://higilabor.com.br",
-  "telephone": "+55-34-XXXX-XXXX",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Uberlândia",
-    "addressRegion": "MG",
-    "addressCountry": "BR"
-  },
-  "areaServed": [
-    {"@type": "City", "name": "Uberlândia"},
-    {"@type": "AdministrativeArea", "name": "Triângulo Mineiro"}
-  ]
+  "telephone": "+55-34-3214-1720",
+  "address": { "@type": "PostalAddress", "streetAddress": "R. Arthur Bernardes, 1515", "addressLocality": "Uberlândia", "addressRegion": "MG", "postalCode": "38400-368", "addressCountry": "BR" },
+  "areaServed": [{"@type": "City","name": "Uberlândia"},{"@type": "AdministrativeArea","name": "Triângulo Mineiro"}]
 }
 </script>
 <script type="application/ld+json">
@@ -583,30 +734,9 @@ new Chart(document.getElementById('chart-setor'), {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "O que muda na NR-1 em 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A partir de 26/05/2026, toda empresa com funcionários deve incluir riscos psicossociais no PGR. Quem não adequar está sujeito a multas a partir de R$ 6.674 por autuação."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quem precisa se adequar à NR-1 psicossocial?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Todas as empresas que possuem empregados com registro em carteira, independentemente do porte — MEI com funcionários, micro, pequenas, médias e grandes empresas."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "A Higilabor atende fora de Uberlândia?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sim. Atendemos todo o Triângulo Mineiro presencialmente e qualquer cidade do Brasil por telemedicina, com validade legal conforme NR-7 e Resolução CFM 2.314/2022."
-      }
-    }
+    {"@type":"Question","name":"Quem precisa se adequar à NR-1 psicossocial?","acceptedAnswer":{"@type":"Answer","text":"Todas as empresas com empregados registrados, independentemente do porte, conforme Portaria MTE 1.419/2024."}},
+    {"@type":"Question","name":"O que acontece se não adequar até 26/05/2026?","acceptedAnswer":{"@type":"Answer","text":"Multa a partir de R$ 6.674 por autuação do MTE, além de exposição em ações trabalhistas."}},
+    {"@type":"Question","name":"A Higilabor atende fora de Uberlândia?","acceptedAnswer":{"@type":"Answer","text":"Sim. Atendemos todo o Brasil por telemedicina com validade legal plena (NR-7 + Res. CFM 2.314/2022)."}}
   ]
 }
 </script>
