@@ -1,0 +1,69 @@
+# Memory
+
+## Eu
+Octav — gestor/dono da **Higilabor**, consultoria de SST (Saúde e Segurança do Trabalho) em Uberlândia/MG.
+Operação enxuta; acumula comercial, financeiro e decisão final.
+
+## Empresa
+**Higilabor** — consultoria SST. Emite laudos, treinamentos, PGR, PCMSO, LTCAT, perícias trabalhistas.
+Clientes: empresas de pequeno e médio porte (até ~100 funcionários), agro, indústria, comércio.
+Capacidade mensal: 650 UEP. Estrutura fixa: ~R$ 38.150/mês (março/26).
+
+## Plano atual
+**Plano de 60 dias** — 3 sprints de 20 dias. Objetivo: parar de operar no escuro e construir tração comercial.
+- Sprint 1 (Dias 1–20): financeiro confiável + CRM mínimo + base classificada + abertura NR-1
+- Sprint 2 (Dias 21–40): propostas rápidas + follow-up disciplinado + primeiros contratos mensais
+- Sprint 3 (Dias 41–60): margem, cobrança, poda de carteira, consolidação
+
+## Serviços / Pacotes Comerciais
+| Pacote | O que é |
+|--------|---------|
+| **Essencial** | PGR + PCMSO base para pequenas empresas |
+| **Financeiro/FAP** | Foco em redução do FAP e economia previdenciária |
+| **Premium Patrimonial** | Gestão de risco patrimonial e responsabilidade civil |
+| **Psicossocial** | NR-1 psicossocial — urgência regulatória a partir de maio/26 |
+
+## Termos
+| Termo | Significado |
+|-------|-------------|
+| **NR** | Norma Regulamentadora (ex: NR-1, NR-12) |
+| **NR-1 psicossocial** | Exigência nova: PGR deve contemplar riscos psicossociais a partir de maio/26 |
+| **PGR** | Programa de Gerenciamento de Riscos |
+| **PCMSO** | Programa de Controle Médico de Saúde Ocupacional |
+| **LTCAT** | Laudo Técnico das Condições Ambientais do Trabalho |
+| **FAP** | Fator Acidentário de Prevenção (multiplica alíquota de RAT/INSS) |
+| **eSocial** | Sistema digital de obrigações trabalhistas/tributárias |
+| **SST** | Saúde e Segurança do Trabalho |
+| **UEP** | Unidade de Esforço de Produção (capacidade operacional) |
+| **CR** | Contas a Receber |
+| **CP** | Contas a Pagar |
+| **DRE** | Demonstrativo de Resultado do Exercício |
+| **MRR** | Monthly Recurring Revenue (receita mensal recorrente) |
+| **Retainer** | Contrato mensal recorrente |
+| **Piso** | Preço mínimo por serviço (custo real + overhead + tributo + margem 20%) |
+| **Pipeline** | Funil comercial ativo |
+| **ERP** | Planilha de gestão financeira multi-mês (5 blocos) |
+
+## KPIs diários que acompanho
+saldo de caixa · recebimentos do dia · vencidos em aberto · contas abordadas · reuniões agendadas/realizadas · propostas enviadas · propostas em follow-up · contratos fechados · MRR novo · 1 decisão de margem/preço
+
+## KPIs semanais
+CR/CP atualizado · fluxo projetado · taxa de fechamento · ticket médio · inadimplência · margem bruta novos contratos · % follow-up no prazo · % CRM atualizado
+
+## Funil CRM
+lead → contato → reunião → proposta → follow-up 1 → follow-up 2 → negociação → fechado/perdido
+
+## Ferramentas
+- **Notion** — ERP Higilabor, KPIs, Kanban, check-ins, rotina semanal
+- **5 blocos (xlsx)** — CR, CP, Fluxo de Caixa, Indicadores, DRE, Consolidado
+- **Sistema ESO** — gestão operacional SST
+
+## Situação financeira (março/26)
+- Carteira CR: R$ 35.862 | Recebido: R$ 25.339 (70,7%) | Inadimplência: R$ 10.524 (29,3%)
+- Despesas CP: R$ 38.150 | Resultado proxy: –R$ 2.287 (déficit)
+- Empréstimos ativos: 2 parcelas recorrentes (~R$ 2.864/mês)
+
+## Preferências de trabalho
+- Direto ao ponto, sem enrolação
+- Cobrado diariamente nos KPIs
+- Foco em execução, não em planejamento adicional
