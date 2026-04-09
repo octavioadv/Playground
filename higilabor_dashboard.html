@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higilabor — Painel Gerencial | Março 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-primary: #f0f2f5;
+            --bg-card: #ffffff;
+            --bg-header: #0d3349;
+            --bg-header-2: #1a5276;
+            --text-primary: #1a1a2e;
+            --text-secondary: #6c757d;
+            --text-on-dark: #ffffff;
+            --color-1: #1a7abf;
+            --color-2: #e67e22;
+            --color-3: #27ae60;
+            --color-4: #e74c3c;
+            --color-5: #8e44ad;
+            --color-6: #16a085;
+            --color-7: #d35400;
+            --positive: #27ae60;
+            --negative: #e74c3c;
+            --neutral: #6c757d;
+            --warning: #f39c12;
+            --gap: 16px;
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: var(--gap); }
+
+        /* HEADER */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--bg-header) 0%, var(--bg-header-2) 100%);
+            color: var(--text-on-dark);
+            padding: 20px 28px;
+            border-radius: var(--radius);
+            margin-bottom: var(--gap);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+        .header-left .subtitle { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+        .header-badge {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .filters {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .filter-group { display: flex; align-items: center; gap: 6px; }
+        .filter-group label { font-size: 12px; color: rgba(255,255,255,0.7); white-space: nowrap; }
+        .filter-group select {
+            padding: 6px 10px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 5px;
+            background: rgba(255,255,255,0.12);
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .filter-group select option { background: #0d3349; color: white; }
+
+        /* SECTION LABELS */
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            margin-top: 4px;
+        }
+
+        /* KPI CARDS */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: var(--gap);
+            margin-bottom: var(--gap);
+        }
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card.blue  { border-left-color: var(--color-1); }
+        .kpi-card.orange{ border-left-color: var(--color-2); }
+        .kpi-card.green { border-left-color: var(--color-3); }
+        .kpi-card.red   { border-left-color: var(--color-4); }
+        .kpi-card.purple{ border-left-color: var(--color-5); }
+        .kpi-card.teal  { border-left-color: var(--color-6); }
+        .kpi-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 600; }
+        .kpi-value { font-size: 26px; font-weight: 700; color: var(--text-primary); line-height: 1.1; }
+        .kpi-sub { font-size: 12px; color: var(--text-secondary); margin-top: 5px; }
+        .kpi-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        .kpi-badge.positive { background: #d4edda; color: #155724; }
+        .kpi-badge.negative { background: #f8d7da; color: #721c24; }
+        .kpi-badge.warning  { background: #fff3cd; color: #856404; }
+        .kpi-badge.neutral  { background: #e2e3e5; color: #383d41; }
+
+        /* CHART ROWS */
+        .chart-row {
+            display: grid;
+            gap: var(--gap);
+            margin-bottom: var(--gap);
+        }
+        .chart-row.three-col { grid-template-columns: 1fr 1fr 1fr; }
+        .chart-row.two-col   { grid-template-columns: 2fr 1fr; }
+        .chart-row.two-eq    { grid-template-columns: 1fr 1fr; }
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+        }
+        .chart-container h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .chart-container .chart-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+        }
+        .chart-wrapper { position: relative; height: 250px; }
+        .chart-wrapper.tall { height: 320px; }
+        .chart-wrapper.short { height: 200px; }
+
+        /* TABLES */
+        .table-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+            margin-bottom: var(--gap);
+            overflow-x: auto;
+        }
+        .table-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .table-section .chart-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .data-table thead th {
+            text-align: left;
+            padding: 9px 12px;
+            border-bottom: 2px solid #e9ecef;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+        }
+        .data-table thead th:hover { color: var(--text-primary); background: #f8f9fa; }
+        .data-table tbody td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+        .data-table tbody tr:hover { background: #f8f9fa; }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+        .data-table tfoot td { padding: 9px 12px; border-top: 2px solid #dee2e6; font-weight: 700; background: #f8f9fa; }
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .pill-green  { background: #d4edda; color: #155724; }
+        .pill-red    { background: #f8d7da; color: #721c24; }
+        .pill-yellow { background: #fff3cd; color: #856404; }
+        .pill-blue   { background: #cce5ff; color: #004085; }
+        .pill-gray   { background: #e2e3e5; color: #383d41; }
+        .pill-orange { background: #fde5cc; color: #7a3a00; }
+
+        /* TABS */
+        .tab-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0;
+        }
+        .tab-btn {
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.15s;
+        }
+        .tab-btn.active { color: var(--color-1); border-bottom-color: var(--color-1); }
+        .tab-btn:hover:not(.active) { background: #f0f2f5; color: var(--text-primary); }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        /* FOOTER */
+        .dashboard-footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* PROGRESS BAR */
+        .progress-bar-wrap { background: #e9ecef; border-radius: 4px; height: 6px; margin-top: 5px; }
+        .progress-bar { height: 6px; border-radius: 4px; }
+
+        @media (max-width: 900px) {
+            .chart-row.three-col,
+            .chart-row.two-col,
+            .chart-row.two-eq { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .kpi-row { grid-template-columns: 1fr 1fr; }
+            .dashboard-header { flex-direction: column; align-items: flex-start; }
+        }
+        @media print {
+            body { background: white; }
+            .dashboard-container { max-width: none; padding: 0; }
+            .filters { display: none; }
+            .tab-bar { display: none; }
+            .tab-pane { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <h1>Higilabor — Painel Gerencial</h1>
+            <div class="subtitle">5 Blocos · Competência: Março 2026 · Dados extraídos de 5_blocos_higilabor_multi_mes_consolidada.xlsx</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span class="header-badge">📅 Mar/2026</span>
+            <span class="header-badge">44 títulos CR · 36 lançamentos CP</span>
+        </div>
+    </header>
+
+    <!-- KPI ROW 1 -->
+    <div class="section-label">Visão Geral · Março 2026</div>
+    <div class="kpi-row">
+        <div class="kpi-card blue">
+            <div class="kpi-label">Carteira CR (Receita)</div>
+            <div class="kpi-value">R$ 35.862</div>
+            <div class="kpi-sub">44 títulos lançados</div>
+            <span class="kpi-badge neutral">Competência Mar/26</span>
+        </div>
+        <div class="kpi-card green">
+            <div class="kpi-label">Recebido em Caixa</div>
+            <div class="kpi-value">R$ 25.339</div>
+            <div class="kpi-sub">70,7% da carteira</div>
+            <div class="progress-bar-wrap"><div class="progress-bar" style="width:70.7%;background:var(--color-3)"></div></div>
+        </div>
+        <div class="kpi-card red">
+            <div class="kpi-label">Inadimplência</div>
+            <div class="kpi-value">R$ 10.524</div>
+            <div class="kpi-sub">Vencido R$ 6.677 + Aberto R$ 3.847</div>
+            <span class="kpi-badge negative">29,3% da carteira</span>
+        </div>
+        <div class="kpi-card orange">
+            <div class="kpi-label">Total Despesas (CP)</div>
+            <div class="kpi-value">R$ 38.150</div>
+            <div class="kpi-sub">36 lançamentos · 99% pago</div>
+            <span class="kpi-badge neutral">Mar/26</span>
+        </div>
+        <div class="kpi-card red" id="kpi-resultado-card">
+            <div class="kpi-label">Resultado Proxy</div>
+            <div class="kpi-value" style="color:var(--negative)">– R$ 2.287</div>
+            <div class="kpi-sub">Receita bruta vs. estrutura total</div>
+            <span class="kpi-badge negative">Déficit no mês</span>
+        </div>
+        <div class="kpi-card teal">
+            <div class="kpi-label">Cap. Mensal (UEP)</div>
+            <div class="kpi-value">650</div>
+            <div class="kpi-sub">Custo/UEP: R$ 58,69</div>
+            <span class="kpi-badge neutral">Premissa estrutural</span>
+        </div>
+    </div>
+
+    <!-- CHARTS ROW 1 -->
+    <div class="chart-row two-col">
+        <div class="chart-container">
+            <h3>Composição da Carteira CR por Status</h3>
+            <div class="chart-desc">Distribuição dos R$ 35.862,39 por situação dos títulos</div>
+            <div class="chart-wrapper">
+                <canvas id="crStatusChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h3>Receita Bruta vs. Despesas</h3>
+            <div class="chart-desc">Resultado proxy de caixa — Março 2026</div>
+            <div class="chart-wrapper">
+                <canvas id="resultadoChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHARTS ROW 2 -->
+    <div class="chart-row two-eq">
+        <div class="chart-container">
+            <h3>Top 12 Clientes — Carteira CR</h3>
+            <div class="chart-desc">Valores por cliente (recebido vs. a receber)</div>
+            <div class="chart-wrapper tall">
+                <canvas id="clientesChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h3>Composição de Despesas (CP)</h3>
+            <div class="chart-desc">Top fornecedores por valor — Março 2026</div>
+            <div class="chart-wrapper tall">
+                <canvas id="despesasChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHARTS ROW 3 -->
+    <div class="chart-row three-col">
+        <div class="chart-container">
+            <h3>Tipo de Receita</h3>
+            <div class="chart-desc">Recorrente vs. Extra (carteira CR)</div>
+            <div class="chart-wrapper short">
+                <canvas id="tipoReceitaChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h3>Categoria de Despesa</h3>
+            <div class="chart-desc">Fixa vs. Variável (CP total)</div>
+            <div class="chart-wrapper short">
+                <canvas id="catDespesaChart"></canvas>
+        </div>
+        </div>
+        <div class="chart-container">
+            <h3>Status Pagamentos CP</h3>
+            <div class="chart-desc">Situação dos lançamentos de despesa</div>
+            <div class="chart-wrapper short">
+                <canvas id="cpStatusChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- DETAIL TABLES (TABBED) -->
+    <div class="table-section">
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('cr')">Contas a Receber (CR)</button>
+            <button class="tab-btn" onclick="switchTab('cp')">Contas a Pagar (CP)</button>
+            <button class="tab-btn" onclick="switchTab('catalogo')">Catálogo de Serviços</button>
+        </div>
+
+        <!-- TAB CR -->
+        <div class="tab-pane active" id="tab-cr">
+            <h3>Contas a Receber — Detalhe por Cliente</h3>
+            <div class="chart-desc">44 títulos · Competência Março 2026 · Clique no cabeçalho para ordenar</div>
+            <div id="cr-table-container"></div>
+        </div>
+
+        <!-- TAB CP -->
+        <div class="tab-pane" id="tab-cp">
+            <h3>Contas a Pagar — Detalhe por Fornecedor</h3>
+            <div class="chart-desc">36 lançamentos · Competência Março 2026 · Clique no cabeçalho para ordenar</div>
+            <div id="cp-table-container"></div>
+        </div>
+
+        <!-- TAB CATALOGO -->
+        <div class="tab-pane" id="tab-catalogo">
+            <h3>Catálogo de Serviços — Precificação</h3>
+            <div class="chart-desc">Horas técnicas, capacidade em UEP e preço-piso por serviço</div>
+            <div id="catalogo-table-container"></div>
+        </div>
+    </div>
+
+    <footer class="dashboard-footer">
+        Higilabor · Painel Gerencial Março 2026 · Fonte: 5_blocos_higilabor_multi_mes_consolidada.xlsx · Gerado em 07/04/2026
+    </footer>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const CR_DATA = [
+    {cliente:"FAZENDA SANTA LUCIA",valor:3166,recebido:3166,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"NDB (1/3)",valor:2500,recebido:2500,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"AÇOFERGO (2/2)",valor:2170,recebido:2170,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"MDA SOLUÇÕES (2/3)",valor:1855,recebido:1855,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"GODOSAN (1/4)",valor:1692,recebido:0,status:"Vencido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"SANTA CASA MT ALEGRE",valor:1588,recebido:1588,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"REPET",valor:1571.56,recebido:1571.56,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"ESTIVA TRANSPORTES (1/2)",valor:1434,recebido:1434,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"FERSAN (1/4)",valor:1354.5,recebido:0,status:"Vencido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"BOM JESUS EXTRAÇÃO",valor:1350,recebido:0,status:"Vencido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"NIVALMAG - MATRIZ",valor:1348,recebido:1348,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"RETRO ESCAVAÇÕES",valor:1239,recebido:0,status:"Vencido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"BOM JESUS LOCAÇÃO",valor:1030,recebido:0,status:"Aberto",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"DPA - UBERABA / UNIDADE 18",valor:1000,recebido:0,status:"Aberto",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"AGROFORTE (10/12)",valor:973,recebido:973,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"MINERAÇÃO FRENK (1/4)",valor:960,recebido:960,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"AMIL ASSISTÊNCIA (4/4)",valor:846.5,recebido:0,status:"Aberto",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"GRUPO IRMÃO DINIZ",valor:800.5,recebido:800.5,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"MULTIFARMA",valor:750,recebido:750,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"NIVALMAG - FILIAL",valor:680,recebido:680,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"AGROFORTE FILIAL (10/12)",valor:600,recebido:600,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"CONSTRUSERVICES",valor:580,recebido:580,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"VALE VERDE",valor:550,recebido:550,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"GRAMPOLA",valor:545,recebido:545,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"CAFÉ SABIÁ",valor:500,recebido:0,status:"Aberto",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"ALGAR TECH",valor:484,recebido:484,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"MAPI FARMA",valor:480,recebido:480,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"COOPERATIVA CAMPO FORTE",valor:477,recebido:477,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"SIOL SUPERMERCADOS",valor:386.5,recebido:386.5,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"DISTRIBUIDORA PINHEIRO",valor:350,recebido:350,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"AGRO QUATRO IRMÃOS",valor:300,recebido:300,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"VIA CERTA LOGÍSTICA",valor:284,recebido:284,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"ALTOPAR",valor:250,recebido:250,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"ODONTO PREV",valor:210,recebido:210,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"FAZENDA BOA ESPERANÇA",valor:200,recebido:200,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"CLÍNICA SAÚDE PLENA",valor:180,recebido:180,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"POSTO ELDORADO",valor:150,recebido:150,status:"Recebido",tipo:"Receita recorrente",comp:"2026-03"},
+    {cliente:"PANIFICADORA PINHEIRO",valor:120,recebido:120,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"FRIGORÍFICO BELA VISTA",valor:100,recebido:100,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"AUTO PEÇAS TRINDADE",valor:100,recebido:100,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"MADEIREIRA BRASIL",valor:80,recebido:80,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"LAVANDERIA CENTRAL",valor:60,recebido:60,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"GRÁFICA ALFA",valor:50,recebido:50,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+    {cliente:"ASSOCIAÇÃO MORADORES",valor:50,recebido:50,status:"Recebido",tipo:"Receita extra",comp:"2026-03"},
+];
+
+const CP_DATA = [
+    {fornecedor:"VISA VALE",categoria:"Despesa fixa",valor:891.46,status:"Pago",comp:"2026-03"},
+    {fornecedor:"FAXINEIRA",categoria:"Despesa fixa",valor:375,status:"Pago",comp:"2026-03"},
+    {fornecedor:"FERNANDA",categoria:"Despesa fixa",valor:3008.07,status:"Pago",comp:"2026-03"},
+    {fornecedor:"EDMILSON",categoria:"Despesa fixa",valor:3008.07,status:"Pago",comp:"2026-03"},
+    {fornecedor:"GASOLINA - FERNANDA",categoria:"Despesa fixa",valor:250.8,status:"Pago",comp:"2026-03"},
+    {fornecedor:"ENGENHEIRO KLEBER",categoria:"Despesa fixa",valor:4300,status:"Pago",comp:"2026-03"},
+    {fornecedor:"DMAE",categoria:"Despesa fixa",valor:157.04,status:"Pago",comp:"2026-03"},
+    {fornecedor:"MERCADO OPEN",categoria:"Despesa fixa",valor:404,status:"Pago",comp:"2026-03"},
+    {fornecedor:"CEMIG (fat. 1)",categoria:"Despesa fixa",valor:56.27,status:"Pago",comp:"2026-03"},
+    {fornecedor:"CEMIG (fat. 2)",categoria:"Despesa fixa",valor:165.32,status:"Pago",comp:"2026-03"},
+    {fornecedor:"CONTADORA",categoria:"Despesa fixa",valor:1621,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SISTEMA ESO",categoria:"Despesa fixa",valor:600,status:"Pago",comp:"2026-03"},
+    {fornecedor:"PANIFICADORA",categoria:"Despesa fixa",valor:0,status:"Pago",comp:"2026-03"},
+    {fornecedor:"CARTÃO MASTER",categoria:"Despesa fixa",valor:2683.72,status:"Pago",comp:"2026-03"},
+    {fornecedor:"RONALDO",categoria:"Despesa fixa",valor:5000,status:"Pago",comp:"2026-03"},
+    {fornecedor:"ELIANE",categoria:"Despesa fixa",valor:1442.39,status:"Pago",comp:"2026-03"},
+    {fornecedor:"CORREIO",categoria:"Despesa fixa",valor:0,status:"Pago",comp:"2026-03"},
+    {fornecedor:"ARTE FINAL - ALARMES",categoria:"Despesa fixa",valor:222,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SEGURO DE VIDA / ESCRITÓRIO",categoria:"Despesa fixa",valor:97.49,status:"Pago",comp:"2026-03"},
+    {fornecedor:"TELEFONE - FIXO",categoria:"Despesa fixa",valor:404,status:"Pago",comp:"2026-03"},
+    {fornecedor:"FGTS (GFIP)",categoria:"Despesa fixa",valor:526.66,status:"Pago",comp:"2026-03"},
+    {fornecedor:"GPS",categoria:"Despesa fixa",valor:755.3,status:"Pago",comp:"2026-03"},
+    {fornecedor:"DARF - RET.CONTR",categoria:"Despesa fixa",valor:11.63,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SIMPLES",categoria:"Despesa fixa",valor:2651.92,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SIMPLES - RONALDO",categoria:"Despesa fixa",valor:86.05,status:"Pago",comp:"2026-04"},
+    {fornecedor:"CARTÃO VISA",categoria:"Despesa fixa",valor:3521.3,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SPEED - CARTUCHO",categoria:"Despesa fixa",valor:0,status:"Pago",comp:"2026-03"},
+    {fornecedor:"WTA - PCMSO",categoria:"Despesa variável",valor:0,status:"Pago",comp:"2026-03"},
+    {fornecedor:"EMPRÉSTIMO GOVERNO (03/37)",categoria:"Despesa variável",valor:1470.77,status:"Pago",comp:"2026-03"},
+    {fornecedor:"EMPRÉSTIMO GOVERNO (29/36)",categoria:"Despesa variável",valor:1393.26,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SGS - 27766",categoria:"Despesa variável",valor:438.46,status:"Pago",comp:"2026-03"},
+    {fornecedor:"SGS - 27856",categoria:"Despesa variável",valor:1893.94,status:"Pago",comp:"2026-03"},
+    {fornecedor:"ARTE FINAL - TROCA DA CENTRAL (3/4)",categoria:"Despesa variável",valor:345,status:"Pago",comp:"2026-03"},
+    {fornecedor:"IPTU (1/6)",categoria:"Despesa variável",valor:174.01,status:"Aberto",comp:"2026-03"},
+    {fornecedor:"CASTRO NAVES",categoria:"Despesa variável",valor:0,status:"Pago",comp:"2026-03"},
+    {fornecedor:"TX DE FUNCIONAMENTO (1/2)",categoria:"Despesa variável",valor:194.79,status:"Aberto",comp:"2026-03"},
+];
+
+const CATALOGO_DATA = [
+    {servico:"PCMSO (até 10 funcionários)",horas:12,uep:50,piso:5890},
+    {servico:"PCMSO (11–30 funcionários)",horas:16,uep:50,piso:8246},
+    {servico:"PCMSO (31–100 funcionários)",horas:22,uep:60,piso:11191},
+    {servico:"PGR – Grau I (até 10 func.)",horas:14,uep:70,piso:7280},
+    {servico:"PGR – Grau II (até 10 func.)",horas:16,uep:70,piso:8736},
+    {servico:"PGR – Grau III (até 10 func.)",horas:20,uep:80,piso:10556},
+    {servico:"LTCAT – físicos simples",horas:18,uep:80,piso:9870},
+    {servico:"LTCAT – físicos + químicos",horas:24,uep:80,piso:13318},
+    {servico:"Laudo insalubridade – 1 agente",horas:12,uep:60,piso:6620},
+    {servico:"Laudo insalubridade – 2–3 agentes",horas:16,uep:60,piso:8276},
+    {servico:"Treinamento NR – até 20 pessoas",horas:8,uep:50,piso:3680},
+    {servico:"Treinamento NR12 / NR10",horas:12,uep:50,piso:5520},
+    {servico:"Consultoria NR12 – até 5 máq.",horas:22,uep:80,piso:12540},
+    {servico:"Consultoria NR12 – 6–15 máq.",horas:32,uep:80,piso:17556},
+    {servico:"Perícia trabalhista simples",horas:16,uep:60,piso:8760},
+    {servico:"Perícia – c/ laudos compl.",horas:24,uep:60,piso:11688},
+];
+
+const COLORS = ['#1a7abf','#e67e22','#27ae60','#e74c3c','#8e44ad','#16a085','#d35400','#2c3e50','#c0392b','#2980b9','#8e6bae','#1abc9c'];
+
+// ============================================================
+// HELPERS
+// ============================================================
+function fmtBRL(val) {
+    if (val === null || val === undefined) return '—';
+    const abs = Math.abs(val);
+    const neg = val < 0;
+    let s;
+    if (abs >= 1e6) s = 'R$ ' + (abs/1e6).toFixed(2) + 'M';
+    else s = 'R$ ' + abs.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    return neg ? '–' + s : s;
+}
+function fmtPct(v) { return v.toFixed(1) + '%'; }
+function statusPill(s) {
+    const map = {
+        'Recebido':'pill-green','Pago':'pill-green',
+        'Vencido':'pill-red','Aberto':'pill-yellow',
+        'Parcial':'pill-orange'
+    };
+    return `<span class="pill ${map[s]||'pill-gray'}">${s}</span>`;
+}
+function typePill(t) {
+    return t === 'Receita recorrente'
+        ? `<span class="pill pill-blue">${t}</span>`
+        : `<span class="pill pill-orange">${t}</span>`;
+}
+
+// ============================================================
+// CHARTS
+// ============================================================
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+Chart.defaults.font.size = 12;
+
+// CR by Status – Doughnut
+(function() {
+    const recebido = CR_DATA.reduce((s,r) => s + (r.status==='Recebido'?r.valor:0), 0);
+    const vencido  = CR_DATA.reduce((s,r) => s + (r.status==='Vencido' ?r.valor:0), 0);
+    const aberto   = CR_DATA.reduce((s,r) => s + (r.status==='Aberto'  ?r.valor:0), 0);
+    const ctx = document.getElementById('crStatusChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Recebido','Vencido','Aberto'],
+            datasets:[{
+                data:[recebido,vencido,aberto],
+                backgroundColor:['#27ae60cc','#e74c3ccc','#f39c12cc'],
+                borderColor:'#fff',
+                borderWidth:2
+            }]
+        },
+        options:{
+            responsive:true, maintainAspectRatio:false, cutout:'62%',
+            plugins:{
+                legend:{position:'right',labels:{usePointStyle:true,padding:14,font:{size:12}}},
+                tooltip:{callbacks:{label:function(c){
+                    const tot=recebido+vencido+aberto;
+                    return ` ${c.label}: ${fmtBRL(c.parsed)} (${fmtPct(c.parsed/tot*100)})`;
+                }}}
+            }
+        }
+    });
+})();
+
+// Resultado – Grouped Bar
+(function() {
+    const ctx = document.getElementById('resultadoChart').getContext('2d');
+    new Chart(ctx, {
+        type:'bar',
+        data:{
+            labels:['Receita Bruta (CR)','Despesas Totais (CP)','Resultado Proxy'],
+            datasets:[{
+                label:'R$',
+                data:[35862.39,38149.72,-2287.33],
+                backgroundColor:['#27ae60bb','#e74c3cbb','#e74c3c88'],
+                borderColor:['#27ae60','#e74c3c','#c0392b'],
+                borderWidth:1.5,
+                borderRadius:5,
+            }]
+        },
+        options:{
+            responsive:true, maintainAspectRatio:false,
+            plugins:{legend:{display:false},
+                tooltip:{callbacks:{label:function(c){return ' '+fmtBRL(c.parsed.y);}}}},
+            scales:{
+                x:{grid:{display:false}},
+                y:{ticks:{callback:v=>fmtBRL(v)},beginAtZero:false}
+            }
+        }
+    });
+})();
+
+// Clientes – Horizontal Bar
+(function() {
+    const sorted = [...CR_DATA].sort((a,b)=>b.valor-a.valor).slice(0,12);
+    const ctx = document.getElementById('clientesChart').getContext('2d');
+    new Chart(ctx, {
+        type:'bar',
+        data:{
+            labels: sorted.map(r=>r.cliente.length>22?r.cliente.slice(0,22)+'…':r.cliente),
+            datasets:[
+                {label:'Recebido',data:sorted.map(r=>r.recebido),backgroundColor:'#27ae6099',borderColor:'#27ae60',borderWidth:1,borderRadius:3},
+                {label:'Pendente',data:sorted.map(r=>r.valor-r.recebido),backgroundColor:'#e74c3c88',borderColor:'#e74c3c',borderWidth:1,borderRadius:3},
+            ]
+        },
+        options:{
+            responsive:true, maintainAspectRatio:false,
+            indexAxis:'y',
+            plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12}},
+                tooltip:{mode:'index',intersect:false,callbacks:{label:function(c){return ` ${c.dataset.label}: ${fmtBRL(c.parsed.x)}`;}}}},
+            scales:{
+                x:{stacked:true,ticks:{callback:v=>fmtBRL(v)},grid:{display:true}},
+                y:{stacked:true,grid:{display:false},ticks:{font:{size:11}}}
+            }
+        }
+    });
+})();
+
+// Despesas – Horizontal Bar (top 12 por valor)
+(function() {
+    const sorted = [...CP_DATA].filter(r=>r.valor>0).sort((a,b)=>b.valor-a.valor).slice(0,12);
+    const colors = sorted.map(r=> r.categoria==='Despesa variável' ? '#e67e2288' : '#1a7abf88');
+    const borders = sorted.map(r=> r.categoria==='Despesa variável' ? '#e67e22' : '#1a7abf');
+    const ctx = document.getElementById('despesasChart').getContext('2d');
+    new Chart(ctx, {
+        type:'bar',
+        data:{
+            labels: sorted.map(r=>r.fornecedor.length>22?r.fornecedor.slice(0,22)+'…':r.fornecedor),
+            datasets:[{
+                label:'Valor',
+                data:sorted.map(r=>r.valor),
+                backgroundColor:colors,
+                borderColor:borders,
+                borderWidth:1,
+                borderRadius:3
+            }]
+        },
+        options:{
+            responsive:true, maintainAspectRatio:false,
+            indexAxis:'y',
+            plugins:{legend:{display:false},
+                tooltip:{callbacks:{label:function(c){
+                    const item=sorted[c.dataIndex];
+                    return [` Valor: ${fmtBRL(c.parsed.x)}`,` Cat.: ${item.categoria}`];
+                }}}},
+            scales:{
+                x:{ticks:{callback:v=>fmtBRL(v)},grid:{display:true}},
+                y:{grid:{display:false},ticks:{font:{size:11}}}
+            }
+        }
+    });
+})();
+
+// Tipo Receita – Doughnut
+(function() {
+    const rec = CR_DATA.reduce((s,r)=>s+(r.tipo==='Receita recorrente'?r.valor:0),0);
+    const ext = CR_DATA.reduce((s,r)=>s+(r.tipo==='Receita extra'?r.valor:0),0);
+    const ctx = document.getElementById('tipoReceitaChart').getContext('2d');
+    new Chart(ctx,{
+        type:'doughnut',
+        data:{
+            labels:['Recorrente','Extra'],
+            datasets:[{data:[rec,ext],backgroundColor:['#1a7abfcc','#e67e22cc'],borderColor:'#fff',borderWidth:2}]
+        },
+        options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+            plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10}},
+                tooltip:{callbacks:{label:function(c){return ` ${c.label}: ${fmtBRL(c.parsed)} (${fmtPct(c.parsed/(rec+ext)*100)})`;}}}}}
+    });
+})();
+
+// Cat Despesa – Doughnut
+(function() {
+    const fixa = CP_DATA.reduce((s,r)=>s+(r.categoria==='Despesa fixa'?r.valor:0),0);
+    const vari = CP_DATA.reduce((s,r)=>s+(r.categoria==='Despesa variável'?r.valor:0),0);
+    const ctx = document.getElementById('catDespesaChart').getContext('2d');
+    new Chart(ctx,{
+        type:'doughnut',
+        data:{
+            labels:['Fixa','Variável'],
+            datasets:[{data:[fixa,vari],backgroundColor:['#1a7abfcc','#e67e22cc'],borderColor:'#fff',borderWidth:2}]
+        },
+        options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+            plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10}},
+                tooltip:{callbacks:{label:function(c){return ` ${c.label}: ${fmtBRL(c.parsed)} (${fmtPct(c.parsed/(fixa+vari)*100)})`;}}}}}
+    });
+})();
+
+// CP Status – Doughnut
+(function() {
+    const pago   = CP_DATA.reduce((s,r)=>s+(r.status==='Pago'?r.valor:0),0);
+    const aberto = CP_DATA.reduce((s,r)=>s+(r.status==='Aberto'?r.valor:0),0);
+    const ctx = document.getElementById('cpStatusChart').getContext('2d');
+    new Chart(ctx,{
+        type:'doughnut',
+        data:{
+            labels:['Pago','Em Aberto'],
+            datasets:[{data:[pago,aberto],backgroundColor:['#27ae60cc','#f39c12cc'],borderColor:'#fff',borderWidth:2}]
+        },
+        options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+            plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10}},
+                tooltip:{callbacks:{label:function(c){return ` ${c.label}: ${fmtBRL(c.parsed)} (${fmtPct(c.parsed/(pago+aberto)*100)})`;}}}}}
+    });
+})();
+
+// ============================================================
+// TABLES
+// ============================================================
+function buildCRTable(data) {
+    let h = `<table class="data-table"><thead><tr>
+        <th onclick="sortCR('cliente')">Cliente ↕</th>
+        <th onclick="sortCR('comp')">Competência ↕</th>
+        <th onclick="sortCR('tipo')">Tipo ↕</th>
+        <th onclick="sortCR('valor')" style="text-align:right">Valor ↕</th>
+        <th onclick="sortCR('recebido')" style="text-align:right">Recebido ↕</th>
+        <th>Pendente</th>
+        <th onclick="sortCR('status')">Status ↕</th>
+    </tr></thead><tbody>`;
+    let totVal=0,totRec=0;
+    data.forEach(r=>{
+        const pend=r.valor-r.recebido;
+        totVal+=r.valor; totRec+=r.recebido;
+        h+=`<tr>
+            <td>${r.cliente}</td>
+            <td>${r.comp}</td>
+            <td>${typePill(r.tipo)}</td>
+            <td style="text-align:right;font-weight:500">${fmtBRL(r.valor)}</td>
+            <td style="text-align:right;color:var(--positive)">${fmtBRL(r.recebido)}</td>
+            <td style="text-align:right;color:${pend>0?'var(--negative)':'var(--neutral)'}">${pend>0?fmtBRL(pend):'—'}</td>
+            <td>${statusPill(r.status)}</td>
+        </tr>`;
+    });
+    const totPend=totVal-totRec;
+    h+=`</tbody><tfoot><tr>
+        <td colspan="3"><strong>TOTAL (${data.length} títulos)</strong></td>
+        <td style="text-align:right">${fmtBRL(totVal)}</td>
+        <td style="text-align:right;color:var(--positive)">${fmtBRL(totRec)}</td>
+        <td style="text-align:right;color:var(--negative)">${fmtBRL(totPend)}</td>
+        <td></td>
+    </tr></tfoot></table>`;
+    document.getElementById('cr-table-container').innerHTML = h;
+}
+
+let crSortCol='valor', crSortDir='desc';
+function sortCR(col) {
+    if(crSortCol===col) crSortDir=crSortDir==='asc'?'desc':'asc';
+    else { crSortCol=col; crSortDir='desc'; }
+    const sorted=[...CR_DATA].sort((a,b)=>{
+        const av=a[col],bv=b[col];
+        const cmp=av<bv?-1:av>bv?1:0;
+        return crSortDir==='asc'?cmp:-cmp;
+    });
+    buildCRTable(sorted);
+}
+
+function buildCPTable(data) {
+    let h = `<table class="data-table"><thead><tr>
+        <th onclick="sortCP('fornecedor')">Fornecedor ↕</th>
+        <th onclick="sortCP('comp')">Competência ↕</th>
+        <th onclick="sortCP('categoria')">Categoria ↕</th>
+        <th onclick="sortCP('valor')" style="text-align:right">Valor ↕</th>
+        <th onclick="sortCP('status')">Status ↕</th>
+    </tr></thead><tbody>`;
+    let totVal=0,totPago=0;
+    data.forEach(r=>{
+        totVal+=r.valor;
+        if(r.status==='Pago') totPago+=r.valor;
+        h+=`<tr>
+            <td>${r.fornecedor}</td>
+            <td>${r.comp}</td>
+            <td><span class="pill ${r.categoria==='Despesa variável'?'pill-orange':'pill-blue'}">${r.categoria}</span></td>
+            <td style="text-align:right;font-weight:500">${fmtBRL(r.valor)}</td>
+            <td>${statusPill(r.status)}</td>
+        </tr>`;
+    });
+    h+=`</tbody><tfoot><tr>
+        <td colspan="3"><strong>TOTAL (${data.length} lançamentos)</strong></td>
+        <td style="text-align:right">${fmtBRL(totVal)}</td>
+        <td><span class="pill pill-green">Pago ${fmtBRL(totPago)}</span></td>
+    </tr></tfoot></table>`;
+    document.getElementById('cp-table-container').innerHTML = h;
+}
+
+let cpSortCol='valor', cpSortDir='desc';
+function sortCP(col) {
+    if(cpSortCol===col) cpSortDir=cpSortDir==='asc'?'desc':'asc';
+    else { cpSortCol=col; cpSortDir='desc'; }
+    const sorted=[...CP_DATA].sort((a,b)=>{
+        const av=a[col],bv=b[col];
+        const cmp=av<bv?-1:av>bv?1:0;
+        return cpSortDir==='asc'?cmp:-cmp;
+    });
+    buildCPTable(sorted);
+}
+
+function buildCatalogoTable() {
+    const pisoMin = Math.min(...CATALOGO_DATA.map(r=>r.piso));
+    const pisoMax = Math.max(...CATALOGO_DATA.map(r=>r.piso));
+    let h = `<table class="data-table"><thead><tr>
+        <th>Serviço</th>
+        <th style="text-align:center">Horas Téc.</th>
+        <th style="text-align:center">UEP</th>
+        <th style="text-align:right">Preço Piso</th>
+        <th>Nível de complexidade</th>
+    </tr></thead><tbody>`;
+    CATALOGO_DATA.forEach(r=>{
+        const pct=(r.piso-pisoMin)/(pisoMax-pisoMin)*100;
+        const nivel = r.uep>=80?'<span class="pill pill-red">Alta</span>':r.uep>=60?'<span class="pill pill-yellow">Média</span>':'<span class="pill pill-green">Básica</span>';
+        h+=`<tr>
+            <td>${r.servico}</td>
+            <td style="text-align:center">${r.horas}h</td>
+            <td style="text-align:center">${r.uep}</td>
+            <td style="text-align:right;font-weight:600">${fmtBRL(r.piso)}</td>
+            <td>${nivel} <div class="progress-bar-wrap" style="margin-top:6px"><div class="progress-bar" style="width:${pct.toFixed(0)}%;background:var(--color-1)"></div></div></td>
+        </tr>`;
+    });
+    h+=`</tbody><tfoot><tr>
+        <td><strong>RESUMO (${CATALOGO_DATA.length} serviços)</strong></td>
+        <td style="text-align:center"><strong>${(CATALOGO_DATA.reduce((s,r)=>s+r.horas,0)/CATALOGO_DATA.length).toFixed(0)}h médio</strong></td>
+        <td style="text-align:center"><strong>${(CATALOGO_DATA.reduce((s,r)=>s+r.uep,0)/CATALOGO_DATA.length).toFixed(0)} médio</strong></td>
+        <td style="text-align:right"><strong>${fmtBRL(CATALOGO_DATA.reduce((s,r)=>s+r.piso,0)/CATALOGO_DATA.length)} médio</strong></td>
+        <td></td>
+    </tr></tfoot></table>`;
+    document.getElementById('catalogo-table-container').innerHTML = h;
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(name) {
+    document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('tab-'+name).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildCRTable(CR_DATA);
+buildCPTable(CP_DATA);
+buildCatalogoTable();
+</script>
+</body>
+</html>

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Pricing — Higilabor</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #1f2235;
+    --border: #2a2d3e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #22c55e;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --accent: #00d4aa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* HEADER */
+  .header { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #000; font-size: 16px; }
+  .header-title { font-size: 18px; font-weight: 700; }
+  .header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .mes-badge { background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 600; }
+  .btn { background: var(--accent); color: #000; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity .15s; }
+  .btn:hover { opacity: .85; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* LAYOUT */
+  .main { padding: 24px 28px; max-width: 1400px; margin: 0 auto; }
+  .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; }
+
+  /* KPI CARDS */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; position: relative; overflow: hidden; }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+  .kpi-card.green::before { background: var(--green); }
+  .kpi-card.yellow::before { background: var(--yellow); }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: 8px; }
+  .kpi-value { font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .kpi-value.green { color: var(--green); }
+  .kpi-value.yellow { color: var(--yellow); }
+  .kpi-value.red { color: var(--red); }
+  .kpi-meta { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .kpi-target { font-size: 11px; color: var(--muted); }
+  .kpi-target span { color: var(--text); font-weight: 600; }
+  .status-badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 700; margin-top: 8px; }
+  .status-badge.green { background: rgba(34,197,94,.15); color: var(--green); }
+  .status-badge.yellow { background: rgba(245,158,11,.15); color: var(--yellow); }
+  .status-badge.red { background: rgba(239,68,68,.15); color: var(--red); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .green .status-dot { background: var(--green); }
+  .yellow .status-dot { background: var(--yellow); }
+  .red .status-dot { background: var(--red); }
+
+  /* PROGRESS BAR */
+  .progress-wrap { margin-top: 12px; }
+  .progress-bar-bg { background: var(--border); border-radius: 4px; height: 6px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+  .progress-bar-fill.green { background: var(--green); }
+  .progress-bar-fill.yellow { background: var(--yellow); }
+  .progress-bar-fill.red { background: var(--red); }
+
+  /* ROW 2: INPUT + BREAKEVEN */
+  .row2 { display: grid; grid-template-columns: 340px 1fr; gap: 16px; margin-bottom: 24px; }
+
+  /* ATUALIZAR SEMANA */
+  .update-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .update-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; font-weight: 600; margin-bottom: 6px; }
+  .field input { width: 100%; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 14px; font-weight: 600; outline: none; transition: border-color .15s; }
+  .field input:focus { border-color: var(--accent); }
+  .field-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* BREAKEVEN CARD */
+  .breakeven-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .breakeven-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+  .breakeven-chart-wrap { height: 220px; position: relative; }
+  .breakeven-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ROW 3: CENARIOS + CATALOGO */
+  .row3 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+  /* SCENARIO TABLE */
+  .scenario-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .scenario-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead th { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  tbody td { padding: 10px 10px; font-size: 13px; border-bottom: 1px solid rgba(42,45,62,.5); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,.02); }
+  .tag { display: inline-block; border-radius: 5px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+  .tag.green { background: rgba(34,197,94,.15); color: var(--green); }
+  .tag.yellow { background: rgba(245,158,11,.15); color: var(--yellow); }
+  .tag.red { background: rgba(239,68,68,.15); color: var(--red); }
+  .tag.blue { background: rgba(59,130,246,.15); color: var(--blue); }
+  .tag.muted { background: rgba(100,116,139,.15); color: var(--muted); }
+
+  /* PROPOSALS */
+  .proposals-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+  .proposals-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .proposals-header h3 { font-size: 13px; font-weight: 700; }
+  .proposals-header .actions { display: flex; gap: 8px; }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; width: 540px; max-height: 90vh; overflow-y: auto; }
+  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+  .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .modal-grid .field { margin-bottom: 0; }
+  .field select { width: 100%; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 13px; outline: none; cursor: pointer; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .btn-danger { background: rgba(239,68,68,.15); color: var(--red); border: 1px solid rgba(239,68,68,.3); border-radius: 8px; padding: 8px 16px; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+  /* EMPTY STATE */
+  .empty-state { text-align: center; padding: 40px; color: var(--muted); }
+  .empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+
+  /* ALERT */
+  .alert-box { background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.25); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px; }
+  .alert-box.warn { background: rgba(245,158,11,.08); border-color: rgba(245,158,11,.25); }
+  .alert-icon { font-size: 18px; flex-shrink: 0; }
+  .alert-text { font-size: 12px; line-height: 1.6; color: var(--text); }
+  .alert-text strong { color: inherit; }
+
+  /* POR SERVIÇO */
+  .servico-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+  .servico-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+  .servico-row { display: grid; grid-template-columns: 1fr 240px; gap: 16px; }
+  .mini-bar { height: 4px; border-radius: 2px; background: var(--border); margin-top: 4px; }
+  .mini-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+  .servico-chart-wrap { height: 280px; }
+
+  /* FOOTER */
+  .footer { padding: 20px 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; text-align: center; }
+
+  /* DIVIDER */
+  .mb24 { margin-bottom: 24px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .row2, .row3 { grid-template-columns: 1fr; }
+    .modal { width: 95vw; }
+    .modal-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">H</div>
+    <div>
+      <div class="header-title">Dashboard Pricing</div>
+      <div class="header-sub">Higilabor — Controle de Preço e Margem</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="mes-badge" id="mesAtual">—</div>
+    <button class="btn" onclick="openModal()">+ Nova Proposta</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ALERTA PISO -->
+  <div class="alert-box warn" id="alertaPiso" style="display:none">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text"><strong>Proposta abaixo do piso detectada.</strong> Revise as propostas marcadas em vermelho antes de enviar. Nenhuma proposta pode sair abaixo do piso calculado.</div>
+  </div>
+
+  <!-- SECAO KPIs -->
+  <div class="section-title">Semáforos da semana</div>
+  <div class="kpi-grid mb24">
+
+    <!-- KPI 1: Cobertura -->
+    <div class="kpi-card" id="kpi1Card">
+      <div class="kpi-label">Cobertura da Estrutura</div>
+      <div class="kpi-value" id="kpi1Val">—%</div>
+      <div class="kpi-meta">Receita faturada ÷ R$ 38.150</div>
+      <div class="progress-wrap">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="kpi1Bar" style="width:0%"></div></div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="kpi-target">Meta viável: <span>≥ 120% (R$ 45.780)</span></div>
+        <div class="kpi-target">Break-even: <span>≥ 100% (R$ 38.150)</span></div>
+      </div>
+      <div class="status-badge" id="kpi1Badge">
+        <div class="status-dot"></div><span id="kpi1Status">Sem dado</span>
+      </div>
+    </div>
+
+    <!-- KPI 2: Horas -->
+    <div class="kpi-card" id="kpi2Card">
+      <div class="kpi-label">Horas Técnicas Faturadas</div>
+      <div class="kpi-value" id="kpi2Val">— h</div>
+      <div class="kpi-meta">Horas Kleber em serviços fechados no mês</div>
+      <div class="progress-wrap">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="kpi2Bar" style="width:0%"></div></div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="kpi-target">Meta viável: <span>≥ 114 h/mês</span></div>
+        <div class="kpi-target">Break-even: <span>≥ 96 h/mês</span></div>
+      </div>
+      <div class="status-badge" id="kpi2Badge">
+        <div class="status-dot"></div><span id="kpi2Status">Sem dado</span>
+      </div>
+    </div>
+
+    <!-- KPI 3: % Piso -->
+    <div class="kpi-card" id="kpi3Card">
+      <div class="kpi-label">Propostas ≥ Piso</div>
+      <div class="kpi-value" id="kpi3Val">—%</div>
+      <div class="kpi-meta">Propostas acima do piso ÷ total enviadas</div>
+      <div class="progress-wrap">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="kpi3Bar" style="width:0%"></div></div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="kpi-target">Meta: <span>100% — regra absoluta</span></div>
+        <div class="kpi-target">Alerta: <span>qualquer proposta abaixo</span></div>
+      </div>
+      <div class="status-badge" id="kpi3Badge">
+        <div class="status-dot"></div><span id="kpi3Status">Sem dado</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECAO ATUALIZAR + BREAKEVEN -->
+  <div class="section-title">Atualização semanal</div>
+  <div class="row2 mb24">
+
+    <!-- INPUTS -->
+    <div class="update-card">
+      <h3>Inserir valores da semana</h3>
+      <div class="field">
+        <label>Receita faturada no mês (R$)</label>
+        <input type="number" id="inp_receita" placeholder="Ex: 42500" oninput="recalcular()">
+        <div class="field-hint">Soma de todas as OS/contratos emitidos até hoje</div>
+      </div>
+      <div class="field">
+        <label>Horas técnicas Kleber (mês)</label>
+        <input type="number" id="inp_horas" placeholder="Ex: 98" oninput="recalcular()">
+        <div class="field-hint">Total de horas em serviços fechados</div>
+      </div>
+      <div class="field">
+        <label>Total de propostas enviadas</label>
+        <input type="number" id="inp_total_prop" placeholder="Ex: 6" oninput="recalcular()">
+      </div>
+      <div class="field">
+        <label>Propostas acima do piso</label>
+        <input type="number" id="inp_ok_prop" placeholder="Ex: 6" oninput="recalcular()">
+        <div class="field-hint">Deve ser igual ao total — meta 100%</div>
+      </div>
+      <button class="btn" onclick="salvarInputs()" style="width:100%;margin-top:4px">Salvar e Atualizar</button>
+    </div>
+
+    <!-- BREAKEVEN CHART -->
+    <div class="breakeven-card">
+      <h3>Break-even — Progresso de Faturamento</h3>
+      <div class="breakeven-chart-wrap">
+        <canvas id="chartBreakeven"></canvas>
+      </div>
+      <div class="breakeven-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Estrutura (R$ 38.150)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div>Meta viável (R$ 45.780)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Faturado atual</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CENARIOS + CATALOGO -->
+  <div class="section-title">Cenários e referências</div>
+  <div class="row3 mb24">
+
+    <!-- CENARIOS -->
+    <div class="scenario-card">
+      <h3>Cenários — Contratos Fechados por Mês</h3>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+        Cada serviço usa ≤ 4h do Kleber. O gargalo é <strong style="color:var(--text)">volume de contratos</strong>, não horas.<br>
+        Ticket médio catálogo (piso c/ margem): ~R$ 8.000 por contrato.
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Cenário</th>
+            <th>Contratos/mês</th>
+            <th>Receita estimada</th>
+            <th>Resultado</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mar/26 real</td>
+            <td>~5 contratos</td>
+            <td>R$ 35.862</td>
+            <td style="color:var(--red)">–R$ 2.288</td>
+            <td><span class="tag red">❌ Déficit</span></td>
+          </tr>
+          <tr>
+            <td>Break-even</td>
+            <td>~6 contratos</td>
+            <td>R$ 38.150</td>
+            <td style="color:var(--yellow)">R$ 0</td>
+            <td><span class="tag yellow">⚠️ Zero</span></td>
+          </tr>
+          <tr style="background:rgba(34,197,94,.05)">
+            <td><strong>Meta viável ⭐</strong></td>
+            <td><strong>7–8 contratos</strong></td>
+            <td><strong>R$ 56.000–64.000</strong></td>
+            <td style="color:var(--green)"><strong>+R$ 18.000–26.000</strong></td>
+            <td><span class="tag green">✅ Meta</span></td>
+          </tr>
+          <tr>
+            <td>Crescimento</td>
+            <td>10–12 contratos</td>
+            <td>R$ 80.000–96.000</td>
+            <td style="color:var(--green)">+R$ 42.000–58.000</td>
+            <td><span class="tag blue">💰 Ideal</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;padding:12px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--muted);line-height:1.6">
+        <strong style="color:var(--text)">Foco:</strong> fechar 2–3 contratos a mais por mês sobre março/26.
+        Kleber comporta. Inadimplência (R$ 10.524) equivale a 1,3 contrato perdido — cobra primeiro.
+      </div>
+    </div>
+
+    <!-- CATALOGO -->
+    <div class="scenario-card">
+      <h3>Catálogo — Piso c/ Margem 20%</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Serviço</th>
+            <th>Horas</th>
+            <th>Piso</th>
+            <th>Alvo (150%)</th>
+          </tr>
+        </thead>
+        <tbody id="tblCatalogo"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- POR SERVIÇO -->
+  <div class="section-title">Performance por serviço</div>
+  <div class="servico-card">
+    <div class="servico-row">
+      <div id="tblPorServico"></div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Receita fechada por serviço</div>
+        <div class="servico-chart-wrap"><canvas id="chartServico"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPOSTAS -->
+  <div class="section-title">Log de propostas</div>
+  <div class="proposals-card">
+    <div class="proposals-header">
+      <h3>Propostas enviadas <span id="propCount" style="color:var(--muted);font-weight:400"></span></h3>
+      <div class="actions">
+        <button class="btn-ghost" onclick="exportCSV()">Exportar CSV</button>
+        <button class="btn" onclick="openModal()">+ Nova</button>
+      </div>
+    </div>
+    <div id="proposalsTable"></div>
+  </div>
+
+</div>
+
+<!-- MODAL NOVA PROPOSTA -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <h3 id="modalTitle">Nova Proposta</h3>
+    <div class="modal-grid">
+      <div class="field">
+        <label>Data</label>
+        <input type="date" id="m_data">
+      </div>
+      <div class="field">
+        <label>Cliente</label>
+        <input type="text" id="m_cliente" placeholder="Nome da empresa">
+      </div>
+      <div class="field" style="grid-column:1/-1">
+        <label>Serviço</label>
+        <select id="m_servico" onchange="autoFillServico()">
+          <option value="">Selecionar...</option>
+          <option value="PCMSO até 10 func.">PCMSO até 10 func.</option>
+          <option value="PCMSO 11–30 func.">PCMSO 11–30 func.</option>
+          <option value="PCMSO 31–100 func.">PCMSO 31–100 func.</option>
+          <option value="PGR Grau I">PGR Grau I</option>
+          <option value="PGR Grau II">PGR Grau II</option>
+          <option value="PGR Grau III">PGR Grau III</option>
+          <option value="LTCAT físicos simples">LTCAT físicos simples</option>
+          <option value="LTCAT físicos+químicos">LTCAT físicos+químicos</option>
+          <option value="Laudo insalubridade 1 ag.">Laudo insalubridade 1 ag.</option>
+          <option value="Laudo insalubridade 2-3 ag.">Laudo insalubridade 2-3 ag.</option>
+          <option value="Treinamento NR até 20 pess.">Treinamento NR até 20 pess.</option>
+          <option value="Treinamento NR12/NR10">Treinamento NR12/NR10</option>
+          <option value="Consultoria NR12 até 5 máq.">Consultoria NR12 até 5 máq.</option>
+          <option value="Consultoria NR12 6-15 máq.">Consultoria NR12 6-15 máq.</option>
+          <option value="Perícia trabalhista simples">Perícia trabalhista simples</option>
+          <option value="Perícia c/ laudos compl.">Perícia c/ laudos compl.</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Horas Kleber (campo)</label>
+        <input type="number" id="m_h_kleber" placeholder="Ex: 3" min="0" step="0.5" oninput="calcPiso()">
+      </div>
+      <div class="field">
+        <label>Horas Médica</label>
+        <input type="number" id="m_h_medica" placeholder="Ex: 1" min="0" step="0.5" oninput="calcPiso()">
+      </div>
+      <div class="field">
+        <label>Horas Admin (Fernanda/Edmilson)</label>
+        <input type="number" id="m_h_admin" placeholder="Ex: 2" min="0" step="0.5" oninput="calcPiso()">
+      </div>
+      <div class="field">
+        <label>ART CREA</label>
+        <select id="m_art" onchange="calcPiso()">
+          <option value="0">Não se aplica</option>
+          <option value="300">Sim — R$ 300</option>
+          <option value="350">Sim — R$ 350</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Deslocamento</label>
+        <select id="m_desloc" onchange="calcPiso()">
+          <option value="0">Incluso (≤ 30 km)</option>
+          <option value="500">31–100 km (+R$ 500 est.)</option>
+          <option value="1400">+100 km — diária R$ 1.400</option>
+        </select>
+      </div>
+      <div class="field" style="grid-column:1/-1">
+        <label>Piso calculado (R$)</label>
+        <input type="text" id="m_piso" readonly placeholder="Preencha as horas acima" style="color:var(--accent);cursor:default;font-size:16px;font-weight:700">
+        <div class="field-hint" id="m_piso_breakdown" style="color:var(--muted);font-family:monospace"></div>
+      </div>
+      <div class="field">
+        <label>Preço cobrado (R$)</label>
+        <input type="number" id="m_cobrado" placeholder="Ex: 10500" oninput="calcMargem()">
+      </div>
+      <div class="field">
+        <label>Margem efetiva</label>
+        <input type="text" id="m_margem" readonly placeholder="Auto" style="color:var(--accent)">
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="m_status">
+          <option value="Enviado">Enviado</option>
+          <option value="Fechado">Fechado</option>
+          <option value="Renegociando">Renegociando</option>
+          <option value="Perdido">Perdido</option>
+        </select>
+      </div>
+      <div class="field" id="fieldMotivo" style="display:none">
+        <label>Motivo da perda</label>
+        <select id="m_motivo">
+          <option value="">Selecionar...</option>
+          <option value="Preço">Preço</option>
+          <option value="Prazo">Prazo</option>
+          <option value="Concorrente">Concorrente</option>
+          <option value="Escopo">Escopo</option>
+          <option value="Sem retorno">Sem retorno</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Obs.</label>
+        <input type="text" id="m_obs" placeholder="Notas livres">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn-danger" id="btnDeletar" onclick="deletarProposta()" style="display:none">Deletar</button>
+      <button class="btn" onclick="salvarProposta()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Higilabor — Dashboard Pricing · Piso base R$ 400/h · Estrutura R$ 38.150/mês · Atualizado localmente</div>
+
+<script>
+// ─── DADOS ───────────────────────────────────────────────────────────────────
+const ESTRUTURA = 38149.72;
+const META_VIAVEL = 45780;
+const BREAKEVEN = 38150;
+const PISO_HORA = 400;
+
+const CATALOGO = [
+  {s:'PCMSO até 10 func.',     h:12, piso:4558,  pisoM:5890},
+  {s:'PCMSO 11–30 func.',      h:16, piso:6381,  pisoM:8246},
+  {s:'PCMSO 31–100 func.',     h:22, piso:8660,  pisoM:11191},
+  {s:'PGR Grau I',             h:14, piso:5557,  pisoM:7280},
+  {s:'PGR Grau II',            h:16, piso:6668,  pisoM:8736},
+  {s:'PGR Grau III',           h:20, piso:8057,  pisoM:10556},
+  {s:'LTCAT físicos simples',  h:18, piso:7465,  pisoM:9870},
+  {s:'LTCAT físicos+químicos', h:24, piso:9332,  pisoM:13318},
+  {s:'Laudo insalub. 1 ag.',   h:12, piso:5104,  pisoM:6620},
+  {s:'Laudo insalub. 2-3 ag.', h:16, piso:6380,  pisoM:8276},
+  {s:'Treinamento NR ≤20',     h:8,  piso:2915,  pisoM:3680},
+  {s:'Treinamento NR12/NR10',  h:12, piso:4372,  pisoM:5520},
+  {s:'Consultoria NR12 5 máq.',h:22, piso:9374,  pisoM:12540},
+  {s:'Consultoria NR12 15 máq.',h:32,piso:13124, pisoM:17556},
+  {s:'Perícia simples',         h:16, piso:6545,  pisoM:8760},
+  {s:'Perícia c/ laudos',       h:24, piso:9817,  pisoM:11688},
+];
+
+let propostas   = JSON.parse(localStorage.getItem('hl_propostas') || '[]');
+let inputs      = JSON.parse(localStorage.getItem('hl_inputs')    || '{}');
+let editIndex   = -1;
+let chartObj    = null;
+let chartServico = null;
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Mês atual
+  const now = new Date();
+  document.getElementById('mesAtual').textContent =
+    now.toLocaleString('pt-BR',{month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
+
+  // Data default no modal
+  document.getElementById('m_data').valueAsDate = now;
+
+  // Restorerinputs
+  if(inputs.receita)    document.getElementById('inp_receita').value    = inputs.receita;
+  if(inputs.horas)      document.getElementById('inp_horas').value      = inputs.horas;
+  if(inputs.total_prop) document.getElementById('inp_total_prop').value = inputs.total_prop;
+  if(inputs.ok_prop)    document.getElementById('inp_ok_prop').value    = inputs.ok_prop;
+
+  // Status select listener
+  document.getElementById('m_status').addEventListener('change', e => {
+    document.getElementById('fieldMotivo').style.display = e.target.value === 'Perdido' ? 'block' : 'none';
+  });
+
+  populateCatalogo();
+  initChart();
+  initChartServico();
+  recalcular();
+  renderPropostas();
+  renderPorServico();
+});
+
+// ─── CATALOGO TABLE ───────────────────────────────────────────────────────────
+function populateCatalogo() {
+  const tb = document.getElementById('tblCatalogo');
+  CATALOGO.forEach(c => {
+    const alvo = Math.round(c.pisoM * 1.5);
+    tb.innerHTML += `<tr>
+      <td>${c.s}</td>
+      <td>${c.h}h</td>
+      <td>R$ ${c.pisoM.toLocaleString('pt-BR')}</td>
+      <td>R$ ${alvo.toLocaleString('pt-BR')}</td>
+    </tr>`;
+  });
+}
+
+// ─── CHART ────────────────────────────────────────────────────────────────────
+function initChart() {
+  const ctx = document.getElementById('chartBreakeven').getContext('2d');
+  chartObj = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Estrutura', 'Meta viável', 'Faturado'],
+      datasets: [{
+        data: [ESTRUTURA, META_VIAVEL, 0],
+        backgroundColor: ['rgba(239,68,68,.25)', 'rgba(245,158,11,.25)', 'rgba(34,197,94,.35)'],
+        borderColor:     ['var(--red)', 'var(--yellow)', 'var(--green)'],
+        borderWidth: 2,
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: { label: ctx => ' R$ ' + ctx.raw.toLocaleString('pt-BR') }
+      }},
+      scales: {
+        y: { ticks: { color:'#64748b', callback: v => 'R$' + (v/1000).toFixed(0)+'k' }, grid: { color:'rgba(42,45,62,.8)' } },
+        x: { ticks: { color:'#94a3b8' }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ─── RECALCULAR ───────────────────────────────────────────────────────────────
+function recalcular() {
+  const receita    = parseFloat(document.getElementById('inp_receita').value)    || 0;
+  const horas      = parseFloat(document.getElementById('inp_horas').value)      || 0;
+  const totalProp  = parseFloat(document.getElementById('inp_total_prop').value) || 0;
+  const okProp     = parseFloat(document.getElementById('inp_ok_prop').value)    || 0;
+
+  // KPI1 — Cobertura
+  const cob = receita > 0 ? (receita / ESTRUTURA) * 100 : null;
+  setKPI('kpi1', cob !== null ? cob.toFixed(0) + '%' : '—%',
+    cob, 95, 120,
+    ['🔴 Déficit', '⚠️ Risco', '✅ Viável'],
+    Math.min(cob || 0, 200) / 200 * 100);
+
+  // KPI2 — Horas
+  const hPct = horas > 0 ? (horas / 114 * 100) : null;
+  setKPI('kpi2', horas > 0 ? horas + ' h' : '— h',
+    horas, 96, 114,
+    ['🔴 Abaixo', '⚠️ No limite', '✅ Meta atingida'],
+    Math.min(horas, 176) / 176 * 100);
+
+  // KPI3 — % piso
+  const pPct = totalProp > 0 ? (okProp / totalProp * 100) : null;
+  setKPI('kpi3', pPct !== null ? pPct.toFixed(0) + '%' : '—%',
+    pPct, 99.9, 100,
+    ['🔴 Alerta', '⚠️ Alerta', '✅ OK'],
+    pPct || 0);
+
+  // Chart
+  if(chartObj) {
+    chartObj.data.datasets[0].data[2] = receita;
+    chartObj.update();
+  }
+
+  // Alerta piso
+  const abaixo = propostas.some(p => parseFloat(p.cobrado) < parseFloat(p.piso));
+  document.getElementById('alertaPiso').style.display = abaixo ? 'flex' : 'none';
+}
+
+function setKPI(id, val, num, limBad, limGood, labels, barPct) {
+  const card   = document.getElementById(id + 'Card');
+  const valEl  = document.getElementById(id + 'Val');
+  const bar    = document.getElementById(id + 'Bar');
+  const badge  = document.getElementById(id + 'Badge');
+  const status = document.getElementById(id + 'Status');
+
+  const cls = num === null ? 'muted' : num < limBad ? 'red' : num < limGood ? 'yellow' : 'green';
+  const lbl = num === null ? 'Sem dado' : num < limBad ? labels[0] : num < limGood ? labels[1] : labels[2];
+
+  card.className  = 'kpi-card ' + (num === null ? '' : cls);
+  valEl.className = 'kpi-value ' + cls;
+  valEl.textContent = val;
+  bar.className   = 'progress-bar-fill ' + cls;
+  bar.style.width = Math.min(barPct, 100) + '%';
+  badge.className = 'status-badge ' + (num === null ? 'muted' : cls);
+  badge.querySelector('.status-dot').className = 'status-dot';
+  status.textContent = lbl;
+}
+
+function salvarInputs() {
+  inputs = {
+    receita:    document.getElementById('inp_receita').value,
+    horas:      document.getElementById('inp_horas').value,
+    total_prop: document.getElementById('inp_total_prop').value,
+    ok_prop:    document.getElementById('inp_ok_prop').value,
+  };
+  localStorage.setItem('hl_inputs', JSON.stringify(inputs));
+  recalcular();
+  showToast('Dados atualizados ✓');
+}
+
+// ─── PROPOSTAS ────────────────────────────────────────────────────────────────
+function renderPropostas() {
+  const wrap = document.getElementById('proposalsTable');
+  document.getElementById('propCount').textContent =
+    propostas.length ? `(${propostas.length})` : '';
+
+  if (!propostas.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="icon">📋</div><div>Nenhuma proposta registrada.<br>Clique em <strong>+ Nova</strong> para começar.</div></div>`;
+    return;
+  }
+
+  const statusColor = { Enviado:'blue', Fechado:'green', Renegociando:'yellow', Perdido:'red' };
+
+  let html = `<table>
+    <thead><tr>
+      <th>Data</th><th>Cliente</th><th>Serviço</th><th>Horas</th>
+      <th>Piso (R$)</th><th>Cobrado (R$)</th><th>Margem</th><th>Status</th><th></th>
+    </tr></thead><tbody>`;
+
+  propostas.forEach((p, i) => {
+    const cobrado = parseFloat(p.cobrado) || 0;
+    const piso    = parseFloat(p.piso)    || 0;
+    const margem  = piso > 0 ? ((cobrado - piso) / cobrado * 100).toFixed(0) : '—';
+    const abaixo  = cobrado < piso && piso > 0;
+    const sc      = statusColor[p.status] || 'muted';
+    const margemCls = abaixo ? 'red' : parseFloat(margem) >= 25 ? 'green' : 'yellow';
+
+    html += `<tr>
+      <td>${p.data || '—'}</td>
+      <td><strong>${p.cliente || '—'}</strong></td>
+      <td style="font-size:12px">${p.servico || '—'}</td>
+      <td>${p.horas || '—'}h</td>
+      <td>R$ ${piso ? piso.toLocaleString('pt-BR') : '—'}</td>
+      <td><strong>R$ ${cobrado ? cobrado.toLocaleString('pt-BR') : '—'}</strong>
+        ${abaixo ? ' <span class="tag red">❌ Abaixo piso</span>' : ''}</td>
+      <td style="color:var(--${margemCls}); font-weight:700">${margem !== '—' ? margem + '%' : '—'}</td>
+      <td><span class="tag ${sc}">${p.status}</span>
+        ${p.motivo ? `<br><small style="color:var(--muted)">${p.motivo}</small>` : ''}</td>
+      <td><button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="editarProposta(${i})">Editar</button></td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+
+  // Totais
+  const fechados   = propostas.filter(p => p.status === 'Fechado');
+  const totalRec   = fechados.reduce((a,p) => a + (parseFloat(p.cobrado)||0), 0);
+  const totalHoras = fechados.reduce((a,p) => a + (parseFloat(p.horas)||0), 0);
+  const totalProp  = propostas.length;
+  const acimaPiso  = propostas.filter(p => {
+    const c = parseFloat(p.cobrado)||0; const pi = parseFloat(p.piso)||0;
+    return c >= pi && pi > 0;
+  }).length;
+
+  html += `<div style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap;padding:12px 10px;background:var(--card2);border-radius:8px;font-size:12px">
+    <span>Fechados: <strong style="color:var(--green)">${fechados.length}</strong></span>
+    <span>Receita fechada: <strong style="color:var(--green)">R$ ${totalRec.toLocaleString('pt-BR')}</strong></span>
+    <span>Horas fechadas: <strong>${totalHoras}h</strong></span>
+    <span>Acima do piso: <strong style="color:${acimaPiso===totalProp&&totalProp>0?'var(--green)':'var(--red)'}">${acimaPiso}/${totalProp}</strong></span>
+  </div>`;
+
+  wrap.innerHTML = html;
+  recalcular();
+  renderPorServico();
+}
+
+// ─── POR SERVIÇO ──────────────────────────────────────────────────────────────
+function initChartServico() {
+  const ctx = document.getElementById('chartServico').getContext('2d');
+  chartServico = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: [], datasets: [{ data: [], backgroundColor: 'rgba(0,212,170,.3)', borderColor: 'var(--accent)', borderWidth: 2, borderRadius: 4 }] },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' R$ ' + (c.raw||0).toLocaleString('pt-BR') } } },
+      scales: {
+        x: { ticks: { color:'#64748b', callback: v => 'R$'+(v/1000).toFixed(0)+'k' }, grid: { color:'rgba(42,45,62,.6)' } },
+        y: { ticks: { color:'#94a3b8', font: { size: 10 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderPorServico() {
+  const wrap = document.getElementById('tblPorServico');
+
+  if (!propostas.length) {
+    wrap.innerHTML = `<div class="empty-state" style="padding:20px"><div class="icon">📊</div><div style="font-size:12px">Adicione propostas para ver análise por serviço.</div></div>`;
+    if (chartServico) { chartServico.data.labels = []; chartServico.data.datasets[0].data = []; chartServico.update(); }
+    return;
+  }
+
+  // Agrupa por serviço
+  const grupos = {};
+  propostas.forEach(p => {
+    const key = (p.servico || 'Outro').split('|')[0].trim();
+    if (!grupos[key]) grupos[key] = { total:0, fechados:0, perdidos:0, receita:0, horas:0, margens:[], abaixoPiso:0 };
+    const g = grupos[key];
+    g.total++;
+    const cob  = parseFloat(p.cobrado) || 0;
+    const piso = parseFloat(p.piso)    || 0;
+    if (p.status === 'Fechado') {
+      g.fechados++;
+      g.receita += cob;
+      g.horas   += parseFloat(p.horas) || 0;
+      if (piso > 0) g.margens.push((cob - piso) / cob * 100);
+    }
+    if (p.status === 'Perdido') g.perdidos++;
+    if (cob < piso && piso > 0) g.abaixoPiso++;
+  });
+
+  const sorted = Object.entries(grupos).sort((a,b) => b[1].receita - a[1].receita);
+  const maxReceita = Math.max(...sorted.map(([,g]) => g.receita), 1);
+
+  let html = `<table>
+    <thead><tr>
+      <th>Serviço</th>
+      <th style="text-align:center">Env.</th>
+      <th style="text-align:center">Fech.</th>
+      <th style="text-align:center">Tx.</th>
+      <th>Receita</th>
+      <th>Marg. Méd.</th>
+      <th>Ticket Méd.</th>
+    </tr></thead><tbody>`;
+
+  sorted.forEach(([nome, g]) => {
+    const tx       = g.total > 0 ? (g.fechados / g.total * 100).toFixed(0) : 0;
+    const txCls    = tx >= 60 ? 'green' : tx >= 30 ? 'yellow' : 'red';
+    const margMedia = g.margens.length ? (g.margens.reduce((a,v)=>a+v,0) / g.margens.length).toFixed(0) : '—';
+    const margCls  = margMedia !== '—' ? (parseFloat(margMedia) >= 25 ? 'green' : parseFloat(margMedia) >= 10 ? 'yellow' : 'red') : 'muted';
+    const ticket   = g.fechados > 0 ? Math.round(g.receita / g.fechados) : 0;
+    const barPct   = (g.receita / maxReceita * 100).toFixed(0);
+
+    html += `<tr>
+      <td>
+        <div style="font-size:12px;font-weight:600">${nome}</div>
+        ${g.abaixoPiso ? `<div style="font-size:10px;color:var(--red)">⚠️ ${g.abaixoPiso} abaixo do piso</div>` : ''}
+        <div class="mini-bar"><div class="mini-bar-fill" style="width:${barPct}%"></div></div>
+      </td>
+      <td style="text-align:center;color:var(--muted)">${g.total}</td>
+      <td style="text-align:center"><strong style="color:var(--green)">${g.fechados}</strong></td>
+      <td style="text-align:center"><span class="tag ${txCls}">${tx}%</span></td>
+      <td><strong>R$ ${g.receita ? g.receita.toLocaleString('pt-BR') : '—'}</strong></td>
+      <td style="color:var(--${margCls});font-weight:700">${margMedia !== '—' ? margMedia + '%' : '—'}</td>
+      <td style="color:var(--muted)">${ticket ? 'R$ '+ticket.toLocaleString('pt-BR') : '—'}</td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+
+  // Atualiza chart
+  if (chartServico) {
+    const top = sorted.slice(0, 8);
+    chartServico.data.labels   = top.map(([n]) => n.length > 20 ? n.slice(0,18)+'…' : n);
+    chartServico.data.datasets[0].data = top.map(([,g]) => g.receita);
+    chartServico.update();
+  }
+}
+
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+function openModal() {
+  editIndex = -1;
+  document.getElementById('modalTitle').textContent = 'Nova Proposta';
+  document.getElementById('btnDeletar').style.display = 'none';
+  document.getElementById('m_data').valueAsDate = new Date();
+  document.getElementById('m_cliente').value = '';
+  document.getElementById('m_servico').value    = '';
+  document.getElementById('m_h_kleber').value   = '';
+  document.getElementById('m_h_medica').value   = '';
+  document.getElementById('m_h_admin').value    = '';
+  document.getElementById('m_art').value        = '0';
+  document.getElementById('m_desloc').value     = '0';
+  document.getElementById('m_piso').value       = '';
+  document.getElementById('m_piso').dataset.raw = '';
+  document.getElementById('m_piso_breakdown').textContent = '';
+  document.getElementById('m_cobrado').value = '';
+  document.getElementById('m_margem').value  = '';
+  document.getElementById('m_status').value  = 'Enviado';
+  document.getElementById('m_obs').value     = '';
+  document.getElementById('fieldMotivo').style.display = 'none';
+  document.getElementById('m_motivo').value  = '';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function editarProposta(i) {
+  editIndex = i;
+  const p = propostas[i];
+  document.getElementById('modalTitle').textContent = 'Editar Proposta';
+  document.getElementById('btnDeletar').style.display = 'inline-block';
+  document.getElementById('m_data').value       = p.data      || '';
+  document.getElementById('m_cliente').value   = p.cliente   || '';
+  document.getElementById('m_h_kleber').value  = p.h_kleber  || '';
+  document.getElementById('m_h_medica').value  = p.h_medica  || '';
+  document.getElementById('m_h_admin').value   = p.h_admin   || '';
+  document.getElementById('m_art').value       = p.art       || '0';
+  document.getElementById('m_desloc').value    = p.desloc    || '0';
+  const pisoNum = parseFloat(p.piso) || 0;
+  document.getElementById('m_piso').value        = pisoNum ? 'R$ ' + pisoNum.toLocaleString('pt-BR') : '—';
+  document.getElementById('m_piso').dataset.raw  = p.piso || '';
+  document.getElementById('m_cobrado').value = p.cobrado || '';
+  document.getElementById('m_status').value  = p.status  || 'Enviado';
+  document.getElementById('m_obs').value     = p.obs     || '';
+  document.getElementById('m_motivo').value  = p.motivo  || '';
+  document.getElementById('fieldMotivo').style.display = p.status === 'Perdido' ? 'block' : 'none';
+  calcPiso();
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeModalOutside(e) { if(e.target === document.getElementById('modalOverlay')) closeModal(); }
+
+function autoFillServico() {
+  // Só limpa o piso ao mudar serviço — horas são sempre manuais
+  calcPiso();
+}
+
+const CUSTO_HORA = 400; // R$/h — cobre estrutura + overhead + tributos + margem 20%
+
+function calcPiso() {
+  const hK    = parseFloat(document.getElementById('m_h_kleber').value) || 0;
+  const hM    = parseFloat(document.getElementById('m_h_medica').value) || 0;
+  const hA    = parseFloat(document.getElementById('m_h_admin').value)  || 0;
+  const art   = parseFloat(document.getElementById('m_art').value)      || 0;
+  const desl  = parseFloat(document.getElementById('m_desloc').value)   || 0;
+  const total_h = hK + hM + hA;
+
+  if (!total_h && !art && !desl) {
+    document.getElementById('m_piso').value         = '';
+    document.getElementById('m_piso').dataset.raw   = '';
+    document.getElementById('m_piso_breakdown').textContent = '';
+    calcMargem(); return;
+  }
+
+  const base    = total_h * CUSTO_HORA;
+  const piso    = base + art + desl;
+  const alvo120 = Math.round(piso * 1.20);
+  const alvo150 = Math.round(piso * 1.50);
+
+  document.getElementById('m_piso').value       = 'R$ ' + piso.toLocaleString('pt-BR');
+  document.getElementById('m_piso').dataset.raw = piso.toFixed(0);
+
+  const partes = [];
+  if (hK) partes.push(`Kleber ${hK}h`);
+  if (hM) partes.push(`Médica ${hM}h`);
+  if (hA) partes.push(`Admin ${hA}h`);
+  let breakdown = `(${partes.join(' + ')}) × R$${CUSTO_HORA}/h = R$${base.toLocaleString('pt-BR')}`;
+  if (art)  breakdown += `  +  ART R$${art}`;
+  if (desl) breakdown += `  +  Desl. R$${desl.toLocaleString('pt-BR')}`;
+  breakdown += `  →  Alvo: R$${alvo120.toLocaleString('pt-BR')}–${alvo150.toLocaleString('pt-BR')}`;
+  document.getElementById('m_piso_breakdown').textContent = breakdown;
+
+  calcMargem();
+}
+
+function calcMargem() {
+  const cob  = parseFloat(document.getElementById('m_cobrado').value) || 0;
+  const piso = parseFloat(document.getElementById('m_piso').dataset.raw) || 0;
+  if(cob && piso) {
+    const m = ((cob - piso) / cob * 100).toFixed(0);
+    const el = document.getElementById('m_margem');
+    el.value = m + '%';
+    el.style.color = parseFloat(m) < 0 ? 'var(--red)' : parseFloat(m) < 20 ? 'var(--yellow)' : 'var(--accent)';
+  } else {
+    document.getElementById('m_margem').value = '';
+  }
+}
+
+function salvarProposta() {
+  const hK = parseFloat(document.getElementById('m_h_kleber').value) || 0;
+  const hM = parseFloat(document.getElementById('m_h_medica').value) || 0;
+  const hA = parseFloat(document.getElementById('m_h_admin').value)  || 0;
+
+  const p = {
+    data:     document.getElementById('m_data').value,
+    cliente:  document.getElementById('m_cliente').value,
+    servico:  document.getElementById('m_servico').value || (editIndex >= 0 ? propostas[editIndex].servico : ''),
+    horas:    (hK + hM + hA).toString(),
+    h_kleber: hK.toString(),
+    h_medica: hM.toString(),
+    h_admin:  hA.toString(),
+    art:      document.getElementById('m_art').value,
+    desloc:   document.getElementById('m_desloc').value,
+    piso:     document.getElementById('m_piso').dataset.raw || '',
+    cobrado:  document.getElementById('m_cobrado').value,
+    status:   document.getElementById('m_status').value,
+    motivo:   document.getElementById('m_motivo').value,
+    obs:      document.getElementById('m_obs').value,
+  };
+
+  if(!p.cliente) { alert('Informe o cliente.'); return; }
+  if(!p.cobrado) { alert('Informe o preço cobrado.'); return; }
+
+  if(editIndex >= 0) propostas[editIndex] = p;
+  else propostas.unshift(p);
+
+  localStorage.setItem('hl_propostas', JSON.stringify(propostas));
+  closeModal();
+  renderPropostas();
+  showToast(editIndex >= 0 ? 'Proposta atualizada ✓' : 'Proposta registrada ✓');
+}
+
+function deletarProposta() {
+  if(!confirm('Deletar esta proposta?')) return;
+  propostas.splice(editIndex, 1);
+  localStorage.setItem('hl_propostas', JSON.stringify(propostas));
+  closeModal();
+  renderPropostas();
+}
+
+// ─── EXPORT CSV ───────────────────────────────────────────────────────────────
+function exportCSV() {
+  if(!propostas.length) { alert('Nenhuma proposta para exportar.'); return; }
+  const header = ['Data','Cliente','Serviço','Horas','Piso','Cobrado','Margem%','Status','Motivo','Obs'];
+  const rows = propostas.map(p => {
+    const cob  = parseFloat(p.cobrado)||0;
+    const piso = parseFloat(p.piso)||0;
+    const m    = piso > 0 ? ((cob-piso)/cob*100).toFixed(0) : '';
+    return [p.data,p.cliente,p.servico,p.horas,p.piso,p.cobrado,m,p.status,p.motivo,p.obs]
+      .map(v => '"'+(v||'').toString().replace(/"/g,'""')+'"').join(',');
+  });
+  const csv  = [header.join(','), ...rows].join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), {href:url, download:`propostas_higilabor_${new Date().toISOString().slice(0,10)}.csv`});
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--accent);color:#000;font-weight:700;padding:12px 20px;border-radius:10px;font-size:13px;z-index:999;animation:fadeIn .2s';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+</script>
+</body>
+</html>

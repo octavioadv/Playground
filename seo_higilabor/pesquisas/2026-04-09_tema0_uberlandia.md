@@ -1,81 +1,125 @@
-# Pesquisa SEO — Tema 0: Google Trends / Volume Real
-**Data:** 2026-04-09
-**Cidade:** Uberlândia (base)
-**Rodada:** 1
+# SEO Research — Tema 0: Google Trends / Volume Real
+**Data:** 2026-04-09  
+**Cidade:** Uberlândia/MG  
+**Tema:** Volume de busca e tendências nacionais + locais
 
 ---
 
-## 1. Contexto Regulatório Quente: NR-1 Psicossocial
-
-- **Obrigatoriedade:** 26 de maio de 2026 — todas as empresas com CLT, sem exceção de porte ou setor
-- **Multa por descumprimento:** R$ 6.708,08 por trabalhador exposto
-- **Período educativo:** maio/2025 a maio/2026 (sem autuação). A partir de 26/05/2026, fiscalização com multa
-- **Exigência:** riscos psicossociais devem ser identificados, avaliados e tratados no PGR com critérios claros e evidências documentais
-- **Base legal:** Portaria MTE 1.419/2025
-- **Canpat 2026:** MTE lançou campanha nacional com foco em prevenção de riscos psicossociais
-- **Fonte:** gov.br, Migalhas, TOTVS Espaço Legislação, Climec, WTW
-
-**Insight SEO:** Termo em alta explosiva. Todo conteúdo sobre NR-1 psicossocial tem janela de oportunidade máxima até maio/2026. Depois vira evergreen de conformidade.
+## Metodologia
+8 WebSearches executadas. Volumes são estimativas indiretas baseadas em densidade de conteúdo, número de competidores, e dados de blogs públicos de SEO/SST (Semrush/Ahrefs não acessíveis via web aberta).
 
 ---
 
-## 2. Estimativas de Volume de Busca (baseado em fontes públicas)
+## Análise dos 10 Termos
 
-Ferramentas gratuitas públicas não retornaram volumes exatos nesta pesquisa. Estimativas baseadas em tendência, concorrência e tipo de intenção:
+### 1. NR-1 psicossocial
+- **Volume estimado nacional:** 5.000–10.000 buscas/mês (explosão desde 2024)
+- **Tendência:** fortemente crescente — prazo de fiscalização maio/2026
+- **Dificuldade local:** BAIXA — nenhum concorrente local identificado com conteúdo específico
+- **Janela de oportunidade:** aberta agora, pico Q1-Q2/2026
 
-| Keyword | Volume Estimado | Intenção | Tendência |
-|---|---|---|---|
-| medicina do trabalho Uberlândia | Alto (1K-5K/mês) | Comercial/Local | Estável |
-| exame admissional Uberlândia | Médio-Alto (500-2K) | Transacional | Estável |
-| PGR | Muito Alto (10K+) | Informacional/Comercial | Crescente |
-| PCMSO | Muito Alto (10K+) | Informacional/Comercial | Estável |
-| LTCAT | Alto (5K-10K) | Informacional/Comercial | Estável |
-| NR-1 riscos psicossociais | Alto e crescente (5K+) | Informacional | Explosivo |
-| NR-1 psicossocial 2026 | Médio-Alto (1K-5K) | Informacional | Explosivo |
-| laudo insalubridade Uberlândia | Médio (500-1K) | Comercial | Estável |
-| engenharia segurança trabalho Uberlândia | Médio (500-1K) | Comercial | Estável |
-| FAP redução | Médio (1K-3K) | Informacional | Sazonal (jan-mar) |
-| medicina do trabalho preço | Médio-Alto (1K-3K) | Transacional | Crescente |
-| SST pequena empresa | Médio (500-1K) | Informacional | Crescente |
-| exame admissional valor | Alto (3K-5K) | Transacional | Estável |
-| quanto custa PGR | Médio (500-1K) | Transacional | Crescente |
-| terceirizar SST vs SESMT | Baixo-Médio (100-500) | Informacional | Crescente |
+### 2. medicina do trabalho Uberlândia
+- **Volume estimado local:** 500–2.000 buscas/mês
+- **Tendência:** estável (serviço perene)
+- **Dificuldade local:** ALTA — WTA (1998), CEMTRAS (20+ anos), Asseme (36 anos)
+- **Higilabor:** NÃO aparece nessa SERP
+
+### 3. PGR pequena empresa
+- **Volume estimado nacional:** 1.000–3.000 buscas/mês
+- **Tendência:** crescente desde 2022 (substitui PPRA)
+- **Dificuldade local:** baixa a média
+- **Higilabor:** JÁ aparece em "PGR Uberlândia" (posição 2-3 estimada)
+
+### 4. PCMSO valor preço
+- **Volume estimado nacional:** 500–2.000 buscas/mês
+- **Tendência:** estável (perene)
+- **Preços de mercado:** R$ 640–R$ 2.000/ano PME; R$ 400–R$ 12.000 por complexidade
+- **Dificuldade:** média
+
+### 5. exame admissional Uberlândia
+- **Volume estimado:** moderado-alto local
+- **Tendência:** estável (obrigação CLT)
+- **Dificuldade local:** ALTA — WTA, CEMTRAS, M7, Nexus, Ubermed ativos
+- **Alerta:** Marcelino SST (SP) com doorway pages para Uberlândia sem presença real
+
+### 6. engenharia segurança trabalho Uberlândia
+- **Volume estimado:** 100–500 buscas/mês
+- **Tendência:** estável
+- **Dificuldade local:** baixa a média — LGF Ergonomia presente, poucos outros
+
+### 7. laudo insalubridade preço
+- **Volume estimado nacional:** 500–1.500 buscas/mês
+- **Tendência:** estável
+- **Preços de mercado:** R$ 750–R$ 2.500 unitário; pacote combo reduz
+- **Dificuldade:** média
+
+### 8. FAP redução como
+- **Volume estimado nacional:** 200–800 buscas/mês
+- **Tendência:** sazonal — pico setembro/outubro (publicação FAP) e novembro (contestação)
+- **Próxima janela:** setembro/2026
+- **Dificuldade:** baixa a média
+
+### 9. medicina do trabalho preço
+- **Volume estimado nacional:** 2.000–5.000 buscas/mês
+- **Tendência:** crescente (visibilidade eSocial)
+- **Dificuldade local:** média — "medicina do trabalho preço Uberlândia" viável
+
+### 10. SST pequena empresa quanto custa
+- **Volume estimado nacional:** 500–2.000 buscas/mês
+- **Tendência:** crescente (eSocial + NR-1 nova)
+- **Dificuldade:** baixa a média — dominado por consultorias pequenas, não grandes portais
 
 ---
 
-## 3. Concorrentes Orgânicos em Uberlândia
+## Top Resultados Orgânicos
 
-### Top resultados para "medicina do trabalho Uberlândia"
-| Empresa | Domínio | Diferencial | Menciona Preço? |
-|---|---|---|---|
-| Sermed | sermeduberlandia.com.br | Medicina ocupacional, 20+ anos | Não |
-| CEMTRAS | cemtras.com.br | Centro especializado, 20+ anos | Não |
-| WTA | wtanegocios.com.br | "Exames mais rápidos do mercado", desde 1998 | Não |
-| M7 | m7medicinaocupacional.com.br | Fundada 2022, agilidade e preço | Sim (implícito) |
-| Asseme | asseme.com.br | 36+ anos em SST | Não |
-| Grupo Mednet | grupomednet.com.br | Rede nacional | Não |
-| Doctoralia | doctoralia.com.br | Agregador | N/A |
+### "medicina do trabalho Uberlândia"
+| Player | Domínio | Observação |
+|--------|---------|------------|
+| WTA | wtanegocios.com.br | Desde 1998, autoridade sólida |
+| CEMTRAS | cemtras.com.br | 20+ anos |
+| Asseme | asseme.com.br | 36 anos, maior autoridade |
+| M7 | m7medicinaocupacional.com.br | Fundada 2022, crescendo rápido |
+| Nexus | nxs.med.br | Player estabelecido |
+| Grupo Mednet | grupomednet.com.br | Página /uberlandia |
+| Doctoralia | doctoralia.com.br | Diretório |
 
-### Para "laudo insalubridade Uberlândia"
-- **Higilabor aparece em 1º lugar** (higilabor.com.br/laudo-de-insalubridade/) — excelente posição
-- Marcelino SST (SP, com página geo-targetada para Uberlândia)
-- PSEG
-- DBS
+**Higilabor: AUSENTE nessa SERP**
 
----
-
-## 4. Preços de Referência do Mercado
-
-- **Exame admissional:** R$ 20 a R$ 300 (Brasil). Cidades menores: R$ 20-80. Capitais: R$ 120-300
-- **Referência São Paulo:** R$ 50 (SSO Medicina)
-- **Nenhum concorrente local publica preço abertamente no site** — GAP de oportunidade enorme para a Higilabor
+### "PGR Uberlândia"
+| Player | Domínio | Observação |
+|--------|---------|------------|
+| Asseme | asseme.com.br | Posição 1-2 |
+| **Higilabor** | **higilabor.com.br** | **Posição 2-3 — já rankeia!** |
+| LGF Ergonomia | lgfergonomia.com.br | Player de engenharia |
+| Gescon | gesconocupacional.com.br | "Empresas que fazem PGR" |
 
 ---
 
-## 5. Insights Principais
+## Ranking de Oportunidades (ROI Imediato)
 
-1. **NR-1 psicossocial é o tema #1 do momento** — busca em alta explosiva, multa pesada (R$ 6.708/trabalhador), prazo iminente (maio/2026). Prioridade máxima para conteúdo.
-2. **Higilabor já tem posição forte para "laudo insalubridade Uberlândia"** — manter e expandir com internal linking.
-3. **Nenhum concorrente local publica preço** — criar conteúdo com faixas de preço ("quanto custa PGR", "exame admissional valor") é um diferencial SEO enorme para capturar buscas transacionais.
-4. **Keywords de intenção de preço são subexploradas** no setor SST regional — "medicina do trabalho preço", "quanto custa PGR", "exame admissional valor" têm volume e zero concorrência local.
-5. **FAP/redução tributária** é gancho forte para conteúdo de ROI — "investir em SST = pagar menos INSS".
+| # | Keyword | Prioridade | Ação Recomendada |
+|---|---------|------------|-----------------|
+| 1 | NR-1 psicossocial Uberlândia | P0 urgente | Landing page dedicada AGORA |
+| 2 | SST pequena empresa quanto custa Uberlândia | P0 | Blog post com tabela de preços |
+| 3 | PCMSO preço 2026 Uberlândia | P1 | Blog post com dados reais |
+| 4 | laudo insalubridade preço Uberlândia | P1 | Página de serviço ou blog |
+| 5 | FAP redução como fazer 2026 | P1 | Blog post — preparar para set/2026 |
+| 6 | PGR Uberlândia (já rankeia) | P1 | Otimizar: FAQ + preços + CTA |
+| 7 | medicina do trabalho preço Uberlândia | P2 | Long-tail, difícil mas viável |
+
+## Termos Difíceis — Evitar no Curto Prazo
+- "medicina do trabalho Uberlândia" — mercado maduro, décadas de autoridade competindo
+- "exame admissional Uberlândia" — muitos players fortes, incluindo doorway pages agressivas de SP
+
+---
+
+## Fontes Consultadas
+- gov.br/trabalho — NR-1 psicossocial 2026
+- Simplifica Ocupacional, Exame, Blog Empregare — NR-1 tendências
+- wtanegocios.com.br, cemtras.com.br, asseme.com.br — concorrentes locais
+- higilabor.com.br — posicionamento atual
+- alfaseg, pvmed.com.br — preços PCMSO/PGR mercado
+- avaliacaoambiental.com.br — preços laudos insalubridade
+- creisconsultoria.com — SST PME benchmarks
+- clmcontroller.com.br — FAP 2025/2026
