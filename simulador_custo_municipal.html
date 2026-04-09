@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Higilabor — Simulador de Custo Mínimo & Estratégia Municipal</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #07070d;
+    --surface: #0f0f1a;
+    --card: #13131f;
+    --border: #1f1f32;
+    --border-light: #2a2a42;
+    --accent: #6366f1;
+    --accent-dim: #4f46e5;
+    --accent-glow: rgba(99,102,241,0.15);
+    --green: #10b981;
+    --green-dim: rgba(16,185,129,0.15);
+    --yellow: #f59e0b;
+    --yellow-dim: rgba(245,158,11,0.12);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.12);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.12);
+    --purple: #a855f7;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --input-bg: #0c0c18;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0f0f1a 0%, #13131f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-logo { display: flex; align-items: center; gap: 14px; }
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: white;
+  }
+  .logo-text h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .logo-text p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+  .header-meta { text-align: right; }
+  .header-meta .date { font-size: 12px; color: var(--text-muted); }
+  .header-meta .version { font-size: 11px; color: var(--accent); background: var(--accent-glow); padding: 3px 8px; border-radius: 4px; margin-top: 4px; display: inline-block; }
+
+  /* NAV */
+  .nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .nav-btn {
+    padding: 14px 20px;
+    color: var(--text-muted);
+    font-size: 13px; font-weight: 500;
+    border: none; background: none;
+    cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-btn:hover:not(.active) { color: var(--text-dim); }
+
+  /* MAIN */
+  .main { padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .card-sm { padding: 18px; }
+  .card-title {
+    font-size: 13px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* KPI CARD */
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .kpi-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+  .kpi-value { font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; }
+  .kpi-value span { font-size: 13px; font-weight: 400; color: var(--text-muted); margin-left: 3px; }
+  .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+  .kpi.accent { border-color: rgba(99,102,241,0.4); background: linear-gradient(135deg, #13131f, #0f0f1e); }
+  .kpi.accent .kpi-value { color: #818cf8; }
+  .kpi.green { border-color: rgba(16,185,129,0.3); }
+  .kpi.green .kpi-value { color: #34d399; }
+  .kpi.yellow { border-color: rgba(245,158,11,0.3); }
+  .kpi.yellow .kpi-value { color: #fbbf24; }
+  .kpi.red { border-color: rgba(239,68,68,0.3); }
+  .kpi.red .kpi-value { color: #f87171; }
+
+  /* INPUTS */
+  .input-group { margin-bottom: 14px; }
+  .input-group label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 5px; font-weight: 500; }
+  .input-row { display: flex; align-items: center; gap: 8px; }
+  .input-prefix { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+  input[type="number"], input[type="text"] {
+    background: var(--input-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 7px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    padding: 8px 12px;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  input[type="number"]:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-light);
+    outline: none;
+    margin: 8px 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+  .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: #0c0c18; border-bottom: 1px solid var(--border); }
+  th { padding: 11px 14px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: left; white-space: nowrap; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td.number { text-align: right; font-variant-numeric: tabular-nums; }
+  td input[type="number"] { padding: 5px 8px; font-size: 13px; width: 80px; }
+  .tr-total td { background: #0c0c1a; font-weight: 600; border-top: 2px solid var(--border-light); }
+
+  /* BADGE */
+  .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: var(--green-dim); color: var(--green); }
+  .badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
+  .badge-red { background: var(--red-dim); color: var(--red); }
+  .badge-blue { background: var(--blue-dim); color: var(--blue); }
+  .badge-purple { background: rgba(168,85,247,0.12); color: var(--purple); }
+  .badge-gray { background: rgba(100,116,139,0.15); color: var(--text-muted); }
+
+  /* SECTION HEADER */
+  .section-header { margin-bottom: 24px; }
+  .section-header h2 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .section-header p { font-size: 13px; color: var(--text-muted); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  /* ALERT */
+  .alert {
+    border-radius: 8px; padding: 14px 16px;
+    font-size: 13px; line-height: 1.5;
+    display: flex; gap: 10px; align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert-green { background: var(--green-dim); border: 1px solid rgba(16,185,129,0.25); color: #a7f3d0; }
+  .alert-yellow { background: var(--yellow-dim); border: 1px solid rgba(245,158,11,0.25); color: #fde68a; }
+  .alert-red { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.25); color: #fecaca; }
+  .alert-blue { background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.25); color: #bfdbfe; }
+
+  /* PACKAGE CARD */
+  .pkg-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .pkg-card:hover { border-color: var(--border-light); }
+  .pkg-card.recommended { border-color: rgba(99,102,241,0.5); }
+  .pkg-card .pkg-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; font-size: 10px; font-weight: 700; padding: 3px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+  .pkg-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .pkg-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
+  .pkg-price { font-size: 28px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+  .pkg-price span { font-size: 13px; font-weight: 400; color: var(--text-muted); }
+  .pkg-annual { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+  .pkg-services { list-style: none; padding: 0; margin-bottom: 18px; }
+  .pkg-services li { font-size: 12px; color: var(--text-dim); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 7px; }
+  .pkg-services li:last-child { border-bottom: none; }
+  .pkg-services li::before { content: '✓'; color: var(--green); font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .pkg-margin { font-size: 12px; }
+  .dispensa-bar { margin-top: 16px; }
+  .dispensa-bar-label { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; display: flex; justify-content: space-between; }
+  .bar-track { background: var(--border-light); border-radius: 4px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+
+  /* MUNI SECTION */
+  .muni-stat { display: flex; flex-direction: column; align-items: center; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; text-align: center; }
+  .muni-stat-value { font-size: 32px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .muni-stat-label { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+
+  /* RESULT HIGHLIGHT */
+  .result-box {
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.05));
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .result-box .result-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .result-box .result-value { font-size: 36px; font-weight: 800; color: #818cf8; line-height: 1; }
+  .result-box .result-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+  /* CHART CONTAINER */
+  .chart-container { position: relative; height: 280px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .header { padding: 20px; }
+    .main { padding: 20px; }
+    .nav { padding: 0 20px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3a5c; }
+
+  /* ROW COLORS */
+  .row-highlight td { background: rgba(99,102,241,0.04); }
+  .row-alert td { background: rgba(239,68,68,0.03); }
+
+  .mb-20 { margin-bottom: 20px; }
+  .mb-24 { margin-bottom: 24px; }
+  .mt-20 { margin-top: 20px; }
+
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .flex-gap { display: flex; gap: 12px; align-items: center; }
+
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+  .tag-indigo { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+  .tag-emerald { background: rgba(16,185,129,0.12); color: #6ee7b7; }
+
+  .section-sub { font-size: 12px; color: var(--text-muted); margin: -12px 0 20px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">
+    <div class="logo-icon">H</div>
+    <div class="logo-text">
+      <h1>Higilabor SST</h1>
+      <p>Simulador de Custo Mínimo &amp; Estratégia Municipal</p>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div class="date" id="headerDate">Carregando...</div>
+    <div class="version">v1.0 · Confidencial</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="showSection('custos')">① Base de Custos</button>
+  <button class="nav-btn" onclick="showSection('catalogo')">② Catálogo de Serviços</button>
+  <button class="nav-btn" onclick="showSection('municipios')">③ Pacotes Municipais</button>
+  <button class="nav-btn" onclick="showSection('estrategia')">④ Estratégia de Prospecção</button>
+</div>
+
+<!-- ============================================================ SEÇÃO 1: CUSTOS ============================================================ -->
+<div class="main">
+<div id="sec-custos" class="section active">
+
+  <div class="section-header">
+    <h2>Base de Custos da Operação</h2>
+    <p>Preencha os custos reais mensais. Todos os cálculos dependem desta base — seja preciso.</p>
+  </div>
+
+  <div class="alert alert-yellow">
+    <span class="alert-icon">⚠</span>
+    <div><strong>Células em amarelo no ERP</strong> — estes valores ainda não foram lançados. Preencha aqui para simular o custo real por serviço. Os valores default são estimativas conservadoras para uma empresa SST em Uberlândia/MG.</div>
+  </div>
+
+  <div class="grid-2 mb-24">
+    <!-- COLUNA ESQUERDA: CUSTOS FIXOS -->
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Custos Fixos Mensais</div>
+
+      <div class="input-group">
+        <label>Folha de Pagamento (salários + encargos ~70%)</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_folha" value="15000" min="0" step="100" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Pró-labore dos Sócios</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_prolabore" value="5000" min="0" step="100" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Aluguel do Escritório</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_aluguel" value="2500" min="0" step="100" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Energia Elétrica + Internet</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_energia" value="600" min="0" step="50" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Sistemas (SST, Fiscal, eSocial, etc.)</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_sistemas" value="700" min="0" step="50" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Contabilidade</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_contab" value="900" min="0" step="50" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Combustível / Frota / Deslocamento</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_combustivel" value="1200" min="0" step="100" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Marketing + Ferramentas Digitais</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_marketing" value="500" min="0" step="50" oninput="recalc()"></div>
+      </div>
+      <div class="input-group">
+        <label>Outros Custos Fixos</label>
+        <div class="input-row"><span class="input-prefix">R$</span><input type="number" id="custo_outros" value="600" min="0" step="50" oninput="recalc()"></div>
+      </div>
+
+      <hr class="divider">
+      <div class="flex-between">
+        <span style="font-size:13px; color:var(--text-dim); font-weight:600;">Total Custo Fixo/mês</span>
+        <span id="total_fixo_display" style="font-size:18px; font-weight:800; color:#f87171;">R$ 0</span>
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA: EQUIPE E RESULTADO -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--green)"></span>Capacidade Técnica</div>
+
+        <div class="input-group">
+          <label>Técnicos de SST ativos (campo + escritório)</label>
+          <div class="input-row"><input type="number" id="num_tecnicos" value="2" min="1" max="20" oninput="recalc()"></div>
+        </div>
+        <div class="input-group">
+          <label>Horas de trabalho por técnico/mês</label>
+          <div class="input-row"><input type="number" id="horas_tec_mes" value="176" min="80" max="220" oninput="recalc()"></div>
+        </div>
+        <div class="input-group">
+          <label>Produtividade real: <strong id="produtividade_pct_label">70%</strong> das horas → atividades técnicas faturáveis</label>
+          <input type="range" id="produtividade_pct" min="40" max="90" value="70" oninput="updateProdLabel(); recalc()">
+          <div class="range-labels"><span>40% (muita adm/desloc)</span><span>90% (altamente focado)</span></div>
+        </div>
+        <hr class="divider" style="margin:12px 0;">
+        <div class="flex-between mb-20" style="margin-bottom:12px;">
+          <span style="font-size:12px; color:var(--text-muted);">Horas produtivas/mês</span>
+          <span id="horas_prod_display" style="font-size:16px; font-weight:700; color:var(--green);">0 h</span>
+        </div>
+        <div class="input-group">
+          <label>Impostos sobre receita (Simples Nacional ~%)</label>
+          <div class="input-row"><input type="number" id="aliquota_imposto" value="11.5" min="0" max="30" step="0.5" oninput="recalc()"><span class="input-prefix">%</span></div>
+        </div>
+        <div class="input-group">
+          <label>Margem de contribuição desejada (após custo)</label>
+          <div class="input-row"><input type="number" id="margem_desejada" value="35" min="10" max="70" step="1" oninput="recalc()"><span class="input-prefix">%</span></div>
+        </div>
+      </div>
+
+      <!-- KPI BOX: CUSTO POR HORA -->
+      <div class="result-box">
+        <div class="result-label">Custo por Hora Técnica</div>
+        <div class="result-value" id="custo_hora_display">R$ –</div>
+        <div class="result-sub" id="custo_hora_sub">Custo estrutural ÷ horas produtivas</div>
+      </div>
+
+      <div class="grid-2" style="gap:12px;">
+        <div class="kpi green">
+          <div class="kpi-label">Preço/hora sugerido</div>
+          <div class="kpi-value" id="preco_hora_display">–<span>R$/h</span></div>
+          <div class="kpi-sub" id="preco_hora_sub">Com <span id="kpi_margem">35</span>% margem</div>
+        </div>
+        <div class="kpi yellow">
+          <div class="kpi-label">Receita mín. necessária</div>
+          <div class="kpi-value" id="receita_min_display">–<span>R$/mês</span></div>
+          <div class="kpi-sub">Para cobrir todos os custos</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KPIs LINHA -->
+  <div class="grid-4 mb-24">
+    <div class="kpi accent">
+      <div class="kpi-label">Custo Fixo/mês</div>
+      <div class="kpi-value" id="kpi_fixo">–<span>R$</span></div>
+      <div class="kpi-sub">Estrutura operacional</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Horas Produtivas</div>
+      <div class="kpi-value" id="kpi_horas">–<span>h/mês</span></div>
+      <div class="kpi-sub">Equipe técnica</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Ponto de Equilíbrio</div>
+      <div class="kpi-value" id="kpi_pe">–<span>R$</span></div>
+      <div class="kpi-sub">Faturamento mínimo</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-label">Meta de Fat. (margem)</div>
+      <div class="kpi-value" id="kpi_meta_fat">–<span>R$</span></div>
+      <div class="kpi-sub">Com <span id="kpi_meta_margem">35</span>% contribuição</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ SEÇÃO 2: CATÁLOGO ============================================================ -->
+<div id="sec-catalogo" class="section">
+
+  <div class="section-header">
+    <h2>Catálogo de Serviços — Custo Mínimo &amp; Preço Sugerido</h2>
+    <p>Ajuste as horas de cada serviço conforme a complexidade real das suas entregas. Custo de produção direto inclui deslocamento, materiais e terceiros.</p>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon">ℹ</span>
+    <div>Os valores abaixo são calculados automaticamente com base nos custos configurados na <strong>Base de Custos</strong>. Ajuste as horas para refletir sua operação real. O <strong>Preço Mínimo</strong> é o menor preço que cobre custo + impostos. O <strong>Preço Sugerido</strong> inclui a margem desejada.</div>
+  </div>
+
+  <div class="table-wrap mb-24">
+    <table id="tabela-catalogo">
+      <thead>
+        <tr>
+          <th>Serviço</th>
+          <th>Categoria</th>
+          <th style="text-align:center">Horas (h)</th>
+          <th style="text-align:right">Custo Direto (R$)</th>
+          <th style="text-align:right">Custo Total (R$)</th>
+          <th style="text-align:right">Preço Mínimo (R$)</th>
+          <th style="text-align:right">Preço Sugerido (R$)</th>
+          <th style="text-align:center">Margem Efetiva</th>
+        </tr>
+      </thead>
+      <tbody id="catalogo-body">
+        <!-- Preenchido por JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--yellow)"></span>Análise de Rentabilidade por Tipo</div>
+      <div class="chart-container">
+        <canvas id="chartRentabilidade"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--green)"></span>Custo vs. Preço por Serviço (R$)</div>
+      <div class="chart-container">
+        <canvas id="chartCustoPreco"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ SEÇÃO 3: MUNICÍPIOS ============================================================ -->
+<div id="sec-municipios" class="section">
+
+  <div class="section-header">
+    <h2>Pacotes Municipais SST</h2>
+    <p>Estrutura de proposta para os 853 municípios de MG — dentro do limite de dispensa de licitação (Lei 14.133/2021: até R$ 59.904/ano).</p>
+  </div>
+
+  <div class="alert alert-green">
+    <span class="alert-icon">✓</span>
+    <div><strong>Dispensa de licitação confirmada</strong> — serviços de SST enquadrados como serviços técnicos especializados. Municípios podem contratar diretamente até <strong>R$ 59.904/ano</strong> sem processo licitatório, via contrato simplificado com contadora e CNPJ correto (CNAE 74.90-1-04 ou 71.12-0-00).</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="grid-4 mb-24">
+    <div class="muni-stat">
+      <div class="muni-stat-value">853</div>
+      <div class="muni-stat-label">Municípios em MG</div>
+    </div>
+    <div class="muni-stat">
+      <div class="muni-stat-value" id="stat_municipios_alcance">853</div>
+      <div class="muni-stat-label">Dentro da dispensa</div>
+    </div>
+    <div class="muni-stat" style="border-color: rgba(99,102,241,0.3);">
+      <div class="muni-stat-value" style="color:#818cf8;" id="stat_receita_10pct">–</div>
+      <div class="muni-stat-label">Receita com 10% captados</div>
+    </div>
+    <div class="muni-stat" style="border-color: rgba(16,185,129,0.3);">
+      <div class="muni-stat-value" style="color:#34d399;" id="stat_receita_5pct">–</div>
+      <div class="muni-stat-label">Receita com 5% captados</div>
+    </div>
+  </div>
+
+  <!-- PACOTES -->
+  <div class="grid-3 mb-24">
+    <!-- ESSENCIAL -->
+    <div class="pkg-card">
+      <div class="pkg-name">Pacote Essencial</div>
+      <div class="pkg-desc">Para municípios de até 5.000 hab. Conformidade básica com NR-1 e obrigações mínimas de SST.</div>
+      <div class="pkg-price" id="pkg1_preco_mes">R$ –<span>/mês</span></div>
+      <div class="pkg-annual" id="pkg1_preco_ano">R$ – /ano · <span id="pkg1_pct_dispensa">–</span>% do limite de dispensa</div>
+      <ul class="pkg-services">
+        <li>PGR (Programa de Gerenciamento de Riscos)</li>
+        <li>GRO Mensal — acompanhamento 12 meses</li>
+        <li>2 Treinamentos NR por ano</li>
+        <li>CIPA ou Designado de Segurança</li>
+        <li>Suporte técnico por WhatsApp</li>
+      </ul>
+      <div class="pkg-margin">
+        Custo de produção: <strong id="pkg1_custo" style="color:#f87171;">R$ –</strong><br>
+        Margem estimada: <strong id="pkg1_margem" style="color:var(--green);">–%</strong>
+      </div>
+      <div class="dispensa-bar">
+        <div class="dispensa-bar-label"><span>% do limite de dispensa/ano</span><span id="pkg1_bar_pct">–%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="pkg1_bar" style="background: var(--blue); width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- INTEGRADO - RECOMENDADO -->
+    <div class="pkg-card recommended">
+      <div class="pkg-badge">★ Recomendado</div>
+      <div class="pkg-name">Pacote Integrado</div>
+      <div class="pkg-desc">Para municípios de 5.000–30.000 hab. Cobertura completa com GRO, laudos e treinamentos regulares.</div>
+      <div class="pkg-price" id="pkg2_preco_mes">R$ –<span>/mês</span></div>
+      <div class="pkg-annual" id="pkg2_preco_ano">R$ – /ano · <span id="pkg2_pct_dispensa">–</span>% do limite de dispensa</div>
+      <ul class="pkg-services">
+        <li>PGR completo (médio porte)</li>
+        <li>LTCAT — Laudo das Condições Ambientais</li>
+        <li>GRO Mensal — acompanhamento 12 meses</li>
+        <li>4 Treinamentos NR por ano</li>
+        <li>PCMSO (Programa de Controle Médico)</li>
+        <li>Suporte técnico + relatório semestral</li>
+      </ul>
+      <div class="pkg-margin">
+        Custo de produção: <strong id="pkg2_custo" style="color:#f87171;">R$ –</strong><br>
+        Margem estimada: <strong id="pkg2_margem" style="color:var(--green);">–%</strong>
+      </div>
+      <div class="dispensa-bar">
+        <div class="dispensa-bar-label"><span>% do limite de dispensa/ano</span><span id="pkg2_bar_pct">–%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="pkg2_bar" style="background: var(--accent); width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pkg-card">
+      <div class="pkg-name">Pacote Premium</div>
+      <div class="pkg-desc">Para municípios de 30.000+ hab. ou com atividades de risco. Cobertura máxima dentro da dispensa.</div>
+      <div class="pkg-price" id="pkg3_preco_mes">R$ –<span>/mês</span></div>
+      <div class="pkg-annual" id="pkg3_preco_ano">R$ – /ano · <span id="pkg3_pct_dispensa">–</span>% do limite de dispensa</div>
+      <ul class="pkg-services">
+        <li>PGR completo (grande porte)</li>
+        <li>LTCAT atualizado</li>
+        <li>GRO Mensal — 12 meses</li>
+        <li>6 Treinamentos NR por ano</li>
+        <li>PCMSO + PPRA</li>
+        <li>Laudo NR-10 ou NR-12 (conforme atividade)</li>
+        <li>Relatório trimestral de conformidade</li>
+      </ul>
+      <div class="pkg-margin">
+        Custo de produção: <strong id="pkg3_custo" style="color:#f87171;">R$ –</strong><br>
+        Margem estimada: <strong id="pkg3_margem" style="color:var(--green);">–%</strong>
+      </div>
+      <div class="dispensa-bar">
+        <div class="dispensa-bar-label"><span>% do limite de dispensa/ano</span><span id="pkg3_bar_pct">–%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="pkg3_bar" style="background: var(--purple); width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULADOR DE RECEITA -->
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span>Simulador de Receita Municipal</div>
+    <div class="grid-2">
+      <div>
+        <div class="input-group">
+          <label>Municípios contratantes — Pacote Essencial</label>
+          <input type="number" id="sim_pkg1" value="20" min="0" max="853" oninput="recalcSimulator()">
+        </div>
+        <div class="input-group">
+          <label>Municípios contratantes — Pacote Integrado</label>
+          <input type="number" id="sim_pkg2" value="10" min="0" max="853" oninput="recalcSimulator()">
+        </div>
+        <div class="input-group">
+          <label>Municípios contratantes — Pacote Premium</label>
+          <input type="number" id="sim_pkg3" value="3" min="0" max="853" oninput="recalcSimulator()">
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="result-box">
+          <div class="result-label">Receita Mensal Municipal</div>
+          <div class="result-value" id="sim_receita_mensal">R$ –</div>
+          <div class="result-sub" id="sim_total_contratos">0 contratos ativos</div>
+        </div>
+        <div class="grid-2" style="gap:12px;">
+          <div class="kpi green">
+            <div class="kpi-label">Receita Anual</div>
+            <div class="kpi-value" id="sim_receita_anual">–</div>
+            <div class="kpi-sub">Faturamento contratos muni</div>
+          </div>
+          <div class="kpi yellow">
+            <div class="kpi-label">Margem Municipal</div>
+            <div class="kpi-value" id="sim_margem_muni">–<span>%</span></div>
+            <div class="kpi-sub">Ponderada por mix</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ SEÇÃO 4: ESTRATÉGIA ============================================================ -->
+<div id="sec-estrategia" class="section">
+
+  <div class="section-header">
+    <h2>Estratégia de Prospecção Municipal</h2>
+    <p>Priorização, argumentação e abordagem operacional para os 853 municípios de MG.</p>
+  </div>
+
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--yellow)"></span>Critérios de Priorização</div>
+      <table>
+        <thead><tr><th>Critério</th><th>Peso</th><th>Lógica</th></tr></thead>
+        <tbody>
+          <tr><td>Proximidade de Uberlândia</td><td><span class="badge badge-green">Alto</span></td><td style="font-size:12px; color:var(--text-muted);">Reduz deslocamento, aumenta margem real</td></tr>
+          <tr><td>Porte do município</td><td><span class="badge badge-blue">Médio</span></td><td style="font-size:12px; color:var(--text-muted);">10–50k hab. = demanda ativa + budget disponível</td></tr>
+          <tr><td>Setor produtivo dominante</td><td><span class="badge badge-blue">Médio</span></td><td style="font-size:12px; color:var(--text-muted);">Agro, mineração, construção = risco alto = SST prioritário</td></tr>
+          <tr><td>Contato disponível</td><td><span class="badge badge-green">Alto</span></td><td style="font-size:12px; color:var(--text-muted);">820 municípios têm cel. do prefeito na base</td></tr>
+          <tr><td>Situação SST atual</td><td><span class="badge badge-green">Alto</span></td><td style="font-size:12px; color:var(--text-muted);">Municípios sem fornecedor = entrada imediata</td></tr>
+          <tr><td>Ano eleitoral / mandato</td><td><span class="badge badge-yellow">Baixo</span></td><td style="font-size:12px; color:var(--text-muted);">Prefeitos no início do mandato fecham mais rápido</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--purple)"></span>Funil de Prospecção Municipal</div>
+      <table>
+        <thead><tr><th>Etapa</th><th>Quantidade</th><th>Conversão</th><th>Ação</th></tr></thead>
+        <tbody>
+          <tr><td>Base total</td><td style="font-weight:700;">853</td><td>–</td><td style="font-size:12px; color:var(--text-muted);">Exportar, limpar, filtrar</td></tr>
+          <tr><td>Priorizados (cel+email)</td><td style="font-weight:700;">693</td><td>81%</td><td style="font-size:12px; color:var(--text-muted);">Lista de trabalho ativa</td></tr>
+          <tr><td>Raio 150km de Uberlândia</td><td style="font-weight:700;">~220</td><td>32%</td><td style="font-size:12px; color:var(--text-muted);">Sprint 1 de prospecção</td></tr>
+          <tr><td>Contato feito</td><td style="font-weight:700;">–</td><td>meta: 15%/mês</td><td style="font-size:12px; color:var(--text-muted);">WhatsApp + e-mail</td></tr>
+          <tr><td>Reunião agendada</td><td style="font-weight:700;">–</td><td>meta: 30%</td><td style="font-size:12px; color:var(--text-muted);">Visita ou vídeo</td></tr>
+          <tr><td>Proposta enviada</td><td style="font-weight:700;">–</td><td>meta: 60%</td><td style="font-size:12px; color:var(--text-muted);">Pacote + dispensa</td></tr>
+          <tr class="tr-total"><td>Fechamento</td><td style="color:var(--green);">–</td><td style="color:var(--green);">meta: 35%</td><td style="font-size:12px; color:var(--text-muted);">Assinar + nota</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ABORDAGEM -->
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--green)"></span>Script de Abordagem — Prefeito via WhatsApp</div>
+      <div style="background:var(--input-bg); border:1px solid var(--border-light); border-radius:8px; padding:16px; font-size:13px; line-height:1.7; color:var(--text-dim);">
+        <p style="margin-bottom:8px;">Bom dia, <strong>[Nome do Prefeito]</strong>!</p>
+        <p style="margin-bottom:8px;">Sou <strong>Octavio Alvarenga</strong>, da <strong>Higilabor SST</strong>, empresa de Uberlândia especializada em Saúde e Segurança do Trabalho para prefeituras de Minas Gerais.</p>
+        <p style="margin-bottom:8px;">Nosso objetivo é simples: <strong>blindar o município contra autuações do MTE e ações trabalhistas</strong> relacionadas a SST, de forma acessível e dentro do limite de dispensa de licitação.</p>
+        <p style="margin-bottom:8px;">Desenvolvemos um <strong>Pacote Municipal</strong> que inclui PGR, laudos, GRO mensal e treinamentos — tudo documentado e assinado por engenheiro e médico do trabalho habilitados.</p>
+        <p style="margin-bottom:0;">Posso apresentar uma proposta personalizada para [Município]? Levo menos de 30 minutos e não gera nenhum compromisso.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--blue)"></span>Argumentos de Valor — Prefeitura</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="background:var(--input-bg); border-left:3px solid var(--green); border-radius:0 6px 6px 0; padding:10px 14px;">
+          <strong style="font-size:12px; color:var(--green);">COMPLIANCE</strong>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">Autuação do MTE pode gerar multa de R$3.000–R$630.000 por irregularidade. O PGR e LTCAT são exigências legais — não opcionais.</p>
+        </div>
+        <div style="background:var(--input-bg); border-left:3px solid var(--blue); border-radius:0 6px 6px 0; padding:10px 14px;">
+          <strong style="font-size:12px; color:var(--blue);">LICITAÇÃO ZERO</strong>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">Lei 14.133/2021 — contratação direta até R$59.904/ano. Processo simplificado, sem edital. Assinatura em dias, não meses.</p>
+        </div>
+        <div style="background:var(--input-bg); border-left:3px solid var(--yellow); border-radius:0 6px 6px 0; padding:10px 14px;">
+          <strong style="font-size:12px; color:var(--yellow);">RESPONSABILIDADE PESSOAL</strong>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">Acidente sem documentação SST = responsabilidade do gestor público, não só do município. Risco pessoal e eleitoral.</p>
+        </div>
+        <div style="background:var(--input-bg); border-left:3px solid var(--purple); border-radius:0 6px 6px 0; padding:10px 14px;">
+          <strong style="font-size:12px; color:var(--purple);">PROXIMIDADE</strong>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">Empresa mineira, atendimento presencial quando necessário, conhece a realidade do interior de MG.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRONOGRAMA -->
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Plano de Captação Municipal — 90 Dias</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Período</th><th>Meta de Contatos</th><th>Meta de Reuniões</th><th>Meta de Fechamentos</th><th>Receita Projetada/mês</th><th>Foco Geográfico</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-blue">Mês 1</span></td>
+            <td>30 municípios</td>
+            <td>8 reuniões</td>
+            <td><strong style="color:var(--green);">3 contratos</strong></td>
+            <td id="meta_mes1">–</td>
+            <td style="font-size:12px; color:var(--text-muted);">Triângulo Mineiro (raio 100km)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">Mês 2</span></td>
+            <td>40 municípios</td>
+            <td>12 reuniões</td>
+            <td><strong style="color:var(--green);">5 contratos</strong></td>
+            <td id="meta_mes2">–</td>
+            <td style="font-size:12px; color:var(--text-muted);">Triângulo + Alto Paranaíba</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Mês 3</span></td>
+            <td>50 municípios</td>
+            <td>15 reuniões</td>
+            <td><strong style="color:var(--green);">7 contratos</strong></td>
+            <td id="meta_mes3">–</td>
+            <td style="font-size:12px; color:var(--text-muted);">Triângulo + Noroeste + Sudeste MG</td>
+          </tr>
+          <tr class="tr-total">
+            <td><strong>Total 90 dias</strong></td>
+            <td>120 municípios contatados</td>
+            <td>35 reuniões</td>
+            <td><strong style="color:var(--green);">15 contratos</strong></td>
+            <td id="meta_total_90d">–</td>
+            <td style="font-size:12px; color:var(--text-muted);">Raio ~150km de Uberlândia</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-yellow" style="margin-top:16px; margin-bottom:0;">
+      <span class="alert-icon">⚡</span>
+      <div><strong>Ação imediata:</strong> Dos 820 municípios com celular do prefeito, filtre os 50 mais próximos de Uberlândia. Gustavo opera prospecção ativa via WhatsApp enquanto você fecha reuniões. Cada ligação bem feita → R$800–3.500/mês de receita recorrente.</div>
+    </div>
+  </div>
+
+</div>
+</div><!-- /.main -->
+
+<script>
+// ============================================================
+// DADOS DOS SERVIÇOS
+// ============================================================
+const servicos = [
+  { id:'pgr_peq',    nome:'PGR — Empresa Pequena (até 20 func.)',  cat:'PGR/GRO',      horas:12, custo_direto:180,  tag:'pgr'  },
+  { id:'pgr_med',    nome:'PGR — Empresa Média (21–50 func.)',     cat:'PGR/GRO',      horas:24, custo_direto:250,  tag:'pgr'  },
+  { id:'pgr_grd',    nome:'PGR — Empresa Grande (51–150 func.)',   cat:'PGR/GRO',      horas:45, custo_direto:350,  tag:'pgr'  },
+  { id:'ltcat',      nome:'LTCAT — Laudo Técnico Ambiental',       cat:'Laudos',        horas:14, custo_direto:300,  tag:'laudo'},
+  { id:'nr10',       nome:'Laudo de Instalações Elétricas (NR-10)',cat:'Laudos',        horas:12, custo_direto:200,  tag:'laudo'},
+  { id:'nr12',       nome:'Laudo de Máquinas e Equipamentos (NR-12)',cat:'Laudos',      horas:14, custo_direto:200,  tag:'laudo'},
+  { id:'nr35',       nome:'Laudo de Trabalho em Altura (NR-35)',   cat:'Laudos',        horas:10, custo_direto:150,  tag:'laudo'},
+  { id:'trein',      nome:'Treinamento NR (turma até 20 pessoas)', cat:'Treinamentos',  horas:8,  custo_direto:180,  tag:'trein'},
+  { id:'trein_esp',  nome:'Treinamento Especializado (NR-33/34/35)',cat:'Treinamentos', horas:12, custo_direto:220,  tag:'trein'},
+  { id:'pcmso',      nome:'PCMSO — Programa de Controle Médico',   cat:'Medicina',      horas:16, custo_direto:400,  tag:'med'  },
+  { id:'gro_mes',    nome:'GRO Mensal (acompanhamento recorrente)',cat:'PGR/GRO',       horas:4,  custo_direto:80,   tag:'gro'  },
+  { id:'consultoria',nome:'Consultoria Técnica (por hora)',        cat:'Consultoria',   horas:1,  custo_direto:0,    tag:'cons' },
+];
+
+let custoHora = 0;
+let margem = 35;
+let aliquota = 11.5;
+let chartRent = null;
+let chartCP = null;
+
+function fmt(v) {
+  return 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:0, maximumFractionDigits:0});
+}
+function fmtK(v) {
+  if(v >= 1000000) return 'R$ ' + (v/1000000).toFixed(1) + 'M';
+  if(v >= 1000) return 'R$ ' + Math.round(v/1000) + 'k';
+  return fmt(v);
+}
+function pct(v) { return v.toFixed(1) + '%'; }
+
+function updateProdLabel() {
+  document.getElementById('produtividade_pct_label').textContent = document.getElementById('produtividade_pct').value + '%';
+}
+
+function recalc() {
+  const folha = +document.getElementById('custo_folha').value || 0;
+  const prolabore = +document.getElementById('custo_prolabore').value || 0;
+  const aluguel = +document.getElementById('custo_aluguel').value || 0;
+  const energia = +document.getElementById('custo_energia').value || 0;
+  const sistemas = +document.getElementById('custo_sistemas').value || 0;
+  const contab = +document.getElementById('custo_contab').value || 0;
+  const combustivel = +document.getElementById('custo_combustivel').value || 0;
+  const marketing = +document.getElementById('custo_marketing').value || 0;
+  const outros = +document.getElementById('custo_outros').value || 0;
+
+  const totalFixo = folha + prolabore + aluguel + energia + sistemas + contab + combustivel + marketing + outros;
+
+  const numTec = +document.getElementById('num_tecnicos').value || 1;
+  const horasTecMes = +document.getElementById('horas_tec_mes').value || 176;
+  const prodPct = +document.getElementById('produtividade_pct').value || 70;
+  aliquota = +document.getElementById('aliquota_imposto').value || 11.5;
+  margem = +document.getElementById('margem_desejada').value || 35;
+
+  const horasProd = Math.round(numTec * horasTecMes * prodPct / 100);
+  custoHora = horasProd > 0 ? totalFixo / horasProd : 0;
+
+  const precoHora = horasProd > 0 ? custoHora / (1 - aliquota/100) / (1 - margem/100) : 0;
+  const receitaMin = totalFixo / (1 - aliquota/100);
+  const metaFat = totalFixo / (1 - aliquota/100) / (1 - margem/100);
+
+  document.getElementById('total_fixo_display').textContent = fmt(totalFixo);
+  document.getElementById('horas_prod_display').textContent = horasProd + ' h';
+  document.getElementById('custo_hora_display').textContent = fmt(custoHora);
+  document.getElementById('custo_hora_sub').textContent = fmt(totalFixo) + ' ÷ ' + horasProd + 'h';
+  document.getElementById('preco_hora_display').textContent = Math.round(precoHora);
+  document.getElementById('preco_hora_sub').querySelector('span').textContent = margem;
+  document.getElementById('receita_min_display').textContent = fmtK(receitaMin);
+  document.getElementById('kpi_fixo').textContent = fmtK(totalFixo);
+  document.getElementById('kpi_horas').textContent = horasProd;
+  document.getElementById('kpi_pe').textContent = fmtK(receitaMin);
+  document.getElementById('kpi_meta_fat').textContent = fmtK(metaFat);
+  document.getElementById('kpi_margem').textContent = margem;
+  document.getElementById('kpi_meta_margem').textContent = margem;
+
+  // Atualiza cor custo hora
+  const ch = document.getElementById('custo_hora_display');
+  ch.style.color = custoHora < 80 ? '#34d399' : custoHora < 150 ? '#fbbf24' : '#f87171';
+
+  recalcCatalogo();
+  recalcPacotes();
+  recalcSimulator();
+  recalcMetas();
+}
+
+function recalcCatalogo() {
+  const tbody = document.getElementById('catalogo-body');
+  tbody.innerHTML = '';
+  const labels = [];
+  const custos = [];
+  const precos = [];
+  const margens = [];
+
+  servicos.forEach(s => {
+    const custoTotal = (s.horas * custoHora) + s.custo_direto;
+    const custoComImposto = custoTotal / (1 - aliquota/100);
+    const precoMin = custoComImposto;
+    const precoSug = custoTotal / (1 - aliquota/100) / (1 - margem/100);
+    const margemEfetiva = precoSug > 0 ? ((precoSug - custoTotal) / precoSug) * 100 : 0;
+
+    labels.push(s.nome.replace(/—.*/, '').trim());
+    custos.push(Math.round(custoTotal));
+    precos.push(Math.round(precoSug));
+    margens.push(Math.round(margemEfetiva));
+
+    const badgeM = margemEfetiva >= 35 ? 'badge-green' : margemEfetiva >= 20 ? 'badge-yellow' : 'badge-red';
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong style="font-size:13px;">${s.nome}</strong></td>
+      <td><span class="tag tag-indigo">${s.cat}</span></td>
+      <td style="text-align:center">
+        <input type="number" value="${s.horas}" min="1" max="200"
+          style="width:70px;"
+          oninput="servicos.find(x=>x.id==='${s.id}').horas=+this.value; recalcCatalogo(); recalcPacotes(); recalcSimulator();">
+      </td>
+      <td class="number" style="color:var(--text-muted);">${fmt(s.custo_direto)}</td>
+      <td class="number" style="color:#f87171;">${fmt(custoTotal)}</td>
+      <td class="number" style="color:#fbbf24;">${fmt(precoMin)}</td>
+      <td class="number" style="color:#34d399; font-weight:700;">${fmt(precoSug)}</td>
+      <td style="text-align:center"><span class="badge ${badgeM}">${pct(margemEfetiva)}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  updateCharts(labels, custos, precos, margens);
+}
+
+function getServico(id) {
+  return servicos.find(x => x.id === id);
+}
+function calcPrecoSug(id) {
+  const s = getServico(id);
+  if(!s) return 0;
+  const custoTotal = (s.horas * custoHora) + s.custo_direto;
+  return custoTotal / (1 - aliquota/100) / (1 - margem/100);
+}
+function calcCusto(id) {
+  const s = getServico(id);
+  if(!s) return 0;
+  return (s.horas * custoHora) + s.custo_direto;
+}
+
+function recalcPacotes() {
+  // PACOTE 1: pgr_peq + gro_mes*12 + trein*2
+  const p1_custo = calcCusto('pgr_peq') + calcCusto('gro_mes')*12 + calcCusto('trein')*2;
+  const p1_preco_ano = calcPrecoSug('pgr_peq') + calcPrecoSug('gro_mes')*12 + calcPrecoSug('trein')*2;
+  const p1_preco_mes = p1_preco_ano / 12;
+  const p1_margem = p1_preco_ano > 0 ? ((p1_preco_ano - p1_custo) / p1_preco_ano * 100) : 0;
+  const p1_pct_disp = p1_preco_ano / 59904 * 100;
+
+  // PACOTE 2: pgr_med + ltcat + gro_mes*12 + trein*4 + pcmso
+  const p2_custo = calcCusto('pgr_med') + calcCusto('ltcat') + calcCusto('gro_mes')*12 + calcCusto('trein')*4 + calcCusto('pcmso');
+  const p2_preco_ano = calcPrecoSug('pgr_med') + calcPrecoSug('ltcat') + calcPrecoSug('gro_mes')*12 + calcPrecoSug('trein')*4 + calcPrecoSug('pcmso');
+  const p2_preco_mes = p2_preco_ano / 12;
+  const p2_margem = p2_preco_ano > 0 ? ((p2_preco_ano - p2_custo) / p2_preco_ano * 100) : 0;
+  const p2_pct_disp = p2_preco_ano / 59904 * 100;
+
+  // PACOTE 3: pgr_grd + ltcat + gro_mes*12 + trein*6 + pcmso + nr12
+  const p3_custo = calcCusto('pgr_grd') + calcCusto('ltcat') + calcCusto('gro_mes')*12 + calcCusto('trein')*6 + calcCusto('pcmso') + calcCusto('nr12');
+  const p3_preco_ano = calcPrecoSug('pgr_grd') + calcPrecoSug('ltcat') + calcPrecoSug('gro_mes')*12 + calcPrecoSug('trein')*6 + calcPrecoSug('pcmso') + calcPrecoSug('nr12');
+  const p3_preco_mes = p3_preco_ano / 12;
+  const p3_margem = p3_preco_ano > 0 ? ((p3_preco_ano - p3_custo) / p3_preco_ano * 100) : 0;
+  const p3_pct_disp = p3_preco_ano / 59904 * 100;
+
+  function setpkg(n, preco_mes, preco_ano, custo, mrgm, pct_d) {
+    document.getElementById(`pkg${n}_preco_mes`).innerHTML = fmt(preco_mes) + '<span>/mês</span>';
+    document.getElementById(`pkg${n}_preco_ano`).innerHTML = fmt(preco_ano) + ' /ano · <span id="pkg${n}_pct_dispensa">' + pct_d.toFixed(0) + '%</span> do limite de dispensa';
+    document.getElementById(`pkg${n}_custo`).textContent = fmt(custo);
+    document.getElementById(`pkg${n}_margem`).textContent = pct(mrgm);
+    document.getElementById(`pkg${n}_margem`).style.color = mrgm >= 30 ? 'var(--green)' : mrgm >= 15 ? 'var(--yellow)' : 'var(--red)';
+    document.getElementById(`pkg${n}_bar_pct`).textContent = pct_d.toFixed(0) + '%';
+    const fill = document.getElementById(`pkg${n}_bar`);
+    fill.style.width = Math.min(pct_d, 100) + '%';
+    fill.style.background = pct_d > 90 ? 'var(--yellow)' : pct_d > 100 ? 'var(--red)' : n == 1 ? 'var(--blue)' : n == 2 ? 'var(--accent)' : 'var(--purple)';
+  }
+  setpkg(1, p1_preco_mes, p1_preco_ano, p1_custo, p1_margem, p1_pct_disp);
+  setpkg(2, p2_preco_mes, p2_preco_ano, p2_custo, p2_margem, p2_pct_disp);
+  setpkg(3, p3_preco_mes, p3_preco_ano, p3_custo, p3_margem, p3_pct_disp);
+
+  // Stats
+  const avg = (p1_preco_ano + p2_preco_ano + p3_preco_ano) / 3;
+  document.getElementById('stat_receita_10pct').textContent = fmtK(85 * avg / 3);
+  document.getElementById('stat_receita_5pct').textContent = fmtK(42 * avg / 3);
+
+  // Guardar para o simulador
+  window._pkg1_mes = p1_preco_mes;
+  window._pkg2_mes = p2_preco_mes;
+  window._pkg3_mes = p3_preco_mes;
+  window._pkg1_custo_mes = p1_custo / 12;
+  window._pkg2_custo_mes = p2_custo / 12;
+  window._pkg3_custo_mes = p3_custo / 12;
+}
+
+function recalcSimulator() {
+  const n1 = +document.getElementById('sim_pkg1').value || 0;
+  const n2 = +document.getElementById('sim_pkg2').value || 0;
+  const n3 = +document.getElementById('sim_pkg3').value || 0;
+  const total = n1 + n2 + n3;
+
+  const rec_mes = (n1 * (window._pkg1_mes||0)) + (n2 * (window._pkg2_mes||0)) + (n3 * (window._pkg3_mes||0));
+  const custo_mes = (n1 * (window._pkg1_custo_mes||0)) + (n2 * (window._pkg2_custo_mes||0)) + (n3 * (window._pkg3_custo_mes||0));
+  const margem_ponderada = rec_mes > 0 ? ((rec_mes - custo_mes) / rec_mes * 100) : 0;
+
+  document.getElementById('sim_receita_mensal').textContent = fmt(rec_mes);
+  document.getElementById('sim_receita_anual').textContent = fmtK(rec_mes * 12);
+  document.getElementById('sim_total_contratos').textContent = total + ' contratos ativos';
+  document.getElementById('sim_margem_muni').innerHTML = margem_ponderada.toFixed(0) + '<span>%</span>';
+}
+
+function recalcMetas() {
+  const p1 = window._pkg1_mes || 0;
+  const p2 = window._pkg2_mes || 0;
+  // Mês 1: 2 essencial + 1 integrado
+  const m1 = 2*p1 + 1*p2;
+  // Mês 2: +3 essencial + 2 integrado
+  const m2 = m1 + 3*p1 + 2*p2;
+  // Mês 3: +4 essencial + 2 integrado + 1 premium
+  const m3 = m2 + 4*p1 + 2*p2 + 1*(window._pkg3_mes||0);
+
+  document.getElementById('meta_mes1').textContent = fmt(m1) + '/mês';
+  document.getElementById('meta_mes2').textContent = fmt(m2) + '/mês';
+  document.getElementById('meta_mes3').textContent = fmt(m3) + '/mês';
+  document.getElementById('meta_total_90d').innerHTML = '<strong style="color:var(--green)">' + fmt(m3) + '/mês recorrente</strong>';
+}
+
+function updateCharts(labels, custos, precos, margens) {
+  const shortLabels = labels.map(l => l.length > 15 ? l.substring(0,14)+'…' : l);
+
+  if(chartRent) { chartRent.destroy(); }
+  const ctx1 = document.getElementById('chartRentabilidade').getContext('2d');
+  chartRent = new Chart(ctx1, {
+    type:'bar',
+    data:{
+      labels: shortLabels,
+      datasets:[{
+        label:'Margem Efetiva (%)',
+        data: margens,
+        backgroundColor: margens.map(m => m >= 35 ? 'rgba(16,185,129,0.7)' : m >= 20 ? 'rgba(245,158,11,0.7)' : 'rgba(239,68,68,0.7)'),
+        borderColor: margens.map(m => m >= 35 ? '#10b981' : m >= 20 ? '#f59e0b' : '#ef4444'),
+        borderWidth:1, borderRadius:4
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>c.raw.toFixed(1)+'%'}} },
+      scales:{
+        x:{ticks:{color:'#64748b', font:{size:10}}, grid:{color:'#1f1f32'}},
+        y:{ticks:{color:'#64748b', callback:v=>v+'%'}, grid:{color:'#1f1f32'}}
+      }
+    }
+  });
+
+  if(chartCP) { chartCP.destroy(); }
+  const ctx2 = document.getElementById('chartCustoPreco').getContext('2d');
+  chartCP = new Chart(ctx2, {
+    type:'bar',
+    data:{
+      labels: shortLabels,
+      datasets:[
+        {label:'Custo', data:custos, backgroundColor:'rgba(239,68,68,0.5)', borderColor:'#ef4444', borderWidth:1, borderRadius:4},
+        {label:'Preço Sugerido', data:precos, backgroundColor:'rgba(99,102,241,0.5)', borderColor:'#6366f1', borderWidth:1, borderRadius:4}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#94a3b8', font:{size:11}}}},
+      scales:{
+        x:{ticks:{color:'#64748b', font:{size:10}}, grid:{color:'#1f1f32'}},
+        y:{ticks:{color:'#64748b', callback:v=>'R$'+Math.round(v/1000)+'k'}, grid:{color:'#1f1f32'}}
+      }
+    }
+  });
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// INIT
+document.getElementById('headerDate').textContent = new Date().toLocaleDateString('pt-BR', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+recalc();
+</script>
+</body>
+</html>
