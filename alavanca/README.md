@@ -20,12 +20,39 @@ Nenhum conteúdo LinkedIn é criado sem passar por todas as etapas, nesta ordem:
 - **Carrossel nunca é criado direto.** Só se a análise LinkedIn indicar que é o formato certo para o dia.
 - **UX Copy vem antes do HTML.** O documento de copy é gerado e validado antes de produzir o conteúdo final.
 
-### Arquivos
+---
 
-| Arquivo | Função |
-|---------|--------|
-| `linkedin-analise-diaria.md` | Metodologia da análise diária LinkedIn (etapa 2) |
-| `carrossel-nr1-psicossocial-ux-copy.md` | UX copy do carrossel NR-1 (etapa 3) |
-| `carrossel-nr1-psicossocial.html` | Carrossel NR-1 final (etapa 4) |
-| `reprecificacao-higilabor/` | Calculadora de reprecificação |
-| `alavanca1_reprecificacao_higilabor.html` | Redirect de compatibilidade |
+## Pipeline de Blog SEO
+
+Cada post do blog é uma peça de aquisição orgânica. Pipeline obrigatório:
+
+```
+1. Pesquisa SEO       →  keyword, volume, SERP, gap, intenção
+2. Brief de conteúdo  →  estrutura H2s, FAQs, schema, internal links
+3. UX Copy            →  title tag, meta description, CTAs, headings
+4. Redação            →  texto final otimizado
+5. Checklist          →  validação técnica antes de publicar
+```
+
+### Regras
+
+- **Etapa 1 alimenta tudo.** Sem pesquisa SEO, sem post.
+- **O brief (etapa 2) define a estrutura** antes de escrever uma linha.
+- **UX Copy valida os elementos de busca** (title tag, meta desc) antes da redação.
+- **Checklist é obrigatório** — nenhum post sai sem passar.
+- **Posts com prazo legal** (ex: NR-1 maio/2026) são revisados quando a data passa.
+
+Metodologia completa: `blog-seo-pipeline.md`
+
+---
+
+## Arquivos
+
+| Arquivo | Pipeline | Função |
+|---------|----------|--------|
+| `linkedin-analise-diaria.md` | LinkedIn | Metodologia da análise diária |
+| `blog-seo-pipeline.md` | Blog | Pipeline completo de blog SEO |
+| `carrossel-nr1-psicossocial-ux-copy.md` | LinkedIn | UX copy do carrossel NR-1 |
+| `carrossel-nr1-psicossocial.html` | LinkedIn | Carrossel NR-1 final |
+| `reprecificacao-higilabor/` | — | Calculadora de reprecificação |
+| `alavanca1_reprecificacao_higilabor.html` | — | Redirect de compatibilidade |
