@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrossel LinkedIn — NR-1 Psicossocial</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --slide-w: 1080px;
+  --slide-h: 1350px;
+  --font: 'Inter', 'Segoe UI', sans-serif;
+  --bg: #FFFDF8;
+  --bg-warm: #F7F2EA;
+  --text: #1D2B36;
+  --text-sec: #5B6874;
+  --accent: #E24B4A;
+  --accent-dark: #A32D2D;
+  --green: #3B6D11;
+  --green-bg: #EAF3DE;
+  --amber: #854F0B;
+  --amber-bg: #FBF0DA;
+  --red-bg: #FCEBEB;
+  --border: #E4DBCF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E8E0D4;
+  font-family: var(--font);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.slide-label {
+  font-size: 14px;
+  color: var(--text-sec);
+  font-weight: 500;
+  margin-bottom: -36px;
+  align-self: flex-start;
+  width: var(--slide-w);
+  max-width: 100%;
+}
+
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  background: var(--bg);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(91,70,33,0.12);
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+
+/* ── Cover Slide ── */
+.slide.cover {
+  background: linear-gradient(165deg, #1D2B36 0%, #2C3E50 40%, #34495E 100%);
+  color: #fff;
+  padding: 80px 72px;
+  justify-content: space-between;
+}
+.cover .tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 8px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.cover h1 {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-top: 40px;
+}
+.cover h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.cover .subtitle {
+  font-size: 30px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+  margin-top: 24px;
+}
+.cover .bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.cover .logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.04em;
+}
+.cover .swipe {
+  font-size: 20px;
+  color: rgba(255,255,255,0.45);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cover .swipe .arrow {
+  font-size: 28px;
+  animation: nudge 1.5s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+/* ── Content Slides ── */
+.slide.content {
+  padding: 72px 72px 60px;
+}
+.slide-number {
+  position: absolute;
+  top: 36px;
+  right: 48px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--border);
+}
+.content .section-tag {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+.content h2 {
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.12;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+.content h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.content .body-text {
+  font-size: 28px;
+  line-height: 1.55;
+  color: var(--text-sec);
+  margin-bottom: 32px;
+}
+
+/* List items */
+.item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.item-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 26px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.item-list li .icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-top: 2px;
+}
+.item-list li .icon.red { background: var(--red-bg); }
+.item-list li .icon.amber { background: var(--amber-bg); }
+.item-list li .icon.green { background: var(--green-bg); }
+
+/* Numbered cards */
+.num-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+.num-card {
+  background: var(--bg-warm);
+  border-radius: 20px;
+  padding: 32px 36px;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+.num-card .num {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.num-card .card-content h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.num-card .card-content p {
+  font-size: 23px;
+  color: var(--text-sec);
+  line-height: 1.45;
+}
+
+/* Checklist */
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 26px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.checklist .check {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2.5px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+/* Step cards */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.step {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.step .step-num {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--green-bg);
+  color: var(--green);
+  font-size: 24px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step .step-content h3 {
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.step .step-content p {
+  font-size: 22px;
+  color: var(--text-sec);
+  line-height: 1.45;
+}
+.step .step-line {
+  position: relative;
+}
+
+/* Error cards */
+.error-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.error-card {
+  background: var(--red-bg);
+  border-radius: 18px;
+  padding: 28px 32px;
+  border-left: 5px solid var(--accent);
+}
+.error-card .error-quote {
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+.error-card .error-truth {
+  font-size: 22px;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+/* Callout box */
+.callout {
+  background: var(--amber-bg);
+  border-left: 5px solid #EF9F27;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-top: 20px;
+}
+.callout p {
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--amber);
+  font-weight: 500;
+}
+
+/* CTA Slide */
+.slide.cta {
+  background: linear-gradient(165deg, #1D2B36 0%, #2C3E50 40%, #34495E 100%);
+  color: #fff;
+  padding: 80px 72px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+.cta h2 {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.cta h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.cta .cta-desc {
+  font-size: 28px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.7);
+  max-width: 800px;
+}
+.cta .cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  padding: 22px 56px;
+  border-radius: 16px;
+  letter-spacing: 0.02em;
+  margin-top: 12px;
+}
+.cta .cta-sub {
+  font-size: 22px;
+  color: rgba(255,255,255,0.4);
+}
+.cta .logo-text {
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+  position: absolute;
+  bottom: 52px;
+}
+
+/* Footer bar on content slides */
+.slide-footer {
+  margin-top: auto;
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1.5px solid var(--border);
+}
+.slide-footer .footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--border);
+  letter-spacing: 0.04em;
+}
+.slide-footer .footer-hint {
+  font-size: 18px;
+  color: var(--border);
+}
+
+/* Print styles */
+@media print {
+  body { background: none; padding: 0; gap: 0; }
+  .slide-label { display: none; }
+  .slide {
+    border-radius: 0;
+    box-shadow: none;
+    width: 1080px;
+    height: 1350px;
+    page-break-after: always;
+  }
+}
+
+/* Responsive preview */
+@media (max-width: 1120px) {
+  .slide {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1080 / 1350;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== SLIDE 1 — CAPA ====== -->
+<div class="slide cover">
+  <div>
+    <div class="tag">NR-1 / PGR 2026</div>
+    <h1>NR-1 psicossocial:<br>o que muda em <em>maio de 2026</em></h1>
+    <p class="subtitle">E o que fazer agora para sua empresa<br>estar em conformidade.</p>
+  </div>
+  <div class="bottom-bar">
+    <span class="logo-text">HIGILABOR</span>
+    <span class="swipe">Deslize para ler <span class="arrow">&rarr;</span></span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 2 — CONTEXTO ====== -->
+<div class="slide content">
+  <span class="slide-number">02/10</span>
+  <div class="section-tag">O que acontece</div>
+  <h2>A partir de <em>26 de maio de 2026</em>, o PGR precisa incluir riscos psicossociais.</h2>
+  <p class="body-text">Estresse, assédio, sobrecarga, pressão por metas. Isso não é recomendação: <strong>é obrigação, com fiscalização e multa.</strong></p>
+  <div class="callout">
+    <p>Não existe "PGR psicossocial" separado. O PGR que sua empresa já tem precisa de um capítulo novo. Quem vender um documento à parte está criando uma obrigação que não existe.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">02 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 3 — O QUE É ====== -->
+<div class="slide content">
+  <span class="slide-number">03/10</span>
+  <div class="section-tag">Entenda</div>
+  <h2>O que é risco psicossocial, <em>na prática</em>?</h2>
+  <ul class="item-list">
+    <li><span class="icon red">!</span> Metas impossíveis ou pressão crônica por produtividade</li>
+    <li><span class="icon red">!</span> Jornadas longas, horas extras habituais, plantões mal dimensionados</li>
+    <li><span class="icon red">!</span> Assédio moral ou sexual, conflitos não resolvidos</li>
+    <li><span class="icon amber">!</span> Função mal definida &mdash; o funcionário não sabe o que se espera dele</li>
+    <li><span class="icon amber">!</span> Microgerenciamento, falta de autonomia, retrabalho constante</li>
+    <li><span class="icon amber">!</span> Instabilidade de emprego, comunicação agressiva, medo contínuo</li>
+  </ul>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">03 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 4 — 3 OBRIGAÇÕES ====== -->
+<div class="slide content">
+  <span class="slide-number">04/10</span>
+  <div class="section-tag">O que muda</div>
+  <h2>3 obrigações <em>novas</em></h2>
+  <div class="num-cards">
+    <div class="num-card">
+      <div class="num">1</div>
+      <div class="card-content">
+        <h3>Inventário de riscos no PGR</h3>
+        <p>Seção específica com metodologia de avaliação descrita. Não basta mencionar que "os riscos foram considerados".</p>
+      </div>
+    </div>
+    <div class="num-card">
+      <div class="num">2</div>
+      <div class="card-content">
+        <h3>Plano de ação com prazos</h3>
+        <p>Identificou o risco? Precisa dizer o que vai ser feito, quem responde e até quando. Sem ação planejada = não cumpre.</p>
+      </div>
+    </div>
+    <div class="num-card">
+      <div class="num">3</div>
+      <div class="card-content">
+        <h3>Fiscalização com multa</h3>
+        <p>Auditores do MTE podem autuar empresas sem o componente psicossocial. Multas a partir de <strong>R$ 6.674</strong> por autuação.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">04 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 5 — CHECKLIST DO FISCAL ====== -->
+<div class="slide content">
+  <span class="slide-number">05/10</span>
+  <div class="section-tag">Prepare-se</div>
+  <h2>O que o fiscal <em>vai checar</em></h2>
+  <ul class="checklist">
+    <li><span class="check">&check;</span> <div><strong>Existe o inventário?</strong><br><span style="color:var(--text-sec);font-size:23px">A primeira pergunta é sim ou não.</span></div></li>
+    <li><span class="check">&check;</span> <div><strong>Como foi levantado?</strong><br><span style="color:var(--text-sec);font-size:23px">Questionário validado, entrevista, análise de indicadores &mdash; o método precisa estar descrito.</span></div></li>
+    <li><span class="check">&check;</span> <div><strong>Quais ações foram definidas?</strong><br><span style="color:var(--text-sec);font-size:23px">Prazos, responsáveis e status de cada ação.</span></div></li>
+    <li><span class="check">&check;</span> <div><strong>O trabalhador foi ouvido?</strong><br><span style="color:var(--text-sec);font-size:23px">A NR-1 exige participação dos empregados.</span></div></li>
+    <li><span class="check">&check;</span> <div><strong>O PCMSO está integrado?</strong><br><span style="color:var(--text-sec);font-size:23px">O médico do trabalho precisa conhecer os riscos identificados.</span></div></li>
+  </ul>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">05 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 6 — COMO ADEQUAR (1/2) ====== -->
+<div class="slide content">
+  <span class="slide-number">06/10</span>
+  <div class="section-tag">Passo a passo</div>
+  <h2>Como adequar <em>sua empresa</em></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Veja o que você já tem</h3>
+        <p>Olhe afastamentos por CID F, absenteísmo, rotatividade, reclamações trabalhistas, registros de CIPA. Esses dados já indicam os focos de risco.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Escolha uma metodologia reconhecida</h3>
+        <p>As mais usadas no Brasil: <strong>COPSOQ III</strong> ou <strong>JCQ</strong>. O importante é o instrumento ser validado, não genérico.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Aplique com anonimato garantido</h3>
+        <p>Sem anonimato, os dados não prestam. Ninguém vai reportar assédio num formulário assinado. Use ferramenta online ou urna física.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">06 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 7 — COMO ADEQUAR (2/2) ====== -->
+<div class="slide content">
+  <span class="slide-number">07/10</span>
+  <div class="section-tag">Passo a passo</div>
+  <h2>Como adequar <em>(continuação)</em></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Monte o inventário e o plano de ação</h3>
+        <p>Para cada risco: grau de gravidade (leve / moderado / grave), ação prevista, responsável e prazo. Esse documento entra no PGR.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Integre com o PCMSO e treine a liderança</h3>
+        <p>O médico do trabalho precisa saber dos riscos para ajustar exames e condutas. A liderança precisa ser treinada &mdash; risco psicossocial sem mudança de comportamento não se resolve no papel.</p>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:40px">
+    <p><strong>Empresa pequena (até 20 funcionários) precisa cumprir?</strong><br>Sim. A NR-1 vale para qualquer empresa com empregados CLT. O que muda é a profundidade esperada.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">07 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 8 — ERROS ====== -->
+<div class="slide content">
+  <span class="slide-number">08/10</span>
+  <div class="section-tag">Atenção</div>
+  <h2>4 erros que já vemos <em>no mercado</em></h2>
+  <div class="error-cards">
+    <div class="error-card">
+      <div class="error-quote">"Nossa pesquisa de clima já cobre isso."</div>
+      <div class="error-truth">Pesquisa de clima é ferramenta de RH. Risco psicossocial é documento técnico do PGR &mdash; metodologia diferente, finalidade diferente.</div>
+    </div>
+    <div class="error-card">
+      <div class="error-quote">"Compramos um questionário pronto."</div>
+      <div class="error-truth">Papel guardado não cumpre norma. Precisa ser aplicado, tabulado e integrado ao PGR com plano de ação.</div>
+    </div>
+    <div class="error-card">
+      <div class="error-quote">"Vamos deixar para abril."</div>
+      <div class="error-truth">O processo leva tempo: aplicação, tabulação, plano com responsáveis reais. Último mês é arriscado.</div>
+    </div>
+    <div class="error-card">
+      <div class="error-quote">"O fornecedor vai fazer um PGR psicossocial separado."</div>
+      <div class="error-truth">Não existe esse documento. O correto é o PGR existente ser complementado.</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">08 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 9 — FAQ ====== -->
+<div class="slide content">
+  <span class="slide-number">09/10</span>
+  <div class="section-tag">Perguntas diretas</div>
+  <h2>Dúvidas <em>frequentes</em></h2>
+  <div class="num-cards">
+    <div class="num-card" style="background:var(--bg-warm)">
+      <div class="num" style="background:var(--text);font-size:22px">?</div>
+      <div class="card-content">
+        <h3>Já tenho PGR de 2025. Preciso refazer?</h3>
+        <p>Não. Você precisa <strong>complementar</strong> com a seção psicossocial e atualizar o plano de ação. O restante continua válido.</p>
+      </div>
+    </div>
+    <div class="num-card" style="background:var(--bg-warm)">
+      <div class="num" style="background:var(--text);font-size:22px">?</div>
+      <div class="card-content">
+        <h3>Posso usar questionário genérico da internet?</h3>
+        <p>Pode, mas o fiscal pode questionar a validade. Instrumentos reconhecidos (COPSOQ, JCQ) dão mais segurança jurídica.</p>
+      </div>
+    </div>
+    <div class="num-card" style="background:var(--bg-warm)">
+      <div class="num" style="background:var(--text);font-size:22px">?</div>
+      <div class="card-content">
+        <h3>E se o levantamento achar assédio?</h3>
+        <p>Ignorar o achado é pior: vira prova de omissão em ação trabalhista. A obrigação da empresa é <strong>agir</strong>, não esconder.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-logo">HIGILABOR</span>
+    <span class="footer-hint">09 de 10</span>
+  </div>
+</div>
+
+<!-- ====== SLIDE 10 — CTA ====== -->
+<div class="slide cta">
+  <h2>Maio de 2026 está<br>chegando. <em>Sua empresa<br>está pronta?</em></h2>
+  <p class="cta-desc">O <strong>Pacote NR-1 Psicossocial</strong> da Higilabor inclui levantamento com instrumento validado, tabulação, inventário de riscos integrado ao PGR e plano de ação completo.</p>
+  <div class="cta-button">Fale com a Higilabor</div>
+  <p class="cta-sub">higilabor.com.br &mdash; Uma conversa de 15 min já resolve.</p>
+  <span class="logo-text">HIGILABOR</span>
+</div>
+
+</body>
+</html>
