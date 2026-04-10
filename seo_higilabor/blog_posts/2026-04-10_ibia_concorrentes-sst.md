@@ -7,7 +7,7 @@ keyword_principal: "medicina do trabalho Ibiá"
 keywords_secundarias: ["PGR Ibiá", "PCMSO Ibiá", "segurança do trabalho Ibiá MG", "exame admissional Ibiá", "NR-1 psicossocial Ibiá", "SST Ibiá"]
 cidade: "Ibiá"
 data: "2026-04-10"
-status: "RASCUNHO — revisar com /ux-copy antes de publicar"
+status: "REVISADO — /ux-copy 2026-04-10"
 ---
 
 # Medicina do Trabalho em Ibiá: PGR, PCMSO e NR-1 Psicossocial para Sua Empresa
@@ -102,11 +102,11 @@ O importante é não contratar pelo menor preço sem verificar o que está inclu
 
 ## Higilabor: SST para empresas em Ibiá com atendimento especializado
 
-A **Higilabor** é uma consultoria de Saúde e Segurança do Trabalho sediada em Uberlândia que atende empresas em todo o Triângulo Mineiro e Alto Paranaíba, incluindo Ibiá e região.
+**Higilabor** é consultoria de Saúde e Segurança do Trabalho sediada em Uberlândia, atendendo empresas em todo o Triângulo Mineiro e Alto Paranaíba — incluindo Ibiá e região.
 
-Nosso modelo de atendimento combina visitas presenciais para levantamento de riscos e exames com gestão remota contínua dos programas de SST. Isso permite oferecer às empresas de Ibiá o mesmo nível de qualidade técnica que empresas de grandes centros recebem, com preço justo e competitivo.
+O modelo de atendimento combina visitas presenciais para levantamento de riscos com gestão remota contínua dos programas de SST. Empresas em Ibiá recebem o mesmo nível técnico de grandes centros, com preço justo e sem deslocamento desnecessário.
 
-### O que oferecemos para empresas em Ibiá:
+### O que Higilabor faz para empresas em Ibiá:
 
 - **PGR completo** com inventário de riscos e plano de ação personalizados
 - **PCMSO** coordenado por médico do trabalho, com gestão de exames
@@ -191,7 +191,7 @@ Entre em contato pelo WhatsApp **(34) 99971-5684** ou acesse [/contato/](/contat
 
 ## Peça seu orçamento agora
 
-Não espere a fiscalização bater na porta. Regularize a SST da sua empresa em Ibiá com quem entende do assunto.
+A fiscalização da NR-1 psicossocial começa em maio de 2026. Regularize a SST da sua empresa em Ibiá agora — com preço justo e prazo cumprido.
 
 **Solicite um orçamento sem compromisso:**
 
