@@ -72,3 +72,24 @@ CVs adaptados a partir de `CV__Octavio.pdf`. Endereço real (BH/MG) mantido — 
 | SP Inovações | Belo Horizonte/MG | descartada (vaga Pleno) |
 
 Próxima verificação amanhã.
+
+---
+
+## Rodada 2026-04-09 (automática — agendada)
+
+**Nenhuma vaga nova encontrada.** Todas as 10 vagas retornadas já processadas ou descartadas:
+
+| Empresa | Cidade | Status |
+|---|---|---|
+| Prisco Paraiso | Rio de Janeiro/RJ | CV 02 — já feito |
+| Franco & Luzz | Itaim Bibi/SP | CV 01 — já feito |
+| Sapiro Legal | São Paulo/SP | CV 03 — já feito |
+| MUTUUS Gestão Tributária | Belo Horizonte/MG | CV 04 — já feito |
+| EMPREGGA | São Paulo/SP | CV 07 — já feito |
+| FAS Advogados | São Paulo/SP | CV 06 — já feito |
+| Anônima | Porto Alegre/RS | CV 05 — já feito |
+| 4SYNERGY (Aires Soares) | Curitiba/PR | descartada (sem info suficiente) |
+| Andrade Rodrigues Matos (Jr) | Belo Horizonte/MG | CV 08 — já feito |
+| Andrade Rodrigues Matos (Pleno) | Belo Horizonte/MG | descartada (vaga Pleno) |
+
+Próxima verificação amanhã.
