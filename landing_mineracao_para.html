@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SST para Mineração no Pará | Higilabor — PGR NR-22, LTCAT e NR-1</title>
+  <meta name="description" content="Sua mineradora no Pará está com PGR NR-22, LTCAT e NR-1 psicossocial em dia? A Higilabor entrega documentação SST completa para ouro, cobre, areia e argila. Diagnóstico gratuito.">
+  <meta name="keywords" content="SST mineração Pará, NR-22, PGR mineração, PCMSO Pará, segurança do trabalho mineração, ANM conformidade">
+  <meta property="og:title" content="SST para Mineração no Pará — PGR, NR-22 e PCMSO | Higilabor">
+  <meta property="og:description" content="Documentação SST completa para mineradoras no Pará. PGR NR-22, LTCAT, NR-1 psicossocial. Marabá, Itaituba, Parauapebas e todo o Pará. Diagnóstico gratuito.">
+  <meta property="og:image" content="https://higilabor.com.br/wp-content/uploads/2023/10/LOGO-HIGILABORtransparente-e1741200091119-1013x1024.png">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://higilabor.com.br/sst-mineracao-para/">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --verde:      #61a229;
+      --verde-esc:  #4e8221;
+      --verde-cla:  #e8f5d6;
+      --cinza-esc:  #1a1a2e;
+      --cinza-med:  #2d3748;
+      --laranja:    #e67e22;
+      --vermelho:   #c0392b;
+      --dourado:    #f39c12;
+      --cinza-bg:   #F0F2F5;
+      --branco:     #ffffff;
+      --texto:      #1a1a2e;
+      --texto2:     #555;
+      --borda:      #ddd;
+      --gap: 20px;
+      --r: 10px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'League Spartan', -apple-system, sans-serif; background: var(--cinza-bg); color: var(--texto); }
+
+    /* ─── BANNER ──────────────────────────────────────────── */
+    .banner {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--cinza-esc);
+      color: #fff; text-align: center;
+      padding: 9px 16px; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+    }
+    .banner a { color: #c8e89a; text-decoration: none; }
+    .tag-urg { background: var(--vermelho); color:#fff; font-size:11px; font-weight:800; padding:2px 10px; border-radius:20px; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      background: var(--cinza-esc);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      border-bottom: 3px solid var(--verde);
+    }
+    .nav-cta {
+      background: var(--verde); color: #fff;
+      padding: 9px 22px; border-radius: 50px;
+      font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap;
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, rgba(26,26,46,.95) 0%, rgba(45,55,72,.9) 100%),
+        url('https://images.unsplash.com/photo-1578269174936-2709b6aeb913?w=1400&q=80') center/cover no-repeat;
+      color: #fff; padding: 64px 24px 72px; text-align: center;
+    }
+    .hero .setor-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--verde); color: #fff;
+      border-radius: 20px; padding: 5px 16px;
+      font-size: 12px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero h1 { font-size: clamp(26px, 4.5vw, 50px); font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: #c8e89a; }
+    .hero p  { font-size: 18px; opacity: .88; max-width: 620px; margin: 0 auto 36px; line-height: 1.6; }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-prim {
+      background: var(--verde); color: #fff;
+      padding: 15px 34px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      box-shadow: 0 4px 18px rgba(97,162,41,.4);
+      transition: transform .15s;
+    }
+    .btn-prim:hover { transform: translateY(-2px); }
+    .btn-sec {
+      background: rgba(255,255,255,.12); border: 2px solid rgba(255,255,255,.4);
+      color: #fff; padding: 15px 34px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+    }
+
+    /* ─── TRUST BAR ───────────────────────────────────────── */
+    .trust-bar {
+      background: var(--verde-esc);
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .trust-item { color: #fff; text-align: center; }
+    .trust-item .n { font-size: 26px; font-weight: 800; display: block; }
+    .trust-item .l { font-size: 11px; opacity: .8; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ─── CONTAINER ───────────────────────────────────────── */
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--gap); }
+    .sec { padding: 56px 0; }
+    .sec-hd { text-align: center; margin-bottom: 36px; }
+    .sec-hd h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; color: var(--cinza-esc); margin-bottom: 8px; }
+    .sec-hd p  { font-size: 16px; color: var(--texto2); max-width: 580px; margin: 0 auto; }
+    .sec-hd .badge-nr { display:inline-block; background:var(--verde); color:#fff; font-size:11px; font-weight:800; padding:3px 12px; border-radius:20px; margin-bottom:10px; }
+
+    /* ─── RISCO CARDS ─────────────────────────────────────── */
+    .risco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); }
+    .risco-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border-top: 4px solid var(--vermelho); text-align: center;
+    }
+    .risco-card.gold { border-top-color: var(--dourado); }
+    .risco-card .num { font-size: 30px; font-weight: 800; color: var(--vermelho); }
+    .risco-card.gold .num { color: var(--dourado); }
+    .risco-card .tit { font-size: 14px; font-weight: 700; margin: 6px 0 4px; }
+    .risco-card .sub { font-size: 13px; color: var(--texto2); line-height: 1.5; }
+
+    /* ─── NORMAS GRID ─────────────────────────────────────── */
+    .normas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--gap); }
+    .norma-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 28px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border-left: 5px solid var(--verde);
+      position: relative;
+    }
+    .norma-card .nr-tag {
+      display: inline-block;
+      background: var(--cinza-esc); color: #fff;
+      font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 4px;
+      margin-bottom: 12px; letter-spacing: .5px;
+    }
+    .norma-card.urgente .nr-tag { background: var(--vermelho); }
+    .norma-card h3 { font-size: 16px; font-weight: 800; color: var(--cinza-esc); margin-bottom: 8px; }
+    .norma-card p  { font-size: 14px; color: var(--texto2); line-height: 1.6; margin-bottom: 12px; }
+    .norma-card .status {
+      font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+      display: inline-block;
+    }
+    .status-ok      { background: #e8f5e9; color: #2e7d32; }
+    .status-urgente { background: #ffebee; color: var(--vermelho); }
+
+    /* ─── PROCESSO ────────────────────────────────────────── */
+    .processo { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap); }
+    .passo {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      text-align: center; position: relative;
+    }
+    .passo .num-c {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--verde); color: #fff;
+      font-size: 18px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .passo h4 { font-size: 15px; font-weight: 800; color: var(--cinza-esc); margin-bottom: 8px; }
+    .passo p  { font-size: 13px; color: var(--texto2); line-height: 1.6; }
+    .passo .prazo { font-size: 11px; font-weight: 700; color: var(--verde); margin-top: 8px; }
+
+    /* ─── ROI TABLE ───────────────────────────────────────── */
+    .roi-wrap { overflow-x: auto; }
+    table.roi {
+      width: 100%; border-collapse: collapse;
+      background: var(--branco); border-radius: var(--r);
+      overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.07); font-size: 14px;
+    }
+    table.roi th { padding: 14px 16px; text-align: left; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; }
+    table.roi th:first-child { background: var(--cinza-esc); color: #fff; }
+    table.roi th.col-sem { background: var(--vermelho); color: #fff; }
+    table.roi th.col-com { background: var(--verde); color: #fff; }
+    table.roi td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; }
+    table.roi td.val-sem { color: var(--vermelho); font-weight: 700; }
+    table.roi td.val-com { color: var(--verde); font-weight: 700; }
+    table.roi tr.total td { font-weight: 800; background: #fafafa; font-size: 15px; }
+    table.roi tr:last-child td { border-bottom: none; }
+
+    /* ─── PACOTES ─────────────────────────────────────────── */
+    .pacotes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--gap); }
+    .pacote {
+      background: var(--branco); border-radius: var(--r);
+      padding: 30px 26px; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      border: 2px solid var(--borda); position: relative;
+    }
+    .pacote.destaque { border-color: var(--verde); }
+    .rec-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--verde); color: #fff;
+      font-size: 12px; font-weight: 800; padding: 4px 18px; border-radius: 20px; white-space: nowrap;
+    }
+    .pacote h3 { font-size: 19px; font-weight: 800; color: var(--cinza-esc); margin-bottom: 6px; }
+    .pacote .sub { font-size: 13px; color: var(--texto2); margin-bottom: 18px; }
+    .pacote .preco { font-size: 26px; font-weight: 800; color: var(--cinza-esc); margin-bottom: 4px; }
+    .pacote .preco span { font-size: 13px; color: var(--texto2); font-weight: 400; }
+    .pacote ul { list-style: none; margin: 16px 0 24px; display: grid; gap: 8px; }
+    .pacote ul li { font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
+    .pacote ul li::before { content: "✓"; color: var(--verde); font-weight: 800; flex-shrink: 0; }
+    .btn-pacote {
+      display: block; text-align: center;
+      background: var(--cinza-esc); color: #fff;
+      padding: 13px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+    }
+    .pacote.destaque .btn-pacote { background: var(--verde); }
+
+    /* ─── DIF GRID ────────────────────────────────────────── */
+    .dif-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap); }
+    .dif-card {
+      background: var(--branco); border-radius: var(--r);
+      padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.07); text-align: center;
+    }
+    .dif-card .icn { font-size: 36px; margin-bottom: 12px; }
+    .dif-card h4 { font-size: 15px; font-weight: 800; color: var(--cinza-esc); margin-bottom: 6px; }
+    .dif-card p  { font-size: 13px; color: var(--texto2); line-height: 1.5; }
+
+    /* ─── FAQ ─────────────────────────────────────────────── */
+    .faq-list { max-width: 720px; margin: 0 auto; display: grid; gap: 10px; }
+    .faq-item { background: var(--branco); border-radius: var(--r); overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    .faq-q {
+      width: 100%; text-align: left;
+      padding: 18px 20px; background: none; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 700; color: var(--texto);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      font-family: inherit;
+    }
+    .faq-q .arr { font-size: 18px; color: var(--verde); transition: transform .2s; flex-shrink: 0; }
+    .faq-q.open .arr { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 20px 18px; font-size: 14px; color: var(--texto2); line-height: 1.7; }
+    .faq-a.open { display: block; }
+
+    /* ─── COUNTDOWN URGÊNCIA ──────────────────────────────── */
+    .urgencia-bar {
+      background: var(--vermelho); color: #fff;
+      padding: 18px 24px; text-align: center;
+    }
+    .urgencia-bar h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .urgencia-bar p  { font-size: 14px; opacity: .9; margin-bottom: 16px; }
+    .cd-boxes { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .cd-box {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+      border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 68px; color: #fff;
+    }
+    .cd-box .n { font-size: 30px; font-weight: 800; display: block; }
+    .cd-box .u { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; opacity: .8; }
+
+    /* ─── CTA FINAL ───────────────────────────────────────── */
+    .cta-final {
+      background: linear-gradient(135deg, var(--cinza-esc), var(--cinza-med));
+      color: #fff; text-align: center; padding: 64px 24px;
+      border-top: 4px solid var(--verde);
+    }
+    .cta-final h2 { font-size: clamp(22px, 3.5vw, 34px); font-weight: 800; margin-bottom: 10px; }
+    .cta-final p  { font-size: 17px; opacity: .88; margin-bottom: 36px; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+    .btn-wpp {
+      background: #25D366; color: #fff;
+      padding: 15px 30px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-email {
+      background: var(--verde); color: #fff;
+      padding: 15px 30px; border-radius: 50px;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+    }
+    .cta-contato { font-size: 13px; opacity: .75; }
+    .cta-contato a { color: #c8e89a; text-decoration: none; }
+
+    /* ─── WPP FLOAT ───────────────────────────────────────── */
+    .wpp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: #25D366; color: #fff;
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5);
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5); }
+      50%      { box-shadow: 0 4px 32px rgba(37,211,102,.8), 0 0 0 10px rgba(37,211,102,.12); }
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer { text-align: center; padding: 24px; font-size: 13px; color: var(--texto2); border-top: 1px solid var(--borda); }
+    footer a { color: var(--verde); text-decoration: none; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media(max-width:680px){
+      .trust-bar { gap: 16px; }
+      .pacotes-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  <span class="tag-urg">⚠ PRAZO</span>
+  NR-1 psicossocial obrigatória a partir de <strong>26/05/2026</strong> — sua mineradora está adequada?
+  <a href="#urgencia">Ver prazo →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://higilabor.com.br">
+    <img src="https://higilabor.com.br/wp-content/uploads/2023/10/LOGO-HIGILABORtransparente-e1741200091119-1013x1024.png" alt="Higilabor SST" style="height:44px;width:auto;vertical-align:middle;">
+  </a>
+  <a class="nav-cta" href="#contato">Solicitar diagnóstico gratuito →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="setor-tag">⛏ Setor de Mineração — Pará</div>
+  <h1>Sua mineradora no Pará está em dia<br>com <em>NR-22, PGR e NR-1</em>?</h1>
+  <p>De Marabá a Itaituba, de ouro a argila — a Higilabor elabora toda a documentação SST obrigatória para mineração no Pará. PGR NR-22, LTCAT, laudos e NR-1 psicossocial. Tudo com validade para ANM, MTE e licitações.</p>
+  <div class="hero-ctas">
+    <a class="btn-prim" href="#contato">Quero regularizar minha mineradora</a>
+    <a class="btn-sec" href="#normas">Ver o que é obrigatório</a>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="n">34</span><span class="l">Anos de SST</span></div>
+  <div class="trust-item"><span class="n">1.500+</span><span class="l">Empresas atendidas</span></div>
+  <div class="trust-item"><span class="n">NR-22</span><span class="l">Mineração</span></div>
+  <div class="trust-item"><span class="n">PCMSO</span><span class="l">Médica própria</span></div>
+  <div class="trust-item"><span class="n">374</span><span class="l">Mineradoras no Pará</span></div>
+</div>
+
+<div class="wrap">
+
+  <!-- COBERTURA -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>Mineração no Pará — sabemos onde você está</h2>
+      <p>Mapeamos <strong>374 operações minerais</strong> ativas no estado. Atendemos os principais municípios produtores.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--gap);">
+      <div style="background:var(--branco);border-radius:var(--r);padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.07);">
+        <div style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--verde-esc);margin-bottom:14px;">Principais municípios atendidos</div>
+        <div style="display:grid;gap:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>Marabá</span><span style="font-weight:700;color:var(--verde);">49 operações</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>Itaituba</span><span style="font-weight:700;color:var(--verde);">46 operações</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>São Félix do Xingu</span><span style="font-weight:700;color:var(--verde);">22 operações</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>Altamira</span><span style="font-weight:700;color:var(--verde);">19 operações</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>Parauapebas / Curionópolis</span><span style="font-weight:700;color:var(--verde);">30 operações</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;"><span>Jacareacanga / Novo Progresso</span><span style="font-weight:700;color:var(--verde);">22 operações</span></div>
+        </div>
+      </div>
+      <div style="background:var(--branco);border-radius:var(--r);padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.07);">
+        <div style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--verde-esc);margin-bottom:14px;">Minerais que atendemos</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="background:#fff8e1;color:#7a4800;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;">⭐ Ouro</span>
+          <span style="background:#e3f2fd;color:#0d47a1;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;">🔷 Cobre</span>
+          <span style="background:#e8f5e9;color:#1b5e20;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;">🪨 Areia / Cascalho</span>
+          <span style="background:#fce4ec;color:#880e4f;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;">🧱 Argila / Cerâmica</span>
+          <span style="background:#f3e5f5;color:#4a148c;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;">🔩 Ferro / Manganês</span>
+          <span style="background:#e0f7fa;color:#006064;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;">💎 Outros minerais</span>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:var(--verde-cla);border-radius:var(--r);font-size:14px;color:var(--verde-esc);">
+          <strong>95 empresas Prioridade A</strong> identificadas — minerais críticos com maior necessidade de conformidade SST e maior risco de autuação.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISCOS -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>O que está em jogo para quem opera sem conformidade</h2>
+      <p>Mineradoras têm fiscalização dupla: MTE (NRs) e ANM (segurança de minas). Os dois órgãos autuam.</p>
+    </div>
+    <div class="risco-grid">
+      <div class="risco-card">
+        <div class="num">Embargo</div>
+        <div class="tit">Paralisação imediata da operação</div>
+        <div class="sub">A ANM pode embargar a mina por ausência de PGR, PCMSO ou plano de segurança conforme NR-22</div>
+      </div>
+      <div class="risco-card">
+        <div class="num">R$ 13K+</div>
+        <div class="tit">Multa por autuação do MTE</div>
+        <div class="sub">R$ 6.674 base por infração, dobrado em empresas com mais de 10 funcionários</div>
+      </div>
+      <div class="risco-card gold">
+        <div class="num">Licitação</div>
+        <div class="tit">Exclusão de concorrências públicas</div>
+        <div class="sub">Certidões de regularidade SST são exigidas em editais federais e estaduais no setor mineral</div>
+      </div>
+      <div class="risco-card gold">
+        <div class="num">26/mai</div>
+        <div class="tit">Prazo NR-1 psicossocial</div>
+        <div class="sub">Mineradoras precisam incluir riscos psicossociais no PGR até 26/05/2026 — mesmo as de extração</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NORMAS OBRIGATÓRIAS -->
+  <section class="sec" id="normas" style="background:var(--branco); margin:0 -20px; padding:56px 20px;">
+    <div class="sec-hd">
+      <h2>Normas obrigatórias para mineradoras</h2>
+      <p>O que a ANM e o MTE exigem da sua operação — e o que a Higilabor entrega</p>
+    </div>
+    <div class="normas-grid">
+      <div class="norma-card">
+        <span class="nr-tag">NR-22</span>
+        <h3>Segurança e saúde na mineração</h3>
+        <p>Obrigatória para toda empresa que realiza extração mineral. Exige PGR específico, plano de emergência, treinamentos e laudos técnicos para cada frente de lavra.</p>
+        <span class="status status-ok">✓ Entregamos completo</span>
+      </div>
+      <div class="norma-card">
+        <span class="nr-tag">PCMSO</span>
+        <h3>Programa de controle médico de saúde ocupacional</h3>
+        <p>Elaborado por engenheiro de segurança e médico do trabalho em conjunto. Inclui todos os exames obrigatórios, fichas de ASO e cronograma anual conforme NR-7.</p>
+        <span class="status status-ok">✓ Entregamos completo</span>
+      </div>
+      <div class="norma-card">
+        <span class="nr-tag">PGR</span>
+        <h3>Programa de gerenciamento de riscos</h3>
+        <p>Elaborado com inventário de riscos específico para mineração: explosivos, poeiras, gases, calor, vibração e trabalho em altura subterrânea ou a céu aberto.</p>
+        <span class="status status-ok">✓ Entregamos completo</span>
+      </div>
+      <div class="norma-card urgente">
+        <span class="nr-tag">NR-1</span>
+        <h3>Riscos psicossociais — novo prazo 26/05/2026</h3>
+        <p>A portaria MTE 1.419/2024 inclui mineração. O PGR deve contemplar estresse, sobrecarga e saúde mental dos trabalhadores — inclusive em operações de turno.</p>
+        <span class="status status-urgente">⚠ Prazo em <span id="nr1-dias">--</span> dias</span>
+      </div>
+      <div class="norma-card">
+        <span class="nr-tag">LTCAT</span>
+        <h3>Laudo técnico das condições ambientais</h3>
+        <p>Exigido pelo INSS para aposentadoria especial. Mineração tem alta incidência de agentes nocivos (ruído, poeira de sílica, vibração). Sem LTCAT atualizado = passivo trabalhista.</p>
+        <span class="status status-ok">✓ Engenheiro CREA próprio</span>
+      </div>
+      <div class="norma-card">
+        <span class="nr-tag">PPP</span>
+        <h3>Perfil profissiográfico previdenciário</h3>
+        <p>Emitido para todos os trabalhadores expostos a agentes nocivos. Necessário para comprovação de aposentadoria especial e regularidade junto ao eSocial/INSS.</p>
+        <span class="status status-ok">✓ Entregamos completo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>Como funciona o atendimento</h2>
+      <p>Atendimento presencial ao vivo — nossa equipe vai até sua operação no Pará.</p>
+    </div>
+    <div class="processo">
+      <div class="passo">
+        <div class="num-c">1</div>
+        <h4>Contato inicial</h4>
+        <p>WhatsApp ou e-mail para entender sua situação e verificar disponibilidade de agenda para sua região no Pará. Gratuito, sem compromisso.</p>
+        <div class="prazo">Dia 1</div>
+      </div>
+      <div class="passo">
+        <div class="num-c">2</div>
+        <h4>Visita técnica ao vivo</h4>
+        <p>Nossa equipe vai até sua operação para levantamento de campo: frentes de lavra, agentes de risco, funcionários e documentação existente.</p>
+        <div class="prazo">Semana 1–2</div>
+      </div>
+      <div class="passo">
+        <div class="num-c">3</div>
+        <h4>Elaboração dos documentos</h4>
+        <p>Com base no levantamento presencial, elaboramos PGR (NR-22), LTCAT, laudos técnicos, plano de emergência e NR-1 psicossocial. Tudo assinado pelo engenheiro responsável.</p>
+        <div class="prazo">Semana 2–4</div>
+      </div>
+      <div class="passo">
+        <div class="num-c">4</div>
+        <h4>Entrega e representação</h4>
+        <p>Documentação completa entregue fisicamente e em PDF. Suporte em auditoria da ANM, fiscalização do MTE e envio ao eSocial.</p>
+        <div class="prazo">Semana 4+</div>
+      </div>
+    </div>
+    <div style="background:#e8f5d6;border-left:4px solid var(--verde);padding:16px 20px;border-radius:0 var(--r) var(--r) 0;margin-top:28px;font-size:14px;color:#2e5000;">
+      <strong>Presencial em todo o Pará:</strong> Marabá, Itaituba, São Félix do Xingu, Altamira, Parauapebas, Jacareacanga, Novo Progresso, Santarém e toda a região. Nossa equipe se desloca até sua operação. Preço justo, conformidade garantida.
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="sec" style="background:var(--branco); margin:0 -20px; padding:56px 20px;">
+    <div class="sec-hd">
+      <h2>Regularizar agora vs. ser autuado depois</h2>
+      <p>Estimativa para uma mineradora de 30 funcionários nos próximos 12 meses</p>
+    </div>
+    <div class="roi-wrap">
+      <table class="roi">
+        <thead>
+          <tr>
+            <th>Cenário</th>
+            <th class="col-sem">Sem regularização</th>
+            <th class="col-com">Com Higilabor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Multa MTE — NR-22 + NR-1 (2 autuações)</td>
+            <td class="val-sem">R$ 26.696</td>
+            <td class="val-com">R$ 0</td>
+          </tr>
+          <tr>
+            <td>Risco de embargo ANM (paralisação)</td>
+            <td class="val-sem">Operação paralisada</td>
+            <td class="val-com">Risco eliminado</td>
+          </tr>
+          <tr>
+            <td>Afastamentos psicossociais (30 func.)</td>
+            <td class="val-sem">R$ 42.000</td>
+            <td class="val-com">R$ 14.700 (–65%)</td>
+          </tr>
+          <tr>
+            <td>Acréscimo FAP no INSS (12 meses)</td>
+            <td class="val-sem">R$ 24.000</td>
+            <td class="val-com">R$ 12.000 (–50%)</td>
+          </tr>
+          <tr>
+            <td>Passivo LTCAT / aposentadoria especial</td>
+            <td class="val-sem">R$ 80.000+</td>
+            <td class="val-com">Risco mitigado</td>
+          </tr>
+          <tr>
+            <td><strong>Investimento Higilabor</strong></td>
+            <td class="val-sem">—</td>
+            <td class="val-com"><strong>A partir de R$ 2.800</strong></td>
+          </tr>
+          <tr class="total">
+            <td><strong>Exposição estimada</strong></td>
+            <td class="val-sem"><strong>R$ 172.696+</strong></td>
+            <td class="val-com"><strong>R$ 29.190</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PACOTES -->
+  <section class="sec" id="pacotes">
+    <div class="sec-hd">
+      <h2>Pacotes para mineração</h2>
+      <p>Escolha o nível de cobertura que sua operação precisa</p>
+    </div>
+    <div class="pacotes-grid">
+      <div class="pacote">
+        <h3>Regularização Básica</h3>
+        <p class="sub">Para quem precisa resolver uma pendência específica</p>
+        <div class="preco">Sob consulta <span>/ por documento</span></div>
+        <ul>
+          <li>PGR conforme NR-22</li>
+          <li>OU PCMSO (Programa de Controle Médico)</li>
+          <li>OU LTCAT atualizado</li>
+          <li>OU NR-1 psicossocial</li>
+          <li>Entrega em até 3 semanas</li>
+          <li>Suporte para auditoria por 30 dias</li>
+        </ul>
+        <a class="btn-pacote" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+gostaria+de+informa%C3%A7%C3%B5es+sobre+regulariza%C3%A7%C3%A3o+SST+para+minha+mineradora+no+Par%C3%A1" target="_blank">Solicitar orçamento</a>
+      </div>
+      <div class="pacote destaque">
+        <span class="rec-badge">⭐ Mais contratado</span>
+        <h3>Conformidade Completa</h3>
+        <p class="sub">Toda a documentação SST obrigatória para mineração</p>
+        <div class="preco">A partir de R$ 2.800 <span>/ empresa</span></div>
+        <ul>
+          <li>PGR completo — NR-22 + NR-1 psicossocial</li>
+          <li>PCMSO elaborado por equipe própria</li>
+          <li>LTCAT atualizado</li>
+          <li>PPP para trabalhadores expostos</li>
+          <li>Plano de emergência e resgate</li>
+          <li>Suporte para ANM e eSocial</li>
+          <li>Representação em fiscalização</li>
+        </ul>
+        <a class="btn-pacote" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+quero+o+pacote+Conformidade+Completa+para+minha+mineradora+no+Par%C3%A1" target="_blank">Quero conformidade completa</a>
+      </div>
+      <div class="pacote">
+        <h3>Retainer Anual</h3>
+        <p class="sub">Gestão contínua de SST — documentação sempre atualizada</p>
+        <div class="preco">Mensalidade <span>/ por contrato</span></div>
+        <ul>
+          <li>Tudo do pacote Conformidade Completa</li>
+          <li>Renovações e atualizações periódicas</li>
+          <li>Monitoramento do FAP e RAT</li>
+          <li>Assessoria em auditoria ANM</li>
+          <li>Treinamentos NR-22, NR-33, NR-35</li>
+          <li>Suporte ilimitado por e-mail e WhatsApp</li>
+          <li>Prioridade de atendimento</li>
+        </ul>
+        <a class="btn-pacote" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+quero+saber+sobre+o+retainer+anual+de+SST+para+minha+mineradora" target="_blank">Falar sobre retainer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="sec" style="background:var(--branco); margin:0 -20px; padding:56px 20px;">
+    <div class="sec-hd">
+      <h2>Por que a Higilabor para sua mineradora</h2>
+      <p>Fundada em 1992 por Ronaldo Coelho de Alvarenga, Eng. de Segurança (CREA 40.614/D)</p>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card">
+        <div class="icn">⛏</div>
+        <h4>Especialista em NR-22</h4>
+        <p>PGR específico para mineração — lavra a céu aberto, subterrânea, garimpo e beneficiamento. Não é template genérico.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">👩‍⚕️</div>
+        <h4>Médica do trabalho própria</h4>
+        <p>PCMSO assinado pela nossa médica. Sem depender de clínica no Pará — ASOs válidos e entregues no prazo.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">💰</div>
+        <h4>Preço justo para o setor</h4>
+        <p>Documentação SST completa com custo acessível para mineradoras de pequeno e médio porte. Sem surpresas no orçamento.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">⚖️</div>
+        <h4>Engenharia + medicina integradas</h4>
+        <p>PGR e PCMSO elaborados pela mesma equipe — sem contradições entre laudos. Uma documentação consistente.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">🏛️</div>
+        <h4>34 anos de mercado</h4>
+        <p>Desde 1992 em Uberlândia/MG. Histórico em indústria, agro e mineração. Documentação aceita por MTE, ANM e INSS.</p>
+      </div>
+      <div class="dif-card">
+        <div class="icn">📉</div>
+        <h4>Gestão ativa do FAP</h4>
+        <p>Mineração tem alto FAP. Implementamos ações para reduzir o multiplicador do RAT e gerar economia real no INSS.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- URGÊNCIA NR-1 -->
+  <div class="urgencia-bar" id="urgencia">
+    <h3>⚠ NR-1 psicossocial — prazo em <span id="nr1-dias-2">--</span> dias</h3>
+    <p>A partir de 26/05/2026, o PGR da sua mineradora deve incluir avaliação de riscos psicossociais. Isso vale para operações de mineração também.</p>
+    <div class="cd-boxes">
+      <div class="cd-box"><span class="n" id="cd-d">--</span><span class="u">Dias</span></div>
+      <div class="cd-box"><span class="n" id="cd-h">--</span><span class="u">Horas</span></div>
+      <div class="cd-box"><span class="n" id="cd-m">--</span><span class="u">Min</span></div>
+      <div class="cd-box"><span class="n" id="cd-s">--</span><span class="u">Seg</span></div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="sec">
+    <div class="sec-hd">
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">A Higilabor atende mineradoras no Pará sem visita presencial? <span class="arr">▼</span></button>
+        <div class="faq-a">Sim. A Higilabor atende mineradoras no Pará com visita técnica presencial para levantamento de campo. O agendamento é feito pelo WhatsApp ou e-mail. Para diagnóstico inicial e orçamento, fazemos uma reunião ao vivo — entre em contato para verificar disponibilidade de agenda para sua região.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">O PGR da Higilabor é aceito pela ANM? <span class="arr">▼</span></button>
+        <div class="faq-a">Sim. O PGR é elaborado por Engenheiro de Segurança do Trabalho com registro ativo no CREA, conforme exige a NR-22 e a ANM (Agência Nacional de Mineração). A documentação inclui todos os elementos obrigatórios: inventário de riscos, plano de ação, plano de emergência e plano de saúde e segurança da mina.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Quanto tempo leva para regularizar uma mineradora do zero? <span class="arr">▼</span></button>
+        <div class="faq-a">Para uma operação de pequeno e médio porte (até 60 funcionários), a documentação completa — PGR, PCMSO, LTCAT e PPP — leva entre 3 e 5 semanas. O prazo depende da agilidade no envio de dados pela empresa. Diagnóstico gratuito para estimativa específica.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">A NR-1 psicossocial se aplica à mineração? <span class="arr">▼</span></button>
+        <div class="faq-a">Sim. A Portaria MTE 1.419/2024 se aplica a TODAS as empresas com empregados registrados, independentemente do setor. Mineradoras precisam incluir riscos psicossociais no PGR até 26/05/2026 — isso inclui estresse de turno, isolamento geográfico, pressão de produção e riscos de acidente grave.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">O que acontece se a mineradora for autuada sem PGR atualizado? <span class="arr">▼</span></button>
+        <div class="faq-a">A ausência ou desatualização do PGR conforme NR-22 pode resultar em: multa do MTE (R$ 6.674+ por infração), embargo da ANM com paralisação imediata da lavra, e exclusão de certidões para licitações. Em caso de acidente, a empresa fica com responsabilidade civil agravada.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /wrap -->
+
+<!-- CTA FINAL -->
+<div class="cta-final" id="contato">
+  <h2>Regularize sua mineradora antes da autuação</h2>
+  <p>Diagnóstico gratuito em 30 minutos. Proposta em 24 horas. Documentação entregue em até 4 semanas.</p>
+  <div class="cta-btns">
+    <a class="btn-wpp" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+gostaria+de+um+diagn%C3%B3stico+gratuito+para+regularizar+minha+mineradora+no+Par%C3%A1" target="_blank">
+      💬 WhatsApp — (34) 99971-5684
+    </a>
+    <a class="btn-email" href="mailto:comercial@higilabor.com.br?subject=SST%20Mineradora%20Par%C3%A1%20-%20Diagn%C3%B3stico%20Gratuito">
+      ✉ comercial@higilabor.com.br
+    </a>
+  </div>
+  <p class="cta-contato">
+    (34) 3214-1720 &nbsp;|&nbsp; R. Arthur Bernardes, 1515 — Uberlândia/MG &nbsp;|&nbsp;
+    <a href="https://higilabor.com.br" target="_blank">higilabor.com.br</a>
+  </p>
+</div>
+
+<footer>
+  <p>© 2026 <a href="https://higilabor.com.br">Higilabor Consultoria SST</a> — Uberlândia/MG &nbsp;|&nbsp; (34) 3214-1720 &nbsp;|&nbsp; comercial@higilabor.com.br</p>
+</footer>
+
+<!-- WPP FLOAT -->
+<a class="wpp-float" href="https://wa.me/5534999715684?text=Ol%C3%A1%2C+gostaria+de+informa%C3%A7%C3%B5es+sobre+SST+para+minha+mineradora+no+Par%C3%A1" target="_blank" title="Falar no WhatsApp">💬</a>
+
+<script>
+// ── COUNTDOWN ─────────────────────────────────────────────
+const DEADLINE = new Date('2026-05-26T23:59:59');
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function tick(){
+  const diff = DEADLINE - new Date();
+  if(diff <= 0){ return; }
+  const d = Math.floor(diff / 864e5);
+  const h = Math.floor((diff % 864e5) / 36e5);
+  const m = Math.floor((diff % 36e5) / 6e4);
+  const s = Math.floor((diff % 6e4) / 1e3);
+  ['cd-d','nr1-dias','nr1-dias-2'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.textContent = d;
+  });
+  document.getElementById('cd-h').textContent = pad(h);
+  document.getElementById('cd-m').textContent = pad(m);
+  document.getElementById('cd-s').textContent = pad(s);
+}
+tick(); setInterval(tick, 1000);
+
+// ── FAQ ────────────────────────────────────────────────────
+function toggleFaq(btn){
+  const ans = btn.nextElementSibling;
+  const isOpen = ans.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+  if(!isOpen){ ans.classList.add('open'); btn.classList.add('open'); }
+}
+</script>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SST para Mineração — PGR NR-22, PCMSO e LTCAT",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Higilabor Consultoria SST",
+    "url": "https://higilabor.com.br",
+    "telephone": "+55-34-3214-1720",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "R. Arthur Bernardes, 1515",
+      "addressLocality": "Uberlândia",
+      "addressRegion": "MG",
+      "postalCode": "38400-368",
+      "addressCountry": "BR"
+    }
+  },
+  "serviceType": "Saúde e Segurança do Trabalho para Mineração",
+  "areaServed": {"@type": "State", "name": "Pará"},
+  "description": "Documentação SST completa para mineradoras no Pará: PGR NR-22, LTCAT, PCMSO, PPP e NR-1 psicossocial. Atendimento presencial. Preço justo."
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — FRENTE 4 Mineradoras do Pará | Higilabor SST</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --verde: #61a229;
+    --verde-esc: #4e8221;
+    --verde-claro: #d4edaa;
+    --azul: #0269B4;
+    --cinza-esc: #1e293b;
+    --cinza-med: #334155;
+    --cinza-claro: #f1f5f9;
+    --borda: #e2e8f0;
+    --texto: #1e293b;
+    --texto-suave: #64748b;
+    --amarelo: #f59e0b;
+    --vermelho: #ef4444;
+    --roxo: #8b5cf6;
+    --laranja: #f97316;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8fafc; color: var(--texto); font-size: 14px; }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--cinza-esc);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-badge {
+    background: var(--verde);
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .header p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .header-right { display: flex; gap: 10px; align-items: center; }
+  .badge-frente {
+    background: var(--verde);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    background: white;
+    border-bottom: 2px solid var(--borda);
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 14px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all .2s;
+  }
+  .tab-btn:hover { color: var(--verde); }
+  .tab-btn.active { color: var(--verde); border-bottom-color: var(--verde); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── MAIN LAYOUT ── */
+  .main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--borda);
+    border-top: 3px solid var(--borda);
+  }
+  .kpi-card.total    { border-top-color: var(--azul); }
+  .kpi-card.enviado  { border-top-color: var(--amarelo); }
+  .kpi-card.respondeu{ border-top-color: var(--verde); }
+  .kpi-card.reuniao  { border-top-color: var(--roxo); }
+  .kpi-card.proposta { border-top-color: var(--laranja); }
+  .kpi-card.fechado  { border-top-color: var(--verde-esc); }
+  .kpi-card.perdido  { border-top-color: var(--vermelho); }
+  .kpi-value { font-size: 32px; font-weight: 800; line-height: 1; }
+  .kpi-label { font-size: 11px; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
+  .kpi-card.total .kpi-value    { color: var(--azul); }
+  .kpi-card.enviado .kpi-value  { color: var(--amarelo); }
+  .kpi-card.respondeu .kpi-value{ color: var(--verde); }
+  .kpi-card.reuniao .kpi-value  { color: var(--roxo); }
+  .kpi-card.proposta .kpi-value { color: var(--laranja); }
+  .kpi-card.fechado .kpi-value  { color: var(--verde-esc); }
+  .kpi-card.perdido .kpi-value  { color: var(--vermelho); }
+
+  /* ── CHARTS ROW ── */
+  .charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .chart-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--borda);
+    padding: 16px;
+  }
+  .chart-card h3 { font-size: 13px; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+  .chart-wrap { position: relative; height: 200px; }
+
+  /* ── FILTERS ── */
+  .filters-bar {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--borda);
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .filters-bar label { font-size: 12px; font-weight: 600; color: var(--texto-suave); }
+  .filters-bar select, .filters-bar input {
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--texto);
+    background: white;
+    outline: none;
+  }
+  .filters-bar select:focus, .filters-bar input:focus { border-color: var(--verde); }
+  .filters-bar input[type=text] { width: 220px; }
+  .btn-export {
+    margin-left: auto;
+    background: var(--verde);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-export:hover { background: var(--verde-esc); }
+  .btn-reset {
+    background: var(--cinza-claro);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--borda);
+    overflow: hidden;
+  }
+  .table-header-row {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--borda);
+  }
+  .table-title { font-size: 14px; font-weight: 700; }
+  .table-count { font-size: 12px; color: var(--texto-suave); }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--cinza-claro); }
+  th {
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+  }
+  th:hover { color: var(--verde); }
+  th .sort-icon { margin-left: 4px; opacity: .4; }
+  th.sorted .sort-icon { opacity: 1; color: var(--verde); }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  tr:hover td { background: #fafffe; }
+  tr:last-child td { border-bottom: none; }
+
+  .empresa-name { font-weight: 600; max-width: 260px; }
+  .email-cell { font-size: 11px; color: var(--texto-suave); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Status badges */
+  .status-select {
+    border: none;
+    border-radius: 20px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
+    min-width: 110px;
+  }
+  .status-pendente  { background: #e2e8f0; color: #475569; }
+  .status-enviado   { background: #fef3c7; color: #92400e; }
+  .status-respondeu { background: #d1fae5; color: #065f46; }
+  .status-reuniao   { background: #ede9fe; color: #4c1d95; }
+  .status-proposta  { background: #fed7aa; color: #92400e; }
+  .status-fechado   { background: #bbf7d0; color: #14532d; }
+  .status-perdido   { background: #fee2e2; color: #7f1d1d; }
+
+  /* Mineral tags */
+  .mineral-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .min-Ouro          { background: #fef9c3; color: #854d0e; }
+  .min-Cobre         { background: #fce7f3; color: #831843; }
+  .min-Ferro         { background: #e0e7ff; color: #1e1b4b; }
+  .min-Areia         { background: #fef3c7; color: #78350f; }
+  .min-Argila        { background: #fce7f3; color: #9f1239; }
+  .min-Outro         { background: #e7e5e4; color: #44403c; }
+
+  .notes-btn {
+    background: none;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--texto-suave);
+  }
+  .notes-btn:hover { border-color: var(--verde); color: var(--verde); }
+
+  /* ── SCHEDULE ── */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .sched-card {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 14px;
+    border-left: 4px solid var(--borda);
+  }
+  .sched-card.email1 { border-left-color: var(--azul); }
+  .sched-card.email2 { border-left-color: var(--amarelo); }
+  .sched-card.email3 { border-left-color: var(--laranja); }
+  .sched-card.followup { border-left-color: var(--roxo); }
+  .sched-day { font-size: 11px; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; }
+  .sched-action { font-size: 14px; font-weight: 700; margin: 4px 0; }
+  .sched-detail { font-size: 12px; color: var(--texto-suave); }
+
+  /* ── EMAIL TEMPLATES ── */
+  .email-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .email-tab-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    transition: all .2s;
+  }
+  .email-tab-btn.active { background: var(--verde); color: white; border-color: var(--verde); }
+  .email-tab-btn:hover:not(.active) { border-color: var(--verde); color: var(--verde); }
+  .email-panel { display: none; }
+  .email-panel.active { display: block; }
+  .email-card {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .email-meta {
+    background: var(--cinza-claro);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--borda);
+  }
+  .email-meta-row { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; }
+  .email-meta-row:last-child { margin-bottom: 0; }
+  .email-meta-label { font-size: 11px; font-weight: 700; color: var(--texto-suave); width: 60px; flex-shrink: 0; text-transform: uppercase; }
+  .email-meta-val { font-size: 13px; font-weight: 600; }
+  .email-subject { font-size: 15px; font-weight: 700; color: var(--texto); }
+  .email-body {
+    padding: 20px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    font-family: Georgia, serif;
+    color: #334155;
+  }
+  .email-vars { padding: 14px 20px; background: #fafffe; border-top: 1px solid var(--borda); }
+  .email-vars-title { font-size: 11px; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; margin-bottom: 8px; }
+  .var-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .var-tag { background: var(--verde-claro); color: var(--verde-esc); padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; font-family: monospace; }
+  .copy-btn {
+    float: right;
+    background: var(--cinza-claro);
+    border: 1px solid var(--borda);
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .copy-btn:hover { background: var(--verde-claro); border-color: var(--verde); }
+  .day-badge {
+    display: inline-block;
+    background: var(--azul);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-right: 6px;
+  }
+
+  /* ── NOTES MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    width: 480px;
+    max-width: 95vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .modal p { font-size: 12px; color: var(--texto-suave); margin-bottom: 14px; }
+  .modal textarea {
+    width: 100%;
+    height: 120px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 13px;
+    resize: vertical;
+    outline: none;
+    font-family: inherit;
+  }
+  .modal textarea:focus { border-color: var(--verde); }
+  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+  .btn-cancel { padding: 8px 16px; border: 1px solid var(--borda); border-radius: 6px; background: white; cursor: pointer; font-size: 13px; }
+  .btn-save { padding: 8px 16px; border: none; border-radius: 6px; background: var(--verde); color: white; cursor: pointer; font-size: 13px; font-weight: 700; }
+
+  /* ── PROGRESS BAR ── */
+  .funnel-bar { margin-top: 16px; }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .funnel-label { width: 90px; font-size: 12px; color: var(--texto-suave); text-align: right; flex-shrink: 0; }
+  .funnel-track { flex: 1; height: 20px; background: var(--cinza-claro); border-radius: 4px; overflow: hidden; }
+  .funnel-fill { height: 100%; border-radius: 4px; transition: width .6s ease; display: flex; align-items: center; padding-left: 8px; }
+  .funnel-fill span { font-size: 11px; font-weight: 700; color: white; }
+  .funnel-num { width: 30px; font-size: 13px; font-weight: 700; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    .charts-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .charts-row { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-badge">H</div>
+    <div>
+      <h1>Dashboard Comercial — Mineradoras do Pará</h1>
+      <p>Higilabor SST · Campanha FRENTE 4 · Sequência de 3 e-mails · NR-22 + NR-1 + PCMSO</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge-frente">FRENTE 4</span>
+    <span style="font-size:12px;color:#94a3b8;" id="last-updated">Atualizado agora</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Visão Geral</button>
+  <button class="tab-btn" onclick="showTab('empresas')">Empresas (95)</button>
+  <button class="tab-btn" onclick="showTab('emails')">E-mails</button>
+  <button class="tab-btn" onclick="showTab('cronograma')">Cronograma</button>
+</div>
+
+<!-- ════════════ TAB: VISÃO GERAL ════════════ -->
+<div id="tab-overview" class="tab-content active">
+<div class="main">
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card total">
+      <div class="kpi-value" id="kpi-total">95</div>
+      <div class="kpi-label">Total Prio A</div>
+    </div>
+    <div class="kpi-card enviado">
+      <div class="kpi-value" id="kpi-enviado">0</div>
+      <div class="kpi-label">Enviados</div>
+    </div>
+    <div class="kpi-card respondeu">
+      <div class="kpi-value" id="kpi-respondeu">0</div>
+      <div class="kpi-label">Responderam</div>
+    </div>
+    <div class="kpi-card reuniao">
+      <div class="kpi-value" id="kpi-reuniao">0</div>
+      <div class="kpi-label">Reunião</div>
+    </div>
+    <div class="kpi-card proposta">
+      <div class="kpi-value" id="kpi-proposta">0</div>
+      <div class="kpi-label">Proposta</div>
+    </div>
+    <div class="kpi-card fechado">
+      <div class="kpi-value" id="kpi-fechado">0</div>
+      <div class="kpi-label">Fechados</div>
+    </div>
+    <div class="kpi-card perdido">
+      <div class="kpi-value" id="kpi-perdido">0</div>
+      <div class="kpi-label">Perdidos</div>
+    </div>
+    <div class="kpi-card" style="border-top-color:#0e9f6e;">
+      <div class="kpi-value" style="color:#0e9f6e;" id="kpi-mrr">R$ 0</div>
+      <div class="kpi-label">Receita Potencial</div>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Por Mineral</h3>
+      <div class="chart-wrap"><canvas id="chartMineral"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Top Municípios</h3>
+      <div class="chart-wrap"><canvas id="chartMunicipio"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Funil de Conversão</h3>
+      <div class="funnel-bar" id="funnelBar"></div>
+    </div>
+  </div>
+
+  <!-- RESUMO TEXTO -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="chart-card">
+      <h3>Contexto da Campanha</h3>
+      <div style="font-size:13px;line-height:1.8;margin-top:8px;color:#334155;">
+        <strong>Base:</strong> 95 empresas mineradoras — Prioridade A (minerais críticos + e-mail confirmado)<br>
+        <strong>Normas:</strong> NR-22 (Mineração) · NR-7 (PCMSO) · NR-1 Psicossocial (obrig. 26/05/2026)<br>
+        <strong>Pacote:</strong> Conformidade completa a partir de <strong style="color:var(--verde)">R$ 2.800/empresa</strong><br>
+        <strong>Atendimento:</strong> Presencial ao vivo — visita técnica in loco<br>
+        <strong>Sequência:</strong> 3 e-mails · Dia 0 / Dia 3 / Dia 7<br>
+        <strong>Objetivo:</strong> 5 reuniões → 3 propostas → 2 contratos na rodada
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Projeção Financeira</h3>
+      <div style="font-size:13px;line-height:1.9;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--borda);">
+          <span>Taxa de resposta estimada (5%)</span><span style="font-weight:700;">~5 empresas</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--borda);">
+          <span>Fechamento estimado (40% das respostas)</span><span style="font-weight:700;">~2 contratos</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--borda);">
+          <span>Ticket mínimo por empresa</span><span style="font-weight:700;">R$ 2.800</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--borda);">
+          <span>Ticket médio esperado (pacote completo)</span><span style="font-weight:700;">R$ 4.500</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;background:var(--verde-claro);padding:6px 8px;border-radius:4px;margin-top:6px;">
+          <span style="font-weight:700;">Receita rodada 1 (conservador)</span>
+          <span style="font-weight:800;color:var(--verde-esc);">R$ 5.600–9.000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ TAB: EMPRESAS ════════════ -->
+<div id="tab-empresas" class="tab-content">
+<div class="main">
+
+  <div class="filters-bar">
+    <label>Mineral:</label>
+    <select id="filt-mineral" onchange="filterTable()">
+      <option value="">Todos</option>
+      <option>Ouro</option>
+      <option>Cobre</option>
+      <option>Ferro/Manganês</option>
+      <option>Areia/Cascalho</option>
+      <option>Argila</option>
+      <option>Outro</option>
+    </select>
+    <label>Município:</label>
+    <select id="filt-municipio" onchange="filterTable()">
+      <option value="">Todos</option>
+    </select>
+    <label>Status:</label>
+    <select id="filt-status" onchange="filterTable()">
+      <option value="">Todos</option>
+      <option value="pendente">Pendente</option>
+      <option value="enviado">Enviado</option>
+      <option value="respondeu">Respondeu</option>
+      <option value="reuniao">Reunião</option>
+      <option value="proposta">Proposta</option>
+      <option value="fechado">Fechado</option>
+      <option value="perdido">Perdido</option>
+    </select>
+    <label>Buscar:</label>
+    <input type="text" id="filt-search" placeholder="Nome da empresa..." oninput="filterTable()">
+    <button class="btn-reset" onclick="resetFilters()">Limpar</button>
+    <button class="btn-export" onclick="exportCSV()">⬇ Exportar CSV</button>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-header-row">
+      <span class="table-title">Empresas Prioridade A — Pará</span>
+      <span class="table-count" id="table-count">Exibindo 95 de 95</span>
+    </div>
+    <div style="overflow-x:auto;">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)" title="Ordenar"># <span class="sort-icon">↕</span></th>
+          <th onclick="sortTable(1)" title="Ordenar">Empresa <span class="sort-icon">↕</span></th>
+          <th onclick="sortTable(2)" title="Ordenar">Município <span class="sort-icon">↕</span></th>
+          <th onclick="sortTable(3)" title="Ordenar">Mineral <span class="sort-icon">↕</span></th>
+          <th>E-mail</th>
+          <th>Status</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ TAB: E-MAILS ════════════ -->
+<div id="tab-emails" class="tab-content">
+<div class="main">
+
+  <div class="email-tabs">
+    <button class="email-tab-btn active" onclick="showEmail(0)">
+      <span class="day-badge" style="background:var(--azul)">DIA 0</span> E-mail 1 — Abertura
+    </button>
+    <button class="email-tab-btn" onclick="showEmail(1)">
+      <span class="day-badge" style="background:var(--amarelo)">DIA 3</span> E-mail 2 — Follow-up Urgência
+    </button>
+    <button class="email-tab-btn" onclick="showEmail(2)">
+      <span class="day-badge" style="background:var(--laranja)">DIA 7</span> E-mail 3 — Proposta Direta
+    </button>
+  </div>
+
+  <!-- EMAIL 1 -->
+  <div class="email-panel active" id="email-panel-0">
+    <div class="email-card">
+      <div class="email-meta">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Dia</span>
+              <span class="email-meta-val">Dia 0 — Abertura da sequência</span>
+            </div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Assunto</span>
+              <span class="email-subject">PCMSO e PGR NR-22 para operações de mineração no Pará — NR-1 obrigatória em maio</span>
+            </div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Tom</span>
+              <span class="email-meta-val">Informativo / Apresentação institucional</span>
+            </div>
+          </div>
+          <button class="copy-btn" onclick="copyEmail(0)">Copiar texto</button>
+        </div>
+      </div>
+      <div class="email-body" id="email-body-0">Prezados,
+
+A Higilabor é uma consultoria especializada em Saúde e Segurança do Trabalho com atuação em setores de alto risco, incluindo mineração.
+
+Identificamos que a [EMPRESA] atua com extração de [SUBSTÂNCIA] em [MUNICÍPIO]/PA e pode precisar de suporte técnico em:
+
+→ PCMSO (NR-7) — Programa de Controle Médico de Saúde Ocupacional, com médica do trabalho própria
+→ PGR completo conforme NR-22 — gestão de todos os riscos específicos da mineração
+→ LTCAT — Laudo Técnico para eSocial, aposentadoria especial e perícias
+→ NR-1 Psicossocial — obrigatória a partir de 26/05/2026 para todas as empresas com CLT
+→ PPP atualizado — Perfil Profissiográfico Previdenciário
+
+Fazemos visita técnica presencial à operação, com entrega de documentação completa e suporte contínuo ao longo do ano.
+
+Conformidade completa a partir de R$ 2.800/empresa.
+
+Posso enviar uma proposta específica para a [EMPRESA] esta semana?
+
+Atenciosamente,
+
+[NOME DO RESPONSÁVEL]
+Higilabor — Consultoria SST
+comercial@higilabor.com.br | (34) 3214-1720 | (34) 99971-5684
+R. Arthur Bernardes 1515 — Uberlândia/MG</div>
+      <div class="email-vars">
+        <div class="email-vars-title">Variáveis a personalizar</div>
+        <div class="var-tags">
+          <span class="var-tag">[EMPRESA]</span>
+          <span class="var-tag">[SUBSTÂNCIA]</span>
+          <span class="var-tag">[MUNICÍPIO]</span>
+          <span class="var-tag">[NOME DO RESPONSÁVEL]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL 2 -->
+  <div class="email-panel" id="email-panel-1">
+    <div class="email-card">
+      <div class="email-meta">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Dia</span>
+              <span class="email-meta-val">Dia 3 — Follow-up com âncora de urgência</span>
+            </div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Assunto</span>
+              <span class="email-subject">[EMPRESA] — 48 dias para a NR-1 psicossocial se tornar obrigatória na mineração</span>
+            </div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Tom</span>
+              <span class="email-meta-val">Urgência regulatória + risco de embargo</span>
+            </div>
+          </div>
+          <button class="copy-btn" onclick="copyEmail(1)">Copiar texto</button>
+        </div>
+      </div>
+      <div class="email-body" id="email-body-1">Prezados,
+
+Retomando meu e-mail da semana passada.
+
+A [EMPRESA] opera no setor de mineração — um dos segmentos mais fiscalizados pelo MTE e DNPM. Quero chamar atenção para dois pontos urgentes:
+
+1. NR-1 PSICOSSOCIAL — prazo: 26/05/2026
+   Todas as empresas com funcionários CLT devem incluir riscos psicossociais no PGR até essa data.
+   Quem não se adequar estará sujeito a multas a partir de R$ 6.674 por auto de infração.
+
+2. NR-22 — PCMSO específico para mineração
+   A operação com [SUBSTÂNCIA] exige PCMSO diferenciado, com protocolo de exposição a poeira, agentes químicos e agentes físicos específicos da atividade.
+   Sem documentação válida, a empresa fica vulnerável a embargos e passivos trabalhistas.
+
+Trabalhamos com visita técnica presencial, elaboração completa e suporte durante todo o ano.
+
+O pacote inclui PGR + PCMSO + NR-1 psicossocial + LTCAT + PPP.
+
+Conformidade completa a partir de R$ 2.800. Consigo fechar agenda esta semana?
+
+Atenciosamente,
+
+[NOME DO RESPONSÁVEL]
+Higilabor — Consultoria SST
+comercial@higilabor.com.br | (34) 99971-5684</div>
+      <div class="email-vars">
+        <div class="email-vars-title">Variáveis a personalizar</div>
+        <div class="var-tags">
+          <span class="var-tag">[EMPRESA]</span>
+          <span class="var-tag">[SUBSTÂNCIA]</span>
+          <span class="var-tag">[NOME DO RESPONSÁVEL]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL 3 -->
+  <div class="email-panel" id="email-panel-2">
+    <div class="email-card">
+      <div class="email-meta">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Dia</span>
+              <span class="email-meta-val">Dia 7 — Proposta direta / Encerramento da sequência</span>
+            </div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Assunto</span>
+              <span class="email-subject">Proposta SST para [EMPRESA] — PCMSO + PGR NR-22 + NR-1 · R$ 2.800</span>
+            </div>
+            <div class="email-meta-row">
+              <span class="email-meta-label">Tom</span>
+              <span class="email-meta-val">Proposta concreta + decisão / Último contato da sequência</span>
+            </div>
+          </div>
+          <button class="copy-btn" onclick="copyEmail(2)">Copiar texto</button>
+        </div>
+      </div>
+      <div class="email-body" id="email-body-2">Prezados,
+
+Este é meu terceiro e último contato desta série.
+
+Segue a proposta resumida para a [EMPRESA]:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PACOTE SST MINERAÇÃO — HIGILABOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✔ PGR completo conforme NR-22
+✔ PCMSO com médica do trabalho própria
+✔ NR-1 psicossocial (adequação até 26/05/2026)
+✔ LTCAT — Laudo Técnico para eSocial
+✔ PPP atualizado
+✔ Visita técnica presencial à operação
+✔ Suporte durante 12 meses
+
+Valor: a partir de R$ 2.800/empresa
+Forma de pagamento: à vista ou parcelado
+
+Entrega: documentação completa em até 15 dias úteis após visita técnica.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Se tiver interesse, responda este e-mail ou me chame no WhatsApp: (34) 99971-5684.
+
+Se o momento não for o ideal agora, sem problema — fico à disposição quando precisar.
+
+Atenciosamente,
+
+[NOME DO RESPONSÁVEL]
+Higilabor — Consultoria SST
+comercial@higilabor.com.br
+(34) 3214-1720 | (34) 99971-5684
+higilabor.com.br</div>
+      <div class="email-vars">
+        <div class="email-vars-title">Variáveis a personalizar</div>
+        <div class="var-tags">
+          <span class="var-tag">[EMPRESA]</span>
+          <span class="var-tag">[NOME DO RESPONSÁVEL]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ TAB: CRONOGRAMA ════════════ -->
+<div id="tab-cronograma" class="tab-content">
+<div class="main">
+
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;">
+    <div class="chart-card">
+      <h3>Estratégia da Sequência</h3>
+      <div style="font-size:13px;line-height:1.8;margin-top:8px;">
+        <div style="margin-bottom:14px;">
+          <div style="font-weight:700;color:var(--azul);margin-bottom:4px;">DIA 0 — Abertura</div>
+          <div style="color:#475569;">Apresentação institucional. Tom: informativo. Âncora: NR-22 + NR-1 obrigatória. Gatilho de resposta: "Posso enviar proposta esta semana?"</div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-weight:700;color:var(--amarelo);margin-bottom:4px;">DIA 3 — Follow-up Urgência</div>
+          <div style="color:#475569;">Reativação com prazo concreto: 26/05/2026. Risco de embargo e multa. Tom: consultivo mas urgente. Gatilho: "Consigo fechar agenda esta semana?"</div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-weight:700;color:var(--laranja);margin-bottom:4px;">DIA 7 — Proposta Direta</div>
+          <div style="color:#475569;">Proposta concreta com preço. Tom: direto ao ponto. Opção de encerramento educado. Gatilho: WhatsApp.</div>
+        </div>
+        <div style="padding:10px;background:var(--verde-claro);border-radius:6px;font-size:12px;">
+          <strong>Após dia 7:</strong> empresas que não responderam entram em lista de reabordagem a cada 30 dias, com novo contexto (fiscal, NR atualizada, etc.)
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Calendário de Disparo (semana 1)</h3>
+      <div class="schedule-grid" id="schedGrid"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;" class="chart-card">
+    <h3>Roteiro de Disparo — Lote Diário Sugerido</h3>
+    <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:13px;">
+      <thead style="background:var(--cinza-claro);">
+        <tr>
+          <th style="padding:8px 12px;text-align:left;font-size:11px;color:var(--texto-suave);text-transform:uppercase;">Dia</th>
+          <th style="padding:8px 12px;text-align:left;font-size:11px;color:var(--texto-suave);text-transform:uppercase;">Ação</th>
+          <th style="padding:8px 12px;text-align:left;font-size:11px;color:var(--texto-suave);text-transform:uppercase;">Qtd Recomendada</th>
+          <th style="padding:8px 12px;text-align:left;font-size:11px;color:var(--texto-suave);text-transform:uppercase;">Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--borda);">
+          <td style="padding:9px 12px;font-weight:700;color:var(--azul);">Dia 0 (Seg)</td>
+          <td style="padding:9px 12px;">E-mail 1 — Lote A (Ouro)</td>
+          <td style="padding:9px 12px;">15–20/dia</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">Evitar spam: max 20/dia por domínio</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--borda);">
+          <td style="padding:9px 12px;font-weight:700;color:var(--azul);">Dia 0 (Ter)</td>
+          <td style="padding:9px 12px;">E-mail 1 — Lote B (Cobre + Ferro)</td>
+          <td style="padding:9px 12px;">15–20/dia</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">Personalizar [SUBSTÂNCIA] por grupo</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--borda);">
+          <td style="padding:9px 12px;font-weight:700;color:var(--azul);">Dia 0 (Qua)</td>
+          <td style="padding:9px 12px;">E-mail 1 — Lote C (restante)</td>
+          <td style="padding:9px 12px;">20–30/dia</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">Concluir 1ª rodada</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--borda);">
+          <td style="padding:9px 12px;font-weight:700;color:var(--amarelo);">Dia 3 (Qui)</td>
+          <td style="padding:9px 12px;">E-mail 2 — todos que não responderam</td>
+          <td style="padding:9px 12px;">Todos sem resposta</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">Follow-up em thread do mesmo e-mail</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--borda);">
+          <td style="padding:9px 12px;font-weight:700;color:var(--amarelo);">Dia 4 (Sex)</td>
+          <td style="padding:9px 12px;">Ligar para respondentes / agendar reunião</td>
+          <td style="padding:9px 12px;">Todos que responderam</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">WhatsApp (34) 99971-5684</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--borda);">
+          <td style="padding:9px 12px;font-weight:700;color:var(--laranja);">Dia 7 (Ter)</td>
+          <td style="padding:9px 12px;">E-mail 3 — Proposta final (sem resposta)</td>
+          <td style="padding:9px 12px;">Todos sem resposta</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">Encerra a sequência ativa</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;font-weight:700;color:var(--roxo);">Dia 14+</td>
+          <td style="padding:9px 12px;">Reabordagem 30 dias com novo contexto</td>
+          <td style="padding:9px 12px;">Sem resposta + perdidos</td>
+          <td style="padding:9px 12px;color:var(--texto-suave);">Nova NR, fiscalização, notícia do setor</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- MODAL DE NOTAS -->
+<div class="modal-overlay" id="notesModal" onclick="closeModal(event)">
+  <div class="modal">
+    <h3 id="modal-empresa">Notas</h3>
+    <p id="modal-sub">Registre interações, ligações, respostas recebidas.</p>
+    <textarea id="modal-notes" placeholder="Ex: Ligou em 10/04, pediu proposta para 3 funcionários. Retornar na quinta."></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="document.getElementById('notesModal').classList.remove('open')">Cancelar</button>
+      <button class="btn-save" onclick="saveNote()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════ DATA ════════════
+const COMPANIES = [{"empresa":"ALTA FLORESTA GOLD MINERACAO S.A","municipio":"JACAREACANGA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"abadio.luciano@aflgold.com","status":"pendente"},{"empresa":"ALTA FLORESTA GOLD MINERAÇÃO S/A RECADASTRADO","municipio":"JACAREACANGA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"ewertonreis@yahoo.com.br","status":"pendente"},{"empresa":"AMS MINERACAO, EXPORTACAO, BENEFICIAMENTO E EXPORTACAO LTDA","municipio":"ITAITUBA","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"assouza.mba@gmail.com","status":"pendente"},{"empresa":"ANGRA METALS MINERAÇÃO","municipio":"TUCUMÃ","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"AVB Mineração LTDA","municipio":"CANAÃ DOS CARAJÁS","mineral":"Ouro","substancia":"MINÉRIO DE COBRE OURO MINÉRIO ","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"Aura Gold Mineração Ltda RECADASTRADO","municipio":"SANTA MARIA DAS BARREIRAS","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"icampos@auraminerals.com","status":"pendente"},{"empresa":"Avanco Resources Mineração LTDA","municipio":"PARAUAPEBAS","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"BEMISA BRASIL EXPLORAÇÃO MINERAL S.A.","municipio":"SANTANA DO ARAGUAIA","mineral":"Ouro","substancia":"MINÉRIO DE OURO","email":"fguimaraes@bemisa.com.br","status":"pendente"},{"empresa":"BR COMERCIO ATACADISTA DE PRODUTOS MINERAIS EXPORTACAO E IMPORTACAO LTDA","municipio":"ÁGUA AZUL DO NORTE","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"assouza.mba@gmail.com","status":"pendente"},{"empresa":"BRASIL MANGANÊS LTDA","municipio":"ELDORADO DO CARAJÁS","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE FERRO MINÉRIO DE MA","email":"rhuanteixeira_geo@hotmail.com","status":"pendente"},{"empresa":"BRASIL MARABA MINERADORA LTDA","municipio":"PACAJÁ","mineral":"Ouro","substancia":"OURO","email":"diretoria@geoscan.com.br","status":"pendente"},{"empresa":"BRI MINERAÇÃO LTDA","municipio":"CACHOEIRA DO PIRIÁ","mineral":"Ouro","substancia":"MINÉRIO DE OURO","email":"ppereira@brazilresources.com","status":"pendente"},{"empresa":"Belo Sun Mineração Ltda","municipio":"ANAPU","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"ccosta@forbesmanhattan.com.br","status":"pendente"},{"empresa":"Brazauro Recursos Minerais LTDA.","municipio":"ITAITUBA","mineral":"Ouro","substancia":"OURO Industrial","email":"juliano.ferreira@breldoradogold.com.br","status":"pendente"},{"empresa":"Brazil Americas Invest. e Part. Mineração Ltda","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"Brazilian Resources Mineração LTDA RECADASTRADO","municipio":"NOVO PROGRESSO","mineral":"Ouro","substancia":"OURO Ourivesaria","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"C DE OLIVEIRA CORDEIRO EIRELI","municipio":"ITUPIRANGA","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"grtdaniel@hotmail.com","status":"pendente"},{"empresa":"CARAJAS PESQUISA E MINERAÇÃO EIRELI","municipio":"OURILÂNDIA DO NORTE","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"gilliard-moreira@hotmail.com","status":"pendente"},{"empresa":"CARLOS SILVEIRA ALVES","municipio":"ELDORADO DO CARAJÁS","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE MA","email":"meioambientepara@gmail.com","status":"pendente"},{"empresa":"CARVALHO & BEZERRA, MINERADORA LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"rhuanteixeira_geo@hotmail.com","status":"pendente"},{"empresa":"CELESTA MINERAÇÃO S.A","municipio":"CURIONÓPOLIS","mineral":"Cobre","substancia":"MINÉRIO DE COBRE","email":"marcos.paulo@mcelesta.com.br","status":"pendente"},{"empresa":"CENTAURUS BRASIL MINERAÇÃO LTDA","municipio":"MARABÁ","mineral":"Cobre","substancia":"MINÉRIO DE COBRE Industrial","email":"bruno.scarpelli@centaurus.com.au","status":"pendente"},{"empresa":"CHAPLEAU EXPLORACAO MINERAL LTDA","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial Ati","email":"helio.tavares@serabi.com.br","status":"pendente"},{"empresa":"CMB COLISEUM MINERACAO BRASIL LTDA","municipio":"URUARÁ","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE MA","email":"assouza.mba@gmail.com","status":"pendente"},{"empresa":"CNM- Companhia Nacional de Mineração RECADASTRADO","municipio":"CACHOEIRA DO PIRIÁ","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"diego.nicolau@kinross.com","status":"pendente"},{"empresa":"COBREX PROSPECÇÃO MINERAL AS","municipio":"SÃO FÉLIX DO XINGU","mineral":"Cobre","substancia":"MINÉRIO DE COBRE","email":"rpinheiro@codelco.com.br","status":"pendente"},{"empresa":"COMERCIO DE AREIA KM 08 LTDA","municipio":"MARABÁ","mineral":"Ouro","substancia":"MINÉRIO DE OURO AREIA CASCALHO","email":"geomapp@hotmail.com","status":"pendente"},{"empresa":"CONSTRUTORA E BRITAGEM MIL ANOS LTDA RECADASTRADO","municipio":"ITUPIRANGA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial GRA","email":"gerencia@milanos.com.br","status":"pendente"},{"empresa":"COOPERCAM","municipio":"SÃO FÉLIX DO XINGU","mineral":"Outro","substancia":"MINÉRIO DE TUNGSTÊNIO COLUMBIT","email":"mineracaocoopermine@hotmail.com","status":"pendente"},{"empresa":"DC MINERAÇÃO E COMERCIO LTDA","municipio":"PORTEL","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"diogo@dcmineracao.com.br","status":"pendente"},{"empresa":"DC MINERAÇÃO LTDA","municipio":"PACAJÁ","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"diogo@dcmineracao.com.br","status":"pendente"},{"empresa":"DUARTE SERVIÇOS ADMINISTRATIVOS EIRELI","municipio":"ELDORADO DO CARAJÁS","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"mtdsura@hotmail.com","status":"pendente"},{"empresa":"DUBAI MINERAÇÃO LTDA RECADASTRADO","municipio":"CURIONÓPOLIS","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"samirchamon@gmail.com","status":"pendente"},{"empresa":"EAGLE COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE MINERAIS LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"fabian@brasilteams.com","status":"pendente"},{"empresa":"EMFX MINERAÇÃO LTDA-EPP","municipio":"JACAREACANGA","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"mariorubens1952@gmail.com","status":"pendente"},{"empresa":"Electrum Capital Pesquisa de Recursos Minerais Ltda.","municipio":"JACAREACANGA","mineral":"Ouro","substancia":"MINÉRIO DE OURO","email":"ewertonreis@yahoo.com.br","status":"pendente"},{"empresa":"FALCON METAIS LTDA","municipio":"RIO MARIA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"","status":"pendente"},{"empresa":"FILE-MAQ","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"filepecasmt@hotmail.com","status":"pendente"},{"empresa":"Five Star Mineração Ltda RECADASTRADO","municipio":"VISEU","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"G R AMORIN MINERAIS EIRELI","municipio":"RIO MARIA","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"ja1000sa@hotmail.com","status":"pendente"},{"empresa":"G. R. FROTA EIRELI","municipio":"MARABÁ","mineral":"Areia/Cascalho","substancia":"MINÉRIO DE MANGANÊS CASCALHO C","email":"mtoscanos@hotmail.com","status":"pendente"},{"empresa":"GANA GOLD MINERAÇÃO LTDA","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"mineracao@ganagold.com.br","status":"pendente"},{"empresa":"GOLDEN TAPAJOS MINERAÇÃO LTDA RECADASTRADO","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"GRAO PARA MINERADORA E PRESTADORA DE SERVICOS LTD","municipio":"SANTA MARIA DAS BARREIRAS","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"marcosborges@grupomarcovel.com.br","status":"pendente"},{"empresa":"J.J.G.E COMÉRCIO ATACADISTA DE PROSUTOS DA EXTRAÇÃO MINERAL LTDA-ME","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"eliezer@rockenbach.adm.br","status":"pendente"},{"empresa":"LARA DO BRASIL MINERACAO LTDA","municipio":"CUMARU DO NORTE","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"lfranca@ffalegal.com.br","status":"pendente"},{"empresa":"LARA DO BRASIL RECADASTRADO","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"LATINO AMERICANA METAIS LTDA EPP","municipio":"PAPARAUAPEBAS","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"rodrigo.milani@hotmail.com","status":"pendente"},{"empresa":"M. DE A. DELGADO LTDA RE CADASTRADO","municipio":"SÃO FELIX DO XINGU","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"analithosconsultoria@gmail.com","status":"pendente"},{"empresa":"MAGELLAN MINERAIS PROSPECCAO GEOLOGICA LTDA","municipio":"ÁGUA AZUL DO NORTE","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"alcebiadesmacedo@hotmail.com","status":"pendente"},{"empresa":"MC CAMARGO & CIA LTDA","municipio":"CURIONÓPOLIS","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE FE","email":"pedropauloengminas@gmail.com","status":"pendente"},{"empresa":"METAL LIGA INDÚSTRIA COMÉRCIO E EXPORTAÇÃO EIRELI-EPP","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"","status":"pendente"},{"empresa":"METAL X MINERAÇÃO LTDA","municipio":"ELDORADO DO CARAJÁS","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"registro@contaspmab.com.br","status":"pendente"},{"empresa":"MINERACAO BURITIRAMA S.A.","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MANGANÊS","email":"erick@buritirama.com","status":"pendente"},{"empresa":"MINERACAO MOEMA LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"sandrohamilton@grupomaringa.com.br","status":"pendente"},{"empresa":"MINERAÇAO ITAMARACA LTDA. RECADASTRADO","municipio":"SÃO FÉLIX DO XINGU","mineral":"Cobre","substancia":"MINÉRIO DE COBRE Industrial","email":"daniela.nogueira@angloamerican.com","status":"pendente"},{"empresa":"MINERAÇÃO IRAJÁ S/A","municipio":"CUMARU DO NORTE","mineral":"Ouro","substancia":"OURO Ourivesaria MINÉRIO DE CO","email":"salberto@santaelina.com.br","status":"pendente"},{"empresa":"MINERAÇÃO PARABRÁS LTDA RECADASTRADO","municipio":"SÃO FÉLIX DO XINGU","mineral":"Cobre","substancia":"MINÉRIO DE COBRE Industrial","email":"n.josesilva@gmail.com","status":"pendente"},{"empresa":"MINERAÇÃO SERRA DOURADA LTDA RECADASTRADO","municipio":"SANTANA DO ARAGUAIA","mineral":"Outro","substancia":"CALCÁRIO Fabricação de cimento","email":"debora8131@yahoo.com.br","status":"pendente"},{"empresa":"MINERAÇÃO VILA PORTO RICO LTDA","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"lestrageo@hotmail.com","status":"pendente"},{"empresa":"MINERSUL MINERAÇÃO EIRELI","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"willis_hugos@yahoo.com.br","status":"pendente"},{"empresa":"MONTE CARMELO MINERACAO EIRELI","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"andreng.minas@hotmail.com","status":"pendente"},{"empresa":"MRX MINERAÇÃO EIRELI","municipio":"RIO MARIA","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS MINÉRIO DE","email":"maurilio@mrxmineracao.com.br","status":"pendente"},{"empresa":"Mineração Castelo dos Sonhos Ltda RECADASTRADO","municipio":"ALTAMIRA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial Ati","email":"alzieth@vsmweb.com.br","status":"pendente"},{"empresa":"Mineração Regent Brasil LTDA RECADASTRADO","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"Mineração Santa Elina Ind. e Com. S/A","municipio":"JACAREACANGA","mineral":"Cobre","substancia":"MINÉRIO DE COBRE Industrial MI","email":"salberto@santaelina.com.br","status":"pendente"},{"empresa":"ORE MINERIOS E COMERCIO EIRELI","municipio":"BREJO GRANDE DO ARAGUAIA","mineral":"Ferro/Manganês","substancia":"GALENA MINÉRIO DE FERRO MINÉRI","email":"wallasmds@hotmail.com","status":"pendente"},{"empresa":"ORION MINERAÇÃO E GEOLOGIA LTDA","municipio":"CURIONÓPOLIS","mineral":"Cobre","substancia":"MINÉRIO DE COBRE Industrial MI","email":"orionmineracao@gmail.com","status":"pendente"},{"empresa":"OURILANDIA MINERAÇÃO","municipio":"ÁGUA AZUL DO NORTE","mineral":"Cobre","substancia":"MINÉRIO DE COBRE MINÉRIO DE OU","email":"bru.facundo@gmail.com","status":"pendente"},{"empresa":"PARA ALTA FLORESTA GOLD MINERAÇÃO LTDA","municipio":"JACAREACANGA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"abadio.luciano@aflgold.com","status":"pendente"},{"empresa":"PLANALTO MINERACAO LTDA","municipio":"CANAÃ DOS CARAJÁS","mineral":"Ouro","substancia":"MINÉRIO DE OURO MINÉRIO DE COB","email":"lfranca@ffalegal.com.br","status":"pendente"},{"empresa":"PRIME MINERAÇAO LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"eng.danilosantana@hotmail.com","status":"pendente"},{"empresa":"RAIMUNDA OLIVEIRA NUNES","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"farias.geologia@gmail.com","status":"pendente"},{"empresa":"RCA MINERAÇÃO E PARTICIPAÇÃO LTDA","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO","email":"ewertonreis@yahoo.com.br","status":"pendente"},{"empresa":"RECURSOS MINERAIS DO BRASIL S.A RECADASTRADO","municipio":"MARABÁ","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"samuel@rmbbrasil.com.br","status":"pendente"},{"empresa":"RIO MINAS MINERAÇÃO S/A","municipio":"CURIONÓPOLIS","mineral":"Ouro","substancia":"COBRE OURO Industrial","email":"salberto@santaelina.com.br","status":"pendente"},{"empresa":"RIO VERMELHO IMPORTACAO E EXPORTACAO DE DIAMANTES","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"riovermelho@mail.com","status":"pendente"},{"empresa":"RJ EXPLORE COMERCIO DE MINERIOS LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"geotexs@hotmail.com","status":"pendente"},{"empresa":"SALOBO METAIS S.A.","municipio":"MARABÁ","mineral":"Cobre","substancia":"COBRE","email":"wanilson.trevenzoli@vale.com","status":"pendente"},{"empresa":"SBM SISTEMA BRASILEIRO DE MINERIOS LTDA","municipio":"CONCEIÇÃO DO ARAGUAIA","mineral":"Ouro","substancia":"MINÉRIO DE OURO","email":"jonasmaggi@hotmail.com","status":"pendente"},{"empresa":"SCM MINERAÇÃO LTDA","municipio":"CURIONÓPOLIS","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"bru.facundo@gmail.com","status":"pendente"},{"empresa":"SERABI MINERAÇÃO S.A.","municipio":"ITAITUBA","mineral":"Ouro","substancia":"OURO/PRATA/ COBRE","email":"ulisses.melo@serabi.com.br","status":"pendente"},{"empresa":"SERENO - RMB MANGANÊS LTDA - EPP","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"samuel@rmb.com.br","status":"pendente"},{"empresa":"T M MINERACAO EXTRACAO E EXPORTACAO LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"assouza.mba@gmail.com","status":"pendente"},{"empresa":"TAURI MINERAÇÃO EIRELI","municipio":"ITUPIRANGA","mineral":"Ouro","substancia":"MINÉRIO DE OURO DIAMANTE","email":"taurimineracao@gmail.com","status":"pendente"},{"empresa":"TERRASERVICE PESQUISA MINERAL LTDA RECADASTRADO","municipio":"CACHOEIRA DO PIRIÁ","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"terraservice@terraservicepesquisa.com","status":"pendente"},{"empresa":"TERRATIVA MINERAIS S.A RECADASTRADO","municipio":"ANAPU","mineral":"Ouro","substancia":"MINÉRIO DE OURO SIENITO Indust","email":"amarildosleite47@gmail.com","status":"pendente"},{"empresa":"TITÂNIO MINERAÇÃO E COMÉRCIO EIRELI","municipio":"ELDORADO DO CARAJÁS","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"rats_tavares@hotmail.com","status":"pendente"},{"empresa":"TOTAL GROUP SERV. E COM. DE MINERACAO LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"totalgroupltda@hotmail.com","status":"pendente"},{"empresa":"TRIAS BRASIL MINERAÇÃO LTDA","municipio":"CANAÃ DOS CARAJÁS","mineral":"Outro","substancia":"NÍQUEL Não informado Ativo","email":"f.veronese@horizonteminerals.com.br","status":"pendente"},{"empresa":"TYPHON BRASIL MINERAÇÃO LTDA","municipio":"XINGUARA","mineral":"Outro","substancia":"MINÉRIO DE NÍQUEL","email":"a.valerio@horizonteminerals.com.br","status":"pendente"},{"empresa":"Talon Ferrous Mineração LTDA","municipio":"BANNACH","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"irocha@ffalegal.com.br","status":"pendente"},{"empresa":"UNIAO MINERACAO E COMERCIO LTDA","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS Industrial","email":"doratadm@gmail.com","status":"pendente"},{"empresa":"VENANCIO GOLD - EXTRACAO DE MINERIO DE METAIS PRECIOSOS LTDA","municipio":"ITAITUBA","mineral":"Ouro","substancia":"MINÉRIO DE OURO Industrial","email":"b.c.venancio@icloud.com","status":"pendente"},{"empresa":"XTZ MINERIUM","municipio":"MARABÁ","mineral":"Ferro/Manganês","substancia":"MINÉRIO DE MANGANÊS","email":"maria.arlete@rmb.com.br","status":"pendente"}];
+
+// ════════════ STATE ════════════
+let state = {};
+let notes = {};
+let currentModalIdx = -1;
+let sortCol = -1, sortAsc = true;
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('hgl_f4_state');
+    if (s) state = JSON.parse(s);
+    const n = localStorage.getItem('hgl_f4_notes');
+    if (n) notes = JSON.parse(n);
+  } catch(e) {}
+  // merge into companies
+  COMPANIES.forEach((c, i) => {
+    if (state[i]) c.status = state[i];
+  });
+}
+
+function saveState() {
+  localStorage.setItem('hgl_f4_state', JSON.stringify(state));
+  localStorage.setItem('hgl_f4_notes', JSON.stringify(notes));
+  document.getElementById('last-updated').textContent = 'Salvo ' + new Date().toLocaleTimeString('pt-BR');
+}
+
+// ════════════ TABS ════════════
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ════════════ EMAIL TABS ════════════
+function showEmail(idx) {
+  document.querySelectorAll('.email-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.email-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('email-panel-' + idx).classList.add('active');
+  document.querySelectorAll('.email-tab-btn')[idx].classList.add('active');
+}
+
+function copyEmail(idx) {
+  const body = document.getElementById('email-body-' + idx).textContent;
+  navigator.clipboard.writeText(body).then(() => {
+    const btn = event.currentTarget;
+    btn.textContent = 'Copiado!';
+    setTimeout(() => btn.textContent = 'Copiar texto', 1500);
+  });
+}
+
+// ════════════ KPIs ════════════
+function updateKPIs() {
+  const counts = { pendente:0, enviado:0, respondeu:0, reuniao:0, proposta:0, fechado:0, perdido:0 };
+  COMPANIES.forEach(c => { if (counts[c.status] !== undefined) counts[c.status]++; });
+  document.getElementById('kpi-total').textContent = COMPANIES.length;
+  document.getElementById('kpi-enviado').textContent = counts.enviado;
+  document.getElementById('kpi-respondeu').textContent = counts.respondeu;
+  document.getElementById('kpi-reuniao').textContent = counts.reuniao;
+  document.getElementById('kpi-proposta').textContent = counts.proposta;
+  document.getElementById('kpi-fechado').textContent = counts.fechado;
+  document.getElementById('kpi-perdido').textContent = counts.perdido;
+  const mrr = counts.fechado * 2800;
+  document.getElementById('kpi-mrr').textContent = 'R$ ' + mrr.toLocaleString('pt-BR');
+  updateFunnel(counts);
+}
+
+function updateFunnel(counts) {
+  const total = COMPANIES.length;
+  const steps = [
+    { label: 'Enviados', val: counts.enviado, color: '#f59e0b' },
+    { label: 'Respondeu', val: counts.respondeu, color: '#61a229' },
+    { label: 'Reunião', val: counts.reuniao, color: '#8b5cf6' },
+    { label: 'Proposta', val: counts.proposta, color: '#f97316' },
+    { label: 'Fechado', val: counts.fechado, color: '#4e8221' },
+  ];
+  const fb = document.getElementById('funnelBar');
+  fb.innerHTML = steps.map(s => `
+    <div class="funnel-step">
+      <div class="funnel-label">${s.label}</div>
+      <div class="funnel-track">
+        <div class="funnel-fill" style="width:${Math.max(s.val/total*100,0)}%;background:${s.color}">
+          ${s.val > 0 ? `<span>${s.val}</span>` : ''}
+        </div>
+      </div>
+      <div class="funnel-num">${s.val}</div>
+    </div>
+  `).join('');
+}
+
+// ════════════ CHARTS ════════════
+let chartMineral, chartMunicipio;
+
+function initCharts() {
+  const mineralCount = {};
+  const munCount = {};
+  COMPANIES.forEach(c => {
+    mineralCount[c.mineral] = (mineralCount[c.mineral]||0) + 1;
+    munCount[c.municipio] = (munCount[c.municipio]||0) + 1;
+  });
+
+  const mColors = { Ouro:'#f59e0b', Cobre:'#ec4899', 'Ferro/Manganês':'#6366f1', 'Areia/Cascalho':'#f97316', Argila:'#a855f7', Outro:'#94a3b8' };
+
+  // Mineral donut
+  const mLabels = Object.keys(mineralCount);
+  const mData = mLabels.map(l => mineralCount[l]);
+  const mBg = mLabels.map(l => mColors[l] || '#94a3b8');
+  const ctxM = document.getElementById('chartMineral').getContext('2d');
+  chartMineral = new Chart(ctxM, {
+    type: 'doughnut',
+    data: { labels: mLabels, datasets: [{ data: mData, backgroundColor: mBg, borderWidth: 2 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 8 } } }
+    }
+  });
+
+  // Municipio bar (top 10)
+  const sortedMun = Object.entries(munCount).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const ctxMun = document.getElementById('chartMunicipio').getContext('2d');
+  chartMunicipio = new Chart(ctxMun, {
+    type: 'bar',
+    data: {
+      labels: sortedMun.map(e => e[0].length > 14 ? e[0].substring(0,13)+'…' : e[0]),
+      datasets: [{
+        data: sortedMun.map(e => e[1]),
+        backgroundColor: '#61a229',
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { font: { size: 10 } } },
+        y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+// ════════════ TABLE ════════════
+function renderTable(data) {
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+  data.forEach((c, visIdx) => {
+    const origIdx = COMPANIES.indexOf(c);
+    const mClass = 'min-' + c.mineral.split('/')[0];
+    const noteText = notes[origIdx] ? '📝' : '+ Nota';
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td style="color:var(--texto-suave);font-size:12px;">${origIdx+1}</td>
+      <td><div class="empresa-name">${c.empresa}</div></td>
+      <td style="font-size:12px;">${c.municipio}</td>
+      <td><span class="mineral-tag ${mClass}">${c.mineral}</span></td>
+      <td><div class="email-cell" title="${c.email}">${c.email || '<span style="color:#cbd5e1">—</span>'}</div></td>
+      <td>
+        <select class="status-select status-${c.status}" onchange="changeStatus(${origIdx}, this)">
+          <option value="pendente" ${c.status==='pendente'?'selected':''}>⬜ Pendente</option>
+          <option value="enviado" ${c.status==='enviado'?'selected':''}>📤 Enviado</option>
+          <option value="respondeu" ${c.status==='respondeu'?'selected':''}>💬 Respondeu</option>
+          <option value="reuniao" ${c.status==='reuniao'?'selected':''}>📅 Reunião</option>
+          <option value="proposta" ${c.status==='proposta'?'selected':''}>📋 Proposta</option>
+          <option value="fechado" ${c.status==='fechado'?'selected':''}>✅ Fechado</option>
+          <option value="perdido" ${c.status==='perdido'?'selected':''}>❌ Perdido</option>
+        </select>
+      </td>
+      <td><button class="notes-btn" onclick="openNote(${origIdx}, '${c.empresa.replace(/'/g,"\\'")}' )">${noteText}</button></td>
+    `;
+    tbody.appendChild(row);
+  });
+  document.getElementById('table-count').textContent = `Exibindo ${data.length} de ${COMPANIES.length}`;
+}
+
+function changeStatus(idx, select) {
+  const newStatus = select.value;
+  COMPANIES[idx].status = newStatus;
+  state[idx] = newStatus;
+  select.className = 'status-select status-' + newStatus;
+  saveState();
+  updateKPIs();
+}
+
+function filterTable() {
+  const mineral = document.getElementById('filt-mineral').value;
+  const municipio = document.getElementById('filt-municipio').value;
+  const status = document.getElementById('filt-status').value;
+  const search = document.getElementById('filt-search').value.toLowerCase();
+  const filtered = COMPANIES.filter(c => {
+    if (mineral && c.mineral !== mineral) return false;
+    if (municipio && c.municipio !== municipio) return false;
+    if (status && c.status !== status) return false;
+    if (search && !c.empresa.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  renderTable(filtered);
+}
+
+function resetFilters() {
+  document.getElementById('filt-mineral').value = '';
+  document.getElementById('filt-municipio').value = '';
+  document.getElementById('filt-status').value = '';
+  document.getElementById('filt-search').value = '';
+  renderTable(COMPANIES);
+}
+
+function populateMunicipioFilter() {
+  const sel = document.getElementById('filt-municipio');
+  const muns = [...new Set(COMPANIES.map(c=>c.municipio))].sort();
+  muns.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    sel.appendChild(opt);
+  });
+}
+
+let sortData = [...COMPANIES];
+function sortTable(col) {
+  const fields = ['', 'empresa', 'municipio', 'mineral'];
+  if (!fields[col]) return;
+  const key = fields[col];
+  if (sortCol === col) sortAsc = !sortAsc; else { sortCol = col; sortAsc = true; }
+  document.querySelectorAll('th').forEach((th,i) => {
+    th.classList.toggle('sorted', i === col);
+    const icon = th.querySelector('.sort-icon');
+    if (icon) icon.textContent = (i === col) ? (sortAsc ? '↑' : '↓') : '↕';
+  });
+  const filtered = COMPANIES.slice().sort((a,b) => {
+    const av = a[key]||'', bv = b[key]||'';
+    return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+  });
+  renderTable(filtered);
+}
+
+// ════════════ NOTES MODAL ════════════
+function openNote(idx, empresa) {
+  currentModalIdx = idx;
+  document.getElementById('modal-empresa').textContent = empresa;
+  document.getElementById('modal-sub').textContent = 'Registre interações para esta empresa.';
+  document.getElementById('modal-notes').value = notes[idx] || '';
+  document.getElementById('notesModal').classList.add('open');
+}
+
+function saveNote() {
+  if (currentModalIdx < 0) return;
+  const txt = document.getElementById('modal-notes').value.trim();
+  if (txt) notes[currentModalIdx] = txt; else delete notes[currentModalIdx];
+  saveState();
+  document.getElementById('notesModal').classList.remove('open');
+  filterTable();
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('notesModal'))
+    document.getElementById('notesModal').classList.remove('open');
+}
+
+// ════════════ EXPORT CSV ════════════
+function exportCSV() {
+  const headers = ['#','Empresa','Município','Mineral','E-mail','Status','Notas'];
+  const rows = COMPANIES.map((c,i) => [
+    i+1,
+    '"'+c.empresa.replace(/"/g,'""')+'"',
+    c.municipio,
+    c.mineral,
+    c.email,
+    c.status,
+    '"'+(notes[i]||'').replace(/"/g,'""')+'"'
+  ]);
+  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = 'higilabor_frente4_para_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+// ════════════ SCHEDULE ════════════
+function buildSchedule() {
+  const today = new Date();
+  const fmt = (d) => d.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit' });
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+  const items = [
+    { day:'Dia 0', date: fmt(today), cls:'email1', action:'E-mail 1', detail:'Disparo lote A (Ouro — 49 emp.)' },
+    { day:'Dia 0+1', date: fmt(addDays(today,1)), cls:'email1', action:'E-mail 1', detail:'Disparo lote B (Cobre — 18 emp.)' },
+    { day:'Dia 0+2', date: fmt(addDays(today,2)), cls:'email1', action:'E-mail 1', detail:'Disparo lote C (Ferro+Outro — 28 emp.)' },
+    { day:'Dia 3', date: fmt(addDays(today,3)), cls:'email2', action:'E-mail 2', detail:'Follow-up urgência NR-1 (sem resposta)' },
+    { day:'Dia 4', date: fmt(addDays(today,4)), cls:'followup', action:'Ligar/WhatsApp', detail:'Respondentes — agendar reunião' },
+    { day:'Dia 7', date: fmt(addDays(today,7)), cls:'email3', action:'E-mail 3', detail:'Proposta direta + encerramento' },
+    { day:'Dia 10', date: fmt(addDays(today,10)), cls:'followup', action:'Reuniões', detail:'Realizar reuniões agendadas' },
+    { day:'Dia 15', date: fmt(addDays(today,15)), cls:'followup', action:'Propostas', detail:'Enviar propostas formais' },
+    { day:'Dia 30', date: fmt(addDays(today,30)), cls:'followup', action:'Reabordagem', detail:'Nova sequência p/ sem resposta' },
+  ];
+  document.getElementById('schedGrid').innerHTML = items.map(i => `
+    <div class="sched-card ${i.cls}">
+      <div class="sched-day">${i.day} — ${i.date}</div>
+      <div class="sched-action">${i.action}</div>
+      <div class="sched-detail">${i.detail}</div>
+    </div>
+  `).join('');
+}
+
+// ════════════ INIT ════════════
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  renderTable(COMPANIES);
+  populateMunicipioFilter();
+  updateKPIs();
+  initCharts();
+  buildSchedule();
+});
+</script>
+</body>
+</html>

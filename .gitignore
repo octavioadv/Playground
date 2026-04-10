@@ -1,1 +1,13 @@
 node_modules/
+
+# Claude session data (large JSONL conversation files)
+.claude/projects/
+.claude/context/
+
+# Local Claude settings (permissions, not for sharing)
+.claude/settings.local.json
+
+# OS / temp
+Thumbs.db
+.DS_Store
+*.tmp

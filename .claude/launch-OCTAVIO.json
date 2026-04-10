@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Higilabor Dashboard",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-c", "import os,http.server,socketserver; os.chdir(r'C:\\Users\\octav\\OneDrive\\Apps\\Claude'); p=int(os.environ.get('PORT',3000)); httpd=socketserver.TCPServer(('',p),http.server.SimpleHTTPRequestHandler); httpd.serve_forever()"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}
