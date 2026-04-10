@@ -12,10 +12,17 @@
 - 2026-04-10: Dispensas SST de câmaras MG costumam ter valor entre R$ 2k–6k (escopo pequeno: PGR+PCMSO+LTCAT para 10-30 servidores).
 
 ### SEO
-- (ainda não rodado nesta sessão)
+- 2026-04-10: Rodada 2 — Tema 1 (concorrentes) Ibiá/MG. Vácuo digital absoluto: nenhum concorrente com SEO otimizado para SST em Ibiá. Apenas 2 players locais (Vitacenter generalista + Solução Treinamentos só Facebook).
+- 2026-04-10: Araxá (80km) é a referência regional atual — empresas de Ibiá provavelmente se deslocam até lá. Interceptar esse fluxo com conteúdo geo-específico.
+- 2026-04-10: Nenhum concorrente menciona NR-1 psicossocial nem publica preços. Dois diferenciais imediatos para Higilabor.
+- 2026-04-10: Rodar agentes em paralelo funciona bem — SEO e LinkedIn podem executar simultaneamente sem conflito de arquivos.
 
 ### LinkedIn
-- (ainda não rodado nesta sessão)
+- 2026-04-10: Canpat 2026 lançada pelo MTE (7/abril) com foco em riscos psicossociais — timing perfeito para pacote Psicossocial da Higilabor.
+- 2026-04-10: 46 dias para fiscalização NR-1 psicossocial (26/maio). Melhor argumento de venda urgente.
+- 2026-04-10: FAP 2026: 92% das empresas em redução — bom gancho para post de engajamento.
+- 2026-04-10: MTE lançou Manual GRO na mesma semana da Canpat — sinal de que fiscalização será levada a sério.
+- 2026-04-10: Formatos que funcionam no LinkedIn SST: countdown (dias pra deadline), dados impactantes (% de empresas), carrossel com checklist prático.
 
 ## Erros recorrentes
 - API PNCP retorna 403 via proxy — não insistir, ir direto pro WebSearch
@@ -30,3 +37,5 @@
 | Data | Skill | Resultado | Nota |
 |------|-------|-----------|------|
 | 2026-04-10 | PNCP | 2 dispensas MG ativas + 3 leads novas | API bloqueada, scan via WebSearch + histórico |
+| 2026-04-10 | SEO | Pesquisa + blog post Ibiá/MG (tema 1) | Vácuo digital total, 0 concorrência SEO |
+| 2026-04-10 | LinkedIn | 3 tendências hot + 3 posts rascunho | NR-1 psicossocial 46 dias, Canpat 2026, FAP |
