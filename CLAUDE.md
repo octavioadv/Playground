@@ -78,10 +78,24 @@ Analisa tendências SST/EHS no LinkedIn + gera 2-3 rascunhos de posts.
 
 > Todos os textos gerados (blog, LinkedIn) são RASCUNHO — devem passar por `/ux-copy` antes de publicar.
 
+### Protocolo pós-tarefa diária
+Após executar qualquer tarefa diária (PNCP, SEO, LinkedIn), SEMPRE:
+1. Abrir `memoria_operacional.md`
+2. Registrar na seção da skill: o que funcionou, o que falhou, ajustes feitos
+3. Se o Octav deu feedback ou tomou decisão → registrar em "Decisões do Octav"
+4. Se houve erro recorrente → registrar em "Erros recorrentes"
+5. Atualizar tabela de métricas com data, skill, resultado
+6. Commitar e push
+
 ## Situação financeira (março/26)
 - Carteira CR: R$ 35.862 | Recebido: R$ 25.339 (70,7%) | Inadimplência: R$ 10.524 (29,3%)
 - Despesas CP: R$ 38.150 | Resultado proxy: –R$ 2.287 (déficit)
 - Empréstimos ativos: 2 parcelas recorrentes (~R$ 2.864/mês)
+
+## Memória operacional
+Arquivo: `memoria_operacional.md`
+Contém aprendizados acumulados das tarefas diárias. Ler este arquivo no início de cada sessão.
+Atualizar ao final de cada tarefa diária com: o que funcionou, o que falhou, decisões do Octav.
 
 ## Preferências de trabalho
 - Direto ao ponto, sem enrolação
