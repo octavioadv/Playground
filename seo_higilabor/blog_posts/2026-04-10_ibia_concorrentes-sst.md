@@ -7,7 +7,7 @@ keyword_principal: "medicina do trabalho Ibiá"
 keywords_secundarias: ["PGR Ibiá", "PCMSO Ibiá", "segurança do trabalho Ibiá MG", "exame admissional Ibiá", "NR-1 psicossocial Ibiá", "SST Ibiá"]
 cidade: "Ibiá"
 data: "2026-04-10"
-status: "REVISADO — /ux-copy 2026-04-10"
+status: "PRONTO PARA PUBLICAR"
 ---
 
 # Medicina do Trabalho em Ibiá: PGR, PCMSO e NR-1 Psicossocial para Sua Empresa
@@ -130,7 +130,7 @@ A partir de maio de 2026, a fiscalização pode autuar empresas que não incluí
 
 ### 3. Vocês atendem Ibiá presencialmente?
 
-Sim. A Higilabor realiza visitas presenciais em Ibiá para levantamento de riscos, exames e treinamentos. A gestão dos programas (PGR, PCMSO, eSocial) é feita de forma contínua e remota, com suporte sempre disponível.
+Sim. Higilabor realiza visitas presenciais em Ibiá para levantamento de riscos, exames e treinamentos. A gestão dos programas (PGR, PCMSO, eSocial) é feita de forma contínua e remota, com suporte sempre disponível.
 
 ### 4. Quanto tempo leva para fazer o PGR da minha empresa?
 
@@ -166,7 +166,7 @@ Entre em contato pelo WhatsApp **(34) 99971-5684** ou acesse [/contato/](/contat
       "name": "Vocês atendem Ibiá presencialmente?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sim. A Higilabor realiza visitas presenciais em Ibiá para levantamento de riscos, exames e treinamentos. A gestão dos programas (PGR, PCMSO, eSocial) é feita de forma contínua e remota, com suporte sempre disponível."
+        "text": "Sim. Higilabor realiza visitas presenciais em Ibiá para levantamento de riscos, exames e treinamentos. A gestão dos programas (PGR, PCMSO, eSocial) é feita de forma contínua e remota, com suporte sempre disponível."
       }
     },
     {
@@ -200,11 +200,3 @@ A fiscalização da NR-1 psicossocial começa em maio de 2026. Regularize a SST 
 
 Atendemos Ibiá, Araxá, Campos Altos, Pratinha, Sacramento e toda a região do Alto Paranaíba e Triângulo Mineiro.
 
----
-
-**Internal links sugeridos:**
-- [O que é PGR e por que sua empresa precisa](/pgr/)
-- [PCMSO: programa de saúde ocupacional completo](/pcmso/)
-- [LTCAT para aposentadoria especial](/ltcat/)
-- [Fale conosco — orçamento em 24h](/contato/)
-- [NR-1 Psicossocial: o que muda para sua empresa](/nr-1-psicossocial/) *(criar se não existir)*
