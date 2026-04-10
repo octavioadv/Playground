@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Medicina do Trabalho em Ibiá MG | PGR, PCMSO, NR-1</title>
+  <meta name="description" content="Medicina do trabalho em Ibiá/MG: PGR, PCMSO e NR-1 psicossocial com preço justo. Peça seu orçamento sem compromisso pelo WhatsApp (34) 99971-5684.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --verde: #1B7A3D;
+      --verde-claro: #E8F5E9;
+      --verde-escuro: #145A2C;
+      --cinza-texto: #333;
+      --cinza-leve: #f7f7f7;
+      --amarelo-alerta: #FFF3CD;
+      --borda-alerta: #FFC107;
+      --azul-link: #1565C0;
+      --branco: #fff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--cinza-texto);
+      line-height: 1.7;
+      background: var(--branco);
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+      color: var(--branco);
+      padding: 48px 32px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 17px;
+      opacity: 0.92;
+      line-height: 1.6;
+    }
+
+    /* HEADINGS */
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-escuro);
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--verde);
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--verde);
+      margin: 28px 0 12px;
+    }
+
+    /* TEXT */
+    p { margin-bottom: 16px; font-size: 16px; }
+
+    /* LISTS */
+    ul, ol {
+      margin: 12px 0 20px 24px;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    li strong {
+      color: var(--verde-escuro);
+    }
+
+    /* ALERT BOX */
+    .alerta {
+      background: var(--amarelo-alerta);
+      border-left: 4px solid var(--borda-alerta);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+      font-size: 15px;
+    }
+    .alerta strong { color: #856404; }
+
+    /* INFO BOX */
+    .info-box {
+      background: var(--verde-claro);
+      border-left: 4px solid var(--verde);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+
+    /* PRICE TABLE */
+    .precos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .precos th {
+      background: var(--verde);
+      color: var(--branco);
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .precos td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+      font-size: 15px;
+    }
+    .precos tr:nth-child(even) td { background: var(--cinza-leve); }
+
+    /* SERVICES GRID */
+    .servicos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .servico-item {
+      background: var(--cinza-leve);
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 3px solid var(--verde);
+      font-size: 15px;
+    }
+    .servico-item strong {
+      display: block;
+      color: var(--verde-escuro);
+      margin-bottom: 4px;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--cinza-leve);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--verde-escuro);
+    }
+    .faq-item p {
+      margin: 0;
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+      color: var(--branco);
+      padding: 40px 32px;
+      border-radius: 12px;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta-section h2 {
+      color: var(--branco);
+      border: none;
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+    .cta-section p {
+      opacity: 0.92;
+      margin-bottom: 24px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--branco);
+    }
+    .btn-contato {
+      background: var(--branco);
+      color: var(--verde-escuro);
+    }
+
+    /* CHECKLIST */
+    .checklist li {
+      list-style: none;
+      padding-left: 28px;
+      position: relative;
+    }
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--verde);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero { padding: 32px 20px; }
+      .hero h1 { font-size: 22px; }
+      .servicos { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Medicina do Trabalho em Ibiá: PGR, PCMSO e NR-1 Psicossocial para Sua Empresa</h1>
+    <p>Se você é empresário em Ibiá e precisa de medicina do trabalho, segurança ocupacional ou adequação às normas regulamentadoras, este guia foi feito para você. Aqui você vai entender o que sua empresa precisa, quais são os prazos legais e como resolver tudo isso com agilidade e preço justo.</p>
+  </div>
+
+  <!-- POR QUE SST -->
+  <h2>Por que sua empresa em Ibiá precisa de SST?</h2>
+
+  <p>Toda empresa com funcionários registrados tem obrigações de Saúde e Segurança do Trabalho (SST). Não importa o tamanho — de um comércio no centro de Ibiá a uma propriedade rural no Alto Paranaíba, a legislação é clara.</p>
+
+  <p>As principais obrigações incluem:</p>
+
+  <ul>
+    <li><strong>PGR (Programa de Gerenciamento de Riscos):</strong> obrigatório para todas as empresas com empregados. Substitui o antigo PPRA desde janeiro de 2022.</li>
+    <li><strong>PCMSO (Programa de Controle Médico de Saúde Ocupacional):</strong> programa de saúde que define exames admissionais, periódicos, demissionais e de retorno ao trabalho.</li>
+    <li><strong>Envio de eventos SST ao eSocial:</strong> S-2210, S-2220 e S-2240 devem ser transmitidos nos prazos corretos.</li>
+    <li><strong>NR-1 com riscos psicossociais:</strong> a partir de maio de 2026, o PGR precisa contemplar riscos psicossociais como estresse, assédio e sobrecarga de trabalho.</li>
+  </ul>
+
+  <div class="alerta">
+    <strong>Atenção:</strong> O descumprimento dessas obrigações gera multas que variam de R$ 1.000 a mais de R$ 50.000 por infração, além de responsabilização civil e criminal em caso de acidentes.
+  </div>
+
+  <!-- PGR -->
+  <h2>O que é o PGR e por que sua empresa precisa dele?</h2>
+
+  <p>O PGR é o documento que identifica, avalia e controla os riscos ocupacionais da sua empresa. Ele é composto por dois elementos principais:</p>
+
+  <ol>
+    <li><strong>Inventário de Riscos:</strong> levantamento de todos os perigos e riscos do ambiente de trabalho.</li>
+    <li><strong>Plano de Ação:</strong> medidas de prevenção e controle para eliminar ou reduzir os riscos identificados.</li>
+  </ol>
+
+  <p>Para empresas em Ibiá — seja comércio, indústria, agronegócio ou serviços — o PGR deve refletir a realidade específica da operação. Um PGR genérico não cumpre a norma e não protege a empresa em caso de fiscalização ou ação trabalhista.</p>
+
+  <h3>Quem precisa de PGR em Ibiá?</h3>
+
+  <ul class="checklist">
+    <li>Comércios com funcionários CLT</li>
+    <li>Indústrias e metalúrgicas</li>
+    <li>Propriedades rurais com trabalhadores registrados</li>
+    <li>Empresas de transporte e logística</li>
+    <li>Clínicas, consultórios e prestadores de serviço</li>
+    <li>Cooperativas e associações</li>
+  </ul>
+
+  <!-- PCMSO -->
+  <h2>PCMSO: o programa de saúde ocupacional</h2>
+
+  <p>O PCMSO é coordenado por um médico do trabalho e define quais exames cada funcionário precisa realizar, com que frequência e quais são os critérios de aptidão.</p>
+
+  <p>Os exames obrigatórios são:</p>
+
+  <ul>
+    <li><strong>Admissional:</strong> antes do início das atividades</li>
+    <li><strong>Periódico:</strong> conforme a periodicidade definida no PCMSO (anual, bianual, etc.)</li>
+    <li><strong>De retorno ao trabalho:</strong> após afastamento superior a 30 dias</li>
+    <li><strong>De mudança de função:</strong> quando há alteração de riscos</li>
+    <li><strong>Demissional:</strong> até 10 dias após o desligamento</li>
+  </ul>
+
+  <div class="info-box">
+    Sem PCMSO atualizado, sua empresa não consegue enviar os eventos de SST ao eSocial corretamente — e isso pode travar admissões e demissões.
+  </div>
+
+  <!-- NR-1 -->
+  <h2>NR-1 Psicossocial: o prazo está acabando</h2>
+
+  <p>A partir de <strong>maio de 2026</strong>, o PGR de toda empresa precisa incluir a avaliação de <strong>riscos psicossociais</strong>. Essa é uma mudança na NR-1 que afeta todas as organizações, independentemente do porte.</p>
+
+  <p>O que são riscos psicossociais?</p>
+
+  <ul>
+    <li>Sobrecarga de trabalho e jornadas excessivas</li>
+    <li>Assédio moral e sexual no ambiente de trabalho</li>
+    <li>Falta de autonomia e controle sobre as tarefas</li>
+    <li>Conflitos interpessoais e clima organizacional ruim</li>
+    <li>Pressão por metas inatingíveis</li>
+  </ul>
+
+  <h3>O que muda na prática?</h3>
+
+  <p>Sua empresa precisa:</p>
+
+  <ol>
+    <li><strong>Identificar</strong> os fatores de risco psicossocial presentes</li>
+    <li><strong>Avaliar</strong> a gravidade e a probabilidade de danos</li>
+    <li><strong>Incluir no PGR</strong> as medidas de prevenção e controle</li>
+    <li><strong>Documentar</strong> tudo para fins de fiscalização</li>
+  </ol>
+
+  <div class="alerta">
+    <strong>Importante:</strong> Quem não se adequar está sujeito a autuação e multas. A fiscalização já está ativa e a NR-1 psicossocial não é opcional.
+  </div>
+
+  <!-- PREÇOS -->
+  <h2>Quanto custa SST para empresas em Ibiá?</h2>
+
+  <p>O valor de PGR, PCMSO e demais serviços de SST depende de fatores como número de funcionários, grau de risco da atividade e complexidade da operação.</p>
+
+  <table class="precos">
+    <thead>
+      <tr>
+        <th>Serviço</th>
+        <th>Referência de mercado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PGR + PCMSO</strong> (até 10 funcionários)</td>
+        <td>A partir de R$ 750/ano</td>
+      </tr>
+      <tr>
+        <td><strong>PCMSO isolado</strong></td>
+        <td>R$ 640 a R$ 2.000/ano</td>
+      </tr>
+      <tr>
+        <td><strong>Exame admissional/periódico</strong></td>
+        <td>Valores negociados conforme volume</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>O importante é não contratar pelo menor preço sem verificar o que está incluído. Um serviço completo deve contemplar:</p>
+
+  <ul class="checklist">
+    <li>Levantamento presencial de riscos (não apenas um documento genérico)</li>
+    <li>Assinatura de profissional habilitado</li>
+    <li>Coordenação médica do PCMSO por médico do trabalho</li>
+    <li>Suporte para envio ao eSocial</li>
+    <li>Atualização anual ou sempre que houver mudanças na empresa</li>
+  </ul>
+
+  <!-- HIGILABOR -->
+  <h2>Higilabor: SST para empresas em Ibiá</h2>
+
+  <p><strong>Higilabor</strong> é consultoria de Saúde e Segurança do Trabalho sediada em Uberlândia, atendendo empresas em todo o Triângulo Mineiro e Alto Paranaíba — incluindo Ibiá e região.</p>
+
+  <p>O modelo de atendimento combina visitas presenciais para levantamento de riscos com gestão remota contínua dos programas de SST. Empresas em Ibiá recebem o mesmo nível técnico de grandes centros, com preço justo e sem deslocamento desnecessário.</p>
+
+  <div class="servicos">
+    <div class="servico-item">
+      <strong>PGR completo</strong>
+      Inventário de riscos e plano de ação personalizados
+    </div>
+    <div class="servico-item">
+      <strong>PCMSO</strong>
+      Coordenado por médico do trabalho, com gestão de exames
+    </div>
+    <div class="servico-item">
+      <strong>NR-1 Psicossocial</strong>
+      Adequação antes do prazo de maio/2026
+    </div>
+    <div class="servico-item">
+      <strong>LTCAT</strong>
+      Aposentadoria especial e enquadramento previdenciário
+    </div>
+    <div class="servico-item">
+      <strong>Gestão do FAP</strong>
+      Redução de custos com encargos previdenciários
+    </div>
+    <div class="servico-item">
+      <strong>Treinamentos NR</strong>
+      NR-5, NR-6, NR-10, NR-12, NR-31, NR-35 e outras
+    </div>
+    <div class="servico-item">
+      <strong>eSocial SST</strong>
+      Envio de S-2210, S-2220, S-2240
+    </div>
+    <div class="servico-item">
+      <strong>Cobertura regional</strong>
+      Ibiá, Araxá, Campos Altos, Pratinha, Sacramento
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <h2>FAQ — Perguntas frequentes sobre SST em Ibiá</h2>
+
+  <div class="faq-item">
+    <h3>1. Minha empresa é pequena. Preciso mesmo de PGR e PCMSO?</h3>
+    <p>Sim. Todas as empresas com funcionários CLT são obrigadas a ter PGR e PCMSO, independentemente do porte. Microempresas e empresas de pequeno porte de grau de risco 1 e 2 têm tratamento diferenciado, mas não são isentas da obrigação.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>2. O que acontece se eu não fizer a adequação à NR-1 psicossocial?</h3>
+    <p>A partir de maio de 2026, a fiscalização pode autuar empresas que não incluíram riscos psicossociais no PGR. As multas variam conforme a gravidade da infração e o porte da empresa, podendo ultrapassar R$ 50.000 por item.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>3. Vocês atendem Ibiá presencialmente?</h3>
+    <p>Sim. Higilabor realiza visitas presenciais em Ibiá para levantamento de riscos, exames e treinamentos. A gestão dos programas (PGR, PCMSO, eSocial) é feita de forma contínua e remota, com suporte sempre disponível.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>4. Quanto tempo leva para fazer o PGR da minha empresa?</h3>
+    <p>Depende do porte e da complexidade, mas para pequenas empresas o prazo médio é de 5 a 10 dias úteis após a visita técnica.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>5. Como faço para pedir um orçamento?</h3>
+    <p>Entre em contato pelo WhatsApp <strong>(34) 99971-5684</strong> ou acesse a página de contato. Enviamos o orçamento em até 24 horas.</p>
+  </div>
+
+  <!-- FAQ SCHEMA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Minha empresa é pequena. Preciso mesmo de PGR e PCMSO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Todas as empresas com funcionários CLT são obrigadas a ter PGR e PCMSO, independentemente do porte. Microempresas e empresas de pequeno porte de grau de risco 1 e 2 têm tratamento diferenciado, mas não são isentas da obrigação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O que acontece se eu não fizer a adequação à NR-1 psicossocial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A partir de maio de 2026, a fiscalização pode autuar empresas que não incluíram riscos psicossociais no PGR. As multas variam conforme a gravidade da infração e o porte da empresa, podendo ultrapassar R$ 50.000 por item."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vocês atendem Ibiá presencialmente?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Higilabor realiza visitas presenciais em Ibiá para levantamento de riscos, exames e treinamentos. A gestão dos programas (PGR, PCMSO, eSocial) é feita de forma contínua e remota, com suporte sempre disponível."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto tempo leva para fazer o PGR da minha empresa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende do porte e da complexidade, mas para pequenas empresas o prazo médio é de 5 a 10 dias úteis após a visita técnica."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como faço para pedir um orçamento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entre em contato pelo WhatsApp (34) 99971-5684 ou acesse a página de contato. Enviamos o orçamento em até 24 horas."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- CTA FINAL -->
+  <div class="cta-section">
+    <h2>Peça seu orçamento agora</h2>
+    <p>A fiscalização da NR-1 psicossocial começa em maio de 2026.<br>Regularize a SST da sua empresa em Ibiá — com preço justo e prazo cumprido.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5534999715684?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20SST%20para%20minha%20empresa%20em%20Ibi%C3%A1" class="btn btn-whatsapp">WhatsApp (34) 99971-5684</a>
+      <a href="/contato/" class="btn btn-contato">Página de contato</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
