@@ -1,7 +1,16 @@
 {
-  "ultimo_tema": 1,
-  "ultima_cidade_idx": 4,
-  "ultima_cidade": "Ribeirao das Neves (secundaria)",
+  "ultimo_tema": 2,
+  "ultima_cidade_idx": 5,
+  "ultima_cidade": "Vazante",
   "ultima_execucao": "2026-04-11",
-  "total_rodadas": 5
+  "total_rodadas": 6,
+  "conteudo_gerado": [
+    {
+      "cidade": "Ribeirão das Neves",
+      "slug": "ribeirao-das-neves",
+      "data_geracao": "2026-04-11",
+      "pecas": 7,
+      "pasta": "seo_higilabor/cidades/ribeirao-das-neves/"
+    }
+  ]
 }

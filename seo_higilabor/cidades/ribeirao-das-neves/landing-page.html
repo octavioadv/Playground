@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicina do Trabalho em Ribeirão das Neves — Higilabor SST</title>
+    <meta name="description" content="PGR, PCMSO e NR-1 psicossocial para empresas de Ribeirão das Neves. Preço justo, médica própria, orçamento em 24h. Fale com a Higilabor.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Medicina do Trabalho em Ribeirão das Neves — Higilabor SST">
+    <meta property="og:description" content="PGR, PCMSO e NR-1 psicossocial com preço acessível para PMEs de Ribeirão das Neves. Orçamento sem compromisso em 24h.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Higilabor Consultoria SST",
+      "description": "Consultoria de Saúde e Segurança do Trabalho. PGR, PCMSO, NR-1 psicossocial, LTCAT, laudos e treinamentos.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Uberlândia",
+        "addressRegion": "MG",
+        "addressCountry": "BR"
+      },
+      "areaServed": [
+        {"@type": "City", "name": "Ribeirão das Neves"},
+        {"@type": "City", "name": "Uberlândia"},
+        {"@type": "State", "name": "Minas Gerais"}
+      ],
+      "serviceType": ["Medicina do Trabalho", "PGR", "PCMSO", "NR-1 Psicossocial", "LTCAT"],
+      "priceRange": "$$"
+    }
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --verde: #1B4D3E;
+            --laranja: #F5A623;
+            --branco: #FFFFFF;
+            --cinza: #F5F5F5;
+            --cinza-escuro: #555;
+            --texto: #222;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--texto);
+            line-height: 1.6;
+        }
+        a { color: inherit; }
+        img { max-width: 100%; }
+
+        /* HEADER */
+        .header {
+            background: var(--verde);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--branco);
+            letter-spacing: 1px;
+        }
+        .header .logo span { color: var(--laranja); }
+        .header .header-cta {
+            background: var(--laranja);
+            color: var(--branco);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        /* HERO */
+        .hero {
+            background: var(--verde);
+            color: var(--branco);
+            padding: 48px 20px 40px;
+            text-align: center;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: var(--laranja);
+            color: var(--branco);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(1.5rem, 5vw, 2.4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            max-width: 540px;
+            margin: 0 auto 28px;
+        }
+        .hero .hero-cta {
+            display: inline-block;
+            background: var(--laranja);
+            color: var(--branco);
+            padding: 16px 32px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+        }
+        .hero .hero-sub {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 12px;
+        }
+
+        /* URGÊNCIA */
+        .urgencia {
+            background: #FFF3CD;
+            border-left: 4px solid var(--laranja);
+            padding: 16px 20px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        .urgencia strong { color: #856404; }
+
+        /* SEÇÕES GENÉRICAS */
+        .secao { padding: 48px 20px; }
+        .secao.cinza { background: var(--cinza); }
+        .container { max-width: 760px; margin: 0 auto; }
+        .secao h2 {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            color: var(--verde);
+            margin-bottom: 8px;
+        }
+        .secao .subtitulo {
+            color: var(--cinza-escuro);
+            margin-bottom: 28px;
+            font-size: 1rem;
+        }
+
+        /* PROBLEMA */
+        .problema-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        @media (min-width: 600px) {
+            .problema-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .problema-item {
+            background: var(--branco);
+            border: 1px solid #e0e0e0;
+            border-left: 4px solid var(--laranja);
+            border-radius: 6px;
+            padding: 16px;
+        }
+        .problema-item .icon { font-size: 1.4rem; margin-bottom: 8px; }
+        .problema-item h3 { font-size: 0.95rem; margin-bottom: 4px; color: var(--verde); }
+        .problema-item p { font-size: 0.88rem; color: var(--cinza-escuro); }
+
+        /* SERVIÇOS */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+        @media (min-width: 580px) {
+            .servicos-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .servico-card {
+            background: var(--branco);
+            border: 2px solid var(--verde);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .servico-card.destaque { border-color: var(--laranja); }
+        .servico-card h3 {
+            font-size: 1rem;
+            color: var(--verde);
+            margin-bottom: 8px;
+        }
+        .servico-card.destaque h3 { color: #c47800; }
+        .servico-card p { font-size: 0.88rem; color: var(--cinza-escuro); margin-bottom: 10px; }
+        .servico-card .preco {
+            font-size: 0.8rem;
+            background: var(--cinza);
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .destaque-badge {
+            background: var(--laranja);
+            color: var(--branco);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        /* DIFERENCIAIS */
+        .diferenciais-lista {
+            list-style: none;
+            margin-top: 24px;
+        }
+        .diferenciais-lista li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 0.95rem;
+        }
+        .diferenciais-lista li:last-child { border-bottom: none; }
+        .diferenciais-lista .check {
+            color: var(--verde);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* NÚMEROS */
+        .numeros {
+            background: var(--verde);
+            color: var(--branco);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .numeros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 24px;
+            margin-top: 28px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .numero-item .valor {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--laranja);
+        }
+        .numero-item .label {
+            font-size: 0.82rem;
+            opacity: 0.85;
+        }
+
+        /* PREÇO */
+        .preco-box {
+            background: var(--branco);
+            border: 2px solid var(--verde);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+        .preco-box h3 { color: var(--verde); margin-bottom: 12px; }
+        .preco-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .preco-table th {
+            background: var(--verde);
+            color: var(--branco);
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .preco-table td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; }
+        .preco-table tr:last-child td { border-bottom: none; }
+        .preco-table .multa { color: #c0392b; font-weight: 600; }
+        .alerta-multa {
+            background: #FFF3CD;
+            border: 1px solid var(--laranja);
+            border-radius: 6px;
+            padding: 14px;
+            margin-top: 16px;
+            font-size: 0.88rem;
+        }
+
+        /* FORMULÁRIO / CTA FINAL */
+        .cta-final {
+            background: var(--cinza);
+            padding: 48px 20px;
+            text-align: center;
+        }
+        .cta-final h2 { color: var(--verde); margin-bottom: 10px; }
+        .cta-final p { color: var(--cinza-escuro); margin-bottom: 28px; }
+        .form-box {
+            background: var(--branco);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 28px 24px;
+            max-width: 480px;
+            margin: 0 auto 28px;
+            text-align: left;
+        }
+        .form-box label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--verde);
+        }
+        .form-box input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            font-family: inherit;
+        }
+        .form-box input:focus { outline: 2px solid var(--verde); border-color: var(--verde); }
+        .form-box .btn-form {
+            width: 100%;
+            background: var(--verde);
+            color: var(--branco);
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-box .btn-form:hover { background: #163d30; }
+        .ou { text-align: center; color: var(--cinza-escuro); font-size: 0.9rem; margin: 16px 0; }
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: var(--branco);
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--verde);
+            color: var(--branco);
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 0.82rem;
+            opacity: 0.9;
+        }
+        footer a { color: var(--laranja); }
+
+        /* WHATSAPP FLUTUANTE */
+        .wpp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .wpp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-size: 1.6rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">HIGI<span>LABOR</span></div>
+        <a href="https://wa.me/5534[TELEFONE]?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+um+or%C3%A7amento+para+Ribeir%C3%A3o+das+Neves" class="header-cta">Orçamento Grátis</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="badge">Ribeirão das Neves · MG</div>
+        <h1>Medicina do Trabalho e PGR em Ribeirão das Neves com Preço Acessível</h1>
+        <p>Sua empresa está em dia com NR-1, PCMSO e a nova exigência psicossocial? Evite multa de até R$&nbsp;44.396. Orçamento em 24h.</p>
+        <a href="https://wa.me/5534[TELEFONE]?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+um+or%C3%A7amento+para+Ribeir%C3%A3o+das+Neves" class="hero-cta">Solicitar Orçamento Agora</a>
+        <p class="hero-sub">Sem compromisso · Resposta em até 24h</p>
+    </section>
+
+    <!-- URGÊNCIA -->
+    <div class="urgencia">
+        <strong>Atenção:</strong> A NR-1 psicossocial entra em vigor em <strong>26 de maio de 2026</strong>. Empresas sem PGR atualizado podem ser autuadas a partir dessa data.
+    </div>
+
+    <!-- PROBLEMA -->
+    <section class="secao">
+        <div class="container">
+            <h2>Sua empresa em Ribeirão das Neves está regularizada?</h2>
+            <p class="subtitulo">A lei de SST vale para todas as empresas — do MEI à empresa com 100 funcionários. Veja o que está em jogo:</p>
+            <div class="problema-grid">
+                <div class="problema-item">
+                    <div class="icon">⚠️</div>
+                    <h3>Multa do Ministério do Trabalho</h3>
+                    <p>Até R$ 44.396 por infração constatada em auditoria fiscal. Reincidência dobra o valor.</p>
+                </div>
+                <div class="problema-item">
+                    <div class="icon">⚖️</div>
+                    <h3>Passivo Trabalhista</h3>
+                    <p>Sem PGR e PCMSO, qualquer acidente ou doença ocupacional vira processo. A empresa perde sem defesa.</p>
+                </div>
+                <div class="problema-item">
+                    <div class="icon">🧠</div>
+                    <h3>NR-1 Psicossocial — Nova Obrigação</h3>
+                    <p>A partir de maio/2026, o PGR deve documentar riscos de estresse, assédio e burnout. Ignorar custa caro.</p>
+                </div>
+                <div class="problema-item">
+                    <div class="icon">📋</div>
+                    <h3>eSocial SST</h3>
+                    <p>Os dados de SST precisam estar integrados ao eSocial. PGR e PCMSO defasados geram inconsistências.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="secao cinza">
+        <div class="container">
+            <h2>O que a Higilabor faz pela sua empresa</h2>
+            <p class="subtitulo">Serviços completos de SST para PMEs — com médica própria e preço direto, sem intermediários.</p>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <h3>PGR — Programa de Gerenciamento de Riscos</h3>
+                    <p>Identificação e controle de todos os riscos da sua operação. Inclui riscos psicossociais conforme a nova NR-1. Assinado por engenheiro CREA.</p>
+                    <span class="preco">A partir de R$ 990</span>
+                </div>
+                <div class="servico-card">
+                    <h3>PCMSO — Controle Médico de Saúde Ocupacional</h3>
+                    <p>Plano de exames e monitoramento de saúde dos seus funcionários. Elaborado por médica do trabalho própria.</p>
+                    <span class="preco">A partir de R$ 790</span>
+                </div>
+                <div class="servico-card destaque">
+                    <span class="destaque-badge">Urgente — Maio/2026</span>
+                    <h3>NR-1 Psicossocial</h3>
+                    <p>Adequação do PGR para incluir avaliação de riscos psicossociais. Obrigatório a partir de 26/05/2026. Prazo curto — consulte disponibilidade.</p>
+                    <span class="preco">Incluído no PGR</span>
+                </div>
+                <div class="servico-card">
+                    <h3>Pacote Essencial (PGR + PCMSO)</h3>
+                    <p>Tudo que sua empresa precisa para estar em dia com NR-1 e NR-7. Ideal para empresas com até 50 funcionários.</p>
+                    <span class="preco">Consulte o pacote</span>
+                </div>
+                <div class="servico-card">
+                    <h3>LTCAT — Laudo Técnico Ambiental</h3>
+                    <p>Avaliação das condições ambientais para aposentadoria especial. Obrigatório para eSocial em atividades insalubres.</p>
+                    <span class="preco">Solicite orçamento</span>
+                </div>
+                <div class="servico-card">
+                    <h3>Exames Admissionais e Ocupacionais</h3>
+                    <p>ASO, exames periódicos e demissionais com nossa médica do trabalho. Documentação integrada ao eSocial.</p>
+                    <span class="preco">Solicite orçamento</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="secao">
+        <div class="container">
+            <h2>Por que empresas de Ribeirão das Neves escolhem a Higilabor</h2>
+            <ul class="diferenciais-lista">
+                <li>
+                    <span class="check">✓</span>
+                    <span><strong>Médica do trabalho própria</strong> — laudos e PCMSO assinados pela nossa médica, sem terceirização. Qualidade garantida e responsabilidade direta.</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span><strong>Preço justo para PMEs</strong> — sem taxa de franquia, sem intermediários. Você paga pelo serviço, não pelo overhead de uma grande empresa.</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span><strong>Atendimento remoto eficiente</strong> — a documentação de PGR e PCMSO pode ser feita remotamente. Menos custo de deslocamento = preço menor para você.</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span><strong>NR-1 psicossocial incluída</strong> — não cobramos extra pela atualização obrigatória de maio/2026. Está incluída no PGR.</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span><strong>Orçamento em 24 horas</strong> — sem enrolação. Você nos manda os dados da empresa hoje e amanhã tem proposta na mão.</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span><strong>Integração com eSocial</strong> — entregamos a documentação já formatada para o envio no eSocial SST, sem retrabalho para o seu RH.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- NÚMEROS -->
+    <section class="numeros">
+        <div class="container">
+            <h2 style="color:var(--branco); font-size:1.4rem;">Higilabor em números</h2>
+            <div class="numeros-grid">
+                <div class="numero-item">
+                    <div class="valor">+200</div>
+                    <div class="label">Empresas atendidas em MG</div>
+                </div>
+                <div class="numero-item">
+                    <div class="valor">100%</div>
+                    <div class="label">PGRs com NR-1 psicossocial</div>
+                </div>
+                <div class="numero-item">
+                    <div class="valor">24h</div>
+                    <div class="label">Para receber seu orçamento</div>
+                </div>
+                <div class="numero-item">
+                    <div class="valor">R$ 0</div>
+                    <div class="label">Custo da consulta inicial</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREÇO x MULTA -->
+    <section class="secao cinza">
+        <div class="container">
+            <h2>Quanto custa NÃO ter SST em dia?</h2>
+            <p class="subtitulo">Compare o custo de regularizar com o risco de não fazer.</p>
+            <div class="preco-box">
+                <h3>Comparativo: custo x risco</h3>
+                <table class="preco-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PGR + PCMSO completo (empresa até 20 func.)</td>
+                            <td>A partir de R$ 1.590</td>
+                        </tr>
+                        <tr>
+                            <td>Atualização NR-1 psicossocial</td>
+                            <td>Incluída no PGR</td>
+                        </tr>
+                        <tr>
+                            <td class="multa">Multa por infração NR-28 (por trabalhador)</td>
+                            <td class="multa">R$ 1.610 a R$ 6.708</td>
+                        </tr>
+                        <tr>
+                            <td class="multa">Multa máxima por auditoria fiscal</td>
+                            <td class="multa">R$ 44.396,84</td>
+                        </tr>
+                        <tr>
+                            <td class="multa">Ação trabalhista média (dano psicológico)</td>
+                            <td class="multa">R$ 10.000 a R$ 50.000+</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alerta-multa">
+                    <strong>Conclusão:</strong> o custo de regularizar é uma fração do risco de não fazer. E a regularização é permanente — a multa pode vir todo ano.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final" id="contato">
+        <div class="container">
+            <h2>Solicite seu orçamento agora</h2>
+            <p>Preencha o formulário ou chame no WhatsApp. Retorno em até 24 horas úteis.</p>
+
+            <div class="form-box">
+                <label for="nome">Seu nome</label>
+                <input type="text" id="nome" name="nome" placeholder="João Silva" autocomplete="name">
+
+                <label for="empresa">Nome da empresa</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Empresa Ltda">
+
+                <label for="telefone">WhatsApp / Telefone</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(31) 9 9999-0000" autocomplete="tel">
+
+                <a href="https://wa.me/5534[TELEFONE]?text=Ol%C3%A1%21+Quero+um+or%C3%A7amento+de+SST+para+minha+empresa+em+Ribeir%C3%A3o+das+Neves" class="btn-form" style="display:block;text-align:center;text-decoration:none;">Enviar pelo WhatsApp</a>
+            </div>
+
+            <p class="ou">— ou entre em contato direto —</p>
+            <a href="https://wa.me/5534[TELEFONE]?text=Ol%C3%A1%21+Quero+um+or%C3%A7amento+de+SST+para+minha+empresa+em+Ribeir%C3%A3o+das+Neves" class="whatsapp-btn">
+                <span>💬</span> Chamar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Higilabor Consultoria SST</strong></p>
+        <p>Uberlândia, MG · Atendemos Ribeirão das Neves e todo Minas Gerais</p>
+        <p style="margin-top:8px; opacity:0.7;">
+            <a href="tel:+5534[TELEFONE]">(34) [TELEFONE]</a> ·
+            <a href="https://wa.me/5534[TELEFONE]">WhatsApp</a>
+        </p>
+        <p style="margin-top:12px; font-size:0.75rem; opacity:0.6;">
+            © 2026 Higilabor. Todos os direitos reservados.
+        </p>
+    </footer>
+
+    <!-- WHATSAPP FLUTUANTE -->
+    <div class="wpp-float">
+        <a href="https://wa.me/5534[TELEFONE]?text=Ol%C3%A1%21+Quero+um+or%C3%A7amento+de+SST+para+minha+empresa+em+Ribeir%C3%A3o+das+Neves" aria-label="WhatsApp Higilabor">
+            💬
+        </a>
+    </div>
+
+</body>
+</html>

@@ -93,3 +93,15 @@ Próxima verificação amanhã.
 | Andrade Rodrigues Matos (Pleno) | Belo Horizonte/MG | descartada (vaga Pleno) |
 
 Próxima verificação amanhã.
+
+---
+
+## Rodada 2026-04-11 (automática — agendada)
+
+**1 vaga nova encontrada.**
+
+| # | Vaga | Cidade | Salário | Por que é bom fit | Arquivo |
+|---|---|---|---|---|---|
+| 9 | **LJCF Advogados** — Contencioso Tributário Jr. | Campinas/SP | n/d | **NOVA** (08/04). OAB ativa ✓, contencioso tributário ✓, pós-graduação em andamento (diferencial) ✓, PJe/Projudi/e-SAJ ✓. Rotina: elaboração de peças, acompanhamento processual, interlocução com cliente. Presencial 3x/semana em Campinas. | [09](2026-04-11_09_ljcf-advogados_campinas_sp.md) |
+
+**Pulei nesta rodada:** todas as demais 9 vagas retornadas já processadas ou descartadas em rodadas anteriores (Prisco Paraiso, Franco & Luzz, Sapiro, MUTUUS, Porto Alegre anônima, EMPREGGA, 4SYNERGY, FAS Advogados, Andrade Rodrigues Matos).
