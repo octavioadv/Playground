@@ -2,7 +2,17 @@
 
 ## Quem é a Higilabor
 
-Consultoria de SST (Saúde e Segurança do Trabalho) em Uberlândia/MG. Atende PMEs do Triângulo Mineiro e região. Emite PGR, PCMSO, LTCAT, laudos, treinamentos, eSocial SST. Médica própria assina ASOs via telemedicina.
+Consultoria de SST (Saúde e Segurança do Trabalho) em Uberlândia/MG. Atende PMEs do Triângulo Mineiro e região, mas já prestou serviço em **mais de 200 cidades em 13 estados brasileiros** — modelo híbrido de visita técnica agendada + gestão remota contínua. Emite PGR, PCMSO, LTCAT, laudos, treinamentos, eSocial SST. Médica própria assina ASOs via telemedicina.
+
+## Credibilidade (fato factual — pode usar)
+
+- **200+ cidades atendidas em 13 estados brasileiros**
+- Sede em Uberlândia/MG (Triângulo Mineiro)
+- Modelo comprovado de atendimento regional/nacional via visita agendada + gestão remota
+- Médica própria (telemedicina SST)
+- Capacidade: 650 UEP/mês
+
+Esses fatos são verdadeiros e devem ser usados como âncora de credibilidade em landings, blogs, pitches e propostas. Substitui qualquer necessidade de "líder" ou "referência" — o número fala por si.
 
 ## Posicionamento
 
@@ -22,8 +32,8 @@ A Higilabor não é a mais barata nem a mais cara. É a que entrega o que promet
 ### Não somos
 - **Acadêmicos**: não escrevemos artigos de revista científica
 - **Vendedores agressivos**: não fazemos terrorismo com multas
-- **Genéricos**: não atendemos "todo o Brasil", atendemos o Triângulo Mineiro de verdade
-- **Arrogantes**: não usamos "líderes", "excelência", "referência nacional"
+- **Arrogantes**: não usamos "líderes", "excelência", "referência nacional" sem ancorar em fato
+- **Genéricos vazios**: podemos dizer "atendemos mais de 200 cidades em 13 estados" (é verdade) mas NUNCA "solução completa para todo o Brasil" (corporativês vazio)
 
 ## Público-alvo e como falar com cada um
 
@@ -92,7 +102,7 @@ Nunca usar em nenhum contexto público:
 | "Líder de mercado" | Não somos e não precisamos dizer |
 | "Excelência" | Vazio, todo mundo diz |
 | "Solução integrada" | Corporativês — dizer o que faz de verdade |
-| "Atendemos todo o Brasil" | Mentira — atendemos Triângulo Mineiro e região |
+| "Atendemos todo o Brasil" | Corporativês vazio. Usar versão factual: "já atendemos 200+ cidades em 13 estados" |
 | "Parceiro estratégico" | O cliente quer fornecedor bom, não parceiro |
 | "Inovação" | SST é regulamentação, não startup |
 

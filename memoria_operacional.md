@@ -38,6 +38,7 @@
 - Direto ao ponto, sem enrolação
 - Foco em execução, cobrado diariamente nos KPIs
 - Commitar diariamente sem precisar pedir — manter o branch sempre atualizado
+- **Higilabor já atendeu 200+ cidades em 13 estados brasileiros** (2026-04-10). Isso é um fato factual que valida o modelo regional/nacional. Deve ser usado como argumento de credibilidade em landings, blogs e pitches — não é bravata, é prova de execução. Cidades fora do Triângulo Mineiro (como Viçosa/Zona da Mata) são totalmente estratégicas.
 
 ## Métricas de execução
 | Data | Skill | Resultado | Nota |
