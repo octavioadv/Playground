@@ -78,6 +78,13 @@ Analisa tendências SST/EHS no LinkedIn + gera 2-3 rascunhos de posts.
 
 > Todos os textos gerados (blog, LinkedIn) são RASCUNHO — devem passar por `/ux-copy` antes de publicar.
 
+## Tarefa sob demanda
+
+### City-Pack
+Skill: `city-pack` | Trigger: "city-pack [cidade]", "gera pacote [cidade]"
+Output: `seo_higilabor/cidades/[slug]/` com 4 arquivos (landing HTML, blog, LinkedIn, WhatsApp)
+Execução semanal (não diária). 1 pacote completo focado em 1 cidade estratégica.
+
 ### Protocolo pós-tarefa diária
 Após executar qualquer tarefa diária (PNCP, SEO, LinkedIn), SEMPRE:
 1. Abrir `memoria_operacional.md`
