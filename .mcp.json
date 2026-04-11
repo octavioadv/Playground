@@ -5,8 +5,7 @@
       "command": "python",
       "args": [
         "alerta-licitacao/mcp_server_municipio.py"
-      ],
-      "cwd": "${workspaceFolder}"
+      ]
     }
   }
 }
