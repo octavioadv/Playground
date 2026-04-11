@@ -17,6 +17,11 @@
 - 2026-04-10: Nenhum concorrente menciona NR-1 psicossocial nem publica preços. Dois diferenciais imediatos para Higilabor.
 - 2026-04-10: Rodar agentes em paralelo funciona bem — SEO e LinkedIn podem executar simultaneamente sem conflito de arquivos.
 
+### city-pack
+- 2026-04-10: Primeira execução — Viçosa/MG gerado via 4 agents paralelos (landing, blog, LinkedIn, WhatsApp). Funcionou bem, cada agent em ~45-250s. Tempo total < 5min.
+- 2026-04-10: Cidades fora do Triângulo (Viçosa = Zona da Mata, 440km) exigem transparência radical sobre distância — agents adotaram posicionamento "fornecedor regional planejado" em vez de fingir presença local. Melhor qualificação de leads.
+- 2026-04-10: Perfil econômico específico importa — Viçosa (cidade universitária UFV) tem público-alvo diferente de Ibiá (comércio/agro). Agents ajustaram exemplos, tabelas de preço e FAQ automaticamente.
+
 ### LinkedIn
 - 2026-04-10: Canpat 2026 lançada pelo MTE (7/abril) com foco em riscos psicossociais — timing perfeito para pacote Psicossocial da Higilabor.
 - 2026-04-10: 46 dias para fiscalização NR-1 psicossocial (26/maio). Melhor argumento de venda urgente.
@@ -32,6 +37,7 @@
 - Não criar PR sem pedir explicitamente
 - Direto ao ponto, sem enrolação
 - Foco em execução, cobrado diariamente nos KPIs
+- Commitar diariamente sem precisar pedir — manter o branch sempre atualizado
 
 ## Métricas de execução
 | Data | Skill | Resultado | Nota |
@@ -39,3 +45,4 @@
 | 2026-04-10 | PNCP | 2 dispensas MG ativas + 3 leads novas | API bloqueada, scan via WebSearch + histórico |
 | 2026-04-10 | SEO | Pesquisa + blog post Ibiá/MG (tema 1) | Vácuo digital total, 0 concorrência SEO |
 | 2026-04-10 | LinkedIn | 3 tendências hot + 3 posts rascunho | NR-1 psicossocial 46 dias, Canpat 2026, FAP |
+| 2026-04-10 | city-pack | Viçosa/MG — 4 arquivos gerados | Via 4 agents paralelos, cidade fora do Triângulo |

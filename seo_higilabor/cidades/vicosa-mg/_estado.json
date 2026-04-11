@@ -1,0 +1,31 @@
+{
+  "cidade": "Viçosa",
+  "slug": "vicosa-mg",
+  "uf": "MG",
+  "regiao": "Zona da Mata",
+  "populacao": 78000,
+  "distancia_uberlandia_km": 440,
+  "gerado_em": "2026-04-10T15:00:00",
+  "gerado_por": "city-pack (4 agents paralelos)",
+  "atendimento": "regional-visita-agendada",
+  "arquivos": {
+    "landing-page.html": "gerado",
+    "blog-post.md": "gerado",
+    "linkedin-post.md": "gerado",
+    "whatsapp-cold.md": "gerado"
+  },
+  "status_publicacao": {
+    "landing-page": "pendente",
+    "blog-post": "pendente",
+    "linkedin-post": "pendente",
+    "whatsapp-cold": "pendente"
+  },
+  "cidades_vizinhas": ["Teixeiras", "Coimbra", "Porto Firme", "Paula Cândido", "Cajuri"],
+  "revisado_ux_copy": false,
+  "notas_estrategicas": [
+    "Fora do raio natural do Triângulo Mineiro (~440km)",
+    "Transparência sobre distância foi abordagem de todos os 4 arquivos",
+    "Perfil econômico UFV: clínicas, escolas, serviços administrativos",
+    "Posicionamento: fornecedor regional planejado, não local"
+  ]
+}
