@@ -4,15 +4,26 @@
 
 Consultoria de SST (Saúde e Segurança do Trabalho) em Uberlândia/MG. Atende PMEs do Triângulo Mineiro e região, mas já prestou serviço em **mais de 200 cidades em 13 estados brasileiros** — modelo híbrido de visita técnica agendada + gestão remota contínua. Emite PGR, PCMSO, LTCAT, laudos, treinamentos, eSocial SST. Médica própria assina ASOs via telemedicina.
 
-## Credibilidade (fato factual — pode usar)
+## Credibilidade (fatos factuais — pode usar)
 
+- **33+ anos de operação** (fundada em 10/08/1992)
 - **200+ cidades atendidas em 13 estados brasileiros**
-- Sede em Uberlândia/MG (Triângulo Mineiro)
+- Fundada por **Ronaldo Coelho Alvarenga** — engenheiro civil, engenheiro de segurança, higienista ocupacional, perito trabalhista
+- Sede: R. Arthur Bernardes, 1515 — Martins, Uberlândia/MG — CEP 38400-368
+- CNPJ: 42.870.964/0001-30
 - Modelo comprovado de atendimento regional/nacional via visita agendada + gestão remota
 - Médica própria (telemedicina SST)
 - Capacidade: 650 UEP/mês
 
-Esses fatos são verdadeiros e devem ser usados como âncora de credibilidade em landings, blogs, pitches e propostas. Substitui qualquer necessidade de "líder" ou "referência" — o número fala por si.
+Esses fatos são verdadeiros e devem ser usados como âncora de credibilidade em landings, blogs, pitches e propostas. Substitui qualquer necessidade de "líder" ou "excelência" vazios — os números falam por si.
+
+## Identidade visual (a preencher)
+
+- **Logo:** [URL a confirmar com Octav]
+- **Cor primária:** [a confirmar — atualmente usando verde #1B7A3D como placeholder]
+- **Cor secundária:** [a confirmar]
+- **Fonte principal:** [a confirmar]
+- **Site oficial:** https://higilabor.com.br
 
 ## Posicionamento
 
