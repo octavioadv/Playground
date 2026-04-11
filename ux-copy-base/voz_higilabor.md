@@ -17,13 +17,19 @@ Consultoria de SST (Saúde e Segurança do Trabalho) em Uberlândia/MG. Atende P
 
 Esses fatos são verdadeiros e devem ser usados como âncora de credibilidade em landings, blogs, pitches e propostas. Substitui qualquer necessidade de "líder" ou "excelência" vazios — os números falam por si.
 
-## Identidade visual (a preencher)
+## Identidade visual
 
-- **Logo:** [URL a confirmar com Octav]
-- **Cor primária:** [a confirmar — atualmente usando verde #1B7A3D como placeholder]
-- **Cor secundária:** [a confirmar]
-- **Fonte principal:** [a confirmar]
+- **Logo:** https://higilabor.com.br/wp-content/uploads/2023/10/LOGO-HIGILABORtransparente-e1741200091119-1013x1024.png
+- **Favicon:** https://higilabor.com.br/wp-content/uploads/2023/10/cropped-LOGO-HIGILABORtransparente-32x32.png
+- **Cor primária (verde):** #61a229 (hover: #4e8221)
+- **Cor de fundo dark:** #3B3D42
+- **Fonte principal:** Montserrat
+- **Fontes secundárias:** Roboto, Red Hat Text
 - **Site oficial:** https://higilabor.com.br
+- **Telefone fixo:** (34) 3214-1720
+- **WhatsApp:** (34) 99971-5684
+- **Tagline site:** "Desde 1992"
+- **Credenciais visíveis no site:** 1.500+ clientes, 13 estados, 33 anos de operação
 
 ## Posicionamento
 
