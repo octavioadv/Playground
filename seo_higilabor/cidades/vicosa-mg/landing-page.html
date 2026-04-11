@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Medicina do Trabalho em Viçosa MG | PGR, PCMSO, NR-1</title>
+  <meta name="description" content="Medicina do trabalho em Viçosa/MG: PGR, PCMSO e NR-1 psicossocial com preço justo e prazo cumprido. Orçamento pelo WhatsApp (34) 99971-5684.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Higilabor",
+    "description": "Consultoria de Saúde e Segurança do Trabalho (SST) com PGR, PCMSO, LTCAT, NR-1 psicossocial, LTCAT e treinamentos NR. Atende empresas em Viçosa/MG e região da Zona da Mata mineira.",
+    "url": "https://higilabor.com.br/cidades/vicosa-mg/",
+    "telephone": "+5534999715684",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Uberlândia",
+      "addressRegion": "MG",
+      "addressCountry": "BR"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Viçosa",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "MG",
+          "addressCountry": "BR"
+        }
+      },
+      {
+        "@type": "City",
+        "name": "Teixeiras"
+      },
+      {
+        "@type": "City",
+        "name": "Coimbra"
+      },
+      {
+        "@type": "City",
+        "name": "Porto Firme"
+      },
+      {
+        "@type": "City",
+        "name": "Paula Cândido"
+      },
+      {
+        "@type": "City",
+        "name": "Cajuri"
+      }
+    ],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <style>
+    :root {
+      --verde: #1B7A3D;
+      --verde-claro: #E8F5E9;
+      --verde-escuro: #145A2C;
+      --cinza-texto: #333;
+      --cinza-leve: #f7f7f7;
+      --amarelo-alerta: #FFF3CD;
+      --borda-alerta: #FFC107;
+      --azul-link: #1565C0;
+      --branco: #fff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--cinza-texto);
+      line-height: 1.7;
+      background: var(--branco);
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+      color: var(--branco);
+      padding: 48px 32px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 17px;
+      opacity: 0.92;
+      line-height: 1.6;
+    }
+
+    /* HEADINGS */
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--verde-escuro);
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--verde);
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--verde);
+      margin: 28px 0 12px;
+    }
+
+    /* TEXT */
+    p { margin-bottom: 16px; font-size: 16px; }
+
+    /* LISTS */
+    ul, ol {
+      margin: 12px 0 20px 24px;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    li strong {
+      color: var(--verde-escuro);
+    }
+
+    /* ALERT BOX */
+    .alerta {
+      background: var(--amarelo-alerta);
+      border-left: 4px solid var(--borda-alerta);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+      font-size: 15px;
+    }
+    .alerta strong { color: #856404; }
+
+    /* INFO BOX */
+    .info-box {
+      background: var(--verde-claro);
+      border-left: 4px solid var(--verde);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+    }
+
+    /* PRICE TABLE */
+    .precos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .precos th {
+      background: var(--verde);
+      color: var(--branco);
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .precos td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+      font-size: 15px;
+    }
+    .precos tr:nth-child(even) td { background: var(--cinza-leve); }
+
+    /* SERVICES GRID */
+    .servicos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .servico-item {
+      background: var(--cinza-leve);
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 3px solid var(--verde);
+      font-size: 15px;
+    }
+    .servico-item strong {
+      display: block;
+      color: var(--verde-escuro);
+      margin-bottom: 4px;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--cinza-leve);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--verde-escuro);
+    }
+    .faq-item p {
+      margin: 0;
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+      color: var(--branco);
+      padding: 40px 32px;
+      border-radius: 12px;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta-section h2 {
+      color: var(--branco);
+      border: none;
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+    .cta-section p {
+      opacity: 0.92;
+      margin-bottom: 24px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--branco);
+    }
+    .btn-contato {
+      background: var(--branco);
+      color: var(--verde-escuro);
+    }
+
+    /* CHECKLIST */
+    .checklist li {
+      list-style: none;
+      padding-left: 28px;
+      position: relative;
+    }
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--verde);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    /* FOOTER */
+    .rodape {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #777;
+      text-align: center;
+    }
+    .rodape strong { color: var(--verde-escuro); }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero { padding: 32px 20px; }
+      .hero h1 { font-size: 22px; }
+      .servicos { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Medicina do Trabalho em Viçosa MG | PGR, PCMSO, NR-1 Psicossocial</h1>
+    <p>Se você gerencia uma empresa em Viçosa e precisa resolver PGR, PCMSO, LTCAT ou a nova exigência da NR-1 psicossocial, este guia é para você. Aqui está o que a lei pede, o que custa e como Higilabor atende Viçosa e a Zona da Mata com visita técnica agendada e gestão remota contínua.</p>
+  </div>
+
+  <!-- POR QUE SST -->
+  <h2>Por que sua empresa em Viçosa precisa de SST?</h2>
+
+  <p>Toda empresa com funcionários registrados — do comércio no centro de Viçosa a uma clínica próxima à UFV ou a uma pequena indústria no entorno — tem obrigações de Saúde e Segurança do Trabalho. A lei não diferencia porte para a maioria das exigências: o que muda é a complexidade do documento, não a obrigação em si.</p>
+
+  <p>As principais obrigações legais são:</p>
+
+  <ul>
+    <li><strong>PGR (Programa de Gerenciamento de Riscos):</strong> obrigatório para todas as empresas com empregados CLT. Substituiu o antigo PPRA desde janeiro de 2022.</li>
+    <li><strong>PCMSO (Programa de Controle Médico de Saúde Ocupacional):</strong> coordenado por médico do trabalho, define exames admissionais, periódicos, demissionais e de retorno.</li>
+    <li><strong>Envio de eventos SST ao eSocial:</strong> S-2210 (acidente), S-2220 (ASO) e S-2240 (condições ambientais) precisam estar em dia para admissões e demissões não travarem.</li>
+    <li><strong>NR-1 psicossocial:</strong> a partir de 26 de maio de 2026, o PGR precisa contemplar riscos psicossociais como sobrecarga, assédio e pressão excessiva.</li>
+  </ul>
+
+  <div class="alerta">
+    <strong>Atenção:</strong> O descumprimento gera multas que vão de R$ 1.000 a mais de R$ 50.000 por infração, além de responsabilização civil e criminal em caso de acidente. Em uma cidade com forte presença de universidade, clínicas e serviços, a fiscalização costuma ser mais ativa.
+  </div>
+
+  <!-- PGR -->
+  <h2>O que é o PGR e por que sua empresa precisa dele</h2>
+
+  <p>O PGR é o documento que identifica, avalia e controla os riscos ocupacionais da sua empresa. Ele é composto por dois elementos principais:</p>
+
+  <ol>
+    <li><strong>Inventário de Riscos:</strong> levantamento de todos os perigos físicos, químicos, biológicos, ergonômicos, de acidente e agora psicossociais do ambiente de trabalho.</li>
+    <li><strong>Plano de Ação:</strong> medidas de prevenção e controle com prazos e responsáveis para eliminar ou reduzir os riscos identificados.</li>
+  </ol>
+
+  <p>Para empresas em Viçosa — comércio, clínicas, escolas, prestadores ligados à UFV, pequenas indústrias ou agro no entorno — o PGR deve refletir a realidade da operação. Um documento genérico comprado pela internet não resiste a uma fiscalização do Ministério do Trabalho e não protege a empresa em caso de ação trabalhista.</p>
+
+  <h3>Quem precisa de PGR em Viçosa</h3>
+
+  <ul class="checklist">
+    <li>Comércios e supermercados com funcionários CLT</li>
+    <li>Clínicas médicas, odontológicas e laboratórios</li>
+    <li>Escolas, creches e cursos preparatórios</li>
+    <li>Prestadores de serviço ligados à UFV e ao setor público</li>
+    <li>Pequenas indústrias, metalúrgicas e construção civil</li>
+    <li>Propriedades rurais da Zona da Mata com trabalhadores registrados</li>
+  </ul>
+
+  <!-- PCMSO -->
+  <h2>PCMSO: o programa de saúde ocupacional</h2>
+
+  <p>O PCMSO é coordenado por médico do trabalho e define quais exames cada funcionário precisa realizar, com que frequência e quais são os critérios de aptidão. Sem PCMSO atualizado, a empresa não consegue emitir ASO válido — e isso trava admissões, demissões e retornos ao trabalho.</p>
+
+  <p>Os exames obrigatórios são:</p>
+
+  <ul>
+    <li><strong>Admissional:</strong> antes do início das atividades</li>
+    <li><strong>Periódico:</strong> conforme a periodicidade definida no PCMSO (anual, bianual)</li>
+    <li><strong>Retorno ao trabalho:</strong> após afastamento superior a 30 dias</li>
+    <li><strong>Mudança de função:</strong> quando há alteração de riscos</li>
+    <li><strong>Demissional:</strong> até 10 dias após o desligamento</li>
+  </ul>
+
+  <div class="info-box">
+    Higilabor tem médica do trabalho própria que assina ASOs por telemedicina dentro das regras do CFM. Isso significa que empresas em Viçosa não dependem de agenda de médico local para liberar um admissional urgente.
+  </div>
+
+  <!-- NR-1 -->
+  <h2>NR-1 Psicossocial: o prazo está acabando</h2>
+
+  <p>A partir de <strong>26 de maio de 2026</strong>, o PGR de toda empresa precisa incluir a avaliação de <strong>riscos psicossociais</strong>. Essa mudança na NR-1 afeta todas as organizações, independentemente do porte, e a fiscalização já está estruturada para cobrar.</p>
+
+  <p>O que são riscos psicossociais, na prática:</p>
+
+  <ul>
+    <li>Sobrecarga de trabalho e jornadas excessivas</li>
+    <li>Assédio moral e sexual no ambiente de trabalho</li>
+    <li>Falta de autonomia e controle sobre as tarefas</li>
+    <li>Conflitos interpessoais e clima organizacional ruim</li>
+    <li>Pressão por metas inatingíveis</li>
+  </ul>
+
+  <h3>O que muda na prática para empresas de Viçosa</h3>
+
+  <p>Sua empresa precisa:</p>
+
+  <ol>
+    <li><strong>Identificar</strong> os fatores de risco psicossocial presentes no ambiente</li>
+    <li><strong>Avaliar</strong> gravidade e probabilidade de danos</li>
+    <li><strong>Incluir no PGR</strong> medidas de prevenção e controle</li>
+    <li><strong>Documentar</strong> tudo para responder à fiscalização</li>
+  </ol>
+
+  <div class="info-box">
+    <strong>Prioridade até maio/2026:</strong> Se o PGR da sua empresa em Viçosa ainda não contempla riscos psicossociais, este é o item mais urgente da sua agenda de SST em 2026. Depois dessa data, a empresa fica exposta a autuação direta.
+  </div>
+
+  <!-- PREÇOS -->
+  <h2>Quanto custa SST em Viçosa?</h2>
+
+  <p>O valor de PGR, PCMSO e demais serviços depende do número de funcionários, grau de risco da atividade e complexidade da operação. Os valores abaixo são referências de mercado para empresas de pequeno e médio porte:</p>
+
+  <table class="precos">
+    <thead>
+      <tr>
+        <th>Serviço</th>
+        <th>Referência de mercado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PGR + PCMSO</strong> (até 10 funcionários)</td>
+        <td>A partir de R$ 750/ano</td>
+      </tr>
+      <tr>
+        <td><strong>PGR + PCMSO</strong> (11 a 30 funcionários)</td>
+        <td>R$ 1.500 a R$ 3.200/ano</td>
+      </tr>
+      <tr>
+        <td><strong>PCMSO isolado</strong></td>
+        <td>R$ 640 a R$ 2.000/ano</td>
+      </tr>
+      <tr>
+        <td><strong>LTCAT</strong></td>
+        <td>Orçamento sob medida</td>
+      </tr>
+      <tr>
+        <td><strong>Exame admissional/periódico</strong></td>
+        <td>Negociado por volume</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>O importante é não contratar pelo menor preço sem olhar o que está incluído. Um serviço correto precisa ter:</p>
+
+  <ul class="checklist">
+    <li>Levantamento presencial de riscos (não apenas um PDF genérico)</li>
+    <li>Assinatura de profissional habilitado (engenheiro ou técnico de segurança)</li>
+    <li>Coordenação médica do PCMSO por médico do trabalho</li>
+    <li>Suporte para envio ao eSocial</li>
+    <li>Atualização anual ou sempre que houver mudança na empresa</li>
+  </ul>
+
+  <!-- HIGILABOR + DISTÂNCIA -->
+  <h2>Higilabor atende Viçosa — e como funciona à distância</h2>
+
+  <p>Higilabor é consultoria de Saúde e Segurança do Trabalho sediada em Uberlândia, no Triângulo Mineiro. Viçosa fica a aproximadamente 440 km, na Zona da Mata, e é importante ser transparente: não temos escritório físico em Viçosa. O atendimento acontece em um modelo regional, com duas frentes claras.</p>
+
+  <p><strong>1. Visita técnica agendada.</strong> Um técnico ou engenheiro de segurança se desloca até Viçosa em data marcada para fazer o levantamento presencial de riscos, medições quando necessárias e reunião com o responsável pela empresa. Essa visita é planejada — não é um atendimento reativo de 2 horas. Quando possível, agrupamos visitas na mesma semana para reduzir custo de deslocamento e repassar a diferença no orçamento.</p>
+
+  <p><strong>2. Gestão remota contínua.</strong> Depois da visita, a elaboração do PGR, do PCMSO, da coordenação médica e do envio de eventos ao eSocial acontece remotamente. O cliente em Viçosa tem canal direto por WhatsApp e e-mail para dúvidas do dia a dia, liberação de admissional, atualização de documento e suporte em fiscalização.</p>
+
+  <p>Esse modelo funciona porque 90% do trabalho de SST é documental e contínuo. A parte presencial precisa ser bem feita uma ou duas vezes por ano — o restante é gestão, e gestão se faz de onde estiver.</p>
+
+  <div class="servicos">
+    <div class="servico-item">
+      <strong>PGR completo</strong>
+      Inventário de riscos e plano de ação personalizados
+    </div>
+    <div class="servico-item">
+      <strong>PCMSO</strong>
+      Coordenado por médico do trabalho, com gestão de exames
+    </div>
+    <div class="servico-item">
+      <strong>NR-1 Psicossocial</strong>
+      Adequação antes do prazo de 26/05/2026
+    </div>
+    <div class="servico-item">
+      <strong>LTCAT</strong>
+      Aposentadoria especial e enquadramento previdenciário
+    </div>
+    <div class="servico-item">
+      <strong>Gestão do FAP</strong>
+      Redução de custos com encargos previdenciários
+    </div>
+    <div class="servico-item">
+      <strong>Treinamentos NR</strong>
+      NR-5, NR-6, NR-10, NR-12, NR-35 e outras
+    </div>
+    <div class="servico-item">
+      <strong>eSocial SST</strong>
+      Envio de S-2210, S-2220 e S-2240
+    </div>
+    <div class="servico-item">
+      <strong>Zona da Mata</strong>
+      Viçosa, Teixeiras, Coimbra, Porto Firme, Paula Cândido, Cajuri
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <h2>FAQ — Perguntas frequentes sobre SST em Viçosa</h2>
+
+  <div class="faq-item">
+    <h3>1. Higilabor atende Viçosa sendo de Uberlândia?</h3>
+    <p>Sim. O atendimento a Viçosa é feito por visita técnica agendada (o profissional vai até a empresa em data marcada para levantamento presencial de riscos) somada à gestão remota contínua do PGR, PCMSO e eventos eSocial. Não temos escritório em Viçosa — trabalhamos com modelo regional, o que mantém o preço justo mesmo com o deslocamento. O suporte do dia a dia é por WhatsApp e e-mail, com resposta em horário comercial.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>2. Minha empresa em Viçosa é pequena. Preciso mesmo de PGR e PCMSO?</h3>
+    <p>Sim. Todas as empresas com funcionários CLT são obrigadas a ter PGR e PCMSO, independentemente do porte. Microempresas e empresas de pequeno porte de grau de risco 1 e 2 têm tratamento diferenciado no formato do documento, mas não são isentas da obrigação.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>3. O que acontece se eu não adequar a NR-1 psicossocial até maio de 2026?</h3>
+    <p>A partir de 26 de maio de 2026, a fiscalização pode autuar empresas que não incluíram riscos psicossociais no PGR. As multas variam conforme gravidade e porte, podendo ultrapassar R$ 50.000 por item. O ideal é fechar a adequação antes do prazo, sem correria.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>4. Quanto tempo leva para fazer o PGR de uma empresa em Viçosa?</h3>
+    <p>Depende do porte e da complexidade. Para empresas pequenas, o prazo médio é de 5 a 10 dias úteis depois da visita técnica. Para médias com operação mais complexa, pode ir a 15 a 20 dias úteis. O prazo é informado no orçamento e cumprido.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>5. Como peço um orçamento para Viçosa?</h3>
+    <p>Entre em contato pelo WhatsApp (34) 99971-5684 ou pela página de contato. Pedimos algumas informações básicas — número de funcionários, atividade, CNPJ — e enviamos o orçamento em até 24 horas úteis.</p>
+  </div>
+
+  <!-- FAQ SCHEMA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Higilabor atende Viçosa sendo de Uberlândia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. O atendimento a Viçosa é feito por visita técnica agendada (o profissional vai até a empresa em data marcada para levantamento presencial de riscos) somada à gestão remota contínua do PGR, PCMSO e eventos eSocial. Não temos escritório em Viçosa — trabalhamos com modelo regional, o que mantém o preço justo mesmo com o deslocamento. O suporte do dia a dia é por WhatsApp e e-mail, com resposta em horário comercial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Minha empresa em Viçosa é pequena. Preciso mesmo de PGR e PCMSO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Todas as empresas com funcionários CLT são obrigadas a ter PGR e PCMSO, independentemente do porte. Microempresas e empresas de pequeno porte de grau de risco 1 e 2 têm tratamento diferenciado no formato do documento, mas não são isentas da obrigação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O que acontece se eu não adequar a NR-1 psicossocial até maio de 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A partir de 26 de maio de 2026, a fiscalização pode autuar empresas que não incluíram riscos psicossociais no PGR. As multas variam conforme gravidade e porte, podendo ultrapassar R$ 50.000 por item. O ideal é fechar a adequação antes do prazo, sem correria."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto tempo leva para fazer o PGR de uma empresa em Viçosa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende do porte e da complexidade. Para empresas pequenas, o prazo médio é de 5 a 10 dias úteis depois da visita técnica. Para médias com operação mais complexa, pode ir a 15 a 20 dias úteis. O prazo é informado no orçamento e cumprido."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como peço um orçamento para Viçosa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entre em contato pelo WhatsApp (34) 99971-5684 ou pela página de contato. Pedimos algumas informações básicas — número de funcionários, atividade, CNPJ — e enviamos o orçamento em até 24 horas úteis."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- CTA FINAL -->
+  <div class="cta-section">
+    <h2>Peça seu orçamento para Viçosa agora</h2>
+    <p>A fiscalização da NR-1 psicossocial começa em 26 de maio de 2026.<br>Regularize a SST da sua empresa em Viçosa com preço justo e prazo cumprido.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5534999715684?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20SST%20para%20minha%20empresa%20em%20Vi%C3%A7osa%2FMG" class="btn btn-whatsapp">WhatsApp (34) 99971-5684</a>
+      <a href="/contato/" class="btn btn-contato">Página de contato</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="rodape">
+    <p><strong>Higilabor</strong> — consultoria de SST sediada em Uberlândia/MG, atendendo Viçosa e região da Zona da Mata: Teixeiras, Coimbra, Porto Firme, Paula Cândido e Cajuri.</p>
+    <p>PGR · PCMSO · LTCAT · NR-1 Psicossocial · Treinamentos NR · eSocial SST</p>
+  </div>
+
+</div>
+
+</body>
+</html>
