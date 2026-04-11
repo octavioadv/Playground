@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "municipio-sst": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "alerta-licitacao/mcp_server_municipio.py"
+      ]
+    }
+  }
+}

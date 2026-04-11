@@ -23,6 +23,20 @@
   .header h1 span { color: var(--accent); }
   .header-meta { display: flex; gap: 16px; align-items: center; font-size: 0.85rem; color: var(--text2); }
 
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 0; padding: 0 32px; border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tab {
+    padding: 12px 24px; cursor: pointer; font-size: 0.9rem; font-weight: 600;
+    color: var(--text2); border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
   .stats-bar {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 12px; padding: 16px 32px;
@@ -72,6 +86,10 @@
   .badge-aberto { background: rgba(52,211,153,0.15); color: var(--green); }
   .badge-encerrado { background: rgba(248,113,113,0.1); color: var(--red); }
 
+  .badge-urgente { background: rgba(248,113,113,0.2); color: var(--red); }
+  .badge-quente { background: rgba(251,191,36,0.2); color: var(--yellow); }
+  .badge-frio { background: rgba(79,140,255,0.15); color: var(--accent); }
+
   .relevancia-bar {
     width: 60px; height: 6px; background: var(--surface2); border-radius: 3px; display: inline-block; vertical-align: middle;
   }
@@ -104,50 +122,61 @@
   .modal-close { float: right; cursor: pointer; color: var(--text2); font-size: 1.2rem; }
   .modal-close:hover { color: var(--text); }
 
+  .situacao-text { max-width: 350px; line-height: 1.4; }
+  .acao-text { max-width: 300px; line-height: 1.4; font-size: 0.78rem; color: var(--text2); }
+
   @media (max-width: 768px) {
-    .header, .controls, .table-wrap { padding-left: 16px; padding-right: 16px; }
+    .header, .controls, .table-wrap, .tabs { padding-left: 16px; padding-right: 16px; }
     .stats-bar { padding: 12px 16px; grid-template-columns: repeat(2, 1fr); }
+    .tab { padding: 10px 14px; font-size: 0.8rem; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🔔 Alerta Licitações <span>SST</span> — Higilabor</h1>
+  <h1>Alerta Licitacoes <span>SST</span> — Higilabor</h1>
   <div class="header-meta">
-    <span id="lastUpdate">Última atualização: —</span>
-    <button class="btn" onclick="loadData()">↻ Atualizar</button>
-    <button class="btn btn-outline" onclick="exportCSV()">⬇ CSV</button>
+    <span id="lastUpdate">Ultima atualizacao: —</span>
+    <button class="btn" onclick="loadAll()">Atualizar</button>
+    <button class="btn btn-outline" onclick="exportCSV()">CSV</button>
   </div>
 </div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('licitacoes')">Licitacoes PNCP (17)</div>
+  <div class="tab" onclick="switchTab('municipios')">Municipios</div>
+</div>
+
+<!-- ═══════════════ TAB: LICITACOES ═══════════════ -->
+<div class="tab-content active" id="tab-licitacoes">
 
 <div class="stats-bar">
   <div class="stat-card"><div class="num" id="statTotal" style="color:var(--accent)">0</div><div class="label">Total ativas</div></div>
   <div class="stat-card"><div class="num" id="statNovas" style="color:var(--green)">0</div><div class="label">Novas (24h)</div></div>
   <div class="stat-card"><div class="num" id="statMG" style="color:var(--yellow)">0</div><div class="label">Minas Gerais</div></div>
-  <div class="stat-card"><div class="num" id="statHigh" style="color:var(--red)">0</div><div class="label">Alta relevância</div></div>
+  <div class="stat-card"><div class="num" id="statHigh" style="color:var(--red)">0</div><div class="label">Alta relevancia</div></div>
   <div class="stat-card"><div class="num" id="statValor" style="color:var(--orange)">0</div><div class="label">Valor total est.</div></div>
 </div>
 
 <div class="controls">
-  <input type="text" id="searchInput" placeholder="Buscar no objeto, órgão, município..." oninput="renderTable()">
+  <input type="text" id="searchInput" placeholder="Buscar no objeto, orgao, municipio..." oninput="renderTable()">
   <select id="filterUF" onchange="renderTable()">
     <option value="">Todas UFs</option>
-    <option value="MG">MG</option>
   </select>
   <select id="filterModalidade" onchange="renderTable()">
     <option value="">Todas modalidades</option>
   </select>
   <select id="filterRelevancia" onchange="renderTable()">
-    <option value="">Todas relevâncias</option>
-    <option value="high">Alta (≥60)</option>
-    <option value="med">Média (30-59)</option>
+    <option value="">Todas relevancias</option>
+    <option value="high">Alta (>=60)</option>
+    <option value="med">Media (30-59)</option>
     <option value="low">Baixa (<30)</option>
   </select>
   <select id="sortBy" onchange="renderTable()">
-    <option value="relevancia">Relevância ↓</option>
-    <option value="data">Data ↓</option>
-    <option value="valor">Valor ↓</option>
+    <option value="relevancia">Relevancia</option>
+    <option value="data">Data</option>
+    <option value="valor">Valor</option>
   </select>
 </div>
 
@@ -158,24 +187,78 @@
         <th onclick="toggleSort('relevancia')">Rel.</th>
         <th onclick="toggleSort('data')">Data</th>
         <th>UF</th>
-        <th onclick="toggleSort('municipio')">Município</th>
+        <th onclick="toggleSort('municipio')">Municipio</th>
         <th>Objeto</th>
         <th>Modalidade</th>
         <th onclick="toggleSort('valor')">Valor Est.</th>
         <th>Abertura</th>
-        <th>Situação</th>
-        <th>Ações</th>
+        <th>Situacao</th>
+        <th>Acoes</th>
       </tr>
     </thead>
     <tbody id="tableBody"></tbody>
   </table>
   <div class="empty-state" id="emptyState" style="display:none">
-    <h2>Nenhuma licitação encontrada</h2>
-    <p>Execute o monitor para buscar licitações SST no PNCP.</p>
+    <h2>Nenhuma licitacao encontrada</h2>
+    <p>Execute o monitor para buscar licitacoes SST no PNCP.</p>
     <p style="margin-top:12px;font-size:0.8rem;color:var(--text2)">
-      <code>python monitor_pncp.py 7</code> para buscar últimos 7 dias
+      <code>python monitor_pncp.py 7</code> para buscar ultimos 7 dias
     </p>
   </div>
+</div>
+
+</div>
+
+<!-- ═══════════════ TAB: MUNICIPIOS ═══════════════ -->
+<div class="tab-content" id="tab-municipios">
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="num" id="statMunTotal" style="color:var(--accent)">0</div><div class="label">Total municipios</div></div>
+  <div class="stat-card"><div class="num" id="statMunUrgente" style="color:var(--red)">0</div><div class="label">Urgente</div></div>
+  <div class="stat-card"><div class="num" id="statMunQuente" style="color:var(--yellow)">0</div><div class="label">Quente</div></div>
+  <div class="stat-card"><div class="num" id="statMunFrio" style="color:var(--accent)">0</div><div class="label">Frio / Pipeline</div></div>
+  <div class="stat-card"><div class="num" id="statMunValor" style="color:var(--orange)">0</div><div class="label">Valor referencia</div></div>
+</div>
+
+<div class="controls">
+  <input type="text" id="searchMun" placeholder="Buscar municipio, situacao..." oninput="renderMunicipios()">
+  <select id="filterPrioridade" onchange="renderMunicipios()">
+    <option value="">Todas prioridades</option>
+    <option value="urgente">Urgente</option>
+    <option value="quente">Quente</option>
+    <option value="frio">Frio</option>
+  </select>
+  <select id="sortMun" onchange="renderMunicipios()">
+    <option value="prioridade">Prioridade</option>
+    <option value="distancia">Distancia</option>
+    <option value="populacao">Populacao</option>
+    <option value="valor">Valor ref.</option>
+  </select>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Prioridade</th>
+        <th>Municipio</th>
+        <th>UF</th>
+        <th>Pop.</th>
+        <th>Dist. km</th>
+        <th>Situacao</th>
+        <th>Valor Ref.</th>
+        <th>Acao Recomendada</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody id="munTableBody"></tbody>
+  </table>
+  <div class="empty-state" id="munEmptyState" style="display:none">
+    <h2>Nenhum municipio encontrado</h2>
+    <p>Carregue os dados de municipios.json.</p>
+  </div>
+</div>
+
 </div>
 
 <!-- Modal detalhes -->
@@ -185,20 +268,35 @@
 
 <script>
 let allData = [];
-let currentSort = { key: 'relevancia', asc: false };
+let munData = [];
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelector(`.tab[onclick*="${tab}"]`).classList.add('active');
+}
+
+async function loadAll() {
+  await Promise.all([loadData(), loadMunicipios()]);
+  document.getElementById('lastUpdate').textContent =
+    'Ultima atualizacao: ' + new Date().toLocaleString('pt-BR');
+}
+
+// ═══════════════ LICITACOES ═══════════════
 
 async function loadData() {
   try {
     const resp = await fetch('./data/resultados.json');
-    if (!resp.ok) throw new Error('Arquivo não encontrado');
+    if (!resp.ok) throw new Error('Arquivo nao encontrado');
     allData = await resp.json();
-    document.getElementById('lastUpdate').textContent =
-      'Última atualização: ' + new Date().toLocaleString('pt-BR');
     populateFilters();
     updateStats();
     renderTable();
+    // Update tab count
+    document.querySelector('.tab[onclick*="licitacoes"]').textContent =
+      'Licitacoes PNCP (' + allData.length + ')';
   } catch (e) {
-    // Tentar carregar de localStorage como fallback
     const stored = localStorage.getItem('resultados_licitacoes');
     if (stored) {
       allData = JSON.parse(stored);
@@ -326,8 +424,8 @@ function renderTable() {
       <td style="white-space:nowrap">${dtAb}</td>
       <td>${sitBadge}</td>
       <td style="white-space:nowrap">
-        <a href="${r.link_pncp}" target="_blank" title="Ver no PNCP">🔗</a>
-        <span style="cursor:pointer;margin-left:6px" onclick="showDetail(${i})" title="Detalhes">📋</span>
+        <a href="${r.link_pncp}" target="_blank" title="Ver no PNCP">Link</a>
+        <span style="cursor:pointer;margin-left:6px" onclick="showDetail(${i})" title="Detalhes">+</span>
       </td>
     </tr>`;
   }).join('');
@@ -338,34 +436,34 @@ function showDetail(idx) {
   const r = filtered[idx];
   if (!r) return;
 
-  const valor = r.valor_estimado ? 'R$ ' + r.valor_estimado.toLocaleString('pt-BR', {minimumFractionDigits: 2}) : 'Não informado';
+  const valor = r.valor_estimado ? 'R$ ' + r.valor_estimado.toLocaleString('pt-BR', {minimumFractionDigits: 2}) : 'Nao informado';
   const kws = (r.keywords_match || []).map(k => `<span class="kw-tag">${k}</span>`).join(' ');
 
   document.getElementById('modalContent').innerHTML = `
-    <span class="modal-close" onclick="closeModal()">✕</span>
-    <h2>Detalhes da Licitação</h2>
+    <span class="modal-close" onclick="closeModal()">X</span>
+    <h2>Detalhes da Licitacao</h2>
     <div class="modal-row"><span class="modal-label">ID PNCP:</span><span>${r.id}</span></div>
     <div class="modal-row"><span class="modal-label">Processo:</span><span>${r.processo || '—'}</span></div>
-    <div class="modal-row"><span class="modal-label">Relevância:</span><span><span class="badge ${r.relevancia >= 60 ? 'badge-high' : r.relevancia >= 30 ? 'badge-med' : 'badge-low'}">${r.relevancia} pts</span></span></div>
+    <div class="modal-row"><span class="modal-label">Relevancia:</span><span><span class="badge ${r.relevancia >= 60 ? 'badge-high' : r.relevancia >= 30 ? 'badge-med' : 'badge-low'}">${r.relevancia} pts</span></span></div>
     <hr style="border-color:var(--border);margin:12px 0">
     <div class="modal-row"><span class="modal-label">Objeto:</span><span>${r.objeto}</span></div>
     <div class="modal-row"><span class="modal-label">Keywords:</span><span>${kws}</span></div>
     <hr style="border-color:var(--border);margin:12px 0">
-    <div class="modal-row"><span class="modal-label">Órgão:</span><span>${r.orgao_nome}</span></div>
+    <div class="modal-row"><span class="modal-label">Orgao:</span><span>${r.orgao_nome}</span></div>
     <div class="modal-row"><span class="modal-label">CNPJ:</span><span>${r.orgao_cnpj}</span></div>
     <div class="modal-row"><span class="modal-label">Unidade:</span><span>${r.unidade_nome || '—'}</span></div>
-    <div class="modal-row"><span class="modal-label">Município/UF:</span><span>${r.municipio}/${r.uf}</span></div>
+    <div class="modal-row"><span class="modal-label">Municipio/UF:</span><span>${r.municipio}/${r.uf}</span></div>
     <hr style="border-color:var(--border);margin:12px 0">
     <div class="modal-row"><span class="modal-label">Modalidade:</span><span>${r.modalidade}</span></div>
     <div class="modal-row"><span class="modal-label">Modo disputa:</span><span>${r.modo_disputa || '—'}</span></div>
     <div class="modal-row"><span class="modal-label">Amparo legal:</span><span>${r.amparo_legal || '—'}</span></div>
-    <div class="modal-row"><span class="modal-label">SRP:</span><span>${r.srp ? 'Sim' : 'Não'}</span></div>
+    <div class="modal-row"><span class="modal-label">SRP:</span><span>${r.srp ? 'Sim' : 'Nao'}</span></div>
     <div class="modal-row"><span class="modal-label">Valor estimado:</span><span style="font-weight:700">${valor}</span></div>
     <hr style="border-color:var(--border);margin:12px 0">
-    <div class="modal-row"><span class="modal-label">Publicação:</span><span>${(r.data_publicacao || '').substring(0, 10)}</span></div>
+    <div class="modal-row"><span class="modal-label">Publicacao:</span><span>${(r.data_publicacao || '').substring(0, 10)}</span></div>
     <div class="modal-row"><span class="modal-label">Abertura:</span><span>${(r.data_abertura || '').substring(0, 10)}</span></div>
     <div class="modal-row"><span class="modal-label">Encerramento:</span><span>${(r.data_encerramento || '').substring(0, 10)}</span></div>
-    <div class="modal-row"><span class="modal-label">Situação:</span><span>${r.situacao || '—'}</span></div>
+    <div class="modal-row"><span class="modal-label">Situacao:</span><span>${r.situacao || '—'}</span></div>
     <hr style="border-color:var(--border);margin:12px 0">
     <div class="modal-row">
       <span class="modal-label">Links:</span>
@@ -388,11 +486,22 @@ function toggleSort(key) {
 }
 
 function exportCSV() {
+  // Export based on active tab
+  const isLicitacoes = document.getElementById('tab-licitacoes').classList.contains('active');
+
+  if (isLicitacoes) {
+    exportLicitacoesCSV();
+  } else {
+    exportMunicipiosCSV();
+  }
+}
+
+function exportLicitacoesCSV() {
   const filtered = getFiltered();
   if (!filtered.length) return;
 
-  const headers = ['Relevância','Data Publicação','UF','Município','Objeto','Modalidade',
-    'Valor Estimado','Data Abertura','Data Encerramento','Órgão','CNPJ','Link PNCP','Keywords'];
+  const headers = ['Relevancia','Data Publicacao','UF','Municipio','Objeto','Modalidade',
+    'Valor Estimado','Data Abertura','Data Encerramento','Orgao','CNPJ','Link PNCP','Keywords'];
   const rows = filtered.map(r => [
     r.relevancia, (r.data_publicacao||'').substring(0,10), r.uf, r.municipio,
     `"${(r.objeto||'').replace(/"/g,'""')}"`, r.modalidade,
@@ -402,20 +511,146 @@ function exportCSV() {
   ]);
 
   const csv = [headers.join(';'), ...rows.map(r => r.join(';'))].join('\n');
+  downloadCSV(csv, 'licitacoes_sst');
+}
+
+function exportMunicipiosCSV() {
+  const filtered = getFilteredMun();
+  if (!filtered.length) return;
+
+  const headers = ['Prioridade','Municipio','UF','Populacao','Distancia km',
+    'Situacao','Valor Referencia','Acao','Fonte','Contato','Link'];
+  const rows = filtered.map(r => [
+    r.prioridade, r.municipio, r.uf, r.populacao || '',
+    r.distancia_km != null ? r.distancia_km : '',
+    `"${(r.situacao||'').replace(/"/g,'""')}"`,
+    r.valor_referencia || '',
+    `"${(r.acao||'').replace(/"/g,'""')}"`,
+    r.fonte || '', r.contato || '', r.link || ''
+  ]);
+
+  const csv = [headers.join(';'), ...rows.map(r => r.join(';'))].join('\n');
+  downloadCSV(csv, 'municipios_sst');
+}
+
+function downloadCSV(csv, prefix) {
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `licitacoes_sst_${new Date().toISOString().substring(0,10)}.csv`;
+  a.download = `${prefix}_${new Date().toISOString().substring(0,10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+// ═══════════════ MUNICIPIOS ═══════════════
+
+async function loadMunicipios() {
+  try {
+    const resp = await fetch('./data/municipios.json');
+    if (!resp.ok) throw new Error('Arquivo nao encontrado');
+    munData = await resp.json();
+    updateMunStats();
+    renderMunicipios();
+    document.querySelector('.tab[onclick*="municipios"]').textContent =
+      'Municipios (' + munData.length + ')';
+  } catch (e) {
+    document.getElementById('munEmptyState').style.display = 'block';
+  }
+}
+
+function updateMunStats() {
+  document.getElementById('statMunTotal').textContent = munData.length;
+  document.getElementById('statMunUrgente').textContent =
+    munData.filter(m => m.prioridade === 'urgente').length;
+  document.getElementById('statMunQuente').textContent =
+    munData.filter(m => m.prioridade === 'quente').length;
+  document.getElementById('statMunFrio').textContent =
+    munData.filter(m => m.prioridade === 'frio').length;
+
+  const totalValor = munData.reduce((s, m) => s + (m.valor_referencia || 0), 0);
+  document.getElementById('statMunValor').textContent =
+    totalValor >= 1e6
+      ? (totalValor / 1e6).toFixed(1) + 'M'
+      : totalValor >= 1e3
+        ? (totalValor / 1e3).toFixed(0) + 'k'
+        : totalValor.toFixed(0);
+}
+
+function getFilteredMun() {
+  const search = document.getElementById('searchMun').value.toLowerCase();
+  const prio = document.getElementById('filterPrioridade').value;
+  const sortKey = document.getElementById('sortMun').value;
+
+  const prioOrder = { urgente: 0, quente: 1, frio: 2 };
+
+  let filtered = munData.filter(m => {
+    if (search) {
+      const haystack = [m.municipio, m.situacao, m.acao, m.fonte].join(' ').toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
+    if (prio && m.prioridade !== prio) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sortKey === 'prioridade') return (prioOrder[a.prioridade] || 9) - (prioOrder[b.prioridade] || 9);
+    if (sortKey === 'distancia') return (a.distancia_km || 9999) - (b.distancia_km || 9999);
+    if (sortKey === 'populacao') return (b.populacao || 0) - (a.populacao || 0);
+    if (sortKey === 'valor') return (b.valor_referencia || 0) - (a.valor_referencia || 0);
+    return 0;
+  });
+
+  return filtered;
+}
+
+function renderMunicipios() {
+  const filtered = getFilteredMun();
+  const tbody = document.getElementById('munTableBody');
+  const empty = document.getElementById('munEmptyState');
+
+  if (munData.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = filtered.length === 0 ? 'block' : 'none';
+
+  tbody.innerHTML = filtered.map(m => {
+    const badgeClass = m.prioridade === 'urgente' ? 'badge-urgente'
+      : m.prioridade === 'quente' ? 'badge-quente' : 'badge-frio';
+    const prioLabel = m.prioridade === 'urgente' ? 'URGENTE'
+      : m.prioridade === 'quente' ? 'QUENTE' : 'FRIO';
+    const valor = m.valor_referencia
+      ? 'R$ ' + m.valor_referencia.toLocaleString('pt-BR', {minimumFractionDigits: 0})
+      : '—';
+    const pop = m.populacao
+      ? m.populacao >= 1000 ? (m.populacao/1000).toFixed(0) + 'k' : m.populacao
+      : '—';
+    const dist = m.distancia_km != null ? m.distancia_km + ' km' : '—';
+    const linkHtml = m.link
+      ? `<a href="${m.link}" target="_blank">Abrir</a>`
+      : '—';
+
+    return `<tr>
+      <td><span class="badge ${badgeClass}">${prioLabel}</span></td>
+      <td><strong>${m.municipio}</strong></td>
+      <td><span class="badge badge-mg">${m.uf}</span></td>
+      <td style="text-align:right">${pop}</td>
+      <td style="text-align:right">${dist}</td>
+      <td class="situacao-text">${m.situacao || '—'}</td>
+      <td style="white-space:nowrap;text-align:right">${valor}</td>
+      <td class="acao-text">${m.acao || '—'}</td>
+      <td>${linkHtml}</td>
+    </tr>`;
+  }).join('');
 }
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
 
-loadData();
+loadAll();
 </script>
 </body>
 </html>
