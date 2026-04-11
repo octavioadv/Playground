@@ -67,3 +67,14 @@ lead → contato → reunião → proposta → follow-up 1 → follow-up 2 → n
 - Direto ao ponto, sem enrolação
 - Cobrado diariamente nos KPIs
 - Foco em execução, não em planejamento adicional
+
+## Auto Memory (aprendizados persistentes entre sessões)
+Claude Code salva aprendizados automaticamente em `~/.claude/projects/<project>/memory/MEMORY.md` e carrega no início de cada sessão. Ativo por padrão a partir da v2.1.59.
+
+**Comando:** `/memory` — abre/edita/audita o que foi aprendido e persistido.
+
+**Instruções para Claude nesta sessão e nas próximas:**
+- Capture e persista aprendizados reais do Octav: correções, preferências de formato, números-chave de KPIs, regras de negócio da Higilabor, atalhos de fluxo que ele pedir.
+- Não registre conversa trivial nem repetir o que já está neste CLAUDE.md.
+- Ao final de cada sessão relevante, consolide 1–3 learnings objetivos na auto memory.
+- Se `autoMemoryEnabled` estiver desligado, reativar com `/memory` ou setar `"autoMemoryEnabled": true` em `~/.claude/settings.json`.
