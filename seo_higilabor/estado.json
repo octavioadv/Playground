@@ -2,6 +2,25 @@
   "ultimo_tema": 0,
   "ultima_cidade_idx": 0,
   "ultima_cidade": "Uberlândia",
-  "ultima_execucao": "2026-04-08",
-  "total_rodadas": 1
+  "ultima_execucao": "2026-04-11",
+  "total_rodadas": 2,
+  "cidades_processadas": {
+    "uberlandia": {
+      "conteudo_gerado": true,
+      "data": "2026-04-11",
+      "pecas": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "pesquisas_usadas": [
+        "2026-04-08_tema0_uberlandia.md",
+        "2026-04-09_tema0_uberlandia.md"
+      ]
+    }
+  }
 }
