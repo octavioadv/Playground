@@ -2,6 +2,65 @@
 
 ---
 
+## Scan de 11/04/2026
+
+**Palavras-chave varridas:** PCMSO · PGR · LTCAT · saúde ocupacional · segurança do trabalho · medicina do trabalho · SST
+**Critério:** Dispensas e Pregões · Teto ≤ R$ 59.906,02 (dispensas) · Recebendo proposta / encerramento ≥ 11/04/2026
+**Endpoint principal:** `https://pncp.gov.br/api/search?q=<termo>&tipos_documento=edital&status=recebendo_proposta`
+
+### Resumo
+- **MG ativas: 5** (2 dispensas urgentes + 3 pregões)
+- **P2 (GO, SP) ativas: 3**
+- **P3 (PE, PR) referência: 3**
+- **Total confirmadas: 8 disputáveis**
+
+---
+
+### P1 — Minas Gerais
+
+| # | Órgão | Município | Modalidade | Objeto resumido | Encerra | Link PNCP |
+|---|-------|-----------|------------|-----------------|---------|-----------|
+| 1 | Câmara Municipal de Campo Belo | Campo Belo/MG | **Dispensa** ⚡ | Serviços de Engenharia, Medicina e Segurança do Trabalho | **15/04 08h** | [20929212000165-1-000009/2026](https://pncp.gov.br/app/editais/20929212000165/2026/9) |
+| 2 | Câmara Municipal de Rodeiro | Rodeiro/MG | **Dispensa** ⚡ | SST completo: laudos, relatórios, eSocial mensal | **14/04 23h59** | [26119990000175-1-000012/2026](https://pncp.gov.br/app/editais/26119990000175/2026/12) |
+| 3 | CIMOG — Consórcio Intermunicipal Baixa Mogiana | Guaxupé/MG | Pregão | Registro de Preços: PCMSO, PGR, LTCAT, exames, laudos — vários municípios | **15/04 09h** | [32308233000142-1-000012/2026](https://pncp.gov.br/app/editais/32308233000142/2026/12) |
+| 4 | Município de Varjão de Minas | Varjão de Minas/MG | Pregão | SST completo: programas, laudos, sinalizações (SESMT) | **23/04 08h** | [01609780000134-1-000006/2026](https://pncp.gov.br/app/editais/01609780000134/2026/6) |
+| 5 | ACISPES — Agência de Coop. Intermunicipal em Saúde | Juiz de Fora/MG | Pregão | Medicina do trabalho e saúde ocupacional | **28/04 09h30** | [01203485000183-1-000045/2026](https://pncp.gov.br/app/editais/01203485000183/2026/45) |
+
+> ⚠️ **Valor estimado não publicado** nas dispensas MG — confirmar no Termo de Referência do edital antes de propor.
+
+---
+
+### P2 — GO / SP
+
+| # | Órgão | Município/UF | Modalidade | Objeto resumido | Encerra | Link PNCP |
+|---|-------|--------------|------------|-----------------|---------|-----------|
+| 6 | Câmara Municipal de Planaltina | Planaltina/GO | **Dispensa** ⚡ | SST eSocial, ASOS, LTCAT e PGR | **15/04 12h** | [24855835000191-1-000017/2026](https://pncp.gov.br/app/editais/24855835000191/2026/17) |
+| 7 | Município de Carapicuíba | Carapicuíba/SP | **Dispensa** ⚡ | Serviços especializados SST | **14/04 09h** | [44892693000140-1-000042/2026](https://pncp.gov.br/app/editais/44892693000140/2026/42) |
+| 8 | Município de Juquiá | Juquiá/SP | Pregão | PGR, PCMSO, LTCAT, laudo insalub./perc., e-Social NR-1 | **13/04 08h30** ⛔ | [46585964000140-1-000056/2026](https://pncp.gov.br/app/editais/46585964000140/2026/56) |
+
+> ⛔ Juquiá/SP encerra **hoje (13/04 08h30)** — inviável para nova proposta.
+
+---
+
+### P3 — Referência outros estados
+
+| Órgão | UF | Objeto | Encerra |
+|-------|----|--------|---------|
+| Município de Ipojuca | PE | Laudos insalub., perc. e LTCAT | 15/04 |
+| Município de Vera Cruz do Oeste | PR | PGR, PCMSO, LTCAT, LTIP, AET | 15/04 |
+| Município de Antonina | PR | PGR, PCMSO, LTCAT, LTIP completos | 09/12/2026 |
+
+---
+
+### Notas operacionais
+
+1. **Dispensas de câmaras municipais MG** (Campo Belo + Rodeiro) são as mais acessíveis — menor burocracia, ciclo curto, decisão rápida. **Agir até amanhã (14/04)** para Rodeiro.
+2. **CIMOG Guaxupé** é consórcio intermunicipal: ganhar um pregão = atender vários municípios da Baixa Mogiana com um único Registro de Preços. Alto potencial de MRR.
+3. **Valores**: nenhuma dispensa publicou valor_global via API — acessar edital diretamente para confirmar teto antes de montar proposta.
+4. **Pregões** (Varjão de Minas, ACISPES) têm prazo mais folgado; dispensas exigem ação imediata.
+
+---
+
 ## Scan de 10/04/2026
 
 **Palavras-chave varridas:** PCMSO · PGR · LTCAT · saúde ocupacional · segurança do trabalho · medicina do trabalho · SST · exames ocupacionais · ASO · engenharia de segurança
@@ -15,163 +74,41 @@
 - **Total dispensas SST confirmadas ativas: 1 em MG**
 - **Itens de 09/04 não reconfirmados:** Rodeiro/MG (enc. 14/04), Carapicuíba/SP (enc. 14/04), Vera Cruz/PR (enc. 15/04) — provavelmente ainda ativos, não apareceram nas páginas amostradas
 
----
-
 ### P1 — Minas Gerais · Dispensas ativas
 
-| Prioridade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| **P1** ★ | MG | Câmara Municipal de Rodeiro | Rodeiro | SST completo: laudos, saúde ocupacional, envios mensais eSocial | A verificar | **14/04/2026** ⚠️ | https://pncp.gov.br/app/editais/26119990000175/2026/12 |
-| **P1** | MG | Câmara Municipal de Campo Belo | Campo Belo | Engenharia, Medicina e Segurança do Trabalho + exames laboratoriais | **R$ 33.866** | **15/04/2026** | https://pncp.gov.br/app/editais/20929212000165/2026/9 |
+| Prioridade | UF | Órgão | Objeto | Valor | Encerra | Link |
+|---|---|---|---|---|---|---|
+| P1 | MG | Câmara Municipal de Campo Belo (CNPJ 20929212000165) | Serviços de Engenharia, Medicina e Segurança do Trabalho — execução continuada | n/d | **15/04/2026 08:00** | [20929212000165-1-000009/2026](https://pncp.gov.br/app/editais/20929212000165/2026/9) |
 
-> ⚠️ **Rodeiro encerra AMANHÃ 14/04** — último dia útil para submeter proposta.
-> Campo Belo: encerra 15/04, valor confirmado R$ 33.866 (dentro do teto dispensa).
+### P2 — Outros estados · Dispensas ativas
 
----
-
-### P2 — GO/SP · Dispensas SST ativas (de scan anterior)
-
-| Prioridade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| **P2** | SP | Município de Carapicuíba | Carapicuíba | Serviços SST | A verificar | **14/04/2026** ⚠️ | https://pncp.gov.br/app/editais/44892693000140/2026/42 |
-| **P2** | GO | Câmara Municipal de Goiânia | Goiânia | Materiais e equipamentos sinalização segurança (SESMT) | R$ 11.265 | **13/04/2026** ⚠️ | https://pncp.gov.br/app/editais/00001727000193/2026/9 |
-
-> ⚠️ Goiânia: aquisição de *materiais/equipamentos* de sinalização para SESMT — não é consultoria SST. Descartável para Higilabor.
-> Carapicuíba: de scan 09/04, não reconfirmado hoje — verificar se ainda ativo.
-
----
-
-### P3 — Outros estados · Dispensas SST
-
-| Prioridade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| P3 | PR | Município de Vera Cruz do Oeste | Vera Cruz do Oeste | PGR, PCMSO, LTCAT, LTIP, AET | A verificar | **15/04/2026** | https://pncp.gov.br/app/editais/78101821000101/2026/39 |
-
----
-
-### Fechadas hoje (10/04) — descartadas
-
-| Órgão | UF | Objeto | Valor | Encerrou |
-|-------|----|--------|-------|----------|
-| Câmara de Concórdia | SC | PGR + LTCAT | R$ 8.000 | 10/04 08:00 |
-| Câmara de Várzea Paulista | SP | Exames ASO / PCMSO | R$ 6.900 | 10/04 08:30 |
-| Município de São Francisco do Sul | SC | Treinamentos segurança do trabalho (NR) | R$ 15.000 | 10/04 08:59 |
-
----
-
-### Ações urgentes — 10/04
-
-1. **Câmara de Rodeiro (MG) — ENCERRA AMANHÃ 14/04** ★ CRÍTICA
-   - Edital: https://pncp.gov.br/app/editais/26119990000175/2026/12
-   - Proposta tem que ser enviada hoje ou amanhã cedo
-
-2. **Câmara de Campo Belo (MG) — ENCERRA 15/04** ★ PRIORITÁRIA
-   - Edital: https://pncp.gov.br/app/editais/20929212000165/2026/9
-   - Valor confirmado: R$ 33.866 | Escopo: Eng. + Med. do Trabalho + exames laboratoriais
-
-3. **Município de Carapicuíba (SP) — ENCERRA 14/04**
-   - Verificar se ainda ativo: https://pncp.gov.br/app/editais/44892693000140/2026/42
+| Prioridade | UF | Órgão | Objeto | Encerra | Link |
+|---|---|---|---|---|---|
+| P3 | GO | Câmara Municipal de Goiânia | Materiais e equipamentos SESMT (EPI/EPC, não consultoria) | 11/04/2026 | 01409705000138-1-000062/2026 |
 
 ---
 
 ## Scan de 09/04/2026
 
 **Palavras-chave varridas:** PCMSO · PGR · LTCAT · saúde ocupacional · segurança do trabalho · medicina do trabalho · SST
-**Critério:** Dispensas (Lei 14.133/21 art. 75 II) · Teto ≤ R$ 59.906,02 · Recebendo proposta
+**Critério:** Dispensas Lei 14.133/21 art. 75 II · teto R$ 59.906,02 · status recebendo proposta
 
 ### Resumo
-- **MG dispensas ativas: 2** (Câmara Rodeiro + Câmara Campo Belo)
-- **P2 (SP) dispensas: 2** (Carapicuíba + Várzea Paulista)
-- **P3 outros estados dispensas: 1** (Vera Cruz do Oeste/PR)
-- **Total dispensas SST ativas: 5**
-- **SC/Concórdia descartada:** encerra 10/04 (hoje), inviável
+- **MG ativas: 2** (Campo Belo + Rodeiro)
+- **P2/P3 ativas: 3** (Carapicuíba/SP, Vera Cruz do Oeste/PR, Antonina/PR)
+- **Total: 5**
 
----
+### P1 — Minas Gerais
 
-### P1 — Minas Gerais · Dispensas
+| Prioridade | UF | Órgão | Objeto | Valor | Encerra | Link |
+|---|---|---|---|---|---|---|
+| P1 | MG | Câmara Municipal de Campo Belo | Serviços de Engenharia, Medicina e Segurança do Trabalho | n/d | 15/04/2026 08:00 | [pncp.gov.br/app/editais/20929212000165/2026/9](https://pncp.gov.br/app/editais/20929212000165/2026/9) |
+| P1 | MG | Câmara Municipal de Rodeiro | Segurança e Medicina do Trabalho, laudos, relatórios, eSocial mensal | n/d | 14/04/2026 23:59 | [pncp.gov.br/app/editais/26119990000175/2026/12](https://pncp.gov.br/app/editais/26119990000175/2026/12) |
 
-| Prioridade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| **P1** | MG | Câmara Municipal de Rodeiro | Rodeiro | SST completo: laudos, saúde ocupacional, envios mensais eSocial | A verificar | **14/04/2026** | https://pncp.gov.br/app/editais/26119990000175/2026/12 |
-| **P1** | MG | Câmara Municipal de Campo Belo | Campo Belo | Engenharia, Medicina e Segurança do Trabalho + exames laboratoriais | A verificar | **15/04/2026** | https://pncp.gov.br/app/editais/20929212000165/2026/9 |
+### P2/P3 — Outros estados
 
-> ⚠️ **Rodeiro encerra em 5 dias (14/04)** — ação imediata.
-> Campo Belo: **NOVO hoje** — abre recepção de propostas em 10/04 (amanhã).
-
----
-
-### P2 — SP · Dispensas SST
-
-| Prioridade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| **P2** | SP | Município de Carapicuíba | Carapicuíba | Serviços específicos de SST | A verificar | **14/04/2026** | https://pncp.gov.br/app/editais/44892693000140/2026/42 |
-| **P2** | SP | Câmara Municipal de Várzea Paulista | Várzea Paulista | Exames clínicos + emissão ASO (PCMSO) | A verificar | **10/04/2026** ⚠️ | https://pncp.gov.br/app/editais/51863884000149/2026/10 |
-
-> Várzea Paulista encerra **hoje (10/04)** — inviável agir hoje. Monitorar próximas edições.
-
----
-
-### P3 — Outros estados · Dispensas SST
-
-| Prioridade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| P3 | PR | Município de Vera Cruz do Oeste | Vera Cruz do Oeste | PGR, PCMSO, LTCAT, LTIP, AET | A verificar | **15/04/2026** | https://pncp.gov.br/app/editais/78101821000101/2026/39 |
-
----
-
-### P1 — MG · Outros SST abertos (não dispensas — informativo)
-
-| Modalidade | UF | Órgão | Município | Objeto | Valor | Encerra | Link |
-|------------|----|----|----|----|----|----|-----|
-| Pregão | MG | CIMOG Baixa Mogiana | Guaxupé | Medicina e segurança do trabalho (consórcio intermunicipal) | A verificar | 15/04/2026 | https://pncp.gov.br/app/editais/32308233000142/2026/12 |
-| Pregão | MG | Varjão de Minas | Varjão de Minas | Engenharia e medicina do trabalho | A verificar | 23/04/2026 | https://pncp.gov.br/app/editais/01609780000134/2026/6 |
-| Pregão | MG | ACISPES | Juiz de Fora | Medicina do trabalho e saúde ocupacional | A verificar | 28/04/2026 | https://pncp.gov.br/app/editais/01203485000183/2026/45 |
-
----
-
-### Descartados
-
-| Órgão | UF | Razão |
-|-------|----|-------|
-| Câmara de Concórdia | SC | Encerra hoje 10/04 — inviável |
-| Câmara Várzea Paulista | SP | Encerra hoje 10/04 — inviável |
-| Município de Antonina | PR | Período futuro: recebe propostas a partir de 14/11/2026 |
-| SAAE Paraisópolis | MG | Pregão, não dispensa — encerra 10/04 |
-| SAAE Manhuaçu | MG | Pregão com resultado (já adjudicado) |
-
----
-
-### Ações urgentes — 09/04
-
-1. **Câmara de Rodeiro (MG) — ENCERRA 14/04 (5 dias)** ★ PRIORITÁRIA
-   - Edital: https://pncp.gov.br/app/editais/26119990000175/2026/12
-   - Verificar valor estimado e escopo exato
-   - Checar SICAF e CNDs vigentes
-   - Proposta até 13/04
-
-2. **Câmara de Campo Belo (MG) — ENCERRA 15/04 (6 dias)** ★ NOVA
-   - Edital: https://pncp.gov.br/app/editais/20929212000165/2026/9
-   - Abre recepção em 10/04 (amanhã)
-   - Escopo: engenharia + medicina do trabalho + exames laboratoriais
-
----
-
-## Histórico — Scan de 08/04/2026
-
-**Última atualização:** 08/04/2026
-
-| # | Órgão | Município | Objeto | Modalidade | Encerra |
-|---|-------|-----------|--------|------------|---------|
-| 1 | Câmara Municipal de Rodeiro | Rodeiro/MG | SST + medicina + laudos + eSocial | Dispensa | 14/04/2026 |
-| 2 | Câmara Municipal de Dom Silvério | Dom Silvério/MG | PCMSO/NR-07 | Dispensa | 15/04/2026 |
-| 3 | CIMOG Baixa Mogiana | Guaxupé/MG | Medicina e segurança (reg. preços) | Pregão | 15/04/2026 |
-| 4 | Município de Carapicuíba | Carapicuíba/SP | SST | Dispensa | 14/04/2026 |
-| 5 | Município de Parintins | Parintins/AM | SST | Pregão | 24/04/2026 |
-
-*Scan 08/04: 2 dispensas MG · Rodeiro e Dom Silvério como alvos prioritários*
-
-> **Nota 09/04:** Dom Silvério não retornou no scan de hoje — pode ter encerrado antecipadamente ou sido cancelada. Campo Belo/MG surgiu como novo item.
-
----
-
-*Scan automático — Claude Code · scheduled task `pncp-sst-daily-scan`*
+| Prioridade | UF | Órgão | Objeto | Valor | Encerra | Link |
+|---|---|---|---|---|---|---|
+| P2 | SP | Município de Carapicuíba | Serviços Especializados de SST | n/d | 14/04/2026 09:00 | [pncp.gov.br/app/editais/44892693000140/2026/42](https://pncp.gov.br/app/editais/44892693000140/2026/42) |
+| P3 | PR | Município de Vera Cruz do Oeste | PGR, PCMSO, LTCAT, LTIP e AET | n/d | 15/04/2026 08:00 | 78101821000101-1-000039/2026 |
+| P3 | PR | Município de Antonina | PGR, PCMSO, LTCAT, LTIP completos | n/d | 09/12/2026 | 76022516000107-1-000041/2026 |
