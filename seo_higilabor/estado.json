@@ -2,6 +2,29 @@
   "ultimo_tema": 0,
   "ultima_cidade_idx": 0,
   "ultima_cidade": "Uberlândia",
-  "ultima_execucao": "2026-04-08",
-  "total_rodadas": 1
+  "ultima_execucao": "2026-04-12",
+  "total_rodadas": 2,
+  "cidades": {
+    "uberlandia": {
+      "conteudo_gerado": true,
+      "data_geracao": "2026-04-12",
+      "pecas": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "keywords_principais": [
+        "NR-1 psicossocial Uberlândia",
+        "PGR Uberlândia",
+        "PCMSO preço Uberlândia",
+        "SST pequena empresa quanto custa",
+        "medicina do trabalho Uberlândia",
+        "laudo insalubridade preço"
+      ]
+    }
+  }
 }
