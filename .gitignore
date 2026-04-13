@@ -1,3 +1,5 @@
+node_modules/
+
 # Claude session data (large JSONL conversation files)
 .claude/projects/
 .claude/context/
