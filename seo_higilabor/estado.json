@@ -1,0 +1,66 @@
+{
+  "ultima_execucao": "2026-04-13T08:00:00-03:00",
+  "versao": "1.0",
+  "cidades": [
+    {
+      "cidade": "Uberlândia",
+      "uf": "MG",
+      "slug": "uberlandia-mg",
+      "status": "completa",
+      "data_processamento": "2026-04-13T08:00:00-03:00",
+      "origem_pesquisa": "seo_higilabor/pesquisas/uberlandia-mg.json",
+      "arquivos_gerados": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "arquivos_pendentes": [],
+      "diretorio": "seo_higilabor/cidades/uberlandia-mg/",
+      "hash_controle": "uberlandia-mg-20260413-v1"
+    },
+    {
+      "cidade": "Uberaba",
+      "uf": "MG",
+      "slug": "uberaba-mg",
+      "status": "completa",
+      "data_processamento": "2026-04-13T08:00:00-03:00",
+      "origem_pesquisa": "seo_higilabor/pesquisas/uberaba-mg.json",
+      "arquivos_gerados": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "arquivos_pendentes": [],
+      "diretorio": "seo_higilabor/cidades/uberaba-mg/",
+      "hash_controle": "uberaba-mg-20260413-v1"
+    },
+    {
+      "cidade": "Araguari",
+      "uf": "MG",
+      "slug": "araguari-mg",
+      "status": "completa",
+      "data_processamento": "2026-04-13T08:00:00-03:00",
+      "origem_pesquisa": "seo_higilabor/pesquisas/araguari-mg.json",
+      "arquivos_gerados": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "arquivos_pendentes": [],
+      "diretorio": "seo_higilabor/cidades/araguari-mg/",
+      "hash_controle": "araguari-mg-20260413-v1"
+    }
+  ]
+}

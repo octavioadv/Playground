@@ -1,0 +1,19 @@
+{
+  "cidade": "Araguari",
+  "uf": "MG",
+  "slug": "araguari-mg",
+  "regiao": "Triângulo Mineiro",
+  "prioridade": "média",
+  "motivo": "Cidade industrial relevante no Triângulo Mineiro, próxima à sede em Uberlândia.",
+  "populacao_estimada": "117000",
+  "perfil_economico": "Polo de mineração (fosfato), agroindústria, café e comércio regional. Presença de indústrias de médio porte.",
+  "demanda_sst": "Média-alta — mineração, agroindústria, construção civil e logística.",
+  "palavras_chave_principais": [
+    "saúde e segurança do trabalho Araguari",
+    "PGR Araguari",
+    "PCMSO Araguari",
+    "LTCAT Araguari",
+    "consultoria SST Araguari"
+  ],
+  "data_inclusao": "2026-04-13"
+}
