@@ -2,6 +2,39 @@
   "ultimo_tema": 0,
   "ultima_cidade_idx": 0,
   "ultima_cidade": "Uberlândia",
-  "ultima_execucao": "2026-04-08",
-  "total_rodadas": 1
+  "ultima_execucao": "2026-04-15",
+  "total_rodadas": 2,
+  "cidades": {
+    "uberlandia-mg": {
+      "cidade": "Uberlândia",
+      "uf": "MG",
+      "slug": "uberlandia-mg",
+      "status": "completa",
+      "origem_pesquisa": [
+        "2026-04-08_tema0_uberlandia.md",
+        "2026-04-09_tema0_uberlandia.md"
+      ],
+      "data_geracao": "2026-04-15T08:00:00-03:00",
+      "arquivos_gerados": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "arquivos_pendentes": [],
+      "keyword_principal": "consultoria SST Uberlândia",
+      "keywords_secundarias": [
+        "segurança do trabalho Uberlândia",
+        "PGR Uberlândia",
+        "PCMSO Uberlândia",
+        "NR-1 psicossocial Uberlândia",
+        "eSocial SST Uberlândia",
+        "SST pequena empresa Uberlândia"
+      ],
+      "hash_controle": "7-arquivos-completos-v1"
+    }
+  }
 }
