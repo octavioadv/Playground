@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python)",
+      "Bash(python _build_sheets.py)",
+      "Bash(rm _build_sheets.py _cand.json)",
+      "Bash(PYTHONIOENCODING=utf-8 python)",
+      "Bash(python _add_whatsapp.py)",
+      "Bash(rm _add_whatsapp.py)",
+      "WebFetch(domain:higilabor.com.br)",
+      "Bash(python -c ':*)",
+      "Bash(python -c \"import sys; print\\(sys.stdin.buffer.read\\(\\).decode\\('utf-8','replace'\\)\\)\")",
+      "Bash(python \"C:/Users/octav/OneDrive/Apps/Claude/gerar_acao_imediata.py\")",
+      "Bash(cp \"C:/Users/octav/OneDrive/Apps/Claude/acao_imediata_higilabor.xlsx\" \"/tmp/acao.xlsx\")",
+      "Bash(cp \"C:/Users/octav/OneDrive/Apps/Claude/acao_imediata_higilabor.xlsx\" \"C:/Users/octav/AppData/Local/Temp/acao.xlsx\")",
+      "WebSearch",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(cp \"C:/Users/octav/OneDrive/Documentos/Claude/Projects/Finanças Higilabor/5_blocos_higilabor_multi_mes_consolidada.xlsx\" /tmp/erp.xlsx)",
+      "Bash(mkdir -p \"C:/Users/octav/.claude/skills/higilabor-precificacao\")",
+      "Bash(cp \"C:/Users/octav/OneDrive/Apps/Claude/skills/higilabor-precificacao/SKILL.md\" \"C:/Users/octav/.claude/skills/higilabor-precificacao/SKILL.md\")",
+      "Bash(preco)",
+      "Bash(price)",
+      "Bash(margem)",
+      "Bash(piso\")",
+      "Bash(python3 -c ':*)",
+      "Bash(python -c \"print\\('ok'\\)\")",
+      "Bash(py -c \"print\\('ok'\\)\")",
+      "Bash(where python:*)",
+      "WebFetch(domain:pncp.gov.br)",
+      "Bash(powershell -Command \"Get-Item 'C:\\\\Users\\\\octav\\\\OneDrive\\\\Apps\\\\Claude\\\\playbook_dispensa_mg.md' | Select-Object Name, Length, Attributes\")",
+      "Bash(powershell -Command \"attrib +p 'C:\\\\Users\\\\octav\\\\OneDrive\\\\Apps\\\\Claude\\\\playbook_dispensa_mg.md' 2>&1; Start-Sleep -Seconds 2; Get-Item 'C:\\\\Users\\\\octav\\\\OneDrive\\\\Apps\\\\Claude\\\\playbook_dispensa_mg.md' | Select-Object Name, Attributes\")",
+      "Bash(powershell -Command \"\\(Get-Item -LiteralPath 'C:\\\\Users\\\\octav\\\\OneDrive\\\\Apps\\\\Claude\\\\playbook_dispensa_mg.md'\\).Attributes\")",
+      "Bash(powershell -Command \"Get-Content -LiteralPath 'C:\\\\Users\\\\octav\\\\OneDrive\\\\Apps\\\\Claude\\\\playbook_dispensa_mg.md' -Raw -Encoding UTF8 | Measure-Object -Character\")"
+    ]
+  }
+}
