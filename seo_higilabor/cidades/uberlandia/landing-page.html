@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NR-1 Psicossocial em Uberlândia — Higilabor SST</title>
+    <meta name="description" content="NR-1 psicossocial entra em vigor em 26/05/2026. Saiba como adequar sua empresa em Uberlândia com PGR, PCMSO e NR-1. Preço acessível, médica própria. WhatsApp agora.">
+    <meta name="keywords" content="NR-1 psicossocial Uberlândia, PGR Uberlândia, PCMSO preço, segurança do trabalho, medicina ocupacional">
+    <meta property="og:title" content="NR-1 Psicossocial em Uberlândia — Higilabor">
+    <meta property="og:description" content="Sua empresa está pronta para a NR-1 psicossocial? Apenas 34 dias até o início da fiscalização. Preço acessível.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://higilabor.com.br/nr1-uberlandia">
+    <meta property="og:image" content="https://higilabor.com.br/og-nr1.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --verde-escuro: #1B4D3E;
+            --laranja: #F5A623;
+            --branco: #FFFFFF;
+            --cinza-claro: #F5F5F5;
+            --cinza-medio: #E8E8E8;
+            --cinza-escuro: #4A4A4A;
+            --preto: #000000;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--cinza-escuro);
+            background-color: var(--branco);
+        }
+
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        header .cta-header {
+            background-color: var(--laranja);
+            color: var(--preto);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        header .cta-header:hover {
+            background-color: #E59400;
+        }
+
+        /* Seção Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--verde-escuro) 0%, #0F3E2E 100%);
+            color: var(--branco);
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        .hero .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 8vw, 52px);
+            line-height: 1.2;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .hero .urgencia {
+            background-color: rgba(245, 166, 35, 0.2);
+            border-left: 4px solid var(--laranja);
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .hero .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--laranja);
+            color: var(--preto);
+        }
+
+        .btn-primary:hover {
+            background-color: #E59400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--branco);
+            color: var(--verde-escuro);
+            border: 2px solid var(--branco);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--cinza-claro);
+            transform: translateY(-2px);
+        }
+
+        /* Container padrão */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Seção Problema */
+        .problema {
+            padding: 60px 24px;
+            background-color: var(--cinza-claro);
+        }
+
+        .problema h2 {
+            font-size: 36px;
+            color: var(--verde-escuro);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .problema .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .problema .card {
+            background-color: var(--branco);
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .problema .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .problema .card h3 {
+            color: var(--laranja);
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .problema .card p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Seção Serviços */
+        .servicos {
+            padding: 60px 24px;
+        }
+
+        .servicos h2 {
+            font-size: 36px;
+            color: var(--verde-escuro);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .servicos .subtitulo {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .servicos .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .servicos .servico-card {
+            background: linear-gradient(135deg, var(--verde-escuro) 0%, #0F3E2E 100%);
+            color: var(--branco);
+            padding: 32px 24px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(27, 77, 62, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .servicos .servico-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .servicos .servico-card .icone {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .servicos .servico-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .servicos .servico-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Seção Preços */
+        .precos {
+            padding: 60px 24px;
+            background-color: var(--cinza-claro);
+        }
+
+        .precos h2 {
+            font-size: 36px;
+            color: var(--verde-escuro);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .precos .tabela {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .precos table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .precos th {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .precos td {
+            padding: 16px;
+            border-bottom: 1px solid var(--cinza-medio);
+        }
+
+        .precos tr:last-child td {
+            border-bottom: none;
+        }
+
+        .precos tr:hover {
+            background-color: var(--cinza-claro);
+        }
+
+        /* Seção Diferenciais */
+        .diferenciais {
+            padding: 60px 24px;
+        }
+
+        .diferenciais h2 {
+            font-size: 36px;
+            color: var(--verde-escuro);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .diferenciais .lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .diferenciais .item {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background-color: var(--cinza-claro);
+            border-radius: 8px;
+            border-left: 4px solid var(--laranja);
+        }
+
+        .diferenciais .item .check {
+            color: var(--laranja);
+            font-weight: bold;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .diferenciais .item h3 {
+            color: var(--verde-escuro);
+            margin-bottom: 4px;
+        }
+
+        .diferenciais .item p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Seção Prova Social */
+        .prova-social {
+            padding: 60px 24px;
+            background: linear-gradient(135deg, var(--verde-escuro) 0%, #0F3E2E 100%);
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .prova-social .numero {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--laranja);
+            margin-bottom: 8px;
+        }
+
+        .prova-social p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* Seção CTA Final */
+        .cta-final {
+            padding: 60px 24px;
+            background-color: var(--cinza-claro);
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 36px;
+            color: var(--verde-escuro);
+            margin-bottom: 24px;
+        }
+
+        .cta-final p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            color: #666;
+        }
+
+        .cta-final .formulario {
+            background-color: var(--branco);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .cta-final .formulario input,
+        .cta-final .formulario select {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--cinza-medio);
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .cta-final .formulario input:focus,
+        .cta-final .formulario select:focus {
+            outline: none;
+            border-color: var(--verde-escuro);
+            box-shadow: 0 0 0 3px rgba(27, 77, 62, 0.1);
+        }
+
+        .cta-final .formulario button {
+            width: 100%;
+            background-color: var(--laranja);
+            color: var(--preto);
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-final .formulario button:hover {
+            background-color: #E59400;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        footer .container {
+            margin-bottom: 24px;
+        }
+
+        footer h3 {
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        footer .divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 24px 0;
+        }
+
+        footer .credenciais {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 16px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            header .cta-header {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .problema h2,
+            .servicos h2,
+            .precos h2,
+            .diferenciais h2,
+            .cta-final h2 {
+                font-size: 28px;
+            }
+
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .whatsapp-btn svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .hero .cta-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .cta-final .formulario {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">Higilabor SST</div>
+            <a href="https://wa.me/5534999999999?text=Olá%20Higilabor%20Gostaria%20de%20informações%20sobre%20NR1%20psicossocial" class="cta-header">Fale Conosco</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>NR-1 Psicossocial em Uberlândia: Sua Empresa Está Pronta?</h1>
+            <div class="urgencia">⚠️ Apenas 34 dias até o início da fiscalização (26/05/2026)</div>
+            <p>Saiba como adequar sua empresa com PGR, PCMSO e avaliação de riscos psicossociais. Preço acessível. Médica própria. Atendimento rápido.</p>
+            <div class="cta-group">
+                <a href="https://wa.me/5534999999999?text=Olá%20Higilabor%20Gostaria%20de%20informações%20sobre%20NR1%20psicossocial" class="btn btn-primary">Solicitar Orçamento no WhatsApp</a>
+                <a href="tel:+553499999999" class="btn btn-secondary">Ligar: (34) 9999-9999</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problema -->
+    <section class="problema">
+        <div class="container">
+            <h2>Por que você precisa se adequar AGORA?</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>📋 Nova Obrigação</h3>
+                    <p>A NR-1 psicossocial é obrigatória a partir de 26/05/2026. Sua empresa precisa incluir riscos psicossociais no PGR.</p>
+                </div>
+                <div class="card">
+                    <h3>⏰ Prazo Curto</h3>
+                    <p>Apenas 34 dias para se adequar. Empresas que esperam até o final correm risco de fiscalização e multas.</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Multa Pesada</h3>
+                    <p>Até R$ 44.396,84 por infração. O custo da adequação é bem menor que uma multa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="servicos">
+        <div class="container">
+            <h2>Serviços Higilabor</h2>
+            <p class="subtitulo">Tudo que sua empresa precisa para estar em dia com a SST</p>
+            <div class="grid">
+                <div class="servico-card">
+                    <div class="icone">📄</div>
+                    <h3>PGR Completo</h3>
+                    <p>Programa de Gerenciamento de Riscos com avaliação de riscos psicossociais conforme NR-1 2026.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="icone">🏥</div>
+                    <h3>PCMSO</h3>
+                    <p>Programa de Controle Médico de Saúde Ocupacional com exames periódicos e atendimento com médica própria.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="icone">🧠</div>
+                    <h3>NR-1 Psicossocial</h3>
+                    <p>Avaliação de riscos psicossociais, plano de ação e implementação conforme resolução.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="icone">⚠️</div>
+                    <h3>LTCAT</h3>
+                    <p>Laudo Técnico das Condições Ambientais do Trabalho para atividades com insalubridade ou periculosidade.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="icone">📊</div>
+                    <h3>FAP - Redução</h3>
+                    <p>Análise e redução do Fator Acidentário de Prevenção (FAP) para economizar em contribuição do INSS.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="icone">🎓</div>
+                    <h3>Treinamentos</h3>
+                    <p>Treinamentos NR específicos para sua operação (NR-12, NR-33, NR-35, etc.).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preços -->
+    <section class="precos">
+        <div class="container">
+            <h2>Tabela de Preços — Transparência que Você Merece</h2>
+            <div class="tabela">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Pequena Empresa (até 50 func.)</th>
+                            <th>Média Empresa (50-100 func.)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>PGR Básico</strong></td>
+                            <td>R$ 2.000 - R$ 3.000</td>
+                            <td>R$ 3.500 - R$ 5.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PCMSO Anual</strong></td>
+                            <td>R$ 640 - R$ 1.500</td>
+                            <td>R$ 1.500 - R$ 2.500</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NR-1 Psicossocial</strong></td>
+                            <td>R$ 1.500 - R$ 2.500</td>
+                            <td>R$ 2.500 - R$ 4.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LTCAT (por laudo)</strong></td>
+                            <td>R$ 800 - R$ 1.500</td>
+                            <td>R$ 1.500 - R$ 2.500</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pacote Essencial (PGR+PCMSO)</strong></td>
+                            <td>R$ 2.640 - R$ 4.500/ano</td>
+                            <td>R$ 5.000 - R$ 7.500/ano</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pacote Psicossocial (PGR+PCMSO+NR1)</strong></td>
+                            <td>R$ 4.140 - R$ 7.000/ano</td>
+                            <td>R$ 7.500 - R$ 11.500/ano</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align: center; margin-top: 24px; color: #666; font-size: 14px;">
+                ✓ Preços incluem atendimento presencial em Uberlândia<br>
+                ✓ Não há taxa de consultoria adicional<br>
+                ✓ Solicite um orçamento customizado para sua empresa
+            </p>
+        </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section class="diferenciais">
+        <div class="container">
+            <h2>Por que escolher a Higilabor?</h2>
+            <div class="lista">
+                <div class="item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h3>Médica Própria</h3>
+                        <p>Atendimento rápido e direto com profissional experiente em SST.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h3>Preço Transparente</h3>
+                        <p>Sabemos que preço importa. Publicamos as faixas e não temos cobranças ocultas.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h3>Atendimento Local</h3>
+                        <p>Sediada em Uberlândia. Atendemos cidades do Triângulo Mineiro e região.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h3>Prazo Rápido</h3>
+                        <p>Sua empresa é prioridade. Documentos em prazo curto, sem burocracia.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h3>Expertise em NR-1</h3>
+                        <p>Especialistas em NR-1 psicossocial. Sabemos o que a fiscalização está procurando.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h3>Suporte Contínuo</h3>
+                        <p>Após a entrega, continuamos suportando implementação e atualizações.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prova Social -->
+    <section class="prova-social">
+        <div class="container">
+            <div class="numero">200+</div>
+            <p>Empresas do Triângulo Mineiro já confiam na Higilabor para segurança e saúde ocupacional</p>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Solicite Seu Orçamento</h2>
+            <p>Sem compromisso. Resposta em até 24 horas.</p>
+            <div class="formulario">
+                <input type="text" placeholder="Seu nome" required>
+                <input type="text" placeholder="Nome da empresa" required>
+                <input type="tel" placeholder="Telefone/WhatsApp" required>
+                <select required>
+                    <option value="">Quantos funcionários?</option>
+                    <option value="1-20">1-20</option>
+                    <option value="20-50">20-50</option>
+                    <option value="50-100">50-100</option>
+                    <option value="100+">Mais de 100</option>
+                </select>
+                <button onclick="enviarWhatsApp()">Solicitar Orçamento via WhatsApp</button>
+            </div>
+            <p style="margin-top: 24px; font-size: 14px; color: #999;">
+                Ou ligue direto: <strong>(34) 9999-9999</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Higilabor SST</h3>
+            <p>Consultoria em Segurança e Saúde do Trabalho</p>
+            <p>📍 Uberlândia, MG</p>
+            <p>📞 (34) 9999-9999</p>
+            <p>✉️ contato@higilabor.com.br</p>
+        </div>
+        <div class="divider"></div>
+        <div class="credenciais">
+            <p>CNPJ: 00.000.000/0001-00 | CREA: [Número de registro]</p>
+            <p>&copy; 2026 Higilabor. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/5534999999999?text=Olá%20Higilabor%20Gostaria%20de%20informações%20sobre%20NR1%20psicossocial" class="whatsapp-btn" title="Abrir WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.6915026,2.4744748 C15.6693616,0.909098031 13.0474908,0.354169035 10.5545766,1.04565404 C8.06166234,1.73714898 6.05868216,3.64501905 5.2943026,6.03368899 C4.52992303,8.42235892 5.10604706,10.9914349 6.66742135,12.8299632 L6.68372453,12.8475263 L4.10089611,19.7565173 L11.2471045,17.1604892 L11.2640995,17.174751 C13.0632245,18.5600833 15.3246668,19.0024348 17.4758008,18.4025756 C19.6269348,17.8027163 21.4206869,16.1953446 22.3123276,14.0384786 C23.2039683,11.8816126 23.1139149,9.4164896 22.0576404,7.34167394 L17.6915026,2.4744748 Z" fill="white"/>
+        </svg>
+    </a>
+
+    <script>
+        function enviarWhatsApp() {
+            const nome = document.querySelector('input[placeholder="Seu nome"]').value;
+            const empresa = document.querySelector('input[placeholder="Nome da empresa"]').value;
+            const telefone = document.querySelector('input[placeholder="Telefone/WhatsApp"]').value;
+            const funcionarios = document.querySelector('select').value;
+
+            if (!nome || !empresa || !telefone || !funcionarios) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const mensagem = `Olá Higilabor! Meu nome é ${nome}, da empresa ${empresa}. Gostaria de um orçamento para NR-1 psicossocial. Meu telefone é ${telefone}. Temos ${funcionarios} funcionários.`;
+            const url = `https://wa.me/5534999999999?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Higilabor SST",
+        "description": "Consultoria em Segurança e Saúde Ocupacional (SST) em Uberlândia, MG",
+        "url": "https://higilabor.com.br",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Uberlândia",
+            "addressLocality": "Uberlândia",
+            "addressRegion": "MG",
+            "postalCode": "38400-000",
+            "addressCountry": "BR"
+        },
+        "telephone": "(34) 9999-9999",
+        "email": "contato@higilabor.com.br",
+        "areaServed": "Triângulo Mineiro",
+        "priceRange": "R$ 640 - R$ 7.000",
+        "image": "https://higilabor.com.br/og-nr1.jpg",
+        "knowsAbout": ["Segurança Ocupacional", "PGR", "PCMSO", "NR-1", "NR-1 Psicossocial", "Medicina do Trabalho"],
+        "sameAs": ["https://www.facebook.com/higilabor", "https://www.linkedin.com/company/higilabor"]
+    }
+    </script>
+</body>
+</html>

@@ -2,6 +2,26 @@
   "ultimo_tema": 0,
   "ultima_cidade_idx": 0,
   "ultima_cidade": "Uberlândia",
-  "ultima_execucao": "2026-04-08",
-  "total_rodadas": 1
+  "ultima_execucao": "2026-04-22",
+  "total_rodadas": 1,
+  "cidades_processadas": [
+    {
+      "cidade": "Uberlândia",
+      "estado": "MG",
+      "conteudo_gerado": true,
+      "data_geracao": "2026-04-22",
+      "peças_geradas": 7,
+      "keyword_principal": "NR-1 psicossocial Uberlândia",
+      "pesquisas_utilizadas": ["2026-04-08_tema0_uberlandia.md", "2026-04-09_tema0_uberlandia.md"],
+      "arquivos": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "email-sequencia.md",
+        "tiktok-roteiro.md",
+        "whatsapp-templates.md"
+      ]
+    }
+  ]
 }
