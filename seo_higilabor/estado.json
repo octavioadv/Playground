@@ -2,6 +2,38 @@
   "ultimo_tema": 0,
   "ultima_cidade_idx": 0,
   "ultima_cidade": "Uberlândia",
-  "ultima_execucao": "2026-04-08",
-  "total_rodadas": 1
+  "ultima_execucao": "2026-04-24",
+  "total_rodadas": 2,
+  "cidades": {
+    "uberlandia-mg": {
+      "nome": "Uberlândia",
+      "uf": "MG",
+      "slug": "uberlandia-mg",
+      "status": "concluido",
+      "data_geracao": "2026-04-24T08:00:00-03:00",
+      "origem_pesquisa": [
+        "seo_higilabor/pesquisas/2026-04-08_tema0_uberlandia.md",
+        "seo_higilabor/pesquisas/2026-04-09_tema0_uberlandia.md"
+      ],
+      "arquivos_gerados": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "arquivos_pendentes": [],
+      "keyword_principal": "SST Uberlandia",
+      "keywords_secundarias": [
+        "PGR Uberlandia",
+        "PCMSO Uberlandia",
+        "NR-1 psicossocial empresa",
+        "eSocial SST pequena empresa",
+        "consultoria seguranca trabalho Uberlandia",
+        "medicina do trabalho preco Uberlandia"
+      ]
+    }
+  }
 }
