@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultoria SST em Uberlândia MG | PGR, PCMSO, eSocial | Higilabor</title>
+  <meta name="description" content="Consultoria em Saúde e Segurança do Trabalho para empresas de Uberlândia. PGR, PCMSO, LTCAT, laudos técnicos, eSocial SST e adequação à NR-1 psicossocial. Atendimento especializado para PMEs.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://higilabor.com.br/uberlandia">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --azul: #0B3D91;
+      --azul-escuro: #062a66;
+      --verde: #2E8B57;
+      --cinza-bg: #F5F7FA;
+      --cinza-texto: #333;
+      --branco: #fff;
+      --sombra: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--cinza-texto); line-height: 1.7; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    header { background: var(--azul); color: var(--branco); padding: 14px 0; position: sticky; top: 0; z-index: 100; }
+    header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    header .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
+    header nav a { color: var(--branco); text-decoration: none; margin-left: 24px; font-size: 0.95rem; opacity: 0.9; }
+    header nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--azul) 0%, var(--azul-escuro) 100%); color: var(--branco); padding: 70px 0 60px; text-align: center; }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 18px; line-height: 1.3; }
+    .hero p { font-size: 1.15rem; max-width: 700px; margin: 0 auto 30px; opacity: 0.92; }
+    .btn-cta { display: inline-block; background: var(--verde); color: var(--branco); padding: 14px 36px; border-radius: 6px; text-decoration: none; font-size: 1.05rem; font-weight: 600; transition: background 0.2s; }
+    .btn-cta:hover { background: #256d46; }
+
+    /* SEÇÕES */
+    section { padding: 60px 0; }
+    section:nth-child(even) { background: var(--cinza-bg); }
+    .section-title { font-size: 1.6rem; color: var(--azul); margin-bottom: 12px; text-align: center; }
+    .section-subtitle { text-align: center; max-width: 700px; margin: 0 auto 40px; color: #555; }
+
+    /* DOR */
+    .dor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .dor-card { background: var(--branco); border-left: 4px solid #c0392b; padding: 24px; border-radius: 6px; box-shadow: var(--sombra); }
+    .dor-card h3 { color: #c0392b; margin-bottom: 8px; font-size: 1.05rem; }
+
+    /* SERVIÇOS */
+    .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .servico-card { background: var(--branco); padding: 28px 22px; border-radius: 8px; box-shadow: var(--sombra); text-align: center; }
+    .servico-card h3 { color: var(--azul); margin-bottom: 10px; font-size: 1.1rem; }
+
+    /* DIFERENCIAIS */
+    .dif-list { list-style: none; max-width: 700px; margin: 0 auto; }
+    .dif-list li { padding: 12px 0; border-bottom: 1px solid #e0e0e0; padding-left: 28px; position: relative; }
+    .dif-list li::before { content: "\2713"; position: absolute; left: 0; color: var(--verde); font-weight: 700; }
+
+    /* FAQ */
+    .faq-item { max-width: 800px; margin: 0 auto 20px; background: var(--branco); padding: 22px 26px; border-radius: 6px; box-shadow: var(--sombra); }
+    .faq-item h3 { color: var(--azul); font-size: 1.05rem; margin-bottom: 8px; }
+
+    /* CTA FINAL */
+    .cta-final { background: var(--azul); color: var(--branco); text-align: center; padding: 60px 20px; }
+    .cta-final h2 { font-size: 1.8rem; margin-bottom: 14px; }
+    .cta-final p { margin-bottom: 28px; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 28px; }
+
+    /* FOOTER */
+    footer { background: #1a1a2e; color: #ccc; padding: 30px 0; text-align: center; font-size: 0.9rem; }
+    footer a { color: #8bb8e8; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .hero { padding: 50px 0 40px; }
+      header nav a { margin-left: 12px; font-size: 0.85rem; }
+    }
+  </style>
+
+  <!-- Schema.org: LocalBusiness + ProfessionalService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "name": "Higilabor - Consultoria SST",
+    "description": "Consultoria especializada em Saúde e Segurança do Trabalho para empresas de Uberlândia e região. PGR, PCMSO, LTCAT, eSocial SST, laudos técnicos e adequação à NR-1.",
+    "url": "https://higilabor.com.br",
+    "telephone": "+55-34-99999-0000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Uberlândia",
+      "addressRegion": "MG",
+      "addressCountry": "BR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Uberlândia"
+    },
+    "priceRange": "$$",
+    "openingHours": "Mo-Fr 08:00-18:00",
+    "serviceType": ["PGR", "PCMSO", "LTCAT", "eSocial SST", "Laudos Técnicos", "Treinamentos NR", "Consultoria em Riscos Psicossociais"]
+  }
+  </script>
+
+  <!-- Schema.org: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quanto custa o PGR para uma pequena empresa em Uberlândia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O PGR para pequenas empresas com 20 a 100 funcionários e grau de risco 2 ou 3 costuma variar entre R$ 2.000 e R$ 5.000, dependendo da complexidade das atividades, número de setores e riscos envolvidos. A Higilabor oferece diagnóstico gratuito para dimensionar o investimento exato."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O que muda com a NR-1 psicossocial em 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A partir de maio de 2026, o PGR deve contemplar a identificação e gestão de riscos psicossociais no ambiente de trabalho, conforme a Portaria MTE nº 1.419/2024. Empresas que não se adequarem estarão sujeitas a autuações e multas após o período educativo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A Higilabor atende empresas de todos os portes em Uberlândia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. A Higilabor atende desde microempresas até empresas de médio porte com até 100 funcionários, em setores como comércio, indústria, agronegócio e serviços na região de Uberlândia."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual a diferença entre terceirizar SST e manter um SESMT interno?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Manter um SESMT interno exige contratação de profissionais dedicados (engenheiro, médico, técnico), com custo fixo elevado. A terceirização com uma consultoria como a Higilabor reduz custos, garante atualização regulatória constante e oferece flexibilidade para empresas que não atingem o dimensionamento obrigatório de SESMT."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto custa o PCMSO para uma empresa pequena?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O PCMSO para pequenas empresas geralmente varia entre R$ 640 e R$ 2.000 por ano, sem incluir os exames clínicos complementares. O valor depende do número de funcionários e dos riscos ocupacionais mapeados no PGR."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="logo">Higilabor</div>
+      <nav>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Consultoria em Saúde e Segurança do Trabalho para Empresas de Uberlândia</h1>
+      <p>PGR, PCMSO, LTCAT, eSocial SST e adequação à NR-1 psicossocial. Atendimento especializado para pequenas e médias empresas do Triângulo Mineiro.</p>
+      <a href="#contato" class="btn-cta">Solicite um Diagnóstico Gratuito</a>
+    </div>
+  </section>
+
+  <!-- DOR / RISCO -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Riscos que a sua empresa corre agora</h2>
+      <p class="section-subtitle">A maioria das empresas em Uberlândia só descobre a irregularidade quando recebe a autuação. Estes são os cenários mais comuns:</p>
+      <div class="dor-grid">
+        <div class="dor-card">
+          <h3>Multas por descumprimento de NRs</h3>
+          <p>O PGR é obrigatório desde 2022. Empresas sem documentação atualizada estão sujeitas a autos de infração com valores que partem de R$ 2.396 por item irregular.</p>
+        </div>
+        <div class="dor-card">
+          <h3>NR-1 psicossocial — prazo maio/2026</h3>
+          <p>A Portaria MTE nº 1.419/2024 exige que o PGR contemple riscos psicossociais. Após o período educativo, a fiscalização aplicará multas a quem não estiver adequado.</p>
+        </div>
+        <div class="dor-card">
+          <h3>eSocial SST com eventos pendentes</h3>
+          <p>Eventos S-2210, S-2220 e S-2240 não enviados ou enviados com inconsistências geram bloqueios e penalidades junto à Receita Federal e ao INSS.</p>
+        </div>
+        <div class="dor-card">
+          <h3>Passivo trabalhista acumulado</h3>
+          <p>Laudos vencidos, exames atrasados e ASOs irregulares se transformam em provas contra a empresa em reclamações trabalhistas e perícias judiciais.</p>
+        </div>
+        <div class="dor-card">
+          <h3>FAP elevado e custo previdenciário maior</h3>
+          <p>Acidentes não gerenciados e afastamentos recorrentes elevam o FAP, aumentando a alíquota do RAT/INSS e o custo fixo da folha de pagamento.</p>
+        </div>
+        <div class="dor-card">
+          <h3>Operação sem previsibilidade</h3>
+          <p>Sem gestão integrada de SST, cada exigência vira uma emergência: laudos de última hora, treinamentos improvisados e custos não planejados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="container">
+      <h2 class="section-title">Serviços de SST para empresas de Uberlândia</h2>
+      <p class="section-subtitle">Cobrimos todo o ciclo regulatório: da elaboração dos programas à transmissão do eSocial e acompanhamento contínuo.</p>
+      <div class="servicos-grid">
+        <div class="servico-card">
+          <h3>PGR — Programa de Gerenciamento de Riscos</h3>
+          <p>Identificação, avaliação e controle de riscos ocupacionais conforme a NR-1. Inclui inventário de riscos e plano de ação com cronograma.</p>
+        </div>
+        <div class="servico-card">
+          <h3>PCMSO</h3>
+          <p>Programa de Controle Médico coordenado com o PGR. Gestão de ASOs, exames periódicos, admissionais, demissionais e complementares.</p>
+        </div>
+        <div class="servico-card">
+          <h3>LTCAT</h3>
+          <p>Laudo Técnico das Condições Ambientais do Trabalho para aposentadoria especial e enquadramento previdenciário correto.</p>
+        </div>
+        <div class="servico-card">
+          <h3>eSocial SST</h3>
+          <p>Transmissão dos eventos S-2210, S-2220 e S-2240 com consistência de dados e dentro dos prazos legais.</p>
+        </div>
+        <div class="servico-card">
+          <h3>Laudos Técnicos</h3>
+          <p>Laudos de insalubridade, periculosidade, ergonômico (AET) e avaliações quantitativas de agentes ambientais.</p>
+        </div>
+        <div class="servico-card">
+          <h3>Treinamentos NR</h3>
+          <p>Capacitações obrigatórias: NR-5 (CIPA), NR-6 (EPI), NR-10, NR-12, NR-35 e outras conforme o risco da atividade.</p>
+        </div>
+        <div class="servico-card">
+          <h3>GRO e Riscos Psicossociais</h3>
+          <p>Gerenciamento de Riscos Ocupacionais com inclusão de fatores psicossociais conforme as novas exigências da NR-1.</p>
+        </div>
+        <div class="servico-card">
+          <h3>Gestão de FAP</h3>
+          <p>Análise do histórico acidentário, contestação de FAP e estratégias para redução da alíquota previdenciária.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section id="diferenciais">
+    <div class="container">
+      <h2 class="section-title">Por que empresas de Uberlândia escolhem a Higilabor</h2>
+      <ul class="dif-list">
+        <li>Atendimento presencial em Uberlândia e região do Triângulo Mineiro</li>
+        <li>Equipe técnica com engenheiros de segurança e médicos do trabalho</li>
+        <li>PGR, PCMSO e LTCAT integrados — documentação consistente entre si</li>
+        <li>Transmissão do eSocial SST incluída nos contratos de gestão</li>
+        <li>Adequação à NR-1 psicossocial antes do prazo de fiscalização</li>
+        <li>Preços transparentes e compatíveis com a realidade de PMEs</li>
+        <li>Contratos mensais flexíveis — sem amarras de longo prazo desnecessárias</li>
+        <li>Foco em prevenção e redução de passivo, não apenas cumprimento burocrático</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TRANSPARÊNCIA DE PREÇOS -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Faixas de investimento para SST em Uberlândia</h2>
+      <p class="section-subtitle">Valores de referência para pequenas empresas (20 a 100 funcionários, grau de risco 2 ou 3). O investimento exato depende da complexidade da operação.</p>
+      <div class="servicos-grid">
+        <div class="servico-card">
+          <h3>PGR</h3>
+          <p><strong>R$ 2.000 a R$ 5.000</strong><br>Inclui inventário de riscos e plano de ação. Valor varia conforme número de setores e riscos envolvidos.</p>
+        </div>
+        <div class="servico-card">
+          <h3>PCMSO</h3>
+          <p><strong>R$ 640 a R$ 2.000/ano</strong><br>Coordenação médica e planejamento de exames. Exames complementares cobrados à parte.</p>
+        </div>
+        <div class="servico-card">
+          <h3>Laudo de Insalubridade</h3>
+          <p><strong>R$ 750 a R$ 2.500</strong><br>Avaliação quantitativa e qualitativa. Combos com outros laudos reduzem o custo unitário.</p>
+        </div>
+        <div class="servico-card">
+          <h3>Gestão Mensal SST</h3>
+          <p><strong>Sob consulta</strong><br>Contrato recorrente com PGR + PCMSO + eSocial + acompanhamento. Diagnóstico gratuito para dimensionamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Perguntas frequentes sobre SST em Uberlândia</h2>
+
+      <div class="faq-item">
+        <h3>Quanto custa o PGR para uma pequena empresa em Uberlândia?</h3>
+        <p>Para empresas com 20 a 100 funcionários e grau de risco 2 ou 3, o PGR costuma variar entre R$ 2.000 e R$ 5.000. O valor depende do número de setores, atividades e riscos mapeados. A Higilabor oferece um diagnóstico gratuito para dimensionar o investimento.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>O que muda com a NR-1 psicossocial em 2026?</h3>
+        <p>A partir de maio de 2026, o PGR deve incluir a identificação e gestão de riscos psicossociais — como estresse ocupacional, assédio e sobrecarga mental. A Portaria MTE nº 1.419/2024 estabelece o novo requisito. Após o período educativo, as empresas estarão sujeitas a autuações.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>A Higilabor atende empresas de todos os portes em Uberlândia?</h3>
+        <p>Sim. Atendemos desde microempresas até empresas de médio porte com até 100 funcionários, nos setores de comércio, indústria, agronegócio e serviços em Uberlândia e região.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Qual a diferença entre terceirizar SST e manter um SESMT interno?</h3>
+        <p>O SESMT interno exige contratação de profissionais dedicados com custo fixo elevado. A terceirização com a Higilabor reduz custos, garante atualização regulatória e oferece flexibilidade para empresas que não atingem o dimensionamento obrigatório.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Como funciona a transmissão do eSocial SST?</h3>
+        <p>Os eventos de SST no eSocial (S-2210, S-2220, S-2240) precisam ser enviados com dados consistentes e dentro dos prazos. A Higilabor cuida dessa transmissão nos contratos de gestão mensal, evitando inconsistências e penalidades.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final" id="contato">
+    <div class="container">
+      <h2>Sua empresa em Uberlândia está em conformidade?</h2>
+      <p>Solicite um diagnóstico gratuito e descubra onde estão as lacunas regulatórias antes que a fiscalização descubra por você.</p>
+      <a href="https://wa.me/5534999990000?text=Ol%C3%A1%2C%20quero%20um%20diagn%C3%B3stico%20de%20SST%20para%20minha%20empresa%20em%20Uberl%C3%A2ndia" class="btn-cta">Falar com a Higilabor no WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>Higilabor &mdash; Consultoria em Saúde e Segurança do Trabalho | Uberlândia, MG</p>
+      <p style="margin-top:6px;"><a href="https://higilabor.com.br">higilabor.com.br</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

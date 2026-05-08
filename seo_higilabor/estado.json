@@ -3,5 +3,37 @@
   "ultima_cidade_idx": 0,
   "ultima_cidade": "Uberlândia",
   "ultima_execucao": "2026-04-08",
-  "total_rodadas": 1
+  "total_rodadas": 1,
+  "cidades": {
+    "uberlandia-mg": {
+      "nome": "Uberlândia",
+      "uf": "MG",
+      "slug": "uberlandia-mg",
+      "status": "concluida",
+      "data_geracao": "2026-05-08T08:00:00-03:00",
+      "origem_pesquisa": [
+        "pesquisas/2026-04-08_tema0_uberlandia.md",
+        "pesquisas/2026-04-09_tema0_uberlandia.md"
+      ],
+      "arquivos_gerados": [
+        "landing-page.html",
+        "blog-post.md",
+        "linkedin-post.md",
+        "instagram-carrossel.md",
+        "tiktok-roteiro.md",
+        "email-sequencia.md",
+        "whatsapp-templates.md"
+      ],
+      "arquivos_pendentes": [],
+      "palavra_chave_principal": "consultoria SST Uberlândia",
+      "palavras_chave_secundarias": [
+        "PGR Uberlândia",
+        "PCMSO preço pequena empresa",
+        "NR-1 psicossocial 2026",
+        "eSocial SST Uberlândia",
+        "medicina do trabalho Uberlândia preço",
+        "terceirizar SST vs SESMT interno"
+      ]
+    }
+  }
 }
