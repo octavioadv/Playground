@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cockpit Higilabor</title>
+<style>
+:root{
+  --bg:#f0f2f5; --card:#fff; --hd:#0d3349; --hd2:#1a5276;
+  --tx:#1a1a2e; --tx2:#6c757d; --c1:#1a7abf; --c2:#e67e22; --c3:#27ae60;
+  --c4:#e74c3c; --c5:#8e44ad; --c6:#16a085; --pos:#27ae60; --neg:#e74c3c; --warn:#f39c12;
+  --gap:14px; --r:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;padding-bottom:40px}
+.wrap{max-width:1100px;margin:0 auto;padding:var(--gap)}
+header{background:linear-gradient(135deg,var(--hd),var(--hd2));color:#fff;padding:18px 22px;border-radius:var(--r);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+header .sub{font-size:12px;color:rgba(255,255,255,.65);margin-top:2px}
+.saldo{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:14px;text-align:right}
+.saldo .lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7)}
+.saldo .val{font-size:20px;font-weight:700}
+nav{display:flex;gap:6px;margin:var(--gap) 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav button{flex:0 0 auto;background:var(--card);border:none;padding:10px 16px;border-radius:20px;font-size:13px;font-weight:600;color:var(--tx2);cursor:pointer;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+nav button.active{background:var(--hd);color:#fff}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx2);margin:18px 0 10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--gap)}
+.kpi{background:var(--card);border-radius:var(--r);padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-left:4px solid #ccc}
+.kpi.blue{border-left-color:var(--c1)}.kpi.orange{border-left-color:var(--c2)}.kpi.green{border-left-color:var(--c3)}.kpi.red{border-left-color:var(--c4)}.kpi.purple{border-left-color:var(--c5)}.kpi.teal{border-left-color:var(--c6)}
+.kpi .l{font-size:11px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:5px}
+.kpi .v{font-size:23px;font-weight:700;line-height:1.1}
+.kpi .s{font-size:12px;color:var(--tx2);margin-top:4px}
+.kpi .v.pos{color:var(--pos)}.kpi .v.neg{color:var(--neg)}
+.card{background:var(--card);border-radius:var(--r);box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden;margin-bottom:var(--gap)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:10px 12px;background:#f7f9fb;color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:1px solid #eee}
+td{padding:10px 12px;border-bottom:1px solid #f1f3f5;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px}
+.tag.ok{background:#d4edda;color:#155724}.tag.open{background:#fff3cd;color:#856404}.tag.late{background:#f8d7da;color:#721c24}.tag.gray{background:#e9ecef;color:#495057}
+.tag.b{background:#dbeafe;color:#1e40af}.tag.o{background:#ffedd5;color:#9a3412}.tag.g{background:#dcfce7;color:#166534}.tag.p{background:#f3e8ff;color:#6b21a8}.tag.t{background:#ccfbf1;color:#115e59}
+.money{font-weight:600;white-space:nowrap}
+.right{text-align:right}
+.btn{border:none;background:var(--c1);color:#fff;padding:8px 14px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer}
+.btn.ghost{background:#eef2f5;color:var(--tx)}
+.btn.sm{padding:4px 9px;font-size:12px}
+.btn.del{background:#fdecea;color:var(--neg);padding:4px 8px}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.toolbar .grow{flex:1}
+.empty{padding:24px;text-align:center;color:var(--tx2);font-size:13px}
+.note{font-size:12px;color:var(--tx2);background:#fff8e6;border:1px solid #ffe8a3;border-radius:8px;padding:10px 12px;margin-bottom:var(--gap)}
+.bar{height:8px;background:#eef1f4;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar > span{display:block;height:100%;background:var(--c3)}
+dialog{border:none;border-radius:12px;padding:0;max-width:420px;width:92%;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.dlg-h{background:var(--hd);color:#fff;padding:14px 18px;font-weight:700;font-size:15px}
+.dlg-b{padding:18px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:12px;font-weight:600;color:var(--tx2);margin-bottom:4px}
+.fld input,.fld select{width:100%;padding:9px 11px;border:1px solid #d4dae0;border-radius:7px;font-size:14px}
+.dlg-f{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+.hint{font-size:11px;color:var(--tx2);margin-top:14px}
+@media(max-width:560px){.kpi .v{font-size:20px}.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Cockpit Higilabor</h1>
+      <div class="sub" id="hoje"></div>
+    </div>
+    <div class="saldo">
+      <div class="lbl">Saldo de caixa</div>
+      <div class="val" id="saldoTop">R$ 0</div>
+    </div>
+  </header>
+
+  <nav id="nav">
+    <button data-t="hoje" class="active">Hoje</button>
+    <button data-t="equipe">Equipe</button>
+    <button data-t="contratos">Contratos</button>
+    <button data-t="receber">A Receber</button>
+    <button data-t="pagar">A Pagar</button>
+  </nav>
+
+  <div id="view"></div>
+
+  <div class="hint" style="text-align:center;margin-top:24px">
+    Dados de exemplo (editáveis) — salvos só neste aparelho.
+    <a href="#" id="reset" style="color:var(--c1)">Restaurar exemplo</a>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-h" id="dlgTitle">Novo</div>
+  <div class="dlg-b"><form id="dlgForm" method="dialog"><div id="dlgFields"></div>
+    <div class="dlg-f">
+      <button type="button" class="btn ghost" id="dlgCancel">Cancelar</button>
+      <button type="submit" class="btn">Salvar</button>
+    </div></form></div>
+</dialog>
+
+<script>
+const BRL = n => 'R$ ' + (Math.round(n)||0).toLocaleString('pt-BR');
+const today = new Date(2026,5,30); // 30/06/2026
+const fmtD = s => { const [y,m,d]=s.split('-'); return d+'/'+m; };
+const daysTo = s => Math.round((new Date(s) - today)/86400000);
+
+// ---- seed data (editável) ----
+const SEED = {
+  saldo: 12500,
+  equipe: [
+    {id:1, nome:'Octavio Alvarenga', funcao:'Dono / Comercial', empresa:'(carteira)', tarefa:'Pipeline e fechamento de contratos'},
+    {id:2, nome:'Téc. Segurança 1', funcao:'Técnico de Segurança', empresa:'Dreste', tarefa:'Elaboração do PGR'},
+    {id:3, nome:'Eng. Segurança', funcao:'Engenheiro de Segurança', empresa:'Santa Casa de Monte Alegre', tarefa:'LTCAT + laudo de insalubridade'},
+    {id:4, nome:'Médico do Trabalho', funcao:'PCMSO (parceiro)', empresa:'Auto Posto Pau Furado', tarefa:'ASOs e exames'},
+  ],
+  contratos: [
+    {id:1, empresa:'Dreste', pacote:'Premium Patrimonial', valor:4800, resp:'Eng. Segurança', status:'ativo'},
+    {id:2, empresa:'Santa Casa de Monte Alegre', pacote:'Essencial', valor:3200, resp:'Téc. Segurança 1', status:'ativo'},
+    {id:3, empresa:'Auto Posto Pau Furado', pacote:'Financeiro/FAP', valor:2500, resp:'Octavio', status:'ativo'},
+    {id:4, empresa:'Biogenetics', pacote:'Psicossocial NR-1', valor:1900, resp:'Octavio', status:'ativo'},
+    {id:5, empresa:'Produtec Sacramento', pacote:'Essencial', valor:2200, resp:'Téc. Segurança 1', status:'ativo'},
+    {id:6, empresa:'Lm Assessoria Contabil', pacote:'Essencial', valor:1800, resp:'Eng. Segurança', status:'ativo'},
+  ],
+  receber: [
+    {id:1, empresa:'Dreste', desc:'Mensalidade jun', valor:4800, venc:'2026-06-10', recebido:true},
+    {id:2, empresa:'Santa Casa de Monte Alegre', desc:'Mensalidade jun', valor:3200, venc:'2026-06-15', recebido:true},
+    {id:3, empresa:'Auto Posto Pau Furado', desc:'Mensalidade jun', valor:2500, venc:'2026-06-20', recebido:true},
+    {id:4, empresa:'Produtec Sacramento', desc:'PGR + PCMSO', valor:6800, venc:'2026-06-25', recebido:true},
+    {id:5, empresa:'Biogenetics', desc:'NR-1 psicossocial', valor:1900, venc:'2026-06-28', recebido:true},
+    {id:6, empresa:'Lm Assessoria Contabil', desc:'Mensalidade jun', valor:1800, venc:'2026-06-18', recebido:true},
+    {id:7, empresa:'Equipe Cardoso', desc:'Laudo NR-12', valor:4339, venc:'2026-06-12', recebido:true},
+    {id:8, empresa:'Dreste', desc:'Mensalidade jul', valor:4800, venc:'2026-07-10', recebido:false},
+    {id:9, empresa:'Ecobrix', desc:'LTCAT (vencido)', valor:5224, venc:'2026-06-05', recebido:false},
+    {id:10, empresa:'Ndb Terraplanagem', desc:'PGR (vencido)', valor:5300, venc:'2026-06-08', recebido:false},
+  ],
+  pagar: [
+    {id:1, tipo:'salario', nome:'Salário — Téc. Segurança 1', valor:3800, venc:'2026-07-05', pago:false},
+    {id:2, tipo:'salario', nome:'Salário — Eng. Segurança', valor:6200, venc:'2026-07-05', pago:false},
+    {id:3, tipo:'salario', nome:'Pró-labore — Octavio', valor:7000, venc:'2026-07-05', pago:false},
+    {id:4, tipo:'fornecedor', nome:'Médico do Trabalho (parceiro)', valor:3500, venc:'2026-07-10', pago:false},
+    {id:5, tipo:'fornecedor', nome:'Sistema ESO (software)', valor:890, venc:'2026-07-08', pago:false},
+    {id:6, tipo:'fornecedor', nome:'Contador', valor:1200, venc:'2026-07-07', pago:false},
+    {id:7, tipo:'fornecedor', nome:'Aluguel + estrutura', valor:4200, venc:'2026-07-05', pago:false},
+    {id:8, tipo:'fornecedor', nome:'Outros (deslocamento, EPI, etc.)', valor:8508, venc:'2026-07-15', pago:false},
+    {id:9, tipo:'emprestimo', nome:'Empréstimo — parcela 1', valor:1432, venc:'2026-07-12', pago:false},
+    {id:10, tipo:'emprestimo', nome:'Empréstimo — parcela 2', valor:1432, venc:'2026-07-20', pago:false},
+  ]
+};
+
+let DB = load();
+function load(){ try{const s=localStorage.getItem('cockpit_hl'); return s?JSON.parse(s):structuredClone(SEED);}catch(e){return structuredClone(SEED);} }
+function save(){ localStorage.setItem('cockpit_hl', JSON.stringify(DB)); render(); }
+function nid(arr){ return arr.length?Math.max(...arr.map(x=>x.id))+1:1; }
+
+// ---- computed ----
+function mrr(){ return DB.contratos.filter(c=>c.status==='ativo').reduce((s,c)=>s+c.valor,0); }
+function recAberto(){ return DB.receber.filter(r=>!r.recebido); }
+function recVencido(){ return recAberto().filter(r=>daysTo(r.venc)<0); }
+function pagAberto(){ return DB.pagar.filter(p=>!p.pago); }
+function sum(a,k){ return a.reduce((s,x)=>s+x[k],0); }
+
+let TAB='hoje';
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  TAB=b.dataset.t; document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('active',x===b)); render();
+});
+
+function render(){
+  document.getElementById('hoje').textContent = 'Hoje · ' + today.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('saldoTop').textContent = BRL(DB.saldo);
+  const v=document.getElementById('view');
+  v.innerHTML = ({hoje:vHoje, equipe:vEquipe, contratos:vContratos, receber:vReceber, pagar:vPagar})[TAB]();
+  bind();
+}
+
+function vHoje(){
+  const ab=sum(recAberto(),'valor'), venc=sum(recVencido(),'valor');
+  const pag30=sum(pagAberto().filter(p=>daysTo(p.venc)<=30),'valor');
+  const rec30=sum(recAberto().filter(r=>daysTo(r.venc)<=30 && daysTo(r.venc)>=0),'valor');
+  const projetado = DB.saldo + rec30 - pag30;
+  return `
+  <div class="section-label">Resumo do dia</div>
+  <div class="kpis">
+    <div class="kpi blue"><div class="l">Saldo de caixa</div><div class="v">${BRL(DB.saldo)}</div><div class="s">hoje</div></div>
+    <div class="kpi green"><div class="l">A receber (30d)</div><div class="v pos">${BRL(rec30)}</div><div class="s">${recAberto().filter(r=>daysTo(r.venc)>=0).length} lançamentos</div></div>
+    <div class="kpi red"><div class="l">A pagar (30d)</div><div class="v neg">${BRL(pag30)}</div><div class="s">${pagAberto().filter(p=>daysTo(p.venc)<=30).length} contas</div></div>
+    <div class="kpi orange"><div class="l">Vencidos em aberto</div><div class="v" style="color:var(--warn)">${BRL(venc)}</div><div class="s">${recVencido().length} clientes</div></div>
+    <div class="kpi purple"><div class="l">MRR (recorrente)</div><div class="v">${BRL(mrr())}</div><div class="s">${DB.contratos.filter(c=>c.status==='ativo').length} contratos ativos</div></div>
+    <div class="kpi teal"><div class="l">Saldo projetado (30d)</div><div class="v ${projetado<0?'neg':'pos'}">${BRL(projetado)}</div><div class="s">saldo + a receber − a pagar</div></div>
+  </div>
+  <div class="section-label">Fluxo dos próximos 30 dias</div>
+  <div class="card" style="padding:18px">
+    <div style="display:flex;justify-content:space-between;font-size:13px"><span>Entra</span><span class="money" style="color:var(--pos)">+${BRL(rec30)}</span></div>
+    <div class="bar"><span style="width:${Math.min(100,rec30/(rec30+pag30||1)*100)}%"></span></div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:12px"><span>Sai</span><span class="money" style="color:var(--neg)">−${BRL(pag30)}</span></div>
+    <div class="bar"><span style="width:${Math.min(100,pag30/(rec30+pag30||1)*100)}%;background:var(--neg)"></span></div>
+  </div>`;
+}
+
+function vEquipe(){
+  const rows = DB.equipe.map(e=>`<tr>
+    <td><b>${e.nome}</b><div style="font-size:12px;color:var(--tx2)">${e.funcao}</div></td>
+    <td>${e.empresa}</td>
+    <td>${e.tarefa}</td>
+    <td class="right"><button class="btn sm ghost" data-edit="equipe" data-id="${e.id}">editar</button> <button class="btn del" data-del="equipe" data-id="${e.id}">×</button></td>
+  </tr>`).join('');
+  return tableShell('Equipe — quem está em qual empresa','equipe',
+    ['Funcionário','Empresa','O que está fazendo',''], rows, DB.equipe.length);
+}
+
+function vContratos(){
+  const rows = DB.contratos.map(c=>`<tr>
+    <td><b>${c.empresa}</b></td>
+    <td><span class="tag ${pktag(c.pacote)}">${c.pacote}</span></td>
+    <td class="money right">${BRL(c.valor)}</td>
+    <td class="hide-sm">${c.resp}</td>
+    <td class="right"><button class="btn sm ghost" data-edit="contratos" data-id="${c.id}">editar</button> <button class="btn del" data-del="contratos" data-id="${c.id}">×</button></td>
+  </tr>`).join('');
+  const foot = `<tr><td colspan="2"><b>MRR total</b></td><td class="money right"><b>${BRL(mrr())}</b></td><td class="hide-sm"></td><td></td></tr>`;
+  return tableShell('Contratos — valor cobrado por empresa','contratos',
+    ['Empresa','Pacote','Valor/mês','Responsável',''], rows+foot, DB.contratos.length);
+}
+
+function vReceber(){
+  const rows = DB.receber.slice().sort((a,b)=>new Date(a.venc)-new Date(b.venc)).map(r=>{
+    const st = r.recebido?'<span class="tag ok">recebido</span>':(daysTo(r.venc)<0?'<span class="tag late">vencido</span>':'<span class="tag open">em aberto</span>');
+    return `<tr>
+      <td><b>${r.empresa}</b><div style="font-size:12px;color:var(--tx2)">${r.desc}</div></td>
+      <td>${fmtD(r.venc)}</td>
+      <td class="money right">${BRL(r.valor)}</td>
+      <td>${st}</td>
+      <td class="right"><button class="btn sm ${r.recebido?'ghost':''}" data-toggle="receber" data-id="${r.id}">${r.recebido?'desfazer':'✓ recebi'}</button> <button class="btn del" data-del="receber" data-id="${r.id}">×</button></td>
+    </tr>`;
+  }).join('');
+  const tot=sum(DB.receber,'valor'), rec=sum(DB.receber.filter(r=>r.recebido),'valor'), ab=tot-rec;
+  const head = `<div class="kpis" style="margin-bottom:14px">
+    <div class="kpi blue"><div class="l">Carteira total</div><div class="v">${BRL(tot)}</div></div>
+    <div class="kpi green"><div class="l">Recebido</div><div class="v pos">${BRL(rec)}</div><div class="s">${Math.round(rec/tot*100)||0}%</div></div>
+    <div class="kpi red"><div class="l">Em aberto</div><div class="v neg">${BRL(ab)}</div></div>
+  </div>`;
+  return head + tableShell('A Receber (CR) — quando entra','receber',
+    ['Cliente','Vence','Valor','Status',''], rows, DB.receber.length);
+}
+
+function vPagar(){
+  const order={salario:0,fornecedor:1,emprestimo:2};
+  const rows = DB.pagar.slice().sort((a,b)=>(order[a.tipo]-order[b.tipo])|| (new Date(a.venc)-new Date(b.venc))).map(p=>{
+    const tt={salario:'<span class="tag b">salário</span>',fornecedor:'<span class="tag o">fornecedor</span>',emprestimo:'<span class="tag p">empréstimo</span>'}[p.tipo];
+    const st = p.pago?'<span class="tag ok">pago</span>':(daysTo(p.venc)<0?'<span class="tag late">vencido</span>':'<span class="tag open">a pagar</span>');
+    return `<tr>
+      <td><b>${p.nome}</b> ${tt}</td>
+      <td>${fmtD(p.venc)}</td>
+      <td class="money right">${BRL(p.valor)}</td>
+      <td>${st}</td>
+      <td class="right"><button class="btn sm ${p.pago?'ghost':''}" data-toggle="pagar" data-id="${p.id}">${p.pago?'desfazer':'✓ paguei'}</button> <button class="btn del" data-del="pagar" data-id="${p.id}">×</button></td>
+    </tr>`;
+  }).join('');
+  const sal=sum(DB.pagar.filter(p=>p.tipo==='salario'),'valor'), forn=sum(DB.pagar.filter(p=>p.tipo==='fornecedor'),'valor'), emp=sum(DB.pagar.filter(p=>p.tipo==='emprestimo'),'valor');
+  const head = `<div class="kpis" style="margin-bottom:14px">
+    <div class="kpi blue"><div class="l">Salários</div><div class="v">${BRL(sal)}</div></div>
+    <div class="kpi orange"><div class="l">Fornecedores</div><div class="v">${BRL(forn)}</div></div>
+    <div class="kpi purple"><div class="l">Empréstimos</div><div class="v">${BRL(emp)}</div></div>
+    <div class="kpi red"><div class="l">Total a pagar</div><div class="v neg">${BRL(sal+forn+emp)}</div></div>
+  </div>`;
+  return head + tableShell('A Pagar (CP) — quando sai','pagar',
+    ['Conta','Vence','Valor','Status',''], rows, DB.pagar.length);
+}
+
+function tableShell(title,tipo,cols,rows,n){
+  return `<div class="toolbar"><div class="section-label grow" style="margin:0">${title}</div>
+    <button class="btn sm" data-add="${tipo}">+ Adicionar</button></div>
+    <div class="card">${n?`<table><thead><tr>${cols.map(c=>`<th class="${c==='Valor/mês'||c==='Valor'?'right':''}">${c}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`:'<div class="empty">Nada por aqui. Toque em “+ Adicionar”.</div>'}</div>`;
+}
+function pktag(p){ p=p.toLowerCase(); if(p.includes('premium'))return'p'; if(p.includes('fap')||p.includes('financ'))return'o'; if(p.includes('psico'))return't'; return'g'; }
+
+// ---- forms ----
+const FORMS = {
+  equipe:{title:'Funcionário', fields:[['nome','Nome','text'],['funcao','Função','text'],['empresa','Empresa atual','text'],['tarefa','O que está fazendo','text']]},
+  contratos:{title:'Contrato', fields:[['empresa','Empresa','text'],['pacote','Pacote','select',['Essencial','Financeiro/FAP','Premium Patrimonial','Psicossocial NR-1']],['valor','Valor/mês (R$)','number'],['resp','Responsável','text'],['status','Status','select',['ativo','pausado','encerrado']]]},
+  receber:{title:'A receber', fields:[['empresa','Cliente','text'],['desc','Descrição','text'],['valor','Valor (R$)','number'],['venc','Vencimento','date'],['recebido','Recebido?','select',['não','sim']]]},
+  pagar:{title:'A pagar', fields:[['nome','Descrição','text'],['tipo','Tipo','select',['salario','fornecedor','emprestimo']],['valor','Valor (R$)','number'],['venc','Vencimento','date'],['pago','Pago?','select',['não','sim']]]},
+};
+let editing=null;
+function openForm(tipo,item){
+  editing={tipo,id:item?item.id:null};
+  const f=FORMS[tipo];
+  document.getElementById('dlgTitle').textContent=(item?'Editar ':'Novo ')+f.title;
+  document.getElementById('dlgFields').innerHTML=f.fields.map(([k,lbl,t,opts])=>{
+    let val=item?item[k]:'';
+    if(k==='recebido')val=item?(item[k]?'sim':'não'):'não';
+    if(k==='pago')val=item?(item[k]?'sim':'não'):'não';
+    if(t==='select')return `<div class="fld"><label>${lbl}</label><select name="${k}">${opts.map(o=>`<option ${o==val?'selected':''}>${o}</option>`).join('')}</select></div>`;
+    return `<div class="fld"><label>${lbl}</label><input name="${k}" type="${t}" value="${val}" ${t==='number'?'inputmode="numeric"':''}></div>`;
+  }).join('');
+  document.getElementById('dlg').showModal();
+}
+document.getElementById('dlgCancel').onclick=()=>document.getElementById('dlg').close();
+document.getElementById('dlgForm').onsubmit=(e)=>{
+  const fd=new FormData(e.target), o={};
+  for(const [k,v] of fd.entries()) o[k]=v;
+  const {tipo,id}=editing;
+  if('valor' in o)o.valor=parseFloat(String(o.valor).replace(/[^\d.,]/g,'').replace(',','.'))||0;
+  if('recebido' in o)o.recebido=o.recebido==='sim';
+  if('pago' in o)o.pago=o.pago==='sim';
+  const arr=DB[tipo];
+  if(id){ Object.assign(arr.find(x=>x.id===id),o); }
+  else { o.id=nid(arr); arr.push(o); }
+  document.getElementById('dlg').close(); save();
+};
+
+function bind(){
+  document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>openForm(b.dataset.add,null));
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openForm(b.dataset.edit, DB[b.dataset.edit].find(x=>x.id==b.dataset.id)));
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{ if(confirm('Remover?')){ DB[b.dataset.del]=DB[b.dataset.del].filter(x=>x.id!=b.dataset.id); save(); }});
+  document.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=()=>{
+    const arr=DB[b.dataset.toggle], it=arr.find(x=>x.id==b.dataset.id);
+    if(b.dataset.toggle==='receber'){ it.recebido=!it.recebido; DB.saldo += it.recebido?it.valor:-it.valor; }
+    else { it.pago=!it.pago; DB.saldo += it.pago?-it.valor:it.valor; }
+    save();
+  });
+}
+document.getElementById('reset').onclick=(e)=>{e.preventDefault(); if(confirm('Restaurar os dados de exemplo? Você perde o que editou.')){ DB=structuredClone(SEED); save(); }};
+
+render();
+</script>
+</body>
+</html>
