@@ -68,6 +68,10 @@ lead → contato → reunião → proposta → follow-up 1 → follow-up 2 → n
 - **Limite da conexão de IA**: dá pra criar/editar registros (empresas, contatos, deals, tasks), mas NÃO editar estrutura do funil (etapas/probabilidades) — isso é só no painel Settings → Objects → Deals → Pipelines.
 - **KPIs saem das etapas**: propostas enviadas = nº em "Proposta enviada"; fechados/MRR = "Fechado – Ganho" no mês; taxa fechamento = won ÷ total; ticket médio = média do amount dos won.
 - **Pendente (Octav fazer no painel, 3 min)**: renomear as 7 etapas em inglês conforme acima.
+- **Base importada (30/06/26)**: 153 empresas ativas (func>0) do export ESO "Empresas por Setor", todas como Company lifecycle=`lead`. Segmentação SEM Lista (write de Lista é bloqueado p/ IA): setor gravado no campo `description` como tag `[CODIGO]` filtrável via CONTAINS_TOKEN. Porte tb no description; `numberofemployees`, `phone`, `city`, `state` em campos próprios.
+  - Códigos de setor: AGRO, INDUSTRIA, CONSTRUCAO, POSTOS, TRANSPORTE, COMERCIO, SAUDE, SERVICOS, EDUCACAO, SEGURANCA, ENERGIA, GOVERNO, RESTAURANTE, BELEZA, EVENTOS, NAOCLASSIF.
+  - Pull de segmento = search_crm_objects COMPANY com filtro description CONTAINS_TOKEN '<CODIGO>' (+ numberofemployees p/ porte, + city p/ cidade). Ex: POSTOS=20, AGRO 10+ func=7.
+  - Critério "ativa" na planilha = Funcionários Ativos > 0.
 
 ## Ferramentas
 - **HubSpot** — CRM (funil comercial, contatos, empresas, deals, follow-ups)
