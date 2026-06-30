@@ -72,6 +72,7 @@ lead → contato → reunião → proposta → follow-up 1 → follow-up 2 → n
   - Códigos de setor: AGRO, INDUSTRIA, CONSTRUCAO, POSTOS, TRANSPORTE, COMERCIO, SAUDE, SERVICOS, EDUCACAO, SEGURANCA, ENERGIA, GOVERNO, RESTAURANTE, BELEZA, EVENTOS, NAOCLASSIF.
   - Pull de segmento = search_crm_objects COMPANY com filtro description CONTAINS_TOKEN '<CODIGO>' (+ numberofemployees p/ porte, + city p/ cidade). Ex: POSTOS=20, AGRO 10+ func=7.
   - Critério "ativa" na planilha = Funcionários Ativos > 0.
+  - **Setor também no campo NATIVO `industry`** (135 empresas; "Não classificado" fica em branco). Industry só aceita os ~150 valores padrão do HubSpot (não aceita valor custom em PT via IA — isso é Settings). Mapa usado: AGRO→FARMING · INDUSTRIA→MACHINERY · CONSTRUCAO→CONSTRUCTION · POSTOS→AUTOMOTIVE · TRANSPORTE→TRANSPORTATION_TRUCKING_RAILROAD · COMERCIO→RETAIL · SAUDE→HOSPITAL_HEALTH_CARE · SERVICOS→ACCOUNTING · EDUCACAO→EDUCATION_MANAGEMENT · SEGURANCA→SECURITY_AND_INVESTIGATIONS · ENERGIA→RENEWABLES_ENVIRONMENT · GOVERNO→GOVERNMENT_ADMINISTRATION · RESTAURANTE→RESTAURANTS · BELEZA→COSMETICS · EVENTOS→EVENTS_SERVICES. Pull de segmento pode usar filtro nativo `industry` EQ '<VALOR>' (mais limpo) ou a tag `[CODIGO]` na description.
 
 ## Ferramentas
 - **HubSpot** — CRM (funil comercial, contatos, empresas, deals, follow-ups)
