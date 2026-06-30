@@ -53,7 +53,29 @@ CR/CP atualizado · fluxo projetado · taxa de fechamento · ticket médio · in
 ## Funil CRM
 lead → contato → reunião → proposta → follow-up 1 → follow-up 2 → negociação → fechado/perdido
 
+## HubSpot (CRM) — conta nova desde 30/06/26
+- **Account ID / Portal**: 51679192 · Owner (Octav): 94747440
+- **Modelo de dados**: Company (empresa cliente) → Contact (pessoa) → Deal (oportunidade). Task = follow-up. Product = pacote.
+- **Desenho de funil escolhido (versão enxuta)** — `lead`/`contato` viram *lifecycle stage* do contato (NÃO viram coluna); follow-up vira TAREFA, não etapa. Funil de Deals = 7 etapas:
+  1. Reunião agendada — 10%
+  2. Reunião realizada / Diagnóstico — 25%
+  3. Proposta enviada — 50%
+  4. Em follow-up — 60%
+  5. Negociação — 75%
+  6. Fechado – Ganho — 100% (won)
+  7. Fechado – Perdido — 0% (lost)
+- **Regra**: só cria Deal quando vira oportunidade real (reunião marcada). Lead frio fica como Contact lifecycle="Lead", sem Deal.
+- **Limite da conexão de IA**: dá pra criar/editar registros (empresas, contatos, deals, tasks), mas NÃO editar estrutura do funil (etapas/probabilidades) — isso é só no painel Settings → Objects → Deals → Pipelines.
+- **KPIs saem das etapas**: propostas enviadas = nº em "Proposta enviada"; fechados/MRR = "Fechado – Ganho" no mês; taxa fechamento = won ÷ total; ticket médio = média do amount dos won.
+- **Pendente (Octav fazer no painel, 3 min)**: renomear as 7 etapas em inglês conforme acima.
+- **Base importada (30/06/26)**: 153 empresas ativas (func>0) do export ESO "Empresas por Setor", todas como Company lifecycle=`lead`. Segmentação SEM Lista (write de Lista é bloqueado p/ IA): setor gravado no campo `description` como tag `[CODIGO]` filtrável via CONTAINS_TOKEN. Porte tb no description; `numberofemployees`, `phone`, `city`, `state` em campos próprios.
+  - Códigos de setor: AGRO, INDUSTRIA, CONSTRUCAO, POSTOS, TRANSPORTE, COMERCIO, SAUDE, SERVICOS, EDUCACAO, SEGURANCA, ENERGIA, GOVERNO, RESTAURANTE, BELEZA, EVENTOS, NAOCLASSIF.
+  - Pull de segmento = search_crm_objects COMPANY com filtro description CONTAINS_TOKEN '<CODIGO>' (+ numberofemployees p/ porte, + city p/ cidade). Ex: POSTOS=20, AGRO 10+ func=7.
+  - Critério "ativa" na planilha = Funcionários Ativos > 0.
+  - **Setor também no campo NATIVO `industry`** (135 empresas; "Não classificado" fica em branco). Industry só aceita os ~150 valores padrão do HubSpot (não aceita valor custom em PT via IA — isso é Settings). Mapa usado: AGRO→FARMING · INDUSTRIA→MACHINERY · CONSTRUCAO→CONSTRUCTION · POSTOS→AUTOMOTIVE · TRANSPORTE→TRANSPORTATION_TRUCKING_RAILROAD · COMERCIO→RETAIL · SAUDE→HOSPITAL_HEALTH_CARE · SERVICOS→ACCOUNTING · EDUCACAO→EDUCATION_MANAGEMENT · SEGURANCA→SECURITY_AND_INVESTIGATIONS · ENERGIA→RENEWABLES_ENVIRONMENT · GOVERNO→GOVERNMENT_ADMINISTRATION · RESTAURANTE→RESTAURANTS · BELEZA→COSMETICS · EVENTOS→EVENTS_SERVICES. Pull de segmento pode usar filtro nativo `industry` EQ '<VALOR>' (mais limpo) ou a tag `[CODIGO]` na description.
+
 ## Ferramentas
+- **HubSpot** — CRM (funil comercial, contatos, empresas, deals, follow-ups)
 - **Notion** — ERP Higilabor, KPIs, Kanban, check-ins, rotina semanal
 - **5 blocos (xlsx)** — CR, CP, Fluxo de Caixa, Indicadores, DRE, Consolidado
 - **Sistema ESO** — gestão operacional SST
