@@ -53,7 +53,24 @@ CR/CP atualizado · fluxo projetado · taxa de fechamento · ticket médio · in
 ## Funil CRM
 lead → contato → reunião → proposta → follow-up 1 → follow-up 2 → negociação → fechado/perdido
 
+## HubSpot (CRM) — conta nova desde 30/06/26
+- **Account ID / Portal**: 51679192 · Owner (Octav): 94747440
+- **Modelo de dados**: Company (empresa cliente) → Contact (pessoa) → Deal (oportunidade). Task = follow-up. Product = pacote.
+- **Desenho de funil escolhido (versão enxuta)** — `lead`/`contato` viram *lifecycle stage* do contato (NÃO viram coluna); follow-up vira TAREFA, não etapa. Funil de Deals = 7 etapas:
+  1. Reunião agendada — 10%
+  2. Reunião realizada / Diagnóstico — 25%
+  3. Proposta enviada — 50%
+  4. Em follow-up — 60%
+  5. Negociação — 75%
+  6. Fechado – Ganho — 100% (won)
+  7. Fechado – Perdido — 0% (lost)
+- **Regra**: só cria Deal quando vira oportunidade real (reunião marcada). Lead frio fica como Contact lifecycle="Lead", sem Deal.
+- **Limite da conexão de IA**: dá pra criar/editar registros (empresas, contatos, deals, tasks), mas NÃO editar estrutura do funil (etapas/probabilidades) — isso é só no painel Settings → Objects → Deals → Pipelines.
+- **KPIs saem das etapas**: propostas enviadas = nº em "Proposta enviada"; fechados/MRR = "Fechado – Ganho" no mês; taxa fechamento = won ÷ total; ticket médio = média do amount dos won.
+- **Pendente (Octav fazer no painel, 3 min)**: renomear as 7 etapas em inglês conforme acima.
+
 ## Ferramentas
+- **HubSpot** — CRM (funil comercial, contatos, empresas, deals, follow-ups)
 - **Notion** — ERP Higilabor, KPIs, Kanban, check-ins, rotina semanal
 - **5 blocos (xlsx)** — CR, CP, Fluxo de Caixa, Indicadores, DRE, Consolidado
 - **Sistema ESO** — gestão operacional SST
